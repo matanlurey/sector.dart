@@ -88,11 +88,8 @@ to resize a grid if you constructed the grid yourself and know this
 instance supports resizing.</p>
 <p>For example, the <a href="../../sector/ListGrid-class.html">ListGrid</a> class supports growable grids, but the default
 grid implementation returned by <a href="../../sector/Grid/asSubGrid.html">Grid.asSubGrid</a> only supports resizing if
-the view is "complete"; meaning that <a href="../../sector/Grid/clear.html">Grid.clear</a> only works if the view
-covers the entire grid, <a href="../../sector/Rows/insertAt.html">Rows.insertAt</a>, <a href="../../sector/Rows/removeAt.html">Rows.removeAt</a> only work if the
-view's width is the same as the original grid's width and
-<a href="../../sector/Columns/insertAt.html">Columns.insertAt</a>, <a href="../../sector/Columns/removeAt.html">Columns.removeAt</a> only work if the view's height is the
-same as the original grid's height.</p>
+the view is "complete"; and <a href="../../sector/TypedDataGrid-class.html">TypedDataGrid</a> does not support resizing at
+all.</p>
 </div>
 </section>
 
@@ -134,7 +131,7 @@ same as the original grid's height.</p>
 <footer>
   <span class="no-break">
     sector
-      0.1.0
+      0.1.1
   </span>
 
   

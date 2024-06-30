@@ -81,6 +81,7 @@ print(grid);
 // │ 0 0 0 │
 // └───────┘
 </code></pre>
+<p>For better memory and performance, use <a href="../sector/Uint8Grid-class.html">Uint8Grid</a> instead of <code>Grid&lt;int&gt;</code>.</p>
 <h2 id="custom-implementations">Custom Implementations</h2>
 <p>The default implementation of <a href="../sector/Grid-class.html">Grid</a> is <a href="../sector/ListGrid-class.html">ListGrid</a>, which is a dense grid
 using a 1-dimensional <a href="https://api.dart.dev/stable/3.4.4/dart-core/List-class.html">List</a> to store elements, but the full Dart source is
@@ -147,6 +148,22 @@ built-in methods (either from a mixin or <a href="../sector/GridImpl.html">GridI
 </dt>
 <dd>
   A mutable iterable of rows in a grid.
+</dd>
+
+          <dt id="TypedDataGrid">
+  <span class="name "><a href="../sector/TypedDataGrid-class.html">TypedDataGrid</a><span class="signature">&lt;<wbr><span class="type-parameter">N extends <a href="https://api.dart.dev/stable/3.4.4/dart-core/num-class.html">num</a></span>, <span class="type-parameter">T extends <a href="https://api.dart.dev/stable/3.4.4/dart-typed_data/TypedData-class.html">TypedData</a></span>&gt;</span></span> 
+
+</dt>
+<dd>
+  A <em>fixed</em> grid of cells, each containing a single integer.
+</dd>
+
+          <dt id="Uint8Grid">
+  <span class="name "><a href="../sector/Uint8Grid-class.html">Uint8Grid</a></span> 
+
+</dt>
+<dd>
+  A grid of 8-bit unsigned integer cells.
 </dd>
 
       </dl>
@@ -244,7 +261,7 @@ built-in methods (either from a mixin or <a href="../sector/GridImpl.html">GridI
 <footer>
   <span class="no-break">
     sector
-      0.1.0
+      0.1.1
   </span>
 
   
