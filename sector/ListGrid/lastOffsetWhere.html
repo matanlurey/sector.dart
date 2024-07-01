@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the setUnchecked method from the ListGrid class, for the Dart programming language.">
-  <title>setUnchecked method - ListGrid class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the lastOffsetWhere method from the ListGrid class, for the Dart programming language.">
+  <title>lastOffsetWhere method - ListGrid class - sector library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
     <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">setUnchecked method</li>
+    <li class="self-crumb">lastOffsetWhere method</li>
   </ol>
-  <div class="self-name">setUnchecked</div>
+  <div class="self-name">lastOffsetWhere</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -57,7 +57,7 @@
     data-above-sidebar="sector&#47;ListGrid-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">setUnchecked</span> method 
+<h1><span class="kind-method">lastOffsetWhere</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
@@ -68,10 +68,11 @@
     </ol>
   </div>
 
-<span class="returntype">void</span>
-<span class="name ">setUnchecked</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="setUnchecked-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span></li>
-<li><span class="parameter" id="setUnchecked-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span>, </span></li>
-<li><span class="parameter" id="setUnchecked-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span></span></li>
+<span class="returntype">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
+<span class="name ">lastOffsetWhere</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="lastOffsetWhere-param-test"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">test</span>(<ol class="parameter-list"><li><span class="parameter" id="param-"><span class="type-annotation">T</span></span></li>
+</ol>
+), </span></li>
+<li><span class="parameter" id="lastOffsetWhere-param-end">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span> <span class="parameter-name">end</span>]</span></li>
 </ol>)
 
       <div class="features"><span class="feature">override</span></div>
@@ -79,16 +80,16 @@
     </section>
     
 <section class="desc markdown">
-  <p>Sets the element at the given <code>x</code> and <code>y</code> to <code>value</code>.</p>
-<p>The <code>x</code> and <code>y</code> coordinates are zero-based, where <code>x</code> is the horizontal
-axis and <code>y</code> is the vertical axis. The origin <code>(0, 0)</code> is at the top-left
-corner of the grid.</p>
-<p>If the coordinates are out of bounds, the behavior is undefined.</p>
-<div class="markdown-alert markdown-alert-warning">
-<p class="markdown-alert-title">Warning</p>
-<p>Use this method with caution, as it may lead to undefined behavior if
-the coordinates are out of bounds. It is recommended to use <a href="../../sector/Grid/set.html">set</a>
-instead.</p>
+  <p>Returns the last <code>(x, y)</code> offset where <code>test</code> returns <code>true</code>.</p>
+<p>If <code>end</code> is provided, the search starts at the provided offset, otherwise
+it starts at the bottom-right corner of the grid. If the element is not
+found, <code>null</code> is returned.</p>
+<div class="markdown-alert markdown-alert-note">
+<p class="markdown-alert-title">Note</p>
+<p>The order of the search is not guaranteed, and may vary depending on the
+implementation of the grid. If the order of the search is important, it
+is recommended to use <a href="../../sector/ListGrid/rows.html">rows</a> or <a href="../../sector/ListGrid/columns.html">columns</a> to iterate over the grid and
+search for the element.</p>
 </div>
 </section>
 
@@ -96,10 +97,20 @@ instead.</p>
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@pragma(&#39;vm:prefer-inline&#39;)
-@override
-void setUnchecked(int x, int y, T value) {
-  _cells[_index(x, y)] = value;
+  <pre class="language-dart"><code class="language-dart">@override
+(int, int)? lastOffsetWhere(
+  bool Function(T) test, [
+  (int, int)? end,
+]) {
+  end ??= (width - 1, height - 1);
+
+  &#47;&#47; Convert the offset into an index.
+  final offset = _index(end.$1, end.$2);
+  final index = _cells.lastIndexWhere(test, offset);
+  if (index == -1) {
+    return null;
+  }
+  return _offset(index);
 }</code></pre>
 </section>
 
@@ -118,7 +129,7 @@ void setUnchecked(int x, int y, T value) {
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
     <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">setUnchecked method</li>
+    <li class="self-crumb">lastOffsetWhere method</li>
 </ol>
 
 

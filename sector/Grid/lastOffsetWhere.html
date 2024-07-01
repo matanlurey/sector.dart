@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the removeLast method from the Columns class, for the Dart programming language.">
-  <title>removeLast method - Columns class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the lastOffsetWhere method from the Grid class, for the Dart programming language.">
+  <title>lastOffsetWhere method - Grid class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Columns-class.html">Columns<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">removeLast abstract method</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">lastOffsetWhere method</li>
   </ol>
-  <div class="self-name">removeLast</div>
+  <div class="self-name">lastOffsetWhere</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,36 +54,37 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="sector&#47;Columns-class-sidebar.html"
+    data-above-sidebar="sector&#47;Grid-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">removeLast</span> abstract method 
+<h1><span class="kind-method">lastOffsetWhere</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
       
 
-<span class="returntype">void</span>
-<span class="name ">removeLast</span>(<wbr>)
+<span class="returntype">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
+<span class="name ">lastOffsetWhere</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="lastOffsetWhere-param-test"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">test</span>(<ol class="parameter-list"><li><span class="parameter" id="param-"><span class="type-annotation">T</span></span></li>
+</ol>
+), </span></li>
+<li><span class="parameter" id="lastOffsetWhere-param-end">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span> <span class="parameter-name">end</span>]</span></li>
+</ol>)
 
       
 
     </section>
     
 <section class="desc markdown">
-  <p>Removes the last, or right-most, column in the grid.</p>
-<p>The grid must not be empty. The grid is resized to have a width of
-<code>Grid.width - 1</code>.</p>
-<div class="markdown-alert markdown-alert-warning">
-<p class="markdown-alert-title">Warning</p>
-<p>Not all grid implementations support growable grids, or grids that can
-be resized after they have been created. You should typically only attempt
-to resize a grid if you constructed the grid yourself and know this
-instance supports resizing.</p>
-<p>For example, the <a href="../../sector/ListGrid-class.html">ListGrid</a> class supports growable grids, but the default
-grid implementation returned by <a href="../../sector/Grid/asSubGrid.html">Grid.asSubGrid</a> only supports resizing if
-the view is "complete"; and <a href="../../sector/ListGrid/ListGrid.view.html">ListGrid.view</a> only supports resizing if the
-backing list is growable.</p>
+  <p>Returns the last <code>(x, y)</code> offset where <code>test</code> returns <code>true</code>.</p>
+<p>If <code>end</code> is provided, the search starts at the provided offset, otherwise
+it starts at the bottom-right corner of the grid. If the element is not
+found, <code>null</code> is returned.</p>
+<div class="markdown-alert markdown-alert-note">
+<p class="markdown-alert-title">Note</p>
+<p>The order of the search is not guaranteed, and may vary depending on the
+implementation of the grid. If the order of the search is important, it
+is recommended to use <a href="../../sector/Grid/rows.html">rows</a> or <a href="../../sector/Grid/columns.html">columns</a> to iterate over the grid and
+search for the element.</p>
 </div>
 </section>
 
@@ -91,7 +92,20 @@ backing list is growable.</p>
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">void removeLast();</code></pre>
+  <pre class="language-dart"><code class="language-dart">(int, int)? lastOffsetWhere(
+  bool Function(T) test, [
+  (int, int)? end,
+]) {
+  end ??= (width - 1, height - 1);
+  for (var y = end.$1; y &gt;= 0; y--) {
+    for (var x = end.$2; x &gt;= 0; x--) {
+      if (test(getUnchecked(x, y))) {
+        return (x, y);
+      }
+    }
+  }
+  return null;
+}</code></pre>
 </section>
 
 
@@ -108,12 +122,12 @@ backing list is growable.</p>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Columns-class.html">Columns<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">removeLast abstract method</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">lastOffsetWhere method</li>
 </ol>
 
 
-    <h5>Columns class</h5>
+    <h5>Grid class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 

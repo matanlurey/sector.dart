@@ -98,7 +98,7 @@ instead.</p>
   <pre class="language-dart"><code class="language-dart">@pragma(&#39;vm:prefer-inline&#39;)
 @override
 T getUnchecked(int x, int y) {
-  return _cells[x + y * _width];
+  return _cells[_index(x, y)];
 }</code></pre>
 </section>
 

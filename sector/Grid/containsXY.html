@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the Uint8Grid.from constructor from Class Uint8Grid from the sector library, for the Dart programming language.">
-  <title>Uint8Grid.from constructor - Uint8Grid - sector library - Dart API</title>
+  <meta name="description" content="API docs for the containsXY method from the Grid class, for the Dart programming language.">
+  <title>containsXY method - Grid class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Uint8Grid-class.html">Uint8Grid</a></li>
-    <li class="self-crumb">Uint8Grid.from factory constructor</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">containsXY method</li>
   </ol>
-  <div class="self-name">Uint8Grid.from</div>
+  <div class="self-name">containsXY</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -51,37 +51,44 @@
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="sector&#47;Uint8Grid-class-sidebar.html"
-      data-below-sidebar="">
-      <div>
-<h1><span class="kind-constructor">Uint8Grid.from</span> constructor 
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="sector&#47;Grid-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">containsXY</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
       
-      <span class="name ">Uint8Grid.from</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="from-param-grid"><span class="type-annotation"><a href="../../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>&gt;</span></span> <span class="parameter-name">grid</span></span></li>
-</ol>)
-    </section>
 
+<span class="returntype"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
+<span class="name ">containsXY</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="containsXY-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span></li>
+<li><span class="parameter" id="containsXY-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span></span></li>
+</ol>)
+
+      
+
+    </section>
     
 <section class="desc markdown">
-  <p>Creates a new grid from the provided <code>grid</code>.</p>
+  <p>Returns <code>true</code> if the grid contains an element at the given <code>x</code> and <code>y</code>.</p>
+<p>The <code>x</code> and <code>y</code> coordinates are zero-based, where <code>x</code> is the horizontal
+axis and <code>y</code> is the vertical axis. The origin <code>(0, 0)</code> is at the top-left
+corner of the grid.</p>
+<h2 id="examples">Examples</h2>
+<pre class="language-dart"><code class="language-dart">final grid = Grid.filled(3, 3, 0);
+print(grid.containsXY(1, 1)); // true
+print(grid.containsXY(3, 3)); // false
+</code></pre>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">factory Uint8Grid.from(Grid&lt;int&gt; grid) {
-  return Uint8Grid.generate(
-    grid.width,
-    grid.height,
-    grid.getUnchecked,
-  );
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">bool containsXY(int x, int y) =&gt; x &gt;= 0 &amp;&amp; x &lt; width &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; height;</code></pre>
 </section>
 
 
@@ -98,17 +105,17 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Uint8Grid-class.html">Uint8Grid</a></li>
-    <li class="self-crumb">Uint8Grid.from factory constructor</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">containsXY method</li>
 </ol>
 
 
-    <h5>Uint8Grid class</h5>
+    <h5>Grid class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-left-->
+  </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
+</div><!--/.sidebar-offcanvas-->
 
 </main>
 

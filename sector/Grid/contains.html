@@ -64,8 +64,7 @@
       
 
 <span class="returntype"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
-<span class="name ">contains</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="contains-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span></li>
-<li><span class="parameter" id="contains-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span></span></li>
+<span class="name ">contains</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="contains-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span></span></li>
 </ol>)
 
       
@@ -73,22 +72,15 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns <code>true</code> if the grid contains an element at the given <code>x</code> and <code>y</code>.</p>
-<p>The <code>x</code> and <code>y</code> coordinates are zero-based, where <code>x</code> is the horizontal
-axis and <code>y</code> is the vertical axis. The origin <code>(0, 0)</code> is at the top-left
-corner of the grid.</p>
-<h2 id="examples">Examples</h2>
-<pre class="language-dart"><code class="language-dart">final grid = Grid.filled(3, 3, 0);
-print(grid.contains(1, 1)); // true
-print(grid.contains(3, 3)); // false
-</code></pre>
+  <p>Returns <code>true</code> if the grid contains the provided <code>element</code>.</p>
+<p>The equality of the elements is determined by the <code>==</code> operator.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">bool contains(int x, int y) =&gt; x &gt;= 0 &amp;&amp; x &lt; width &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; height;</code></pre>
+  <pre class="language-dart"><code class="language-dart">bool contains(T element) =&gt; offsetOf(element) != null;</code></pre>
 </section>
 
 

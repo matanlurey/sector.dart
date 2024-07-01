@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the height property from the TypedDataGrid class, for the Dart programming language.">
-  <title>height property - TypedDataGrid class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the contains method from the ListGrid class, for the Dart programming language.">
+  <title>contains method - ListGrid class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/TypedDataGrid-class.html">TypedDataGrid<span class="signature">&lt;<wbr><span class="type-parameter">N extends num</span>, <span class="type-parameter">T extends TypedData</span>&gt;</span></a></li>
-    <li class="self-crumb">height property</li>
+    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">contains method</li>
   </ol>
-  <div class="self-name">height</div>
+  <div class="self-name">contains</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,50 +54,46 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="sector&#47;TypedDataGrid-class-sidebar.html"
+    data-above-sidebar="sector&#47;ListGrid-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-property">height</span> property 
+<h1><span class="kind-method">contains</span> method 
 </h1></div>
 
-      <section class="multi-line-signature">
-        
+    <section class="multi-line-signature">
+      
   <div>
     <ol class="annotation-list">
         <li>@<a href="https://api.dart.dev/stable/3.4.4/dart-core/override-constant.html">override</a></li>
     </ol>
   </div>
-        <a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a>
-        <span class="name ">height</span>
-        <div class="features"><span class="feature">final</span></div>
 
-      </section>
-      
+<span class="returntype"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
+<span class="name ">contains</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="contains-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span></span></li>
+</ol>)
+
+      <div class="features"><span class="feature">override</span></div>
+
+    </section>
+    
 <section class="desc markdown">
-  <p>Height of the grid, in <em>rows</em>.</p>
-<p>This is the number of rows in the grid, where each row is a horizontal
-slice of the grid. The height is the maximum <code>y</code> coordinate that can be
-accessed in the grid.</p>
-<p>The height is always greater than or equal to <code>0</code>, where <code>0</code> indicates an
-empty grid. If the height is <code>0</code>, then the width is also <code>0</code>.</p>
-<h2 id="examples">Examples</h2>
-<pre class="language-dart"><code class="language-dart">final grid = Grid.filled(3, 3, 0);
-print(grid.height); // 3
-</code></pre>
+  <p>Returns <code>true</code> if the grid contains the provided <code>element</code>.</p>
+<p>The equality of the elements is determined by the <code>==</code> operator.</p>
 </section>
 
-      
+
+    
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-final int height;</code></pre>
+bool contains(T element) =&gt; _cells.contains(element);</code></pre>
 </section>
 
 
-</div> <!-- /.main-content -->
+  </div> <!-- /.main-content -->
 
-<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
@@ -107,16 +103,16 @@ final int height;</code></pre>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/TypedDataGrid-class.html">TypedDataGrid<span class="signature">&lt;<wbr><span class="type-parameter">N extends num</span>, <span class="type-parameter">T extends TypedData</span>&gt;</span></a></li>
-    <li class="self-crumb">height property</li>
+    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">contains method</li>
 </ol>
 
 
-  <h5>TypedDataGrid class</h5>
-  <div id="dartdoc-sidebar-left-content"></div>
-</div><!--/.sidebar-offcanvas-->
+    <h5>ListGrid class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
 
-<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
 </div><!--/.sidebar-offcanvas-->
 
 </main>

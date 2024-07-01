@@ -91,7 +91,7 @@ print(grid.containsXYWH(2, 2, 2, 2)); // false
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">bool containsXYWH(int x, int y, int width, int height) {
-  return contains(x, y) &amp;&amp; contains(x + width - 1, y + height - 1);
+  return containsXY(x, y) &amp;&amp; containsXY(x + width - 1, y + height - 1);
 }</code></pre>
 </section>
 

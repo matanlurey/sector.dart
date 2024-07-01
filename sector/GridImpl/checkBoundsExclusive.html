@@ -83,7 +83,7 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static void checkBoundsExclusive(Grid&lt;void&gt; grid, int x, int y) {
-  if (!grid.contains(x, y)) {
+  if (!grid.containsXY(x, y)) {
     throw RangeError(&#39;Coordinates out of bounds: ($x, $y)&#39;);
   }
 }</code></pre>

@@ -67,7 +67,7 @@
   <p>A data structure representing a 2-dimensional grid of elements of type <code>T</code>.</p>
 <p>Where as a <a href="https://api.dart.dev/stable/3.4.4/dart-core/List-class.html">List</a> is a 1-dimensional data structure of elements, a <a href="../sector/Grid-class.html">Grid</a> is
 a 2-dimensional data structure of elements, where each element is accessed
-by its <code>x</code> and <code>y</code> coordinates (<a href="../sector/Grid/get.html">get</a>, <a href="../sector/Grid/set.html">set</a>, <a href="../sector/Grid/contains.html">contains</a>).</p>
+by its <code>x</code> and <code>y</code> coordinates (<a href="../sector/Grid/get.html">get</a>, <a href="../sector/Grid/set.html">set</a>, <a href="../sector/Grid/containsXY.html">containsXY</a>).</p>
 <p>The <code>x</code> and <code>y</code> coordinates are zero-based, where <code>x</code> is the horizontal
 axis and <code>y</code> is the vertical axis. The origin <code>(0, 0)</code> is at the top-left
 corner of the grid, and <a href="../sector/Grid/width.html">width</a> and <a href="../sector/Grid/height.html">height</a> are the number of columns and
@@ -130,7 +130,6 @@ that are derived from other methods.</p>
           <dt>Implementers</dt>
           <dd><ul class="comma-separated clazz-relationships">
               <li><a href="../sector/ListGrid-class.html">ListGrid</a></li>
-              <li><a href="../sector/TypedDataGrid-class.html">TypedDataGrid</a></li>
           </ul></dd>
 
           <dt>Available Extensions</dt>
@@ -325,7 +324,20 @@ that are derived from other methods.</p>
 </dd>
 
         <dt id="contains" class="callable">
-  <span class="name"><a href="../sector/Grid/contains.html">contains</a></span><span class="signature">(<wbr><span class="parameter" id="contains-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span><span class="parameter" id="contains-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span></span>)
+  <span class="name"><a href="../sector/Grid/contains.html">contains</a></span><span class="signature">(<wbr><span class="parameter" id="contains-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns <code>true</code> if the grid contains the provided <code>element</code>.
+  
+
+</dd>
+
+        <dt id="containsXY" class="callable">
+  <span class="name"><a href="../sector/Grid/containsXY.html">containsXY</a></span><span class="signature">(<wbr><span class="parameter" id="containsXY-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span><span class="parameter" id="containsXY-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span></span>)
     <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
   </span>
   
@@ -376,6 +388,32 @@ that are derived from other methods.</p>
 
 </dd>
 
+        <dt id="lastOffsetOf" class="callable">
+  <span class="name"><a href="../sector/Grid/lastOffsetOf.html">lastOffsetOf</a></span><span class="signature">(<wbr><span class="parameter" id="lastOffsetOf-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span>, </span><span class="parameter" id="lastOffsetOf-param-end">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span> <span class="parameter-name">end</span>]</span>)
+    <span class="returntype parameter">&#8594; (<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the last <code>(x, y)</code> offset of the provided <code>element</code> in the grid.
+  
+
+</dd>
+
+        <dt id="lastOffsetWhere" class="callable">
+  <span class="name"><a href="../sector/Grid/lastOffsetWhere.html">lastOffsetWhere</a></span><span class="signature">(<wbr><span class="parameter" id="lastOffsetWhere-param-test"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">test</span>(<span class="parameter" id="param-"><span class="type-annotation">T</span></span>), </span><span class="parameter" id="lastOffsetWhere-param-end">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span> <span class="parameter-name">end</span>]</span>)
+    <span class="returntype parameter">&#8594; (<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the last <code>(x, y)</code> offset where <code>test</code> returns <code>true</code>.
+  
+
+</dd>
+
         <dt id="noSuchMethod" class="callable inherited">
   <span class="name"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
@@ -386,6 +424,32 @@ that are derived from other methods.</p>
 <dd class="inherited">
   Invoked when a nonexistent method or property is accessed.
   <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="offsetOf" class="callable">
+  <span class="name"><a href="../sector/Grid/offsetOf.html">offsetOf</a></span><span class="signature">(<wbr><span class="parameter" id="offsetOf-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span>, </span><span class="parameter" id="offsetOf-param-start">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)</span> <span class="parameter-name">start</span> = <span class="default-value">(0, 0)</span>]</span>)
+    <span class="returntype parameter">&#8594; (<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the first <code>(x, y)</code> offset of the provided <code>element</code> in the grid.
+  
+
+</dd>
+
+        <dt id="offsetWhere" class="callable">
+  <span class="name"><a href="../sector/Grid/offsetWhere.html">offsetWhere</a></span><span class="signature">(<wbr><span class="parameter" id="offsetWhere-param-test"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">test</span>(<span class="parameter" id="param-"><span class="type-annotation">T</span></span>), </span><span class="parameter" id="offsetWhere-param-start">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)</span> <span class="parameter-name">start</span> = <span class="default-value">(0, 0)</span>]</span>)
+    <span class="returntype parameter">&#8594; (<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the first <code>(x, y)</code> offset where <code>test</code> returns <code>true</code>.
+  
 
 </dd>
 
