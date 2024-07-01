@@ -594,10 +594,10 @@ void runGridTests(
       final grid = filled(3, 3, 0);
       grid.set(1, 1, 1);
 
-      final found = grid.offsetOf(1, (1, 1));
+      final found = grid.offsetOf(1, start: (1, 1));
       check(found).equals((1, 1));
 
-      final notFound = grid.offsetOf(1, (1, 2));
+      final notFound = grid.offsetOf(1, start: (1, 2));
       check(notFound).isNull();
     });
   });
@@ -620,10 +620,10 @@ void runGridTests(
       final grid = filled(3, 3, 0);
       grid.set(1, 1, 1);
 
-      final found = grid.offsetWhere((it) => it == 1, (1, 1));
+      final found = grid.offsetWhere((it) => it == 1, start: (1, 1));
       check(found).equals((1, 1));
 
-      final notFound = grid.offsetWhere((it) => it == 1, (1, 2));
+      final notFound = grid.offsetWhere((it) => it == 1, start: (1, 2));
       check(notFound).isNull();
     });
   });
@@ -646,10 +646,10 @@ void runGridTests(
       final grid = filled(3, 3, 0);
       grid.set(1, 1, 1);
 
-      final found = grid.lastOffsetOf(1, (1, 1));
+      final found = grid.lastOffsetOf(1, end: (1, 1));
       check(found).equals((1, 1));
 
-      final notFound = grid.lastOffsetOf(1, (1, 0));
+      final notFound = grid.lastOffsetOf(1, end: (1, 0));
       check(notFound).isNull();
     });
   });
@@ -672,11 +672,62 @@ void runGridTests(
       final grid = filled(3, 3, 0);
       grid.set(1, 1, 1);
 
-      final found = grid.lastOffsetWhere((it) => it == 1, (1, 1));
+      final found = grid.lastOffsetWhere((it) => it == 1, end: (1, 1));
       check(found).equals((1, 1));
 
-      final notFound = grid.lastOffsetWhere((it) => it == 1, (1, 0));
+      final notFound = grid.lastOffsetWhere((it) => it == 1, end: (1, 0));
       check(notFound).isNull();
+    });
+  });
+
+  group('<$testing>.traverse', () {
+    test('should traverse in row-major, starting at (0, 0)', () {
+      final grid = filled(3, 3, 0);
+      final traversal = grid.traverse().map((it) => (it.$1, it.$2));
+      check(traversal).deepEquals([
+        (0, 0),
+        (1, 0),
+        (2, 0),
+        (0, 1),
+        (1, 1),
+        (2, 1),
+        (0, 2),
+        (1, 2),
+        (2, 2),
+      ]);
+    });
+
+    test('should traverse in row-major, starting at (1, 1)', () {
+      final grid = filled(3, 3, 0);
+      final traversal = grid.traverse(start: (1, 1)).map(
+        (it) => (it.$1, it.$2),
+      );
+      check(traversal).deepEquals([
+        (1, 1),
+        (2, 1),
+        (0, 2),
+        (1, 2),
+        (2, 2),
+      ]);
+    });
+
+    test('should traverse in row-major, in reverse', () {
+      final grid = filled(3, 3, 0);
+      final traversal = grid.traverse(
+        order: GridTraversal.rowMajorByXY(-1, 0),
+        start: (2, 2),
+      ).map((it) => (it.$1, it.$2));
+      check(traversal).deepEquals([
+        (2, 2),
+        (1, 2),
+        (0, 2),
+        (2, 1),
+        (1, 1),
+        (0, 1),
+        (2, 0),
+        (1, 0),
+        (0, 0),
+      ]);
     });
   });
 

@@ -214,8 +214,8 @@ abstract mixin class Grid<T> {
   /// > implementation of the grid. If the order of the search is important, it
   /// > is recommended to use [rows] or [columns] to iterate over the grid and
   /// > search for the element.
-  (int, int)? offsetOf(T element, [(int, int) start = (0, 0)]) {
-    return offsetWhere((e) => e == element, start);
+  (int, int)? offsetOf(T element, {(int, int) start = (0, 0)}) {
+    return offsetWhere((e) => e == element, start: start);
   }
 
   /// Returns the first `(x, y)` offset where [test] returns `true`.
@@ -229,7 +229,7 @@ abstract mixin class Grid<T> {
   /// > implementation of the grid. If the order of the search is important, it
   /// > is recommended to use [rows] or [columns] to iterate over the grid and
   /// > search for the element.
-  (int, int)? offsetWhere(bool Function(T) test, [(int, int) start = (0, 0)]) {
+  (int, int)? offsetWhere(bool Function(T) test, {(int, int) start = (0, 0)}) {
     for (var y = start.$1; y < height; y++) {
       for (var x = start.$2; x < width; x++) {
         if (test(getUnchecked(x, y))) {
@@ -253,8 +253,8 @@ abstract mixin class Grid<T> {
   /// > implementation of the grid. If the order of the search is important, it
   /// > is recommended to use [rows] or [columns] to iterate over the grid and
   /// > search for the element.
-  (int, int)? lastOffsetOf(T element, [(int, int)? end]) {
-    return lastOffsetWhere((e) => e == element, end);
+  (int, int)? lastOffsetOf(T element, {(int, int)? end}) {
+    return lastOffsetWhere((e) => e == element, end: end);
   }
 
   /// Returns the last `(x, y)` offset where [test] returns `true`.
@@ -269,9 +269,9 @@ abstract mixin class Grid<T> {
   /// > is recommended to use [rows] or [columns] to iterate over the grid and
   /// > search for the element.
   (int, int)? lastOffsetWhere(
-    bool Function(T) test, [
+    bool Function(T) test, {
     (int, int)? end,
-  ]) {
+  }) {
     end ??= (width - 1, height - 1);
     for (var y = end.$1; y >= 0; y--) {
       for (var x = end.$2; x >= 0; x--) {
@@ -439,6 +439,41 @@ abstract mixin class Grid<T> {
   /// // [0, 0, 0]
   /// ```
   Columns<T> get columns;
+
+  /// Returns an iterable that traverses the grid in a specific [order].
+  ///
+  /// The order of the traversal is determined by the provided [order], which
+  /// is a [GridTraversal] implementation. If not provided, the default order
+  /// is determined by the specific implementation of the grid, often row-major.
+  ///
+  /// The optional [start] parameter specifies the starting point of the
+  /// traversal. If not provided, the traversal will start at a default point
+  /// that makes sense for the specific implementation, and attempt to visit
+  /// _all_ or _most_ elements in the grid, if possible.
+  ///
+  /// ## Examples
+  ///
+  /// ```dart
+  /// final grid = Grid.generate(2, 2, (x, y) => (x, y));
+  /// for (final (x, y, element) in grid.traverse()) {
+  ///   print(element);
+  /// }
+  /// ```
+  ///
+  /// The output of the example is:
+  ///
+  /// ```txt
+  /// (0, 0)
+  /// (1, 0)
+  /// (0, 1)
+  /// (1, 1)
+  /// ```
+  Iterable<(int, int, T)> traverse({
+    GridTraversal order = rowMajor,
+    (int, int)? start,
+  }) {
+    return order.traverse(this, start: start);
+  }
 
   /// Returns a _new_ grid with a shallow copy of the provided bounds.
   ///

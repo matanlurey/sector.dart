@@ -210,9 +210,9 @@ final class ListGrid<T> with Grid<T> {
 
   @override
   (int, int)? offsetOf(
-    T element, [
+    T element, {
     (int, int) start = (0, 0),
-  ]) {
+  }) {
     // Convert the offset into an index.
     final offset = _index(start.$1, start.$2);
     final index = _cells.indexOf(element, offset);
@@ -224,9 +224,9 @@ final class ListGrid<T> with Grid<T> {
 
   @override
   (int, int)? offsetWhere(
-    bool Function(T) test, [
+    bool Function(T) test, {
     (int, int) start = (0, 0),
-  ]) {
+  }) {
     // Convert the offset into an index.
     final offset = _index(start.$1, start.$2);
     final index = _cells.indexWhere(test, offset);
@@ -238,9 +238,9 @@ final class ListGrid<T> with Grid<T> {
 
   @override
   (int, int)? lastOffsetOf(
-    T element, [
+    T element, {
     (int, int)? end,
-  ]) {
+  }) {
     end ??= (width - 1, height - 1);
 
     // Convert the offset into an index.
@@ -254,9 +254,9 @@ final class ListGrid<T> with Grid<T> {
 
   @override
   (int, int)? lastOffsetWhere(
-    bool Function(T) test, [
+    bool Function(T) test, {
     (int, int)? end,
-  ]) {
+  }) {
     end ??= (width - 1, height - 1);
 
     // Convert the offset into an index.

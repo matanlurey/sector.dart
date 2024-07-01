@@ -1,7 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:sector/sector.dart';
-import 'package:sector/src/sub_grid_view.dart';
+import 'package:sector/src/base/iterator.dart';
+import 'package:sector/src/views/sub_grid_view.dart';
 
 /// A collection of static methods for implementing the [Grid] interface.
 ///
@@ -185,6 +186,53 @@ extension GridImpl on Never {
       width,
       height,
     );
+  }
+
+  /// Returns an iterable that traverses the grid unidirectionally.
+  ///
+  /// This is a convenience method that, given a function that returns a
+  /// [GridIterator], adapts it to an iterable that traverses the grid in the
+  /// order provided by the iterator.
+  ///
+  /// The resulting iterator is efficient only for forward iteration.
+  static Iterable<(int, int, E)> forwardIterable<E>(
+    GridIterator<E> Function() it,
+  ) {
+    return ForwardGridIterable(it);
+  }
+
+  /// Returns an iterable that traverses the grid bidirectionally.
+  ///
+  /// This is a convenience method that, given a pair of functions that return
+  /// [GridIterator]s starting at either end of the grid, adapts them to an
+  /// iterable that traverses the grid in the order provided by the iterators.
+  ///
+  /// The resulting iterator is efficient for forward iteration (from the start)
+  /// and reverse iteration (from the end), such as [Iterable.last] or
+  /// [Iterable.lastWhere].
+  static Iterable<(int, int, E)> bidirectionalIterable<E>({
+    required BidirectionalGridIterator<E> Function() start,
+    required BidirectionalGridIterator<E> Function() end,
+  }) {
+    return BidirectionalGridIterable(
+      start: start,
+      end: end,
+    );
+  }
+
+  /// Returns an iterable that traverses the grid in non-uniform order.
+  ///
+  /// This is a convenience method that, given a function that returns a
+  /// [SeekableGridIterator], adapts it to an iterable that traverses the grid
+  /// in the order provided by the iterator.
+  ///
+  /// The resulting iterator is efficient for forward iteration, reverse
+  /// iteration, and seeking to specific points in the grid, such as
+  /// [Iterable.elementAt] or [Iterable.skip].
+  static Iterable<(int, int, E)> seekableIterable<E>(
+    SeekableGridIterator<E> Function() it,
+  ) {
+    return SeekableGridIterable(it);
   }
 
   /// Resizes the grid to the provided [width] and [height].
