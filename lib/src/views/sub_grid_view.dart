@@ -36,6 +36,18 @@ final class SubGridView<T> with Grid<T> {
   }
 
   @override
+  bool contains(T element) {
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
+        if (getUnchecked(x, y) == element) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  @override
   T getUnchecked(int x, int y) {
     return _view.getUnchecked(x + _left, y + _top);
   }

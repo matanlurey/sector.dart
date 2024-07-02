@@ -132,6 +132,11 @@ final class NaiveListGrid<T> with Grid<T> {
   @override
   int get height => _width == 0 ? 0 : _cells.length ~/ _width;
 
+  @override
+  bool contains(T value) {
+    return _cells.contains(value);
+  }
+
   int _indexOfChecked(int x, int y) {
     GridImpl.checkBoundsExclusive(this, x, y);
     return x + y * _width;

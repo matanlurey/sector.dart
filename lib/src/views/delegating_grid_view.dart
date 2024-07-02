@@ -19,26 +19,6 @@ base class DelegatingGridView<T> implements Grid<T> {
   bool contains(T value) => _view.contains(value);
 
   @override
-  (int, int)? offsetOf(T element, {(int, int) start = (0, 0)}) {
-    return _view.offsetOf(element, start: start);
-  }
-
-  @override
-  (int, int)? offsetWhere(bool Function(T) test, {(int, int) start = (0, 0)}) {
-    return _view.offsetWhere(test, start: start);
-  }
-
-  @override
-  (int, int)? lastOffsetOf(T element, {(int, int)? end}) {
-    return _view.lastOffsetOf(element, end: end);
-  }
-
-  @override
-  (int, int)? lastOffsetWhere(bool Function(T) test, {(int, int)? end}) {
-    return _view.lastOffsetWhere(test, end: end);
-  }
-
-  @override
   bool containsXY(int x, int y) => _view.containsXY(x, y);
 
   @override
