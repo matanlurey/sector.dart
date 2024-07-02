@@ -25,7 +25,7 @@ void main() {
         [1, 2, 3],
         [4, 5, 6],
       ]);
-      final iterator = rowMajor(grid).iterator as GridIterator<int>;
+      final iterator = rowMajor<int>()(grid).iterator as GridIterator<int>;
       iterator.seek(2);
       check(iterator.current).equals(2);
     });
@@ -43,15 +43,21 @@ void main() {
         [1, 2, 3],
         [4, 5, 6],
       ]);
-      final iterator = rowMajor(grid).iterator as GridIterator<int>;
+      final iterator = rowMajor<int>()(grid).iterator as GridIterator<int>;
       iterator.moveNext();
       check(iterator.position).equals((0, 0));
     });
-  });
 
-  group('RowMajorTraveral with custom steps', () {
-    test('should traverse with custom steps', () {
-      // ...
+    test('should support custom steps', () {
+      final grid = Grid.fromRows([
+        [1, 2, 3],
+        [4, 5, 6],
+      ]);
+      check(grid.traverse(order: rowMajor(step: (2, 0)))).deepEquals([
+        1,
+        3,
+        5,
+      ]);
     });
   });
 }

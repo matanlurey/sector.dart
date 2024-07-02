@@ -472,7 +472,7 @@ abstract mixin class Grid<T> {
     Traversal<T>? order,
     (int x, int y)? start,
   }) {
-    final traversal = order ?? rowMajor;
+    final traversal = order ?? rowMajor();
     return traversal(this, start: start);
   }
 
