@@ -131,7 +131,7 @@
 </dt>
 <dd>
   <p>Each cell is stored in a contiguous block of memory in row-major order.</p>
-<p>When calling <a href="../sector/Grid/getByIndexUnchecked.html">Grid.getByIndexUnchecked</a>, the position is calculated as:</p>
+<p><a href="../sector/EfficientIndexGrid/getByIndexUnchecked.html">EfficientIndexGrid.getByIndexUnchecked</a> should compute the position as:</p>
 <pre class="language-dart"><code class="language-dart">final x = index % width;
 final y = index ~/ width;
 </code></pre>

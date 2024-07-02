@@ -84,6 +84,9 @@ the cells will be reflected in the grid, and vice versa.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">factory ListGrid.view(List&lt;T&gt; cells, {required int width}) {
   RangeError.checkNotNegative(width, &#39;width&#39;);
+  if (width == 0 || cells.isEmpty) {
+    return ListGrid.empty();
+  }
   if (cells.length % width != 0) {
     throw ArgumentError.value(
       cells,

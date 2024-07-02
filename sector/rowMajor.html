@@ -86,7 +86,8 @@ grid has been visited.</p>
   <pre class="language-dart"><code class="language-dart">Traversal&lt;T&gt; rowMajor&lt;T&gt;({(int, int)? start}) {
   return (grid) {
     final (startX, startY) = start ?? (0, 0);
-    if (grid.layoutHint == LayoutHint.rowMajorContiguous) {
+    if (grid is EfficientIndexGrid&lt;T&gt; &amp;&amp;
+        grid.layoutHint == LayoutHint.rowMajorContiguous) {
       return GridIterable.from(
         () =&gt; _FastRowMajorIterator(
           grid,

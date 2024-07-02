@@ -31,7 +31,7 @@
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
     <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">clear abstract method</li>
+    <li class="self-crumb">clear method</li>
   </ol>
   <div class="self-name">clear</div>
   <form class="search navbar-right" role="search">
@@ -57,7 +57,7 @@
     data-above-sidebar="sector&#47;Grid-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">clear</span> abstract method 
+<h1><span class="kind-method">clear</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
@@ -89,7 +89,12 @@ backing list is growable.</p>
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">void clear();</code></pre>
+  <pre class="language-dart"><code class="language-dart">void clear() {
+  final rows = this.rows;
+  while (isNotEmpty) {
+    rows.removeLast();
+  }
+}</code></pre>
 </section>
 
 
@@ -107,7 +112,7 @@ backing list is growable.</p>
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
     <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">clear abstract method</li>
+    <li class="self-crumb">clear method</li>
 </ol>
 
 
