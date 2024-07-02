@@ -1,3 +1,6 @@
+// This file is not tested; the API that matters is tested through other APIs.
+// coverage:ignore-file
+
 import 'package:meta/meta.dart';
 import 'package:sector/sector.dart';
 
@@ -55,12 +58,6 @@ abstract base class DelegatingGridView<T> implements Grid<T> {
   GridIterable<T> traverse([Traversal<T>? order]) {
     return view.traverse(order);
   }
-
-  @override
-  LayoutHint get layoutHint => view.layoutHint;
-
-  @override
-  T getByIndexUnchecked(int index) => view.getByIndexUnchecked(index);
 
   @override
   Grid<T> subGrid({

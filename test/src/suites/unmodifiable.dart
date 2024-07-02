@@ -1,5 +1,6 @@
 import '../../_prelude.dart';
-import 'fixed.dart';
+
+import 'mutable_fixed.dart';
 
 /// Runs a test suite that checks that operations that mutate fail.
 void runUnmodifiableTestSuite<T>(

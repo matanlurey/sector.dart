@@ -31,4 +31,6 @@ extension GridSubject<T> on Subject<Grid<T>> {
   Subject<GridAxis<T>> get rows => has((it) => it.rows, 'rows');
 
   Subject<GridAxis<T>> get columns => has((it) => it.columns, 'columns');
+
+  Subject<bool> get isEmptyRows => rows.has((it) => it.isEmpty, 'isEmpty');
 }

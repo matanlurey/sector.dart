@@ -6,7 +6,7 @@ import 'package:sector/sector.dart';
 /// the [Grid] interface. It is a row-major dense grid, where each row is stored
 /// contiguously in memory. This is the most common layout for a grid, and is
 /// the most efficient for most use-cases.
-final class ListGrid<T> with Grid<T> {
+final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   /// Creates a new grid with the provided [width] and [height].
   ///
   /// The grid is initialized with all elements set to [fill].
@@ -158,6 +158,9 @@ final class ListGrid<T> with Grid<T> {
   /// the cells will be reflected in the grid, and vice versa.
   factory ListGrid.view(List<T> cells, {required int width}) {
     RangeError.checkNotNegative(width, 'width');
+    if (width == 0 || cells.isEmpty) {
+      return ListGrid.empty();
+    }
     if (cells.length % width != 0) {
       throw ArgumentError.value(
         cells,

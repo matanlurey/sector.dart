@@ -9,6 +9,25 @@
 - Fixed a bug in `<Grid>.columns.remove*` where, similar to above, the grid was
   not updated correctly.
 
+- Moved `<Grid>.layoutHint` and `<Grid>.getByIndexUnchecked` to the optional
+  mixin `EfficientIndexGrid`, which only provides these methods. This allows
+  users to opt-in to these methods, and not have them clutter the API of the
+  main `Grid` class:
+
+  ```dart
+  class MyListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
+    final List<T> _list;
+
+    /* ... */
+
+    @override
+    LayoutHint get layoutHint => LayoutHint.rowMajorContinguous;
+
+    @override
+    T getByIndexUnchecked(int index) => _list[index];
+  }
+  ```
+
 - Replaced `Rows` and `Columns` with `GridAxis`; both of these types only
   existed to have a common interface for iterating over rows and columns, but
   ironically the only common base was `Iterable<Iterable<T>>`.

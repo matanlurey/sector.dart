@@ -71,6 +71,49 @@ void main() {
     ]);
   });
 
+  test('.lastWhere returns the last column that satisfies the predicate', () {
+    final grid = NaiveListGrid.fromColumns([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ]);
+    final column = grid.columns.lastWhere((column) => column.first == 4);
+    check(column).deepEquals([4, 5, 6]);
+  });
+
+  test('.lastWhere returns orElse if no column satisfies the predicate', () {
+    final grid = NaiveListGrid.fromColumns([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ]);
+    final column = grid.columns.lastWhere(
+      (column) => column.first == 10,
+      orElse: () => [10, 11, 12],
+    );
+    check(column).deepEquals([10, 11, 12]);
+  });
+
+  test('.lastWhere returns orElse if the grid is empty', () {
+    final grid = NaiveListGrid.fromColumns([]);
+    final column = grid.columns.lastWhere(
+      (column) => column.first == 10,
+      orElse: () => [10, 11, 12],
+    );
+    check(column).deepEquals([10, 11, 12]);
+  });
+
+  test('.lastWhere throws if orElse is null and no predicate matches', () {
+    final grid = NaiveListGrid.fromColumns([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ]);
+    check(
+      () => grid.columns.lastWhere((column) => column.first == 10),
+    ).throws<StateError>();
+  });
+
   test('.last= throws if the grid is empty', () {
     final grid = NaiveListGrid.fromColumns([]);
     check(() => grid.columns.last = [1, 2, 3]).throws<StateError>();

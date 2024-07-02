@@ -45,6 +45,10 @@
 /// // └───────┘
 /// ```
 ///
+/// Grids may optionally implement [EfficientIndexGrid] to provide hints to
+/// consumers about how the grid is laid out in memory, which can be used to
+/// optimize traversal algorithms.
+///
 /// ## Custom Implementations
 ///
 /// The default implementation of [Grid] is [ListGrid], which is a dense grid
@@ -84,7 +88,7 @@ export 'src/base/axis.dart' show ColumnsMixin, GridAxis, RowsMixin;
 export 'src/base/iterator.dart' show GridIterable, GridIterator;
 export 'src/base/layout_hint.dart' show LayoutHint;
 export 'src/base/traversal.dart' show Traversal;
-export 'src/grids/grid.dart' show Grid;
+export 'src/grids/grid.dart' show EfficientIndexGrid, Grid;
 export 'src/grids/list.dart' show ListGrid;
 export 'src/traverse/draw_line.dart' show drawLine;
 export 'src/traverse/row_major.dart' show rowMajor;
