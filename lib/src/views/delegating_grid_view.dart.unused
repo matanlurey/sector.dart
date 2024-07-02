@@ -1,7 +1,7 @@
 import 'package:sector/sector.dart';
 
 /// A base grid implementation that delegates all methods to another grid.
-base class DelegatingGridView<T> implements Grid<T> {
+abstract base class DelegatingGridView<T> implements Grid<T> {
   /// Creates a new grid that delegates all methods to the provided view.
   const DelegatingGridView(Grid<T> view) : _view = view;
   final Grid<T> _view;
@@ -48,11 +48,8 @@ base class DelegatingGridView<T> implements Grid<T> {
   Columns<T> get columns => _view.columns;
 
   @override
-  GridIterable<T> traverse({
-    Traversal<T>? order,
-    (int x, int y)? start,
-  }) {
-    return _view.traverse(order: order, start: start);
+  GridIterable<T> traverse([Traversal<T>? order]) {
+    return _view.traverse(order);
   }
 
   @override

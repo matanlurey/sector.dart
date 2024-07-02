@@ -221,6 +221,11 @@ void runGridTests(
       final grid = filled(3, 3, 0);
       check(grid).containsXYWH(1, 1, 1, 1).isTrue();
     });
+
+    test('should return if an element exists', () {
+      final grid = filled(3, 3, 0);
+      check(grid.contains(0)).isTrue();
+    });
   });
 
   group('<$testing>.get', () {

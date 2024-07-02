@@ -7,6 +7,11 @@ import 'package:sector/sector.dart';
 /// each row in order from left to right, while a spiral traversal will visit
 /// the elements in a spiral pattern starting from the center.
 ///
+/// See some built-in traversals:
+///
+/// - [rowMajor]
+/// - [drawLine]
+///
 /// ## Examples
 ///
 /// To use a traversal, call the `traverse` method on the grid with the desired
@@ -29,7 +34,4 @@ import 'package:sector/sector.dart';
 /// c
 /// d
 /// ```
-typedef Traversal<T> = GridIterable<T> Function(
-  Grid<T> grid, {
-  (int x, int y)? start,
-});
+typedef Traversal<T> = GridIterable<T> Function(Grid<T> grid);

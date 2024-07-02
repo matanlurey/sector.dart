@@ -17,7 +17,13 @@ void main() {
         [1, 2, 3],
         [4, 5, 6],
       ]);
-      check(grid.traverse(start: (1, 0))).deepEquals([2, 3, 4, 5, 6]);
+      check(grid.traverse(rowMajor(start: (1, 0)))).deepEquals([
+        2,
+        3,
+        4,
+        5,
+        6,
+      ]);
     });
 
     test('should support seek', () {

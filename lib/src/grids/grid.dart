@@ -199,7 +199,16 @@ abstract mixin class Grid<T> {
   /// Returns `true` if the grid contains the provided [element].
   ///
   /// The equality of the elements is determined by the `==` operator.
-  bool contains(T element);
+  bool contains(T element) {
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
+        if (getUnchecked(x, y) == element) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   /// Returns `true` if the grid contains an element at the given [x] and [y].
   ///
@@ -364,11 +373,6 @@ abstract mixin class Grid<T> {
   /// is a [Traversal] implementation. If not provided, the default order is
   /// determined by the specific implementation of the grid, often row-major.
   ///
-  /// The optional [start] parameter specifies the starting point of the
-  /// traversal. If not provided, the traversal will start at a default point
-  /// that makes sense for the specific implementation, and attempt to visit
-  /// _all_ or _most_ elements in the grid, if possible.
-  ///
   /// ## Examples
   ///
   /// ```dart
@@ -386,12 +390,9 @@ abstract mixin class Grid<T> {
   /// (0, 1)
   /// (1, 1)
   /// ```
-  GridIterable<T> traverse({
-    Traversal<T>? order,
-    (int x, int y)? start,
-  }) {
+  GridIterable<T> traverse([Traversal<T>? order]) {
     final traversal = order ?? rowMajor();
-    return traversal(this, start: start);
+    return traversal(this);
   }
 
   /// Returns a _new_ grid with a shallow copy of the provided bounds.

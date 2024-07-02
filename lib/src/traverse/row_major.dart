@@ -6,8 +6,8 @@ import 'package:sector/sector.dart';
 /// top-left corner of the grid and moving to the right until the end of the
 /// row, then moving to the next row and repeating the process until the entire
 /// grid has been visited.
-Traversal<T> rowMajor<T>() {
-  return (grid, {start}) {
+Traversal<T> rowMajor<T>({(int, int)? start}) {
+  return (grid) {
     final (startX, startY) = start ?? (0, 0);
     return GridIterable.from(
       () => _RowMajorIterator(

@@ -1,5 +1,5 @@
 import 'package:sector/sector.dart';
-import 'package:sector/src/views/delegating_grid_view.dart';
+import 'package:sector/src/views/delegating_grid_view.dart.unused';
 
 /// A grid view that prevents modification of the underlying grid.
 ///

@@ -16,7 +16,10 @@ import 'package:sector/sector.dart';
 ///
 /// The [current] value and [position] must not be accessed before calling
 /// [moveNext] or after a call to [moveNext] has returned false.
-mixin GridIterator<E> implements Iterator<E> {
+abstract mixin class GridIterator<E> implements Iterator<E> {
+  /// Creates an empty grid iterator.
+  const factory GridIterator.empty() = _EmptyGridIterator<E>;
+
   /// The current cell value.
   ///
   /// If the iterator has not yet been moved to the first cell ([moveNext] has
@@ -168,6 +171,19 @@ mixin GridIterator<E> implements Iterator<E> {
   int? get remainingSteps => null;
 }
 
+final class _EmptyGridIterator<E> with GridIterator<E> {
+  const _EmptyGridIterator();
+
+  @override
+  E get current => _noElement();
+
+  @override
+  (int, int) get position => _noElement();
+
+  @override
+  bool moveNext() => false;
+}
+
 final class _PositionIterator implements GridIterator<(int, int)> {
   const _PositionIterator(this._iterator);
   final GridIterator<void> _iterator;
@@ -232,6 +248,9 @@ final class GridIterable<E> extends Iterable<E> {
   /// new iterator each time the iterable is iterated. The function should
   /// always return a new iterator that is positioned before the first cell.
   const GridIterable.from(this._iterator);
+
+  /// Creates an empty iterable.
+  const GridIterable.empty() : _iterator = GridIterator.empty;
 
   // Generates the iterator for the iterable.
   final GridIterator<E> Function() _iterator;

@@ -4,6 +4,12 @@ import '../_prelude.dart';
 
 void main() {
   group('$GridIterator', () {
+    test('empty', () {
+      final iterator = GridIterator<void>.empty();
+      check(() => iterator.current).throws<StateError>();
+      check(() => iterator.position).throws<StateError>();
+    });
+
     test('steps throws on -1 or 1', () {
       final iterator = _FakeGridIterator([]);
       check(() => iterator.seek(-1)).throws<RangeError>();
@@ -19,6 +25,10 @@ void main() {
   });
 
   group('$GridIterable', () {
+    test('empty', () {
+      check(GridIterable<void>.empty()).isEmpty();
+    });
+
     test('iterates with a GridIterator', () {
       final iterator = _FakeGridIterator([(0, 0), (1, 0), (2, 0), (3, 0)]);
       final iterable = GridIterable.from(() => iterator);

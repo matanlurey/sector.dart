@@ -59,6 +59,14 @@ for (final row in grid.rows) {
 }
 ```
 
+Use or build your own custom traversals:
+
+```dart
+for (final cell in grid.traverse(drawLine(0, 0, 10, 10))) {
+  // ...
+}
+```
+
 ```dart
 // Expand or shrink the grid on demand.
 grid.rows.insertFirst([Tile.rocks, Tile.rocks, Tile.rocks, Tile.rocks]);
