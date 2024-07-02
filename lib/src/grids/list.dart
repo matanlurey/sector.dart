@@ -126,12 +126,14 @@ final class ListGrid<T> with Grid<T> {
     }
 
     final width = columnsList.length;
+    final height = columnsList.first.length;
     final cells = List.of(GridImpl.checkedExpand(columnsList));
 
     // Map the columns to rows.
-    final rows = List.generate(width, (x) {
-      return List.generate(cells.length ~/ width, (y) {
-        return cells[x + y * width];
+    final rows = List.generate(height, (y) {
+      return List.generate(width, (x) {
+        // Remember cells is column-major, so we need to swap x and y.
+        return cells[y + x * height];
       });
     });
 

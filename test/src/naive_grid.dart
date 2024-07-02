@@ -13,6 +13,30 @@ final class NaiveListGrid<T> with Grid<T> {
     return NaiveListGrid(cells, width);
   }
 
+  factory NaiveListGrid.fromColumns(Iterable<Iterable<T>> columns) {
+    // Make accessing length predictable.
+    final columnsList = List.of(columns);
+
+    // If empty, the grid is empty.
+    if (columnsList.isEmpty) {
+      return NaiveListGrid.fromRows([]);
+    }
+
+    final width = columnsList.length;
+    final height = columnsList.first.length;
+    final cells = List.of(GridImpl.checkedExpand(columnsList));
+
+    // Map the columns to rows.
+    final rows = List.generate(height, (y) {
+      return List.generate(width, (x) {
+        // Remember cells is column-major, so we need to swap x and y.
+        return cells[y + x * height];
+      });
+    });
+
+    return NaiveListGrid.fromRows(rows);
+  }
+
   final List<T> _cells;
 
   @override
@@ -45,17 +69,26 @@ final class _Rows<T> extends GridAxis<T> with RowsMixin<T> {
 
   @override
   void removeAt(int index) {
-    grid._cells.removeAt(index);
+    GridImpl.checkBoundsExclusive(grid, 0, index);
+
+    final start = index * grid.width;
+    grid._cells.removeRange(start, start + grid.width);
   }
 
   @override
   void insertAt(int index, Iterable<T> row) {
+    // If the grid is empty, and index is 0, this is the first row.
     if (grid.isEmpty && index == 0) {
       grid._cells.addAll(row);
       grid._width = row.length;
       return;
     }
-    grid._cells.insertAll(index, row);
+
+    GridImpl.checkBoundsInclusive(grid, 0, index);
+    GridImpl.checkLength(row, grid.width, name: 'row');
+
+    final start = index * grid.width;
+    grid._cells.insertAll(start, row);
   }
 }
 
@@ -67,6 +100,8 @@ final class _Columns<T> extends GridAxis<T> with ColumnsMixin<T> {
 
   @override
   void removeAt(int index) {
+    GridImpl.checkBoundsExclusive(grid, index, 0);
+
     for (var i = index; i < grid._cells.length; i += grid.width) {
       grid._cells.removeAt(i);
     }
@@ -76,12 +111,17 @@ final class _Columns<T> extends GridAxis<T> with ColumnsMixin<T> {
 
   @override
   void insertAt(int index, Iterable<T> column) {
+    // If the grid is empty, and index is 0, this is the first column.
     if (grid.isEmpty && index == 0) {
       grid._cells.addAll(column);
       grid._width = 1;
       return;
     }
 
+    GridImpl.checkBoundsInclusive(grid, index, 0);
+    GridImpl.checkLength(column, grid.height, name: 'column');
+
+    // Insert in reverse order to avoid shifting elements.
     final columnList = List.of(column);
     for (var y = grid.height - 1; y >= 0; y--) {
       grid._cells.insert(index + y * grid.width, columnList[y]);
