@@ -24,8 +24,22 @@ final class UnmodifiableGridView<T> extends DelegatingGridView<T> {
   }
 
   @override
-  GridAxis<T> get rows => DelegatingGridAxis(view.rows);
+  GridAxis<T> get rows => _UnmodifiableGridAxis(view.rows);
 
   @override
-  GridAxis<T> get columns => DelegatingGridAxis(view.columns);
+  GridAxis<T> get columns => _UnmodifiableGridAxis(view.columns);
+}
+
+final class _UnmodifiableGridAxis<T> extends DelegatingGridAxis<T> {
+  const _UnmodifiableGridAxis(super.view);
+
+  @override
+  void removeAt(int index) {
+    throw UnsupportedError('Cannot modify an unmodifiable grid axis');
+  }
+
+  @override
+  void insertAt(int index, Iterable<T> row) {
+    throw UnsupportedError('Cannot modify an unmodifiable grid axis');
+  }
 }

@@ -132,16 +132,24 @@ mixin RowsMixin<T> on GridAxis<T> {
   Grid<T> get grid;
 
   @override
+  bool get isEmpty => grid.isEmpty;
+
+  @override
+  bool get isNotEmpty => grid.isNotEmpty;
+
+  @override
   int get length => grid.height;
 
   @override
   Iterable<T> operator [](int index) {
+    GridImpl.checkNotEmpty(grid);
     GridImpl.checkBoundsExclusive(grid, 0, index);
     return Iterable.generate(grid.width, (x) => grid.getUnchecked(x, index));
   }
 
   @override
   void operator []=(int index, Iterable<T> row) {
+    GridImpl.checkNotEmpty(grid);
     GridImpl.checkBoundsExclusive(grid, 0, index);
     GridImpl.checkLength(row, grid.width, name: 'row');
 
@@ -179,7 +187,7 @@ mixin RowsMixin<T> on GridAxis<T> {
   }
 
   @override
-  void insertLast(Iterable<T> cells) => insertAt(length - 1, cells);
+  void insertLast(Iterable<T> cells) => insertAt(length, cells);
 
   @override
   void removeLast() => removeAt(length - 1);
@@ -213,17 +221,25 @@ mixin ColumnsMixin<T> on GridAxis<T> {
   Grid<T> get grid;
 
   @override
+  bool get isEmpty => grid.isEmpty;
+
+  @override
+  bool get isNotEmpty => grid.isNotEmpty;
+
+  @override
   int get length => grid.width;
 
   @override
   Iterable<T> operator [](int index) {
+    GridImpl.checkNotEmpty(grid);
     GridImpl.checkBoundsExclusive(grid, index, 0);
     return Iterable.generate(grid.height, (y) => grid.getUnchecked(index, y));
   }
 
   @override
   void operator []=(int index, Iterable<T> column) {
-    GridImpl.checkBoundsExclusive(grid, index, 0);
+    GridImpl.checkNotEmpty(grid);
+    GridImpl.checkBoundsExclusive(grid, 0, index);
     GridImpl.checkLength(column, grid.height, name: 'column');
 
     var y = 0;
@@ -260,7 +276,7 @@ mixin ColumnsMixin<T> on GridAxis<T> {
   }
 
   @override
-  void insertLast(Iterable<T> cells) => insertAt(length - 1, cells);
+  void insertLast(Iterable<T> cells) => insertAt(length, cells);
 
   @override
   void removeLast() => removeAt(length - 1);

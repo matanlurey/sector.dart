@@ -88,57 +88,59 @@ abstract base class DelegatingGridView<T> implements Grid<T> {
 
 @internal
 base class DelegatingGridAxis<T> extends GridAxis<T> {
-  const DelegatingGridAxis(this._axis);
-  final GridAxis<T> _axis;
+  const DelegatingGridAxis(this.view);
+
+  @protected
+  final GridAxis<T> view;
 
   @override
-  Iterator<Iterable<T>> get iterator => _axis.iterator;
+  Iterator<Iterable<T>> get iterator => view.iterator;
 
   @override
   set first(Iterable<T> cells) {
-    _axis.first = cells;
+    view.first = cells;
   }
 
   @override
   set last(Iterable<T> cells) {
-    _axis.last = cells;
+    view.last = cells;
   }
 
   @override
   void operator []=(int index, Iterable<T> cells) {
-    _axis[index] = cells;
+    view[index] = cells;
   }
 
   @override
-  Iterable<T> operator [](int index) => _axis[index];
+  Iterable<T> operator [](int index) => view[index];
 
   @override
   void insertAt(int index, Iterable<T> cells) {
-    _axis.insertAt(index, cells);
+    view.insertAt(index, cells);
   }
 
   @override
   void insertFirst(Iterable<T> cells) {
-    _axis.insertFirst(cells);
+    view.insertFirst(cells);
   }
 
   @override
   void insertLast(Iterable<T> cells) {
-    _axis.insertLast(cells);
+    view.insertLast(cells);
   }
 
   @override
   void removeAt(int index) {
-    _axis.removeAt(index);
+    view.removeAt(index);
   }
 
   @override
   void removeFirst() {
-    _axis.removeFirst();
+    view.removeFirst();
   }
 
   @override
   void removeLast() {
-    _axis.removeLast();
+    view.removeLast();
   }
 }
