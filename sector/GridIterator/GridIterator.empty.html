@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the contains method from the Grid class, for the Dart programming language.">
-  <title>contains method - Grid class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the GridIterator.empty constructor from Class GridIterator from the sector library, for the Dart programming language.">
+  <title>GridIterator.empty constructor - GridIterator - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">contains method</li>
+    <li><a href="../../sector/GridIterator-class.html">GridIterator<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">GridIterator.empty const constructor</li>
   </ol>
-  <div class="self-name">contains</div>
+  <div class="self-name">GridIterator.empty</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -51,45 +51,30 @@
 </header>
 <main>
 
-<div
-    id="dartdoc-main-content"
-    class="main-content"
-    data-above-sidebar="sector&#47;Grid-class-sidebar.html"
-    data-below-sidebar="">
-    <div>
-<h1><span class="kind-method">contains</span> method 
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="sector&#47;GridIterator-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">GridIterator&lt;<wbr><span class="type-parameter">E</span>&gt;.empty</span> constructor 
 </h1></div>
 
     <section class="multi-line-signature">
-      
-
-<span class="returntype"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
-<span class="name ">contains</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="contains-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span></span></li>
-</ol>)
-
-      
-
+      const
+      <span class="name ">GridIterator&lt;<wbr><span class="type-parameter">E</span>&gt;.empty</span>(<wbr>)
     </section>
+
     
 <section class="desc markdown">
-  <p>Returns <code>true</code> if the grid contains the provided <code>element</code>.</p>
-<p>The equality of the elements is determined by the <code>==</code> operator.</p>
+  <p>Creates an empty grid iterator.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">bool contains(T element) {
-  for (var y = 0; y &lt; height; y++) {
-    for (var x = 0; x &lt; width; x++) {
-      if (getUnchecked(x, y) == element) {
-        return true;
-      }
-    }
-  }
-  return false;
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">const factory GridIterator.empty() = _EmptyGridIterator&lt;E&gt;;</code></pre>
 </section>
 
 
@@ -106,17 +91,17 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">contains method</li>
+    <li><a href="../../sector/GridIterator-class.html">GridIterator<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">GridIterator.empty const constructor</li>
 </ol>
 
 
-    <h5>Grid class</h5>
+    <h5>GridIterator class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-->
+  </div><!--/.sidebar-offcanvas-left-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-</div><!--/.sidebar-offcanvas-->
+  </div><!--/.sidebar-offcanvas-->
 
 </main>
 

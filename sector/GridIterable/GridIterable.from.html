@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the offsetOf method from the Grid class, for the Dart programming language.">
-  <title>offsetOf method - Grid class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the GridIterable.from constructor from Class GridIterable from the sector library, for the Dart programming language.">
+  <title>GridIterable.from constructor - GridIterable - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">offsetOf method</li>
+    <li><a href="../../sector/GridIterable-class.html">GridIterable<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">GridIterable.from const constructor</li>
   </ol>
-  <div class="self-name">offsetOf</div>
+  <div class="self-name">GridIterable.from</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -51,49 +51,35 @@
 </header>
 <main>
 
-<div
-    id="dartdoc-main-content"
-    class="main-content"
-    data-above-sidebar="sector&#47;Grid-class-sidebar.html"
-    data-below-sidebar="">
-    <div>
-<h1><span class="kind-method">offsetOf</span> method 
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="sector&#47;GridIterable-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">GridIterable&lt;<wbr><span class="type-parameter">E</span>&gt;.from</span> constructor 
 </h1></div>
 
     <section class="multi-line-signature">
-      
-
-<span class="returntype">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
-<span class="name ">offsetOf</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="offsetOf-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span>, </span></li>
-<li><span class="parameter" id="offsetOf-param-start">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)</span> <span class="parameter-name">start</span> = <span class="default-value">(0, 0)</span>]</span></li>
+      const
+      <span class="name ">GridIterable&lt;<wbr><span class="type-parameter">E</span>&gt;.from</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="from-param-_iterator"><span class="type-annotation"><a href="../../sector/GridIterator-class.html">GridIterator</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> <span class="parameter-name">_iterator</span>(<ol class="parameter-list"></ol>
+)</span></li>
 </ol>)
-
-      
-
     </section>
+
     
 <section class="desc markdown">
-  <p>Returns the first <code>(x, y)</code> offset of the provided <code>element</code> in the grid.</p>
-<p>If <code>start</code> is provided, the search starts at the provided offset,
-otherwise it starts at <code>(0, 0)</code>. If the element is not found, <code>null</code> is
-returned.</p>
-<p>The equality of the elements is determined by the <code>==</code> operator.</p>
-<div class="markdown-alert markdown-alert-note">
-<p class="markdown-alert-title">Note</p>
-<p>The order of the search is not guaranteed, and may vary depending on the
-implementation of the grid. If the order of the search is important, it
-is recommended to use <a href="../../sector/Grid/rows.html">rows</a> or <a href="../../sector/Grid/columns.html">columns</a> to iterate over the grid and
-search for the element.</p>
-</div>
+  <p>Creates a new iterable which generates cells from the provided iterator.</p>
+<p>The generated iterable invokes the provided factory function to create a
+new iterator each time the iterable is iterated. The function should
+always return a new iterator that is positioned before the first cell.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">(int, int)? offsetOf(T element, [(int, int) start = (0, 0)]) {
-  return offsetWhere((e) =&gt; e == element, start);
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">const GridIterable.from(this._iterator);</code></pre>
 </section>
 
 
@@ -110,17 +96,17 @@ search for the element.</p>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">offsetOf method</li>
+    <li><a href="../../sector/GridIterable-class.html">GridIterable<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">GridIterable.from const constructor</li>
 </ol>
 
 
-    <h5>Grid class</h5>
+    <h5>GridIterable class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-->
+  </div><!--/.sidebar-offcanvas-left-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-</div><!--/.sidebar-offcanvas-->
+  </div><!--/.sidebar-offcanvas-->
 
 </main>
 

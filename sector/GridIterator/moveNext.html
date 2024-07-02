@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the offsetOf method from the ListGrid class, for the Dart programming language.">
-  <title>offsetOf method - ListGrid class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the moveNext method from the GridIterator class, for the Dart programming language.">
+  <title>moveNext method - GridIterator class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">offsetOf method</li>
+    <li><a href="../../sector/GridIterator-class.html">GridIterator<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">moveNext abstract method</li>
   </ol>
-  <div class="self-name">offsetOf</div>
+  <div class="self-name">moveNext</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,10 +54,10 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="sector&#47;ListGrid-class-sidebar.html"
+    data-above-sidebar="sector&#47;GridIterator-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">offsetOf</span> method 
+<h1><span class="kind-method">moveNext</span> abstract method 
 </h1></div>
 
     <section class="multi-line-signature">
@@ -68,28 +68,39 @@
     </ol>
   </div>
 
-<span class="returntype">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
-<span class="name ">offsetOf</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="offsetOf-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span>, </span></li>
-<li><span class="parameter" id="offsetOf-param-start">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)</span> <span class="parameter-name">start</span> = <span class="default-value">(0, 0)</span>]</span></li>
-</ol>)
+<span class="returntype"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
+<span class="name ">moveNext</span>(<wbr>)
 
       <div class="features"><span class="feature">override</span></div>
 
     </section>
     
 <section class="desc markdown">
-  <p>Returns the first <code>(x, y)</code> offset of the provided <code>element</code> in the grid.</p>
-<p>If <code>start</code> is provided, the search starts at the provided offset,
-otherwise it starts at <code>(0, 0)</code>. If the element is not found, <code>null</code> is
-returned.</p>
-<p>The equality of the elements is determined by the <code>==</code> operator.</p>
-<div class="markdown-alert markdown-alert-note">
-<p class="markdown-alert-title">Note</p>
-<p>The order of the search is not guaranteed, and may vary depending on the
-implementation of the grid. If the order of the search is important, it
-is recommended to use <a href="../../sector/ListGrid/rows.html">rows</a> or <a href="../../sector/ListGrid/columns.html">columns</a> to iterate over the grid and
-search for the element.</p>
-</div>
+  <p>Advances the iterator to the next cell of the iteration.</p>
+<p>Should be called before reading <a href="../../sector/GridIterator/current.html">current</a> or <a href="../../sector/GridIterator/position.html">position</a>.</p>
+<p>If the call to <code>moveNext</code> returns <code>true</code>, then <a href="../../sector/GridIterator/current.html">current</a> will contain the
+next cell of the iteration, and <a href="../../sector/GridIterator/position.html">position</a> will contain the position of
+the next cell, until <code>moveNext</code> is called again. If the call returns
+<code>false</code>, there are no further cells and <a href="../../sector/GridIterator/current.html">current</a> and <a href="../../sector/GridIterator/position.html">position</a> should
+not be used any more.</p>
+<p>It is safe to call <a href="../../sector/GridIterator/moveNext.html">moveNext</a> after it has already returned <code>false</code>, but
+it must keep returning <code>false</code> and not have any other effect.</p>
+<p>A call to <code>moveNext</code> may throw for various reasons, including a concurrent
+change to an underlying grid. If that happens, the iterator may be in an
+inconsistent state, and any further behavior of the iterator is
+unspecified, including the effect of reading <a href="../../sector/GridIterator/current.html">current</a> or <a href="../../sector/GridIterator/position.html">position</a>.</p>
+<h2 id="examples">Examples</h2>
+<pre class="language-dart"><code class="language-dart">final grid = Grid.fromRows([
+  ['a', 'b'],
+  ['c', 'd'],
+]);
+final it = grid.traverse().iterator;
+print(it.moveNext()); // true
+print(it.moveNext()); // true
+print(it.moveNext()); // true
+print(it.moveNext()); // true
+print(it.moveNext()); // false
+</code></pre>
 </section>
 
 
@@ -97,18 +108,7 @@ search for the element.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-(int, int)? offsetOf(
-  T element, [
-  (int, int) start = (0, 0),
-]) {
-  &#47;&#47; Convert the offset into an index.
-  final offset = _index(start.$1, start.$2);
-  final index = _cells.indexOf(element, offset);
-  if (index == -1) {
-    return null;
-  }
-  return _offset(index);
-}</code></pre>
+bool moveNext();</code></pre>
 </section>
 
 
@@ -125,12 +125,12 @@ search for the element.</p>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">offsetOf method</li>
+    <li><a href="../../sector/GridIterator-class.html">GridIterator<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">moveNext abstract method</li>
 </ol>
 
 
-    <h5>ListGrid class</h5>
+    <h5>GridIterator class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 

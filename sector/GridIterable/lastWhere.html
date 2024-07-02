@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the lastOffsetWhere method from the ListGrid class, for the Dart programming language.">
-  <title>lastOffsetWhere method - ListGrid class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the lastWhere method from the GridIterable class, for the Dart programming language.">
+  <title>lastWhere method - GridIterable class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">lastOffsetWhere method</li>
+    <li><a href="../../sector/GridIterable-class.html">GridIterable<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">lastWhere method</li>
   </ol>
-  <div class="self-name">lastOffsetWhere</div>
+  <div class="self-name">lastWhere</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,10 +54,10 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="sector&#47;ListGrid-class-sidebar.html"
+    data-above-sidebar="sector&#47;GridIterable-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">lastOffsetWhere</span> method 
+<h1><span class="kind-method">lastWhere</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
@@ -68,11 +68,12 @@
     </ol>
   </div>
 
-<span class="returntype">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
-<span class="name ">lastOffsetWhere</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="lastOffsetWhere-param-test"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">test</span>(<ol class="parameter-list"><li><span class="parameter" id="param-"><span class="type-annotation">T</span></span></li>
+<span class="returntype">E</span>
+<span class="name ">lastWhere</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="lastWhere-param-test"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">test</span>(<ol class="parameter-list"><li><span class="parameter" id="param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span></li>
 </ol>
 ), </span></li>
-<li><span class="parameter" id="lastOffsetWhere-param-end">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span> <span class="parameter-name">end</span>]</span></li>
+<li><span class="parameter" id="lastWhere-param-orElse">{<span class="type-annotation">E</span> <span class="parameter-name">orElse</span>(<ol class="parameter-list"></ol>
+)?}</span></li>
 </ol>)
 
       <div class="features"><span class="feature">override</span></div>
@@ -80,17 +81,23 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns the last <code>(x, y)</code> offset where <code>test</code> returns <code>true</code>.</p>
-<p>If <code>end</code> is provided, the search starts at the provided offset, otherwise
-it starts at the bottom-right corner of the grid. If the element is not
-found, <code>null</code> is returned.</p>
-<div class="markdown-alert markdown-alert-note">
-<p class="markdown-alert-title">Note</p>
-<p>The order of the search is not guaranteed, and may vary depending on the
-implementation of the grid. If the order of the search is important, it
-is recommended to use <a href="../../sector/ListGrid/rows.html">rows</a> or <a href="../../sector/ListGrid/columns.html">columns</a> to iterate over the grid and
-search for the element.</p>
-</div>
+  <p>The last element that satisfies the given predicate <code>test</code>.</p>
+<p>An iterable that can access its elements directly may check its
+elements in any order (for example a list starts by checking the
+last element and then moves towards the start of the list).
+The default implementation iterates elements in iteration order,
+checks <code>test(element)</code> for each,
+and finally returns that last one that matched.</p>
+<p>Example:</p>
+<pre class="language-dart"><code class="language-dart">final numbers = &lt;int&gt;[1, 2, 3, 5, 6, 7];
+var result = numbers.lastWhere((element) =&gt; element &lt; 5); // 3
+result = numbers.lastWhere((element) =&gt; element &gt; 5); // 7
+result = numbers.lastWhere((element) =&gt; element &gt; 10,
+    orElse: () =&gt; -1); // -1
+</code></pre>
+<p>If no element satisfies <code>test</code>, the result of invoking the <code>orElse</code>
+function is returned.
+If <code>orElse</code> is omitted, it defaults to throwing a <a href="https://api.dart.dev/stable/3.4.4/dart-core/StateError-class.html">StateError</a>.</p>
 </section>
 
 
@@ -98,19 +105,31 @@ search for the element.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-(int, int)? lastOffsetWhere(
-  bool Function(T) test, [
-  (int, int)? end,
-]) {
-  end ??= (width - 1, height - 1);
+E lastWhere(bool Function(E element) test, {E Function()? orElse}) {
+  final it = _iterator();
 
-  &#47;&#47; Convert the offset into an index.
-  final offset = _index(end.$1, end.$2);
-  final index = _cells.lastIndexWhere(test, offset);
-  if (index == -1) {
-    return null;
+  &#47;&#47; If we have a known length, we can seek in reverse.
+  if (it.remainingSteps case final int length) {
+    for (var i = length - 1; i &gt; 0; i--) {
+      it.seek(i);
+      if (test(it.current)) {
+        return it.current;
+      }
+    }
+    if (orElse != null) {
+      return orElse();
+    }
+    _noElement();
   }
-  return _offset(index);
+
+  &#47;&#47; Fallback to the default implementation.
+  E? last;
+  while (it.moveNext()) {
+    if (test(it.current)) {
+      last = it.current;
+    }
+  }
+  return last ?? (orElse != null ? orElse() : _noElement());
 }</code></pre>
 </section>
 
@@ -128,12 +147,12 @@ search for the element.</p>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">lastOffsetWhere method</li>
+    <li><a href="../../sector/GridIterable-class.html">GridIterable<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">lastWhere method</li>
 </ol>
 
 
-    <h5>ListGrid class</h5>
+    <h5>GridIterable class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 

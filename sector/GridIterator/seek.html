@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the offsetWhere method from the Grid class, for the Dart programming language.">
-  <title>offsetWhere method - Grid class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the seek method from the GridIterator class, for the Dart programming language.">
+  <title>seek method - GridIterator class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">offsetWhere method</li>
+    <li><a href="../../sector/GridIterator-class.html">GridIterator<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">seek method</li>
   </ol>
-  <div class="self-name">offsetWhere</div>
+  <div class="self-name">seek</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,20 +54,17 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="sector&#47;Grid-class-sidebar.html"
+    data-above-sidebar="sector&#47;GridIterator-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">offsetWhere</span> method 
+<h1><span class="kind-method">seek</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
       
 
-<span class="returntype">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
-<span class="name ">offsetWhere</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="offsetWhere-param-test"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">test</span>(<ol class="parameter-list"><li><span class="parameter" id="param-"><span class="type-annotation">T</span></span></li>
-</ol>
-), </span></li>
-<li><span class="parameter" id="offsetWhere-param-start">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)</span> <span class="parameter-name">start</span> = <span class="default-value">(0, 0)</span>]</span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
+<span class="name ">seek</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="seek-param-steps"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">steps</span></span></li>
 </ol>)
 
       
@@ -75,32 +72,40 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns the first <code>(x, y)</code> offset where <code>test</code> returns <code>true</code>.</p>
-<p>If <code>start</code> is provided, the search starts at the provided offset,
-otherwise it starts at <code>(0, 0)</code>. If the element is not found, <code>null</code> is
-returned.</p>
-<div class="markdown-alert markdown-alert-note">
-<p class="markdown-alert-title">Note</p>
-<p>The order of the search is not guaranteed, and may vary depending on the
-implementation of the grid. If the order of the search is important, it
-is recommended to use <a href="../../sector/Grid/rows.html">rows</a> or <a href="../../sector/Grid/columns.html">columns</a> to iterate over the grid and
-search for the element.</p>
-</div>
+  <p>Moves the iterator forward by <code>steps</code> cells.</p>
+<p>This method is equivalent to calling <a href="../../sector/GridIterator/moveNext.html">moveNext</a> <code>steps</code> times, which is
+the default implementation. Subclasses may override this method to provide
+a more efficient implementation for iterators that can seek to a position
+without iterating through each cell.</p>
+<p>Returns <code>true</code> if the iterator is positioned at a valid cell after seeking
+<code>steps</code> cells, otherwise <code>false</code>. If <code>steps</code> is not at least 1 the
+behavior is unspecified.</p>
+<h2 id="examples">Examples</h2>
+<pre class="language-dart"><code class="language-dart">final grid = Grid.fromRows([
+  ['a', 'b'],
+  ['c', 'd'],
+]);
+final it = grid.traverse().iterator;
+print(it.seek(2)); // true
+print(it.current); // c
+print(it.position); // (0, 1)
+</code></pre>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">(int, int)? offsetWhere(bool Function(T) test, [(int, int) start = (0, 0)]) {
-  for (var y = start.$1; y &lt; height; y++) {
-    for (var x = start.$2; x &lt; width; x++) {
-      if (test(getUnchecked(x, y))) {
-        return (x, y);
-      }
+  <pre class="language-dart"><code class="language-dart">bool seek(int steps) {
+  if (steps &lt; 1) {
+    throw RangeError.value(steps, &#39;steps&#39;, &#39;Must be at least 1&#39;);
+  }
+  for (var i = 0; i &lt; steps; i++) {
+    if (!moveNext()) {
+      return false;
     }
   }
-  return null;
+  return true;
 }</code></pre>
 </section>
 
@@ -118,12 +123,12 @@ search for the element.</p>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">offsetWhere method</li>
+    <li><a href="../../sector/GridIterator-class.html">GridIterator<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">seek method</li>
 </ol>
 
 
-    <h5>Grid class</h5>
+    <h5>GridIterator class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 

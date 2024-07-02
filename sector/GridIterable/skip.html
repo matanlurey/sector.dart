@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the lastOffsetOf method from the ListGrid class, for the Dart programming language.">
-  <title>lastOffsetOf method - ListGrid class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the skip method from the GridIterable class, for the Dart programming language.">
+  <title>skip method - GridIterable class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">lastOffsetOf method</li>
+    <li><a href="../../sector/GridIterable-class.html">GridIterable<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">skip method</li>
   </ol>
-  <div class="self-name">lastOffsetOf</div>
+  <div class="self-name">skip</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,10 +54,10 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="sector&#47;ListGrid-class-sidebar.html"
+    data-above-sidebar="sector&#47;GridIterable-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">lastOffsetOf</span> method 
+<h1><span class="kind-method">skip</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
@@ -68,9 +68,8 @@
     </ol>
   </div>
 
-<span class="returntype">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
-<span class="name ">lastOffsetOf</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="lastOffsetOf-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span>, </span></li>
-<li><span class="parameter" id="lastOffsetOf-param-end">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span> <span class="parameter-name">end</span>]</span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span>
+<span class="name ">skip</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="skip-param-count"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">count</span></span></li>
 </ol>)
 
       <div class="features"><span class="feature">override</span></div>
@@ -78,18 +77,22 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns the last <code>(x, y)</code> offset of the provided <code>element</code> in the grid.</p>
-<p>If <code>end</code> is provided, the search starts at the provided offset, otherwise
-it starts at the bottom-right corner of the grid. If the element is not
-found, <code>null</code> is returned.</p>
-<p>The equality of the elements is determined by the <code>==</code> operator.</p>
-<div class="markdown-alert markdown-alert-note">
-<p class="markdown-alert-title">Note</p>
-<p>The order of the search is not guaranteed, and may vary depending on the
-implementation of the grid. If the order of the search is important, it
-is recommended to use <a href="../../sector/ListGrid/rows.html">rows</a> or <a href="../../sector/ListGrid/columns.html">columns</a> to iterate over the grid and
-search for the element.</p>
-</div>
+  <p>Creates an <a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a> that provides all but the first <code>count</code> elements.</p>
+<p>When the returned iterable is iterated, it starts iterating over <code>this</code>,
+first skipping past the initial <code>count</code> elements.
+If <code>this</code> has fewer than <code>count</code> elements, then the resulting Iterable is
+empty.
+After that, the remaining elements are iterated in the same order as
+in this iterable.</p>
+<p>Some iterables may be able to find later elements without first iterating
+through earlier elements, for example when iterating a <a href="https://api.dart.dev/stable/3.4.4/dart-core/List-class.html">List</a>.
+Such iterables are allowed to ignore the initial skipped elements.</p>
+<p>Example:</p>
+<pre class="language-dart"><code class="language-dart">final numbers = &lt;int&gt;[1, 2, 3, 5, 6, 7];
+final result = numbers.skip(4); // (6, 7)
+final skipAll = numbers.skip(100); // () - no elements.
+</code></pre>
+<p>The <code>count</code> must not be negative.</p>
 </section>
 
 
@@ -97,19 +100,9 @@ search for the element.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-(int, int)? lastOffsetOf(
-  T element, [
-  (int, int)? end,
-]) {
-  end ??= (width - 1, height - 1);
-
-  &#47;&#47; Convert the offset into an index.
-  final offset = _index(end.$1, end.$2);
-  final index = _cells.lastIndexOf(element, offset);
-  if (index == -1) {
-    return null;
-  }
-  return _offset(index);
+Iterable&lt;E&gt; skip(int count) {
+  RangeError.checkNotNegative(count, &#39;count&#39;);
+  return GridIterable.from(() =&gt; _iterator()..seek(count));
 }</code></pre>
 </section>
 
@@ -127,12 +120,12 @@ search for the element.</p>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">lastOffsetOf method</li>
+    <li><a href="../../sector/GridIterable-class.html">GridIterable<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">skip method</li>
 </ol>
 
 
-    <h5>ListGrid class</h5>
+    <h5>GridIterable class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 

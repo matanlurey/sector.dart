@@ -65,13 +65,13 @@
 <h3 id="usage">Usage</h3>
 <p><code>Grid</code> is the 2-dimensional equivalent of a <code>List</code> in Dart:</p>
 <pre class="language-dart"><code class="language-dart">// Create a 2D grid with 80 columns and 24 rows filled with spaces.
-final grid = Grid.filled(80, 24, ' ');
+final grid = Grid.filled(80, 24, Tile.empty);
 </code></pre>
 <pre class="language-dart"><code class="language-dart">// Create a 2D grid from an existing 2D matrix-like collection.
 final grid = Grid.fromRows([
-  [' ', '#', '#', ' '],
-  [' ', ' ', '#', ' '],
-  [' ', ' ', ' ', ' '],
+  [Tile.grass, Tile.water, Tile.water, Tile.grass],
+  [Tile.grass, Tile.water, Tile.water, Tile.grass],
+  [Tile.grass, Tile.grass, Tile.grass, Tile.grass],
 ]);
 </code></pre>
 <p>Check the bounds, <code>get</code>, and <code>set</code> elements:</p>
@@ -84,7 +84,7 @@ if (grid.containsXY(0, 0)) {
 final element = grid.get(0, 0);
 
 // Set the element at a point.
-grid.set(0, 0, '#');
+grid.set(0, 0, Tile.lava);
 </code></pre>
 <p>Iterate over the grid with <code>rows</code> and <code>columns</code>:</p>
 <pre class="language-dart"><code class="language-dart">// Iterate over the rows of the grid.
@@ -92,8 +92,13 @@ for (final row in grid.rows) {
   // ...
 }
 </code></pre>
+<p>Use or build your own custom traversals:</p>
+<pre class="language-dart"><code class="language-dart">for (final cell in grid.traverse(drawLine(0, 0, 10, 10))) {
+  // ...
+}
+</code></pre>
 <pre class="language-dart"><code class="language-dart">// Expand or shrink the grid on demand.
-grid.rows.insertFirst(['#', '#', '#', '#']);
+grid.rows.insertFirst([Tile.rocks, Tile.rocks, Tile.rocks, Tile.rocks]);
 </code></pre>
 <h2 id="features">Features</h2>
 <ul>

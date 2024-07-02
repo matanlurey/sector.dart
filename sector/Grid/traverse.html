@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the lastOffsetWhere method from the Grid class, for the Dart programming language.">
-  <title>lastOffsetWhere method - Grid class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the traverse method from the Grid class, for the Dart programming language.">
+  <title>traverse method - Grid class - sector library - Dart API</title>
 
 
   
@@ -31,9 +31,9 @@
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
     <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">lastOffsetWhere method</li>
+    <li class="self-crumb">traverse method</li>
   </ol>
-  <div class="self-name">lastOffsetWhere</div>
+  <div class="self-name">traverse</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -57,17 +57,14 @@
     data-above-sidebar="sector&#47;Grid-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">lastOffsetWhere</span> method 
+<h1><span class="kind-method">traverse</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
       
 
-<span class="returntype">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span>
-<span class="name ">lastOffsetWhere</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="lastOffsetWhere-param-test"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">test</span>(<ol class="parameter-list"><li><span class="parameter" id="param-"><span class="type-annotation">T</span></span></li>
-</ol>
-), </span></li>
-<li><span class="parameter" id="lastOffsetWhere-param-end">[<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span> <span class="parameter-name">end</span>]</span></li>
+<span class="returntype"><a href="../../sector/GridIterable-class.html">GridIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+<span class="name ">traverse</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="traverse-param-order">[<span class="type-annotation"><a href="../../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span>?</span> <span class="parameter-name">order</span>]</span></li>
 </ol>)
 
       
@@ -75,36 +72,31 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns the last <code>(x, y)</code> offset where <code>test</code> returns <code>true</code>.</p>
-<p>If <code>end</code> is provided, the search starts at the provided offset, otherwise
-it starts at the bottom-right corner of the grid. If the element is not
-found, <code>null</code> is returned.</p>
-<div class="markdown-alert markdown-alert-note">
-<p class="markdown-alert-title">Note</p>
-<p>The order of the search is not guaranteed, and may vary depending on the
-implementation of the grid. If the order of the search is important, it
-is recommended to use <a href="../../sector/Grid/rows.html">rows</a> or <a href="../../sector/Grid/columns.html">columns</a> to iterate over the grid and
-search for the element.</p>
-</div>
+  <p>Returns an iterable that traverses the grid in a specific <code>order</code>.</p>
+<p>The order of the traversal is determined by the provided <code>order</code>, which
+is a <a href="../../sector/Traversal.html">Traversal</a> implementation. If not provided, the default order is
+determined by the specific implementation of the grid, often row-major.</p>
+<h2 id="examples">Examples</h2>
+<pre class="language-dart"><code class="language-dart">final grid = Grid.generate(2, 2, (x, y) =&gt; (x, y));
+for (final (x, y, element) in grid.traverse()) {
+  print(element);
+}
+</code></pre>
+<p>The output of the example is:</p>
+<pre class="language-txt"><code class="language-txt">(0, 0)
+(1, 0)
+(0, 1)
+(1, 1)
+</code></pre>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">(int, int)? lastOffsetWhere(
-  bool Function(T) test, [
-  (int, int)? end,
-]) {
-  end ??= (width - 1, height - 1);
-  for (var y = end.$1; y &gt;= 0; y--) {
-    for (var x = end.$2; x &gt;= 0; x--) {
-      if (test(getUnchecked(x, y))) {
-        return (x, y);
-      }
-    }
-  }
-  return null;
+  <pre class="language-dart"><code class="language-dart">GridIterable&lt;T&gt; traverse([Traversal&lt;T&gt;? order]) {
+  final traversal = order ?? rowMajor();
+  return traversal(this);
 }</code></pre>
 </section>
 
@@ -123,7 +115,7 @@ search for the element.</p>
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
     <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">lastOffsetWhere method</li>
+    <li class="self-crumb">traverse method</li>
 </ol>
 
 

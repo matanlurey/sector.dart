@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the contains method from the Grid class, for the Dart programming language.">
-  <title>contains method - Grid class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the toOctant1 method from the Octant enum, for the Dart programming language.">
+  <title>toOctant1 method - Octant enum - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">contains method</li>
+    <li><a href="../../sector/Octant.html">Octant</a></li>
+    <li class="self-crumb">toOctant1 method</li>
   </ol>
-  <div class="self-name">contains</div>
+  <div class="self-name">toOctant1</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,17 +54,18 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="sector&#47;Grid-class-sidebar.html"
+    data-above-sidebar="sector&#47;Octant-enum-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">contains</span> method 
+<h1><span class="kind-method">toOctant1</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
       
 
-<span class="returntype"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
-<span class="name ">contains</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="contains-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span></span></li>
+<span class="returntype">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)</span>
+<span class="name ">toOctant1</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="toOctant1-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span></li>
+<li><span class="parameter" id="toOctant1-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span></span></li>
 </ol>)
 
       
@@ -72,23 +73,28 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns <code>true</code> if the grid contains the provided <code>element</code>.</p>
-<p>The equality of the elements is determined by the <code>==</code> operator.</p>
+  <p>Converts the provided point to the octant's equivalent.</p>
+<p>Given a point <code>(x, y)</code> in the first octant, this method will return the
+equivalent point in the octant. For example, the point <code>(2, 3)</code> in the
+first octant is <code>(3, 2)</code> in the second octant.</p>
+<p>This method is the inverse of <a href="../../sector/Octant/toOctant1.html">toOctant1</a>.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">bool contains(T element) {
-  for (var y = 0; y &lt; height; y++) {
-    for (var x = 0; x &lt; width; x++) {
-      if (getUnchecked(x, y) == element) {
-        return true;
-      }
-    }
-  }
-  return false;
+  <pre class="language-dart"><code class="language-dart">(int x, int y) toOctant1(int x, int y) {
+  return switch (this) {
+    Octant.first =&gt; (x, y),
+    Octant.second =&gt; (y, x),
+    Octant.third =&gt; (y, -x),
+    Octant.fourth =&gt; (-x, y),
+    Octant.fifth =&gt; (-x, -y),
+    Octant.sixth =&gt; (-y, -x),
+    Octant.seventh =&gt; (-y, x),
+    Octant.eighth =&gt; (x, -y),
+  };
 }</code></pre>
 </section>
 
@@ -106,12 +112,12 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">contains method</li>
+    <li><a href="../../sector/Octant.html">Octant</a></li>
+    <li class="self-crumb">toOctant1 method</li>
 </ol>
 
 
-    <h5>Grid class</h5>
+    <h5>Octant enum</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 
