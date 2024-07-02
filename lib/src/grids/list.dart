@@ -346,8 +346,9 @@ final class _Columns<T> extends GridAxis<T> with ColumnsMixin<T> {
   void removeAt(int index) {
     GridImpl.checkBoundsExclusive(grid, index, 0);
 
-    for (var i = index; i < grid._cells.length; i += grid.width) {
-      grid._cells.removeAt(i);
+    // Remove in reverse order to avoid shifting elements.
+    for (var i = grid.height - 1; i >= 0; i--) {
+      grid._cells.removeAt(index + i * grid.width);
     }
 
     grid._width -= 1;

@@ -2,6 +2,13 @@
 
 ## 0.3.0-dev
 
+- Fixed a bug in `Grid.fromColumns` (and `ListGrid.fromColumns`) where the
+  columns were not copied correctly, and the grid was not initialized with the
+  correct dimensions.
+
+- Fixed a bug in `<Grid>.columns.remove*` where, similar to above, the grid was
+  not updated correctly.
+
 - Replaced `Rows` and `Columns` with `GridAxis`; both of these types only
   existed to have a common interface for iterating over rows and columns, but
   ironically the only common base was `Iterable<Iterable<T>>`.

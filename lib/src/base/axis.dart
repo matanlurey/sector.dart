@@ -239,7 +239,7 @@ mixin ColumnsMixin<T> on GridAxis<T> {
   @override
   void operator []=(int index, Iterable<T> column) {
     GridImpl.checkNotEmpty(grid);
-    GridImpl.checkBoundsExclusive(grid, 0, index);
+    GridImpl.checkBoundsExclusive(grid, index, 0);
     GridImpl.checkLength(column, grid.height, name: 'column');
 
     var y = 0;
