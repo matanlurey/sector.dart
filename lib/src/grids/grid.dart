@@ -313,7 +313,12 @@ abstract mixin class Grid<T> {
   /// Clears all elements in the grid, making it empty.
   ///
   /// {@macro warn-grid-might-not-be-growable}
-  void clear();
+  void clear() {
+    final rows = this.rows;
+    while (isNotEmpty) {
+      rows.removeLast();
+    }
+  }
 
   /// All rows in the grid, from top to bottom.
   ///
@@ -339,7 +344,7 @@ abstract mixin class Grid<T> {
   /// // [0, 0, 0]
   /// // [0, 0, 0]
   /// ```
-  Rows<T> get rows;
+  GridAxis<T> get rows;
 
   /// All columns in the grid, from left to right.
   ///
@@ -365,7 +370,7 @@ abstract mixin class Grid<T> {
   /// // [0, 0, 0]
   /// // [0, 0, 0]
   /// ```
-  Columns<T> get columns;
+  GridAxis<T> get columns;
 
   /// Returns an iterable that traverses the grid in a specific [order].
   ///

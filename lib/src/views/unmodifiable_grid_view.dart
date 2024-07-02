@@ -1,5 +1,5 @@
 import 'package:sector/sector.dart';
-import 'package:sector/src/views/delegating_grid_view.dart.unused';
+import 'package:sector/src/views/delegating_grid_view.dart';
 
 /// A grid view that prevents modification of the underlying grid.
 ///
@@ -22,4 +22,10 @@ final class UnmodifiableGridView<T> extends DelegatingGridView<T> {
   void clear() {
     throw UnsupportedError('Cannot clear an unmodifiable grid view');
   }
+
+  @override
+  GridAxis<T> get rows => DelegatingGridAxis(view.rows);
+
+  @override
+  GridAxis<T> get columns => DelegatingGridAxis(view.columns);
 }

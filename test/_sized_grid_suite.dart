@@ -1,5 +1,3 @@
-import 'package:sector/sector.dart';
-
 import '_prelude.dart';
 
 void runResizableGridTests(
@@ -35,7 +33,7 @@ void runResizableGridTests(
     check(grid).isEmpty.isTrue();
   });
 
-  group('<$Rows>.insert', () {
+  group('rows.insert', () {
     test('should insert a row at the index', () {
       final grid = filled(3, 3, 0);
       grid.rows.insertAt(1, [1, 2, 3]);
@@ -86,7 +84,7 @@ void runResizableGridTests(
     });
   });
 
-  group('<$Rows>.insertFirst', () {
+  group('rows.insertFirst', () {
     test('should insert a row at the beginning', () {
       final grid = filled(3, 3, 0);
       grid.rows.insertFirst([1, 2, 3]);
@@ -107,7 +105,7 @@ void runResizableGridTests(
     });
   });
 
-  group('<$Rows>.insertLast', () {
+  group('rows.insertLast', () {
     test('should insert a row at the end', () {
       final grid = filled(3, 3, 0);
       grid.rows.insertLast([1, 2, 3]);
@@ -128,7 +126,7 @@ void runResizableGridTests(
     });
   });
 
-  group('<$Rows>.remove', () {
+  group('rows.remove', () {
     test('should remove a row at the index', () {
       final grid = filled(3, 3, 0);
       grid.rows.removeAt(1);
@@ -155,7 +153,7 @@ void runResizableGridTests(
     });
   });
 
-  group('<$Rows>.removeFirst', () {
+  group('rows.removeFirst', () {
     test('should remove the first row', () {
       final grid = filled(3, 3, 0);
       grid.rows.removeFirst();
@@ -177,7 +175,7 @@ void runResizableGridTests(
     });
   });
 
-  group('<$Rows>.removeLast', () {
+  group('rows.removeLast', () {
     test('should remove the last row', () {
       final grid = filled(3, 3, 0);
       grid.rows.removeLast();
@@ -199,7 +197,7 @@ void runResizableGridTests(
     });
   });
 
-  group('<$Columns>.insert', () {
+  group('columns.insert', () {
     test('should insert a column at the index', () {
       final grid = filled(3, 3, 0);
       grid.columns.insertAt(1, [1, 2, 3]);
@@ -247,7 +245,7 @@ void runResizableGridTests(
     });
   });
 
-  group('<$Columns>.insertFirst', () {
+  group('columns.insertFirst', () {
     test('should insert a column at the beginning', () {
       final grid = filled(3, 3, 0);
       grid.columns.insertFirst([1, 2, 3]);
@@ -269,7 +267,7 @@ void runResizableGridTests(
     });
   });
 
-  group('<$Columns>.insertLast', () {
+  group('columns.insertLast', () {
     test('should insert a column at the end', () {
       final grid = filled(3, 3, 0);
       grid.columns.insertLast([1, 2, 3]);
@@ -291,7 +289,7 @@ void runResizableGridTests(
     });
   });
 
-  group('<$Columns>.remove', () {
+  group('columns.remove', () {
     test('should remove a column at the index', () {
       final grid = filled(3, 3, 0);
       grid.columns.removeAt(1);
@@ -319,7 +317,7 @@ void runResizableGridTests(
     });
   });
 
-  group('<$Columns>.removeFirst', () {
+  group('columns.removeFirst', () {
     test('should remove the first column', () {
       final grid = filled(3, 3, 0);
       grid.columns.removeFirst();
@@ -342,7 +340,7 @@ void runResizableGridTests(
     });
   });
 
-  group('<$Columns>.removeLast', () {
+  group('columns.removeLast', () {
     test('should remove the last column', () {
       final grid = filled(3, 3, 0);
       grid.columns.removeLast();

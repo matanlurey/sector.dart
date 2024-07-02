@@ -66,9 +66,9 @@
 ///   }
 ///   ```
 ///
-/// - Use [RowsBase] and [ColumnsBase] to implement [Rows] and [Columns]:
+/// - Use [RowsMixin] and [ColumnsMixin] to implement [GridAxis]s:
 ///   ```dart
-///   class _Rows<T> extends Iterable<Iterable<T>> with RowsBase<T> { /*...*/ }
+///   class _Rows<T> extends GridAxis<T> with RowsMixin<T> { /*...*/ }
 ///   ```
 ///
 /// After profiling, you may find that the default implementation is sufficient
@@ -80,10 +80,9 @@ import 'dart:typed_data';
 
 import 'package:sector/sector.dart';
 
-export 'src/base/columns.dart' show Columns, ColumnsBase;
+export 'src/base/axis.dart' show ColumnsMixin, GridAxis, RowsMixin;
 export 'src/base/iterator.dart' show GridIterable, GridIterator;
 export 'src/base/layout_hint.dart' show LayoutHint;
-export 'src/base/rows.dart' show Rows, RowsBase;
 export 'src/base/traversal.dart' show Traversal;
 export 'src/grids/grid.dart' show Grid;
 export 'src/grids/list.dart' show ListGrid;
@@ -92,3 +91,4 @@ export 'src/traverse/row_major.dart' show rowMajor;
 export 'src/utils/grid_extension.dart' show GridExtension;
 export 'src/utils/grid_impl.dart' show GridImpl;
 export 'src/utils/octant.dart' show Octant;
+export 'src/views/unmodifiable_grid_view.dart' show UnmodifiableGridView;

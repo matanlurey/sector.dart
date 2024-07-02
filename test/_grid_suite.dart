@@ -1,5 +1,3 @@
-import 'package:sector/sector.dart';
-
 import '_prelude.dart';
 
 void runGridTests(
@@ -273,7 +271,7 @@ void runGridTests(
       ]);
     });
 
-    group('<$Rows>.first', () {
+    group('rows.first', () {
       test('should set the first row', () {
         final grid = filled(3, 3, 0);
         grid.rows.first = [1, 2, 3];
@@ -290,7 +288,7 @@ void runGridTests(
       });
     });
 
-    group('<$Rows>.last', () {
+    group('rows.last', () {
       test('should set the last row', () {
         final grid = filled(3, 3, 0);
         grid.rows.last = [1, 2, 3];
@@ -307,7 +305,7 @@ void runGridTests(
       });
     });
 
-    group('<$Rows>.[]=', () {
+    group('rows.[]=', () {
       test('should set the row at the index', () {
         final grid = filled(3, 3, 0);
         grid.rows[1] = [1, 2, 3];
@@ -329,7 +327,7 @@ void runGridTests(
       });
     });
 
-    group('<$Rows>.[]', () {
+    group('rows.[]', () {
       test('should return the row at the index', () {
         final grid = filled(3, 3, 0);
         check(grid.rows[1]).deepEquals([0, 0, 0]);
@@ -352,7 +350,7 @@ void runGridTests(
       ]);
     });
 
-    group('<$Columns>.first', () {
+    group('columns.first', () {
       test('should set the first column', () {
         final grid = filled(3, 3, 0);
         grid.columns.first = [1, 2, 3];
@@ -369,7 +367,7 @@ void runGridTests(
       });
     });
 
-    group('<$Columns>.last', () {
+    group('columns.last', () {
       test('should set the last column', () {
         final grid = filled(3, 3, 0);
         grid.columns.last = [1, 2, 3];
@@ -386,7 +384,7 @@ void runGridTests(
       });
     });
 
-    group('<$Columns>.[]=', () {
+    group('columns.[]=', () {
       test('should set the column at the index', () {
         final grid = filled(3, 3, 0);
         grid.columns[1] = [1, 2, 3];
@@ -413,7 +411,7 @@ void runGridTests(
       });
     });
 
-    group('<$Columns>.[]', () {
+    group('columns.[]', () {
       test('should return the column at the index', () {
         final grid = filled(3, 3, 0);
         check(grid.columns[1]).deepEquals([0, 0, 0]);

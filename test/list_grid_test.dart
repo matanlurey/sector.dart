@@ -1,7 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:sector/sector.dart';
-
 import '_fixed_grid_suite.dart';
 import '_grid_suite.dart';
 import '_prelude.dart';

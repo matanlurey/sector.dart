@@ -1,5 +1,3 @@
-import 'package:sector/sector.dart';
-
 import '_prelude.dart';
 
 void runFixedGridSuite(
@@ -34,22 +32,22 @@ void runFixedGridSuite(
     check(grid.clear).throws<UnsupportedError>();
   });
 
-  test('<$Rows>.insertAt should fail', () {
+  test('rows.insertAt should fail', () {
     final grid = filled(2, 2, 0);
     check(() => grid.rows.insertAt(0, [0, 0])).throws<UnsupportedError>();
   });
 
-  test('<$Columns>.insertAt should fail', () {
+  test('columns.insertAt should fail', () {
     final grid = filled(2, 2, 0);
     check(() => grid.columns.insertAt(0, [0, 0])).throws<UnsupportedError>();
   });
 
-  test('<$Rows>.removeAt should fail', () {
+  test('rows.removeAt should fail', () {
     final grid = filled(2, 2, 0);
     check(() => grid.rows.removeAt(0)).throws<UnsupportedError>();
   });
 
-  test('<$Columns>.removeAt should fail', () {
+  test('columns.removeAt should fail', () {
     final grid = filled(2, 2, 0);
     check(() => grid.columns.removeAt(0)).throws<UnsupportedError>();
   });
