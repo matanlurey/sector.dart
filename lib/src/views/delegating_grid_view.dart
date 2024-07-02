@@ -59,14 +59,6 @@ base class DelegatingGridView<T> implements Grid<T> {
   void setUnchecked(int x, int y, T value) => _view.setUnchecked(x, y, value);
 
   @override
-  Iterable<(int, int, T)> traverse({
-    GridTraversal order = rowMajor,
-    (int, int)? start,
-  }) {
-    return _view.traverse(order: order, start: start);
-  }
-
-  @override
   void clear() => _view.clear();
 
   @override
@@ -74,6 +66,14 @@ base class DelegatingGridView<T> implements Grid<T> {
 
   @override
   Columns<T> get columns => _view.columns;
+
+  @override
+  GridIterable<T> traverse({
+    Traversal<T>? order,
+    (int x, int y)? start,
+  }) {
+    return _view.traverse(order: order, start: start);
+  }
 
   @override
   Grid<T> subGrid({

@@ -72,13 +72,12 @@ import 'dart:typed_data';
 import 'package:sector/sector.dart';
 
 export 'src/base/columns.dart' show Columns, ColumnsBase;
-export 'src/base/iterator.dart'
-    show BidirectionalGridIterator, GridIterator, SeekableGridIterator;
+export 'src/base/iterator.dart' show GridIterable, GridIterator;
 export 'src/base/rows.dart' show Rows, RowsBase;
+export 'src/base/traversal.dart' show Traversal, rowMajor;
 export 'src/grids/grid.dart' show Grid;
 export 'src/grids/list_grid.dart' show ListGrid;
 export 'src/utils/grid_extension.dart' show GridExtension;
 export 'src/utils/grid_impl.dart' show GridImpl;
-export 'src/utils/grid_traversal.dart' show GridTraversal, rowMajor;
 export 'src/views/delegating_grid_view.dart' show DelegatingGridView;
 export 'src/views/unmodifiable_grid_view.dart' show UnmodifiableGridView;

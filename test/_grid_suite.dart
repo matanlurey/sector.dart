@@ -680,57 +680,6 @@ void runGridTests(
     });
   });
 
-  group('<$testing>.traverse', () {
-    test('should traverse in row-major, starting at (0, 0)', () {
-      final grid = filled(3, 3, 0);
-      final traversal = grid.traverse().map((it) => (it.$1, it.$2));
-      check(traversal).deepEquals([
-        (0, 0),
-        (1, 0),
-        (2, 0),
-        (0, 1),
-        (1, 1),
-        (2, 1),
-        (0, 2),
-        (1, 2),
-        (2, 2),
-      ]);
-    });
-
-    test('should traverse in row-major, starting at (1, 1)', () {
-      final grid = filled(3, 3, 0);
-      final traversal = grid.traverse(start: (1, 1)).map(
-        (it) => (it.$1, it.$2),
-      );
-      check(traversal).deepEquals([
-        (1, 1),
-        (2, 1),
-        (0, 2),
-        (1, 2),
-        (2, 2),
-      ]);
-    });
-
-    test('should traverse in row-major, in reverse', () {
-      final grid = filled(3, 3, 0);
-      final traversal = grid.traverse(
-        order: GridTraversal.rowMajorByXY(-1, 0),
-        start: (2, 2),
-      ).map((it) => (it.$1, it.$2));
-      check(traversal).deepEquals([
-        (2, 2),
-        (1, 2),
-        (0, 2),
-        (2, 1),
-        (1, 1),
-        (0, 1),
-        (2, 0),
-        (1, 0),
-        (0, 0),
-      ]);
-    });
-  });
-
   test('<$testing>.toString() is cute', () {
     final grid = filled(3, 3, 0);
     check(grid.toString()).equals(

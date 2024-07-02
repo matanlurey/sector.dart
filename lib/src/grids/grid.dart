@@ -443,8 +443,8 @@ abstract mixin class Grid<T> {
   /// Returns an iterable that traverses the grid in a specific [order].
   ///
   /// The order of the traversal is determined by the provided [order], which
-  /// is a [GridTraversal] implementation. If not provided, the default order
-  /// is determined by the specific implementation of the grid, often row-major.
+  /// is a [Traversal] implementation. If not provided, the default order is
+  /// determined by the specific implementation of the grid, often row-major.
   ///
   /// The optional [start] parameter specifies the starting point of the
   /// traversal. If not provided, the traversal will start at a default point
@@ -468,11 +468,12 @@ abstract mixin class Grid<T> {
   /// (0, 1)
   /// (1, 1)
   /// ```
-  Iterable<(int, int, T)> traverse({
-    GridTraversal order = rowMajor,
-    (int, int)? start,
+  GridIterable<T> traverse({
+    Traversal<T>? order,
+    (int x, int y)? start,
   }) {
-    return order.traverse(this, start: start);
+    final traversal = order ?? rowMajor;
+    return traversal(this, start: start);
   }
 
   /// Returns a _new_ grid with a shallow copy of the provided bounds.
