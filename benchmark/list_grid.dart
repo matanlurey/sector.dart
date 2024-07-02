@@ -7,12 +7,12 @@ import 'package:benchmark_harness/benchmark_harness.dart';
 import 'package:sector/sector.dart';
 
 void main() {
-  // _AllocateGrid().report();
-  // _IterateGetXYGrid().report();
-  // _IterateGetXYUncheckedGrid().report();
-  // _IterateRowsGrid().report();
+  _AllocateGrid().report();
+  _IterateGetXYGrid().report();
+  _IterateGetXYUncheckedGrid().report();
+  _IterateRowsGrid().report();
   _IteratorTraversalGrid().report();
-  // _AddRowsGrid().report();
+  _AddRowsGrid().report();
 }
 
 final class _AllocateGrid extends BenchmarkBase {
