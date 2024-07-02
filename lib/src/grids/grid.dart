@@ -443,7 +443,7 @@ abstract mixin class Grid<T> {
   /// implementation detail and should not be relied upon by external code.
   ///
   /// > [!IMPORTANT]
-  /// > Override [getByIndexUnchecked] if a known layout is provided.
+  /// > You _must_ override [getByIndexUnchecked] if a known layout is provided.
   LayoutHint get layoutHint => LayoutHint.private;
 
   /// Given a grid of `width * height` cells, returns the nth-cell.
@@ -457,9 +457,7 @@ abstract mixin class Grid<T> {
   /// > the index is out of bounds. It is recommended to use [get] instead
   /// > unless writing performance-sensitive code with proper bounds checking.
   T getByIndexUnchecked(int index) {
-    final x = index % width;
-    final y = index ~/ width;
-    return getUnchecked(x, y);
+    throw UnsupportedError('Cannot be used with a private layout');
   }
 
   @override
