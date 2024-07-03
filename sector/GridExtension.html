@@ -120,6 +120,32 @@ perceived value in specialization for specific implementations.</p>
 
 </dd>
 
+        <dt id="fill" class="callable">
+  <span class="name"><a href="../sector/GridExtension/fill.html">fill</a></span><span class="signature">&lt;<wbr><span class="type-parameter">R extends <a href="../sector/GridIterable-class.html">GridIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="fill-param-order"><span class="type-annotation"><a href="../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter">R</span>, <span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">order</span>, </span><span class="parameter" id="fill-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Fills the grid traversed by the <code>order</code> with the given <code>value</code>.
+  
+
+</dd>
+
+        <dt id="fillWith" class="callable">
+  <span class="name"><a href="../sector/GridExtension/fillWith.html">fillWith</a></span><span class="signature">&lt;<wbr><span class="type-parameter">R extends <a href="../sector/GridIterable-class.html">GridIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="fillWith-param-order"><span class="type-annotation"><a href="../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter">R</span>, <span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">order</span>, </span><span class="parameter" id="fillWith-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span>(<span class="parameter" id="param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span><span class="parameter" id="param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span>, </span><span class="parameter" id="param-previous"><span class="type-annotation">T</span> <span class="parameter-name">previous</span></span>)</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Fills the grid traversed by the <code>order</code> by calling <code>value</code> for each cell.
+  
+
+</dd>
+
         <dt id="subGridClamped" class="callable">
   <span class="name"><a href="../sector/GridExtension/subGridClamped.html">subGridClamped</a></span><span class="signature">(<wbr><span class="parameter" id="subGridClamped-param-left">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">left</span> = <span class="default-value">0</span>, </span><span class="parameter" id="subGridClamped-param-top"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">top</span> = <span class="default-value">0</span>, </span><span class="parameter" id="subGridClamped-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">width</span>, </span><span class="parameter" id="subGridClamped-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">height</span>}</span>)
     <span class="returntype parameter">&#8594; <a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>

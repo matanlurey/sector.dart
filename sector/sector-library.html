@@ -290,6 +290,19 @@ built-in methods (either from a mixin or <a href="../sector/GridImpl.html">GridI
       <h2>Functions</h2>
 
       <dl class="callables">
+          <dt id="breadthFirst" class="callable">
+  <span class="name"><a href="../sector/breadthFirst.html">breadthFirst</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="breadthFirst-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span><span class="parameter" id="breadthFirst-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span>, </span><span class="parameter" id="breadthFirst-param-directions">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)</span>&gt;</span></span> <span class="parameter-name">directions</span> = <span class="default-value">const [(0, -1), (1, 0), (0, 1), (-1, 0)]</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../sector/GridIterable-class.html">GridIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>, <span class="type-parameter">T</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  A breadth-first traversal that visits each cell in the grid.
+  
+
+</dd>
+
           <dt id="drawLine" class="callable">
   <span class="name"><a href="../sector/drawLine.html">drawLine</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="drawLine-param-x1"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x1</span>, </span><span class="parameter" id="drawLine-param-y1"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y1</span>, </span><span class="parameter" id="drawLine-param-x2"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x2</span>, </span><span class="parameter" id="drawLine-param-y2"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y2</span>, </span><span class="parameter" id="drawLine-param-inclusive">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">inclusive</span> = <span class="default-value">true</span>}</span>)
     <span class="returntype parameter">&#8594; <a href="../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../sector/GridIterable-class.html">GridIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>, <span class="type-parameter">T</span>&gt;</span></span>
@@ -312,6 +325,19 @@ built-in methods (either from a mixin or <a href="../sector/GridImpl.html">GridI
 </dt>
 <dd>
   A traversal that draws a rectangle between two positions.
+  
+
+</dd>
+
+          <dt id="edges" class="callable">
+  <span class="name"><a href="../sector/edges.html">edges</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="edges-param-grid"><span class="type-annotation"><a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">grid</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../sector/GridIterable-class.html">GridIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Traverses the <em>edges</em> of the grid.
   
 
 </dd>
