@@ -7,7 +7,9 @@ void main() {
       [4, 5, 6],
       [7, 8, 9],
     ]);
-    check(grid.traverse(drawLine(0, 0, 2, 2))).deepEquals([1, 5, 9]);
+    check(
+      grid.traverse2(GridTraversal.drawLine(0, 0, 2, 2)),
+    ).deepEquals([1, 5, 9]);
   });
 
   test('should draw a line from (0, 0) to (2, 2) exclusive', () {
@@ -17,7 +19,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      grid.traverse(drawLine(0, 0, 2, 2, inclusive: false)),
+      grid.traverse2(GridTraversal.drawLine(0, 0, 2, 2, inclusive: false)),
     ).deepEquals([1, 5]);
   });
 
@@ -27,7 +29,9 @@ void main() {
       [4, 5, 6],
       [7, 8, 9],
     ]);
-    check(grid.traverse(drawLine(2, 2, 0, 0))).deepEquals([9, 5, 1]);
+    check(
+      grid.traverse2(GridTraversal.drawLine(2, 2, 0, 0)),
+    ).deepEquals([9, 5, 1]);
   });
 
   test('should fail to draw a line from (0, 0) to (3, 3)', () {
@@ -37,7 +41,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      () => grid.traverse(drawLine(0, 0, 3, 3)),
+      () => grid.traverse2(GridTraversal.drawLine(0, 0, 3, 3)),
     ).throws<Error>();
   });
 
@@ -48,7 +52,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      () => grid.traverse(drawLine(0, 0, 2, 3)),
+      () => grid.traverse2(GridTraversal.drawLine(0, 0, 2, 3)),
     ).throws<Error>();
   });
 
@@ -59,7 +63,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      () => grid.traverse(drawLine(0, 0, 3, 2)),
+      () => grid.traverse2(GridTraversal.drawLine(0, 0, 3, 2)),
     ).throws<Error>();
   });
 }

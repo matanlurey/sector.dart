@@ -2,6 +2,14 @@
 
 ## 0.3.0
 
+TODO:
+
+- [ ] Move `Traversal` to a class instead of nested functions.
+- [ ] Cleanup `GridIterator` somewhat, make it less repetitive.
+- [ ] Finalize a `.fill` implementation or extension.
+
+---
+
 This is a relatively large release, with a few breaking changes, but also a lot
 of new features and improvements. The main focus of this release was to improve
 the ergonomics of the API, and to provide more ways to interact with the grid

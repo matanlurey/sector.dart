@@ -171,6 +171,86 @@ abstract mixin class GridIterator<E> implements Iterator<E> {
   int? get remainingSteps => null;
 }
 
+/// A grid iterator that operates entirely based on X and Y coordinates.
+///
+/// This iterator is useful for traversals that are only concerned with the
+/// X and Y coordinates of the grid, and not the actual values of the cells;
+/// for example, traversing the edges of the grid.
+///
+/// ## Examples
+///
+/// ```dart
+/// final class _EdgesIterator<T> with XYGridIterator<T> {
+///   _EdgesIterator(Grid<T> grid) : super(grid);
+///
+///   @override
+///   (int, int)? nextPosition(int x, int y) {
+///     if (x == -1 && y == 0) {
+///       return (0, 0);
+///     }
+///     /* ... */
+///     return null;
+///   }
+/// }
+/// ```
+abstract base class XYGridIterator<T> with GridIterator<T> {
+  /// Creates a new iterator for the provided [grid].
+  ///
+  /// May optionally provide a starting position. The starting position does
+  /// _not_ have to be within the bounds of the grid, as either [firstPosition]
+  /// is overriden to handle the first iteration, or [nextPosition] is aware
+  /// of the behavior of the starting position.
+  XYGridIterator(this.grid, [this._position = (-1, 0)]);
+
+  /// The grid being iterated over.
+  @protected
+  @nonVirtual
+  final Grid<T> grid;
+
+  @override
+  @nonVirtual
+  (int, int) get position => _position;
+  (int, int) _position;
+  var _first = true;
+
+  @override
+  @nonVirtual
+  T get current => grid.getUnchecked(_position.$1, _position.$2);
+
+  @override
+  @nonVirtual
+  bool moveNext() {
+    if (_first) {
+      _first = false;
+      final first = firstPosition();
+      if (first != null) {
+        _position = first;
+        return grid.containsXY(_position.$1, _position.$2);
+      }
+      return false;
+    }
+
+    final next = nextPosition(_position.$1, _position.$2);
+    if (next == null) {
+      return false;
+    }
+    _position = next;
+    return true;
+  }
+
+  /// May override this method to provide how to handle the first iteration.
+  ///
+  /// If omitted, [nextPosition] will be called with the initial position.
+  @protected
+  (int, int)? firstPosition() => nextPosition(_position.$1, _position.$2);
+
+  /// Given the [x] and [y] coordinates, returns the next position to move to.
+  ///
+  /// If the next position is invalid, this method should return `null`.
+  @protected
+  (int, int)? nextPosition(int x, int y);
+}
+
 final class _EmptyGridIterator<E> with GridIterator<E> {
   const _EmptyGridIterator();
 

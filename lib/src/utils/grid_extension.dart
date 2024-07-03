@@ -57,6 +57,11 @@ extension GridExtension<T> on Grid<T> {
     return asSubGrid(left: left, top: top, width: width, height: height);
   }
 
+  /// TODO: Document.
+  GridIterable<T> traverse2(GridTraversal traversal) {
+    return GridIterable.from(() => traversal.traverse(this));
+  }
+
   /// Fills the grid traversed by the [order] with the given [value].
   ///
   /// ## Examples
