@@ -34,4 +34,4 @@ import 'package:sector/sector.dart';
 /// c
 /// d
 /// ```
-typedef Traversal<T> = GridIterable<T> Function(Grid<T> grid);
+typedef Traversal<R, T> = R Function(Grid<T> grid);
