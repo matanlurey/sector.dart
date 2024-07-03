@@ -67,7 +67,7 @@
 <span class="name ">debugString</span>&lt;<wbr><span class="type-parameter">T</span>&gt;(<wbr><ol class="parameter-list"><li><span class="parameter" id="debugString-param-grid"><span class="type-annotation"><a href="../../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">grid</span>, </span></li>
 <li><span class="parameter" id="debugString-param-format">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/String-class.html">String</a></span> <span class="parameter-name">format</span>(<ol class="parameter-list"><li><span class="parameter" id="param-"><span class="type-annotation">T</span></span></li>
 </ol>
-) = <span class="default-value">_format</span>}</span></li>
+)?}</span></li>
 </ol>)
 
       
@@ -94,11 +94,12 @@ the grid contents:</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">static String debugString&lt;T&gt;(
   Grid&lt;T&gt; grid, {
-  String Function(T) format = _format,
+  String Function(T)? format,
 }) {
   &#47;&#47; Pre-format the cells in row-major order, and track the longest cell.
   final output = &lt;String&gt;[];
   var longest = 0;
+  format ??= _format;
   for (var y = 0; y &lt; grid.height; y++) {
     for (var x = 0; x &lt; grid.width; x++) {
       final cell = format(grid.get(x, y));

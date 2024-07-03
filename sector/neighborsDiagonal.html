@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the drawRect function from the sector library, for the Dart programming language.">
-  <title>drawRect function - sector library - Dart API</title>
+  <meta name="description" content="API docs for the neighborsDiagonal function from the sector library, for the Dart programming language.">
+  <title>neighborsDiagonal function - sector library - Dart API</title>
 
 
   
@@ -30,9 +30,9 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">sector</a></li>
     <li><a href="../sector/sector-library.html">sector.dart</a></li>
-    <li class="self-crumb">drawRect&lt;<wbr><span class="type-parameter">T</span>&gt; function</li>
+    <li class="self-crumb">neighborsDiagonal&lt;<wbr><span class="type-parameter">T</span>&gt; function</li>
   </ol>
-  <div class="self-name">drawRect</div>
+  <div class="self-name">neighborsDiagonal</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -56,18 +56,17 @@
       data-above-sidebar="sector&#47;sector-library-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-function">drawRect&lt;<wbr><span class="type-parameter">T</span>&gt;</span> function 
+<h1><span class="kind-function">neighborsDiagonal&lt;<wbr><span class="type-parameter">T</span>&gt;</span> function 
  
 </h1></div>
 
     <section class="multi-line-signature">
         
 
-<span class="returntype"><a href="../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../sector/GridIterable-class.html">GridIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>, <span class="type-parameter">T</span>&gt;</span></span>
-<span class="name ">drawRect</span>&lt;<wbr><span class="type-parameter">T</span>&gt;(<wbr><ol class="parameter-list"><li><span class="parameter" id="drawRect-param-left"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">left</span>, </span></li>
-<li><span class="parameter" id="drawRect-param-top"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">top</span>, </span></li>
-<li><span class="parameter" id="drawRect-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span></li>
-<li><span class="parameter" id="drawRect-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">height</span></span></li>
+<span class="returntype"><a href="../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../sector/GridIterable-class.html">GridIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T?</span>&gt;</span></span>, <span class="type-parameter">T</span>&gt;</span></span>
+<span class="name ">neighborsDiagonal</span>&lt;<wbr><span class="type-parameter">T</span>&gt;(<wbr><ol class="parameter-list"><li><span class="parameter" id="neighborsDiagonal-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span></li>
+<li><span class="parameter" id="neighborsDiagonal-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span>, </span></li>
+<li><span class="parameter" id="neighborsDiagonal-param-ifAbsent">{<span class="type-annotation">T?</span> <span class="parameter-name">ifAbsent</span>}</span></li>
 </ol>)
 
         
@@ -75,47 +74,55 @@
     </section>
     
 <section class="desc markdown">
-  <p>A traversal that draws a rectangle between two positions.</p>
-<p>This traversal draws a rectangle between a <code>top</code> and <code>left</code> position, and a
-<code>width</code> and <code>height</code> from that position. The traversal will visit each cell
-that the rectangle passes through.</p>
-<h2 id="examples">Examples</h2>
-<pre class="language-dart"><code class="language-dart">final grid = Grid.fromRows([
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
-]);
-for (final cell in grid.traverse(drawRect(0, 0, 2, 2))) {
-  print(cell);
-}
-</code></pre>
-<p>The output of the example is:</p>
-<pre class="language-txt"><code class="language-txt">1
-2
-4
-5
-</code></pre>
+  <p>Given a position, returns the neighbors of that position.</p>
+<p>This traversal returns the neighbors of a position. The neighbors are
+returned in the order of the compass directions, including the diagonal
+directions: north, northeast, east, southeast, south, southwest, west,
+northwest, with <code>ifAbsent</code> substituted for any neighbors that are outside
+the bounds of the grid.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Traversal&lt;GridIterable&lt;T&gt;, T&gt; drawRect&lt;T&gt;(
-  int left,
-  int top,
-  int width,
-  int height,
-) {
+  <pre class="language-dart"><code class="language-dart">Traversal&lt;GridIterable&lt;T?&gt;, T&gt; neighborsDiagonal&lt;T&gt;(
+  int x,
+  int y, {
+  T? ifAbsent,
+}) {
   return (grid) {
-    GridImpl.checkBoundsXYWH(grid, left, top, width, height);
     return GridIterable.from(() {
-      return _RectIterator(
+      return _NeighborsIterator(
         grid,
-        left,
-        top,
-        width,
-        height,
+        x,
+        y,
+        const [
+          &#47;&#47; Up
+          (0, -1),
+
+          &#47;&#47; Up-right
+          (1, -1),
+
+          &#47;&#47; Right
+          (1, 0),
+
+          &#47;&#47; Down-right
+          (1, 1),
+
+          &#47;&#47; Down
+          (0, 1),
+
+          &#47;&#47; Down-left
+          (-1, 1),
+
+          &#47;&#47; Left
+          (-1, 0),
+
+          &#47;&#47; Up-left
+          (-1, -1),
+        ],
+        ifAbsent,
       );
     });
   };
@@ -136,7 +143,7 @@ for (final cell in grid.traverse(drawRect(0, 0, 2, 2))) {
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">sector</a></li>
     <li><a href="../sector/sector-library.html">sector</a></li>
-    <li class="self-crumb">drawRect&lt;<wbr><span class="type-parameter">T</span>&gt; function</li>
+    <li class="self-crumb">neighborsDiagonal&lt;<wbr><span class="type-parameter">T</span>&gt; function</li>
 </ol>
 
 

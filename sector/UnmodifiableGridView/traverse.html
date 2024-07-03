@@ -31,7 +31,7 @@
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
     <li><a href="../../sector/UnmodifiableGridView-class.html">UnmodifiableGridView<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">traverse method</li>
+    <li class="self-crumb">traverse&lt;<wbr><span class="type-parameter">R</span>&gt; method</li>
   </ol>
   <div class="self-name">traverse</div>
   <form class="search navbar-right" role="search">
@@ -57,7 +57,7 @@
     data-above-sidebar="sector&#47;UnmodifiableGridView-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">traverse</span> method 
+<h1><span class="kind-method">traverse&lt;<wbr><span class="type-parameter">R</span>&gt;</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
@@ -68,8 +68,8 @@
     </ol>
   </div>
 
-<span class="returntype"><a href="../../sector/GridIterable-class.html">GridIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
-<span class="name ">traverse</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="traverse-param-order">[<span class="type-annotation"><a href="../../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span>?</span> <span class="parameter-name">order</span>]</span></li>
+<span class="returntype">R</span>
+<span class="name ">traverse</span>&lt;<wbr><span class="type-parameter">R</span>&gt;(<wbr><ol class="parameter-list"><li><span class="parameter" id="traverse-param-order"><span class="type-annotation"><a href="../../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter">R</span>, <span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">order</span></span></li>
 </ol>)
 
       <div class="features"><span class="feature">inherited</span></div>
@@ -83,7 +83,7 @@ is a <a href="../../sector/Traversal.html">Traversal</a> implementation. If not 
 determined by the specific implementation of the grid, often row-major.</p>
 <h2 id="examples">Examples</h2>
 <pre class="language-dart"><code class="language-dart">final grid = Grid.generate(2, 2, (x, y) =&gt; (x, y));
-for (final (x, y, element) in grid.traverse()) {
+for (final (x, y, element) in grid.traverse(rowMajor())) {
   print(element);
 }
 </code></pre>
@@ -100,7 +100,7 @@ for (final (x, y, element) in grid.traverse()) {
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-GridIterable&lt;T&gt; traverse([Traversal&lt;T&gt;? order]) {
+R traverse&lt;R&gt;(Traversal&lt;R, T&gt; order) {
   return view.traverse(order);
 }</code></pre>
 </section>
@@ -120,7 +120,7 @@ GridIterable&lt;T&gt; traverse([Traversal&lt;T&gt;? order]) {
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
     <li><a href="../../sector/UnmodifiableGridView-class.html">UnmodifiableGridView<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">traverse method</li>
+    <li class="self-crumb">traverse&lt;<wbr><span class="type-parameter">R</span>&gt; method</li>
 </ol>
 
 

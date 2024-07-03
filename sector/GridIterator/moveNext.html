@@ -94,7 +94,7 @@ unspecified, including the effect of reading <a href="../../sector/GridIterator/
   ['a', 'b'],
   ['c', 'd'],
 ]);
-final it = grid.traverse().iterator;
+final it = grid.traverse(rowMajor()).iterator;
 print(it.moveNext()); // true
 print(it.moveNext()); // true
 print(it.moveNext()); // true

@@ -85,7 +85,7 @@ behavior is unspecified.</p>
   ['a', 'b'],
   ['c', 'd'],
 ]);
-final it = grid.traverse().iterator;
+final it = grid.traverse(rowMajor()).iterator;
 print(it.seek(2)); // true
 print(it.current); // c
 print(it.position); // (0, 1)

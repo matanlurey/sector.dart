@@ -63,7 +63,7 @@
     <section class="multi-line-signature">
         
 
-<span class="returntype"><a href="../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+<span class="returntype"><a href="../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../sector/GridIterable-class.html">GridIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>, <span class="type-parameter">T</span>&gt;</span></span>
 <span class="name ">rowMajor</span>&lt;<wbr><span class="type-parameter">T</span>&gt;(<wbr><ol class="parameter-list"><li><span class="parameter" id="rowMajor-param-start">{<span class="type-annotation">(<span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span></span>)?</span> <span class="parameter-name">start</span>}</span></li>
 </ol>)
 
@@ -83,7 +83,7 @@ grid has been visited.</p>
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Traversal&lt;T&gt; rowMajor&lt;T&gt;({(int, int)? start}) {
+  <pre class="language-dart"><code class="language-dart">Traversal&lt;GridIterable&lt;T&gt;, T&gt; rowMajor&lt;T&gt;({(int, int)? start}) {
   return (grid) {
     final (startX, startY) = start ?? (0, 0);
     if (grid is EfficientIndexGrid&lt;T&gt; &amp;&amp;

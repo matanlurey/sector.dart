@@ -93,7 +93,7 @@ reading it from the iterator.</p>
   ['a', 'b'],
   ['c', 'd'],
 ]);
-final it = grid.traverse().iterator;
+final it = grid.traverse(rowMajor()).iterator;
 while (it.moveNext()) {
   print(it.current);
 }

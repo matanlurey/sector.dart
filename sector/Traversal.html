@@ -30,7 +30,7 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">sector</a></li>
     <li><a href="../sector/sector-library.html">sector.dart</a></li>
-    <li class="self-crumb">Traversal&lt;<wbr><span class="type-parameter">T</span>&gt; typedef</li>
+    <li class="self-crumb">Traversal&lt;<wbr><span class="type-parameter">R</span>, <span class="type-parameter">T</span>&gt; typedef</li>
   </ol>
   <div class="self-name">Traversal</div>
   <form class="search navbar-right" role="search">
@@ -56,13 +56,13 @@
       data-above-sidebar="sector&#47;sector-library-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-typedef">Traversal&lt;<wbr><span class="type-parameter">T</span>&gt;</span> typedef 
+<h1><span class="kind-typedef">Traversal&lt;<wbr><span class="type-parameter">R</span>, <span class="type-parameter">T</span>&gt;</span> typedef 
  
 </h1></div>
 
     <section class="multi-line-signature">
-        <span class="name ">Traversal</span>&lt;<wbr><span class="type-parameter">T</span>&gt; =
-     <span class="returntype"><a href="../sector/GridIterable-class.html">GridIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> Function<span class="signature">(<span class="parameter" id="param-grid"><span class="type-annotation"><a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">grid</span></span>)</span></span>
+        <span class="name ">Traversal</span>&lt;<wbr><span class="type-parameter">R</span>, <span class="type-parameter">T</span>&gt; =
+     <span class="returntype">R Function<span class="signature">(<span class="parameter" id="param-grid"><span class="type-annotation"><a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">grid</span></span>)</span></span>
 
     </section>
 
@@ -77,6 +77,13 @@ the elements in a spiral pattern starting from the center.</p>
 <ul>
 <li><a href="../sector/rowMajor.html">rowMajor</a></li>
 <li><a href="../sector/drawLine.html">drawLine</a></li>
+<li><a href="../sector/drawRect.html">drawRect</a></li>
+<li><a href="../sector/neighbors.html">neighbors</a></li>
+<li><a href="../sector/neighborsDiagonal.html">neighborsDiagonal</a></li>
+</ul>
+<p>Including ones that don't return an iterable:</p>
+<ul>
+<li><a href="../sector/prettyPrint.html">prettyPrint</a></li>
 </ul>
 <h2 id="examples">Examples</h2>
 <p>To use a traversal, call the <code>traverse</code> method on the grid with the desired
@@ -100,7 +107,7 @@ d
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">typedef Traversal&lt;T&gt; = GridIterable&lt;T&gt; Function(Grid&lt;T&gt; grid);</code></pre>
+  <pre class="language-dart"><code class="language-dart">typedef Traversal&lt;R, T&gt; = R Function(Grid&lt;T&gt; grid);</code></pre>
 </section>
 
 
@@ -117,7 +124,7 @@ d
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">sector</a></li>
     <li><a href="../sector/sector-library.html">sector</a></li>
-    <li class="self-crumb">Traversal&lt;<wbr><span class="type-parameter">T</span>&gt; typedef</li>
+    <li class="self-crumb">Traversal&lt;<wbr><span class="type-parameter">R</span>, <span class="type-parameter">T</span>&gt; typedef</li>
 </ol>
 
 
