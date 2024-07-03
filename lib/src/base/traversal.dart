@@ -9,8 +9,6 @@ import 'package:sector/sector.dart';
 ///
 /// See some built-in traversals:
 ///
-/// - [rowMajor]
-/// - [drawLine]
 /// - [drawRect]
 /// - [neighbors]
 /// - [neighborsDiagonal]

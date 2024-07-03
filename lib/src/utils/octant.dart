@@ -1,3 +1,5 @@
+import 'package:sector/sector.dart';
+
 /// An arc of a circle equal to one-eigh of its circumference.
 ///
 /// The octants are arranged as follows, with the origin `(0, 0)` at the center
@@ -17,6 +19,28 @@
 /// ```
 ///
 /// See also <https://en.wikipedia.org/wiki/Circular_sector>.
+///
+/// ## Usage
+///
+/// This class is provided as a utility for converting points between octants,
+/// which is useful when traversing a grid or drawing lines. For example, when
+/// drawing a line from `(0, 0)` to `(2, 2)`, the line will pass through the
+/// first octant, and the points `(1, 1)` and `(2, 2)` will be visited. When
+/// drawing a line from `(0, 0)` to `(2, 2)` in the second octant, the points
+/// `(1, 1)` and `(2, 2)` will be visited, but the order of the points will be
+/// reversed.
+///
+/// See [GridTraversal.drawLine] for an example of using octants to draw lines.
+///
+/// ## Examples
+///
+/// ```dart
+/// final octant = Octant.fromPoints(0, 0, 2, 2);
+/// print(octant); // Octant.first
+///
+/// final point = octant.toOctant1(2, 2);
+/// print(point); // (2, 2)
+/// ```
 enum Octant {
   /// The first octant, where `x > 0, y > 0`.
   ///

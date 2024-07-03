@@ -1,16 +1,44 @@
-import 'dart:io';
-
 import 'package:meta/meta.dart';
 import 'package:sector/sector.dart';
+import 'package:sector/src/base/iterator.dart';
 
 part 'impl/draw_line.dart';
 part 'impl/edges.dart';
+part 'impl/row_major.dart';
 
 /// An algorithim or strategy for traversing a grid.
+///
+/// This interface is used to define the order in which elements are visited
+/// when iterating over a grid. For example, a row-major traversal will visit
+/// each row in order from left to right, while a spiral traversal will visit
+/// the elements in a spiral pattern starting from the center.
 ///
 /// Grid traversals are immutable and stateless, and are used to produce a
 /// (stateful) [GridIterator], which is used to iterate over the cells of a grid
 /// according to the traversal strategy.
+///
+/// ## Examples
+///
+/// To use a traversal, call the `traverse` method on the grid with the desired
+/// type of traversal. For example, to iterate over a grid in row-major order:
+/// ```dart
+/// final grid = ListGrid.fromRows([
+///   ['a', 'b'],
+///   ['c', 'd'],
+/// ]);
+/// for (final cell in grid.traverse(GridTraversal.rowMajor())) {
+///   print(cell);
+/// }
+/// ```
+///
+/// The output of the example is:
+///
+/// ```txt
+/// a
+/// b
+/// c
+/// d
+/// ```
 @immutable
 abstract interface class GridTraversal {
   /// Creates a new grid traversal from the given [traversal] function.
@@ -19,7 +47,6 @@ abstract interface class GridTraversal {
   /// can be defined as a single function, i.e. do not require any additional
   /// configuration or parameters; for more complex strategies implement the
   /// [GridTraversal] interface directly.
-  @literal
   const factory GridTraversal.from(
     GridIterator<T> Function<T>(Grid<T> grid) traversal,
   ) = _GridTraversal;
@@ -93,8 +120,43 @@ abstract interface class GridTraversal {
   /// 7
   /// 4
   /// ```
-  @literal
   const factory GridTraversal.edges() = _EdgesGridTraveral;
+
+  /// A traversal that visits each cell in the grid in row-major order.
+  ///
+  /// This traversal visits each cell in the grid in row-major order, starting
+  /// from the given [start] position. The traversal will visit each cell in the
+  /// grid exactly once.
+  ///
+  /// ## Examples
+  ///
+  /// ```dart
+  /// final grid = Grid.fromRows([
+  ///   [1, 2, 3],
+  ///   [4, 5, 6],
+  ///   [7, 8, 9],
+  /// ]);
+  /// for (final cell in grid.traverse(GridTraversal.rowMajor()) {
+  ///   print(cell);
+  /// }
+  /// ```
+  ///
+  /// The output of the example is:
+  ///
+  /// ```txt
+  /// 1
+  /// 2
+  /// 3
+  /// 4
+  /// 5
+  /// 6
+  /// 7
+  /// 8
+  /// 9
+  /// ```
+  const factory GridTraversal.rowMajor({
+    (int, int) start,
+  }) = _RowMajorGridTraveral;
 
   /// Returns a [GridIterator] that will traverse the given [grid].
   ///

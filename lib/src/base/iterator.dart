@@ -251,6 +251,49 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
   (int, int)? nextPosition(int x, int y);
 }
 
+/// A grid iterator that operates entirely based on the [index] of the grid.
+///
+/// This iterator is useful for traversals that are only concerned with the
+/// index of the grid, and not the actual values of the cells; for example,
+/// a row-major traversal of a row-major laid out grid.
+abstract base class IndexGridIterator<T> with GridIterator<T> {
+  /// Creates a new iterator for the provided [grid].
+  ///
+  /// May optionally provide a starting index. The starting index does _not_
+  /// have to be within the bounds of the grid, as long as [moveNext] is aware
+  /// of the behavior of the starting index.
+  IndexGridIterator(
+    this.grid, [
+    this.index = 0,
+  ]) : length = grid.width * grid.height;
+
+  /// The grid being iterated over.
+  @protected
+  @nonVirtual
+  final EfficientIndexGrid<T> grid;
+
+  /// Total length of the grid when iteration started.
+  @protected
+  @nonVirtual
+  final int length;
+
+  /// The current index of the iteration.
+  @protected
+  @nonVirtual
+  int index;
+
+  @override
+  (int, int) get position {
+    return grid.layoutHint.toPosition(index, width: grid.width);
+  }
+
+  @override
+  T get current => grid.getByIndexUnchecked(index);
+
+  @override
+  bool moveNext();
+}
+
 final class _EmptyGridIterator<E> with GridIterator<E> {
   const _EmptyGridIterator();
 

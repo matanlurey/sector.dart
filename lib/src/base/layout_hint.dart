@@ -11,6 +11,10 @@ enum LayoutHint {
   // ignore: unused_field
   _;
 
+  /// Whether the layout is row-major contiguous.
+  @pragma('vm:prefer-inline')
+  bool get isRowMajorContiguous => this == LayoutHint.rowMajorContiguous;
+
   /// Converts an [index], given the [width] of a grid, to a position `(x, y)`.
   (int x, int y) toPosition(int index, {required int width}) {
     switch (this) {

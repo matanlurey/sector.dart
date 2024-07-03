@@ -120,7 +120,7 @@ final class _IteratorTraversalGrid extends BenchmarkBase {
   @override
   void run() {
     var adder = 0;
-    for (final cell in grid.traverse(rowMajor())) {
+    for (final cell in grid.traverse2(GridTraversal.rowMajor())) {
       adder += cell;
     }
     if (adder == random.nextInt(1000) + 1) {

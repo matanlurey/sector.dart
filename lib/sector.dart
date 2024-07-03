@@ -96,7 +96,6 @@ export 'src/traverse/breadth_first.dart' show breadthFirst;
 export 'src/traverse/draw_rect.dart' show drawRect;
 export 'src/traverse/neighbors.dart' show neighbors, neighborsDiagonal;
 export 'src/traverse/pretty_print.dart' show prettyPrint;
-export 'src/traverse/row_major.dart' show rowMajor;
 export 'src/traverse/traversal_2.dart' show GridTraversal;
 export 'src/utils/grid_extension.dart' show GridExtension;
 export 'src/utils/grid_impl.dart' show GridImpl;

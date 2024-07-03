@@ -135,6 +135,6 @@ void main() {
       [1, 2],
       [3, 4],
     ]);
-    check(grid.traverse(rowMajor())).deepEquals([1, 2, 3, 4]);
+    check(grid.traverse2(GridTraversal.rowMajor())).deepEquals([1, 2, 3, 4]);
   });
 }
