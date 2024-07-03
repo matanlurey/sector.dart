@@ -11,6 +11,13 @@ import 'package:sector/sector.dart';
 ///
 /// - [rowMajor]
 /// - [drawLine]
+/// - [drawRect]
+/// - [neighbors]
+/// - [neighborsDiagonal]
+///
+/// Including ones that don't return an iterable:
+///
+/// - [prettyPrint]
 ///
 /// ## Examples
 ///

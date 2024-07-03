@@ -66,6 +66,20 @@
   - for (final element in grid.traversal) { /* ... */ }
   + for (final element in grid.traversal(rowMajor())) { /* ... */ }
   ```
+
+  An example of benefitting from this change is the `prettyPrint` traversal:
+
+  ```dart
+  final string = Grid.fromRows([
+    [1, 2, 3],
+    [4, 5, 6],
+  ]).traversal(prettyPrint());
+  print(string);
+  // ┌───────┐
+  // │ 1 2 3 │
+  // │ 4 5 6 │
+  // └───────┘
+  ```
   
 ### New Features
 
