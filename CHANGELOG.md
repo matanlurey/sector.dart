@@ -72,6 +72,14 @@
   print(grid.toSparseMap()); // {0: {0: 'a'}, 1: {1: 'b'}, 2: {2: 'c'}}
   ```
 
+- Added `drawRect` as a traveresal that draws a rectangle on the grid:
+
+  ```dart
+  for (final cell in grid.traverse(drawRect(0, 0, 10, 10))) {
+    // ...
+  }
+  ```
+
 ## 0.2.0
 
 - Renamed `<Grid>.contains` to `<Grid>.containsXY`:

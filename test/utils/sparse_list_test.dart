@@ -100,4 +100,27 @@ void main() {
     list.insertAll(0, ['a']);
     check(list.toDenseList()).deepEquals(['a', 'b', 'c']);
   });
+
+  test('operator[]= replacing with a fill removes it from the memory', () {
+    final list = SparseList.from(['a', 'b', 'c'], fill: ' ');
+    list[1] = ' ';
+    check(list.toSparseMap()).deepEquals({0: 'a', 2: 'c'});
+  });
+
+  test('contains an empty space', () {
+    final list = SparseList.from(['a', ' ', 'c'], fill: ' ');
+    check(list.contains(' ')).isTrue();
+  });
+
+  test('does not contain an empty space', () {
+    final list = SparseList.from(['a', 'b', 'c'], fill: ' ');
+    check(list.contains(' ')).isFalse();
+  });
+
+  test('SpaseList.view cannot have a key >= length', () {
+    final tree = SplayTreeMap<int, String>.from({0: 'a', 2: 'b'});
+    check(
+      () => SparseList.view(tree, fill: ' ', length: 2),
+    ).throws<ArgumentError>();
+  });
 }

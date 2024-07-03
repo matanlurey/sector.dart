@@ -128,8 +128,7 @@ final class SplayTreeGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   }) {
     final cells = GridImpl.checkedExpand(rows).toList();
     final width = rows.isEmpty ? 0 : rows.first.length;
-    final fill_ = fill ?? GridImpl.mostCommonElement(cells);
-
+    final fill_ = fill ?? GridImpl.mostCommonElement<T>(cells);
     final map = SplayTreeMap<int, T>();
     var i = 0;
     for (final cell in cells) {
@@ -143,7 +142,7 @@ final class SplayTreeGrid<T> with Grid<T>, EfficientIndexGrid<T> {
       map,
       width,
       width != 0 ? cells.length ~/ width : 0,
-      fill_ as T,
+      fill_,
     );
   }
 
@@ -185,15 +184,14 @@ final class SplayTreeGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   /// [height], and the grid will have a width and height equal to the provided
   /// dimensions.
   ///
-  /// The [cells] map must be ordered by key, and the keys must be in the range
-  /// `0` to `width * height - 1`; otherwise, the behavior is undefined.
-  ///
-  /// If [fill] is not provided, the most common value is used as the default.
+  /// If either the [cells] length is not equal to `width * height`, the keys
+  /// are not within the range `0` to `width * height`, or the [fill] value is
+  /// present in the [cells], the behavior is undefined.
   factory SplayTreeGrid.view(
     SplayTreeMap<int, T> cells, {
     required int width,
     required int height,
-    T? fill,
+    required T fill,
   }) {
     RangeError.checkNotNegative(width, 'width');
     RangeError.checkNotNegative(height, 'height');
@@ -201,7 +199,7 @@ final class SplayTreeGrid<T> with Grid<T>, EfficientIndexGrid<T> {
       cells,
       width,
       height,
-      fill ?? GridImpl.mostCommonElement(cells.values),
+      fill,
     );
   }
 

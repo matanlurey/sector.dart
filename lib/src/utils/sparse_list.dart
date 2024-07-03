@@ -69,7 +69,7 @@ final class SparseList<T> {
     bool Function(T, T)? equals,
   }) {
     RangeError.checkNotNegative(length, 'length');
-    if (elements.lastKey() case final int key when key > length) {
+    if (elements.lastKey() case final int key when key >= length) {
       throw ArgumentError.value(
         length,
         'length',

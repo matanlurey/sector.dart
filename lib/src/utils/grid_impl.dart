@@ -326,11 +326,3 @@ extension GridImpl on Never {
   //   }
   // }
 }
-
-final class _TypeLiteral<T> {
-  const _TypeLiteral();
-
-  /// Returns `true` if the type is nullable.
-  // ignore: unnecessary_type_check
-  bool get isNullable => this is _TypeLiteral<T?>;
-}
