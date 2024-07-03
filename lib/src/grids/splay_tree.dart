@@ -68,8 +68,10 @@ final class SplayTreeGrid<T> with Grid<T>, EfficientIndexGrid<T> {
     if (fill is T) {
       final cells = SplayTreeMap<int, T>();
       for (var index = 0; index < width * height; index++) {
-        final x = index % width;
-        final y = index ~/ width;
+        final (x, y) = LayoutHint.rowMajorContiguous.toPosition(
+          index,
+          width: width,
+        );
         final value = generator(x, y);
         if (value != fill) {
           cells[index] = value;
@@ -225,19 +227,6 @@ final class SplayTreeGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   @override
   GridAxis<T> get columns => _Columns(this);
 
-  @pragma('vm:prefer-inline')
-  int _index(int x, int y) => x + y * _width;
-
-  @override
-  T getUnchecked(int x, int y) {
-    return _cells[_index(x, y)];
-  }
-
-  @override
-  void setUnchecked(int x, int y, T value) {
-    _cells[_index(x, y)] = value;
-  }
-
   @override
   bool contains(T element) => _cells.contains(element);
 
@@ -245,7 +234,14 @@ final class SplayTreeGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   LayoutHint get layoutHint => LayoutHint.rowMajorContiguous;
 
   @override
+  @pragma('vm:prefer-inline')
   T getByIndexUnchecked(int index) => _cells[index];
+
+  @override
+  @pragma('vm:prefer-inline')
+  void setByIndexUnchecked(int index, T value) {
+    _cells[index] = value;
+  }
 
   /// Returns a sparse map of the grid, with fill values omitted.
   ///

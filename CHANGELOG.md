@@ -1,6 +1,11 @@
 # Change Log
 
-## 0.3.0-dev
+## 0.3.0
+
+This is a relatively large release, with a few breaking changes, but also a lot
+of new features and improvements. The main focus of this release was to improve
+the ergonomics of the API, and to provide more ways to interact with the grid
+data structure.
 
 ### Bug Fixes
 
@@ -32,8 +37,17 @@
 
     @override
     T getByIndexUnchecked(int index) => _list[index];
+
+    @override
+    void setByIndexUnchecked(int index, T value) {
+      _list[index] = value;
+    }
   }
   ```
+
+  In addition, removed `LayoutHint.private`; it's not possible to have a
+  "private" layout, as the point of the layout hint is to provide information
+  about the layout of the grid to algorithms that traverse the grid.
 
 - Replaced `Rows` and `Columns` with `GridAxis`; both of these types only
   existed to have a common interface for iterating over rows and columns, but
@@ -111,6 +125,10 @@
     // ...
   }
   ```
+
+- Added `<LayoutHint>.toPosition` and `<LayoutHint>.toIndex` to convert between
+  positions and indices, and vice versa, based on the layout hint, without
+  having to write this code over and over again.
 
 ## 0.2.0
 

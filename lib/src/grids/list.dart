@@ -56,8 +56,10 @@ final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
     RangeError.checkNotNegative(width, 'width');
     RangeError.checkNotNegative(height, 'height');
     final cells = List<T>.generate(width * height, (index) {
-      final x = index % width;
-      final y = index ~/ width;
+      final (x, y) = LayoutHint.rowMajorContiguous.toPosition(
+        index,
+        width: width,
+      );
       return generator(x, y);
     });
     return ListGrid._(cells, width);
@@ -170,21 +172,6 @@ final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   @override
   GridAxis<T> get columns => _Columns(this);
 
-  @pragma('vm:prefer-inline')
-  int _index(int x, int y) => x + y * _width;
-
-  @pragma('vm:prefer-inline')
-  @override
-  T getUnchecked(int x, int y) {
-    return _cells[_index(x, y)];
-  }
-
-  @pragma('vm:prefer-inline')
-  @override
-  void setUnchecked(int x, int y, T value) {
-    _cells[_index(x, y)] = value;
-  }
-
   @override
   bool contains(T element) => _cells.contains(element);
 
@@ -203,6 +190,12 @@ final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   @override
   @pragma('vm:prefer-inline')
   T getByIndexUnchecked(int index) => _cells[index];
+
+  @override
+  @pragma('vm:prefer-inline')
+  void setByIndexUnchecked(int index, T value) {
+    _cells[index] = value;
+  }
 }
 
 final class _Rows<T> extends GridAxis<T> with RowsMixin<T> {
