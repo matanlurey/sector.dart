@@ -81,27 +81,7 @@ element at index <code>(x, y)</code> is <code>columns[x][y]</code>.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">factory ListGrid.fromColumns(Iterable&lt;Iterable&lt;T&gt;&gt; columns) {
-  &#47;&#47; Make accessing length predictable.
-  final columnsList = List.of(columns);
-
-  &#47;&#47; If empty, the grid is empty.
-  if (columnsList.isEmpty) {
-    return ListGrid.empty();
-  }
-
-  final width = columnsList.length;
-  final height = columnsList.first.length;
-  final cells = List.of(GridImpl.checkedExpand(columnsList));
-
-  &#47;&#47; Map the columns to rows.
-  final rows = List.generate(height, (y) {
-    return List.generate(width, (x) {
-      &#47;&#47; Remember cells is column-major, so we need to swap x and y.
-      return cells[y + x * height];
-    });
-  });
-
-  return ListGrid.fromRows(rows);
+  return ListGrid.fromRows(GridImpl.transpose(columns));
 }</code></pre>
 </section>
 

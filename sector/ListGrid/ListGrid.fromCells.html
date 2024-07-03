@@ -74,8 +74,7 @@
 equal to the number of cells divided by the width, which must be an
 integer.</p>
 <p>The grid is initialized with the elements in the cells, where the element
-at index <code>(x, y)</code> is <code>cells[y * width + x]</code>.</p>
-<p>If <code>width</code> is <code>0</code>, an <a href="../../sector/Grid/Grid.empty.html">Grid.empty</a> is returned.</p>
+at index <code>(x, y)</code> is <code>cells[y * width + x]</code>, known as row-major order.</p>
 </section>
 
 
@@ -84,15 +83,12 @@ at index <code>(x, y)</code> is <code>cells[y * width + x]</code>.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">factory ListGrid.fromCells(Iterable&lt;T&gt; cells, {required int width}) {
   RangeError.checkNotNegative(width, &#39;width&#39;);
-  if (width == 0) {
-    return ListGrid.empty();
-  }
 
   &#47;&#47; Make accessing length predictable.
   final cellsList = List.of(cells);
 
   &#47;&#47; Ensure the number of cells is a multiple of the width.
-  if (cellsList.length % width != 0) {
+  if (width != 0 &amp;&amp; cellsList.length % width != 0) {
     throw ArgumentError.value(
       cells,
       &#39;cells&#39;,

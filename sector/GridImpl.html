@@ -182,6 +182,19 @@ classes.</p>
 
 </dd>
 
+        <dt id="mostCommonElement" class="callable">
+  <span class="name"><a href="../sector/GridImpl/mostCommonElement.html">mostCommonElement</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="mostCommonElement-param-elements"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">elements</span>, </span><span class="parameter" id="mostCommonElement-param-equal">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">equal</span>(<span class="parameter" id="param-"><span class="type-annotation">T</span>, </span><span class="parameter" id="param-"><span class="type-annotation">T</span></span>)? = <span class="default-value">identical</span>, </span><span class="parameter" id="mostCommonElement-param-hashCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">hashCode</span>(<span class="parameter" id="param-"><span class="type-annotation">T</span></span>)? = <span class="default-value">identityHashCode</span>}</span>)
+    <span class="returntype parameter">&#8594; T</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the most common element in the provided <code>elements</code>.
+  
+
+</dd>
+
         <dt id="subGridView" class="callable">
   <span class="name"><a href="../sector/GridImpl/subGridView.html">subGridView</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="subGridView-param-grid"><span class="type-annotation"><a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">grid</span>, </span><span class="parameter" id="subGridView-param-left">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">left</span> = <span class="default-value">0</span>, </span><span class="parameter" id="subGridView-param-top"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">top</span> = <span class="default-value">0</span>, </span><span class="parameter" id="subGridView-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">width</span>, </span><span class="parameter" id="subGridView-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">height</span>}</span>)
     <span class="returntype parameter">&#8594; <a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
@@ -191,6 +204,19 @@ classes.</p>
 </dt>
 <dd>
   Returns a sub-grid view of the provided grid.
+  
+
+</dd>
+
+        <dt id="transpose" class="callable">
+  <span class="name"><a href="../sector/GridImpl/transpose.html">transpose</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="transpose-param-input"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">input</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a list of lists where the inner lists are transposed.
   
 
 </dd>

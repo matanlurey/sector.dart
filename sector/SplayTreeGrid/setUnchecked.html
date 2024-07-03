@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the ListGrid.from constructor from Class ListGrid from the sector library, for the Dart programming language.">
-  <title>ListGrid.from constructor - ListGrid - sector library - Dart API</title>
+  <meta name="description" content="API docs for the setUnchecked method from the SplayTreeGrid class, for the Dart programming language.">
+  <title>setUnchecked method - SplayTreeGrid class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">ListGrid.from factory constructor</li>
+    <li><a href="../../sector/SplayTreeGrid-class.html">SplayTreeGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">setUnchecked method</li>
   </ol>
-  <div class="self-name">ListGrid.from</div>
+  <div class="self-name">setUnchecked</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -51,33 +51,54 @@
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="sector&#47;ListGrid-class-sidebar.html"
-      data-below-sidebar="">
-      <div>
-<h1><span class="kind-constructor">ListGrid&lt;<wbr><span class="type-parameter">T</span>&gt;.from</span> constructor 
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="sector&#47;SplayTreeGrid-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">setUnchecked</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
       
-      <span class="name ">ListGrid&lt;<wbr><span class="type-parameter">T</span>&gt;.from</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="from-param-grid"><span class="type-annotation"><a href="../../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">grid</span></span></li>
-</ol>)
-    </section>
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.4.4/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
 
+<span class="returntype">void</span>
+<span class="name ">setUnchecked</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="setUnchecked-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span></li>
+<li><span class="parameter" id="setUnchecked-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span>, </span></li>
+<li><span class="parameter" id="setUnchecked-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span></span></li>
+</ol>)
+
+      <div class="features"><span class="feature">override</span></div>
+
+    </section>
     
 <section class="desc markdown">
-  <p>Creates a new grid from an existing <code>grid</code>.</p>
-<p>The new grid is a shallow copy of the original grid.</p>
+  <p>Sets the element at the given <code>x</code> and <code>y</code> to <code>value</code>.</p>
+<p>The <code>x</code> and <code>y</code> coordinates are zero-based, where <code>x</code> is the horizontal
+axis and <code>y</code> is the vertical axis. The origin <code>(0, 0)</code> is at the top-left
+corner of the grid.</p>
+<p>If the coordinates are out of bounds, the behavior is undefined.</p>
+<div class="markdown-alert markdown-alert-warning">
+<p class="markdown-alert-title">Warning</p>
+<p>Use this method with caution, as it may lead to undefined behavior if
+the coordinates are out of bounds. It is recommended to use <a href="../../sector/Grid/set.html">set</a>
+instead.</p>
+</div>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">factory ListGrid.from(Grid&lt;T&gt; grid) {
-  return ListGrid.generate(grid.width, grid.height, grid.getUnchecked);
+  <pre class="language-dart"><code class="language-dart">@override
+void setUnchecked(int x, int y, T value) {
+  _cells[_index(x, y)] = value;
 }</code></pre>
 </section>
 
@@ -95,17 +116,17 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">ListGrid.from factory constructor</li>
+    <li><a href="../../sector/SplayTreeGrid-class.html">SplayTreeGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">setUnchecked method</li>
 </ol>
 
 
-    <h5>ListGrid class</h5>
+    <h5>SplayTreeGrid class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-left-->
+  </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
+</div><!--/.sidebar-offcanvas-->
 
 </main>
 

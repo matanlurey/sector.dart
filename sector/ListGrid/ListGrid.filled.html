@@ -73,7 +73,6 @@
   <p>Creates a new grid with the provided <code>width</code> and <code>height</code>.</p>
 <p>The grid is initialized with all elements set to <code>fill</code>.</p>
 <p>The <code>width</code> and <code>height</code> must be non-negative.</p>
-<p>If either dimension is <code>0</code>, an <a href="../../sector/ListGrid/ListGrid.empty.html">ListGrid.empty</a> is returned.</p>
 </section>
 
 
@@ -83,11 +82,6 @@
   <pre class="language-dart"><code class="language-dart">factory ListGrid.filled(int width, int height, T fill) {
   RangeError.checkNotNegative(width, &#39;width&#39;);
   RangeError.checkNotNegative(height, &#39;height&#39;);
-
-  if (width == 0 || height == 0) {
-    return ListGrid.empty();
-  }
-
   final cells = List&lt;T&gt;.filled(width * height, fill, growable: true);
   return ListGrid._(cells, width);
 }</code></pre>

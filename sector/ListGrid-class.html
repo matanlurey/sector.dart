@@ -68,6 +68,22 @@
 the <a href="../sector/Grid-class.html">Grid</a> interface. It is a row-major dense grid, where each row is stored
 contiguously in memory. This is the most common layout for a grid, and is
 the most efficient for most use-cases.</p>
+<h2 id="examples">Examples</h2>
+<p>The following grid:</p>
+<pre class="language-dart"><code class="language-dart">final grid = ListGrid.fromRows([
+  ['a', 'b', 'c'],
+  ['d', 'e', 'f'],
+  ['g', 'h', 'i'],
+]);
+print(grid);
+</code></pre>
+<p>Produces the following output:</p>
+<pre class="language-txt"><code class="language-txt">┌───────┐
+│ a b c │
+│ d e f │
+│ g h i │
+└───────┘
+</code></pre>
 </section>
 
 
