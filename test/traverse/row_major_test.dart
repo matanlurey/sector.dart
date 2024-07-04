@@ -9,8 +9,13 @@ void main() {
         [4, 5, 6],
       ]);
       check(
-        grid.traverse2(GridTraversal.rowMajor()),
+        grid.traverse(GridTraversal.rowMajor()),
       ).deepEquals([1, 2, 3, 4, 5, 6]);
+    });
+
+    test('should traverse empty', () {
+      final grid = NaiveListGrid.fromRows([]);
+      check(grid.traverse(GridTraversal.rowMajor())).isEmpty();
     });
 
     test('should traverse with a custom starting point', () {
@@ -19,7 +24,7 @@ void main() {
         [4, 5, 6],
       ]);
       check(
-        grid.traverse2(GridTraversal.rowMajor(start: (1, 0))),
+        grid.traverse(GridTraversal.rowMajor(start: (1, 0))),
       ).deepEquals([
         2,
         3,
@@ -44,7 +49,7 @@ void main() {
         [1, 2, 3],
         [4, 5, 6],
       ]);
-      check(grid.traverse2(GridTraversal.rowMajor())).last.equals(6);
+      check(grid.traverse(GridTraversal.rowMajor())).last.equals(6);
     });
 
     test('should support position', () {
@@ -65,8 +70,13 @@ void main() {
         [4, 5, 6],
       ]);
       check(
-        grid.traverse2(GridTraversal.rowMajor()),
+        grid.traverse(GridTraversal.rowMajor()),
       ).deepEquals([1, 2, 3, 4, 5, 6]);
+    });
+
+    test('should traverse empty', () {
+      final grid = Grid.fromRows([]);
+      check(grid.traverse(GridTraversal.rowMajor())).isEmpty();
     });
 
     test('should traverse with a custom starting point', () {
@@ -75,7 +85,7 @@ void main() {
         [4, 5, 6],
       ]);
       check(
-        grid.traverse2(GridTraversal.rowMajor(start: (1, 0))),
+        grid.traverse(GridTraversal.rowMajor(start: (1, 0))),
       ).deepEquals([2, 3, 4, 5, 6]);
     });
 
@@ -94,7 +104,7 @@ void main() {
         [1, 2, 3],
         [4, 5, 6],
       ]);
-      check(grid.traverse2(GridTraversal.rowMajor())).last.equals(6);
+      check(grid.traverse(GridTraversal.rowMajor())).last.equals(6);
     });
 
     test('should support position', () {

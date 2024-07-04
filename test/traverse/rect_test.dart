@@ -8,10 +8,10 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      grid.traverse2(GridTraversal.rect(0, 0, 2, 2)),
+      grid.traverse(GridTraversal.rect(0, 0, 2, 2)),
     ).deepEquals([1, 2, 4, 5]);
     check(
-      grid.traverse2(GridTraversal.rect(0, 0, 2, 2)).positions,
+      grid.traverse(GridTraversal.rect(0, 0, 2, 2)).positions,
     ).deepEquals([
       (0, 0),
       (1, 0),
@@ -27,7 +27,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      grid.traverse2(GridTraversal.rect(1, 1, 2, 1)),
+      grid.traverse(GridTraversal.rect(1, 1, 2, 1)),
     ).deepEquals([5, 6]);
   });
 }

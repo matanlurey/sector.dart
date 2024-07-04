@@ -7,7 +7,7 @@ void main() {
       [4, 5, 6],
       [7, 8, 9],
     ]);
-    final results = grid.traverse2(const GridTraversal.edges());
+    final results = grid.traverse(const GridTraversal.edges());
     check(results).deepEquals([
       1, 2, 3, //
       6, 9, 8, //
@@ -17,7 +17,7 @@ void main() {
 
   test('should traverse an empty grid', () {
     final grid = Grid<int>.empty();
-    final results = grid.traverse2(const GridTraversal.edges());
+    final results = grid.traverse(const GridTraversal.edges());
     check(results).isEmpty();
   });
 
@@ -25,7 +25,7 @@ void main() {
     final grid = Grid.fromRows([
       [1],
     ]);
-    final results = grid.traverse2(const GridTraversal.edges());
+    final results = grid.traverse(const GridTraversal.edges());
     check(results).deepEquals([1]);
   });
 }

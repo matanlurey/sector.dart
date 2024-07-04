@@ -2,14 +2,6 @@
 
 ## 0.3.0
 
-TODO:
-
-- [ ] Move `Traversal` to a class instead of nested functions.
-- [ ] Cleanup `GridIterator` somewhat, make it less repetitive.
-- [ ] Finalize a `.fill` implementation or extension.
-
----
-
 This is a relatively large release, with a few breaking changes, but also a lot
 of new features and improvements. The main focus of this release was to improve
 the ergonomics of the API, and to provide more ways to interact with the grid
@@ -71,36 +63,20 @@ data structure.
   + class MyRows extends GridAxis<T> with RowsMixin<T> { /* ... */ }
   ```
 
-- Changed `<Grid>.traversal` and `Traversal` to allow arbitrary return types,
-  i.e. not strictly a `GridIterable<T>`. This allows users to use the traversal
-  API to create custom traversals that return different types of elements, e.g.
-  custom transformations, filters, or other types of elements:
+- Changed `<Grid>.traversal` and `Traversal` to an actual class,
+  `GridTraveresal`, i.e. not a nested function. Exiting traversals are now
+  named constructors on the `GridTraversal` class:
 
   ```diff
   - Traversal<T> rowMajor<T>(...) { ... }
-  + Traversal<GridIterable<T>, T> rowMajor<T>(...) { ... }
+  + GridTraversal.rowMajor()
   ```
 
-  As a result, `.traversal` now _requires_ an argument, versus defaulting to
-  `rowMajor()` before:
+  `.traversal` now _requires_ an argument, versus defaulting to `rowMajor`:
 
   ```diff
   - for (final element in grid.traversal) { /* ... */ }
-  + for (final element in grid.traversal(rowMajor())) { /* ... */ }
-  ```
-
-  An example of benefitting from this change is the `prettyPrint` traversal:
-
-  ```dart
-  final string = Grid.fromRows([
-    [1, 2, 3],
-    [4, 5, 6],
-  ]).traversal(prettyPrint());
-  print(string);
-  // ┌───────┐
-  // │ 1 2 3 │
-  // │ 4 5 6 │
-  // └───────┘
+  + for (final element in grid.traversal(GridTraversal.rowMajor())) { /* ... */ }
   ```
   
 ### New Features

@@ -383,31 +383,6 @@ abstract mixin class Grid<T> {
   /// ```
   GridAxis<T> get columns;
 
-  /// Returns an iterable that traverses the grid in a specific [order].
-  ///
-  /// The order of the traversal is determined by the provided [order], which
-  /// is a [Traversal] implementation. If not provided, the default order is
-  /// determined by the specific implementation of the grid, often row-major.
-  ///
-  /// ## Examples
-  ///
-  /// ```dart
-  /// final grid = Grid.generate(2, 2, (x, y) => (x, y));
-  /// for (final (x, y, element) in grid.traverse(rowMajor())) {
-  ///   print(element);
-  /// }
-  /// ```
-  ///
-  /// The output of the example is:
-  ///
-  /// ```txt
-  /// (0, 0)
-  /// (1, 0)
-  /// (0, 1)
-  /// (1, 1)
-  /// ```
-  R traverse<R>(Traversal<R, T> order) => order(this);
-
   /// Returns a _new_ grid with a shallow copy of the provided bounds.
   ///
   /// The new grid is a sub-grid of the original grid, where the top-left corner

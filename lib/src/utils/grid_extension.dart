@@ -57,12 +57,32 @@ extension GridExtension<T> on Grid<T> {
     return asSubGrid(left: left, top: top, width: width, height: height);
   }
 
-  /// TODO: Document.
-  GridIterable<T> traverse2(GridTraversal traversal) {
+  /// Returns an iterable that traverses the grid in a specific order.
+  ///
+  /// The order of the traversal is determined by the provided [traversal].
+  ///
+  /// ## Examples
+  ///
+  /// ```dart
+  /// final grid = Grid.generate(2, 2, (x, y) => (x, y));
+  /// for (final (x, y, element) in grid.traverse(GridTraversal.rowMajor())) {
+  ///   print(element);
+  /// }
+  /// ```
+  ///
+  /// The output of the example is:
+  ///
+  /// ```txt
+  /// (0, 0)
+  /// (1, 0)
+  /// (0, 1)
+  /// (1, 1)
+  /// ```
+  GridIterable<T> traverse(GridTraversal traversal) {
     return GridIterable.from(() => traversal.traverse(this));
   }
 
-  /// Fills the grid traversed by the [order] with the given [value].
+  /// Fills each cell visited by [traversal] with [value].
   ///
   /// ## Examples
   ///
@@ -72,7 +92,7 @@ extension GridExtension<T> on Grid<T> {
   ///   [4, 5, 6],
   ///   [7, 8, 9],
   /// ]);
-  /// grid.fill(edges, 0);
+  /// grid.fill(GridTraversal.edges(), 0);
   /// print(grid);
   /// ```
   ///
@@ -85,13 +105,13 @@ extension GridExtension<T> on Grid<T> {
   /// | 0 0 0 |
   /// └───────┘
   /// ```
-  void fill<R extends GridIterable<void>>(Traversal<R, T> order, T value) {
-    for (final (x, y) in order(this).positions) {
+  void fill(GridTraversal traversal, T value) {
+    for (final (x, y) in traverse(traversal).positions) {
       setUnchecked(x, y, value);
     }
   }
 
-  /// Fills the grid traversed by the [order] by calling [value] for each cell.
+  /// Fills the grid by calling [value] for each cell visited by [traversal].
   ///
   /// The [value] function is called with the current cell's position and the
   /// previous value at that position. The return value of the function is used
@@ -105,7 +125,7 @@ extension GridExtension<T> on Grid<T> {
   ///   [4, 5, 6],
   ///   [7, 8, 9],
   /// ]);
-  /// grid.fillWith(edges, (x, y, previous) => previous - 1);
+  /// grid.fillWith(GridTraversal.edges(), (x, y, previous) => previous - 1);
   /// print(grid);
   /// ```
   ///
@@ -118,11 +138,11 @@ extension GridExtension<T> on Grid<T> {
   /// | 6 7 8 |
   /// └───────┘
   /// ```
-  void fillWith<R extends GridIterable<T>>(
-    Traversal<R, T> order,
+  void fillWith(
+    GridTraversal traversal,
     T Function(int x, int y, T previous) value,
   ) {
-    for (final (x, y, p) in order(this).positioned) {
+    for (final (x, y, p) in traverse(traversal).positioned) {
       setUnchecked(x, y, value(x, y, p));
     }
   }

@@ -1,37 +1,38 @@
 /// Optional hint for the layout of the data in memory.
 ///
 /// Can be used to optimize performance for certain operations.
-enum LayoutHint {
+abstract final class LayoutHint {
   /// Each cell is stored in an ordered block of memory in row-major order.
   ///
   /// In other words, `index = y * width + x`.
-  rowMajorContiguous,
-
-  // Prevents the enum from being exhaustively checked.
-  // ignore: unused_field
-  _;
+  static const LayoutHint rowMajorContiguous = _RowMajorContiguous();
 
   /// Whether the layout is row-major contiguous.
-  @pragma('vm:prefer-inline')
-  bool get isRowMajorContiguous => this == LayoutHint.rowMajorContiguous;
+  bool get isRowMajorContiguous;
 
   /// Converts an [index], given the [width] of a grid, to a position `(x, y)`.
+  (int x, int y) toPosition(int index, {required int width});
+
+  /// Converts a position `(x, y)` to an `index`, given the [width] of a grid.
+  int toIndex(int x, int y, {required int width});
+}
+
+final class _RowMajorContiguous implements LayoutHint {
+  const _RowMajorContiguous();
+
+  @override
+  @pragma('vm:prefer-inline')
+  bool get isRowMajorContiguous => true;
+
+  @override
+  @pragma('vm:prefer-inline')
   (int x, int y) toPosition(int index, {required int width}) {
-    switch (this) {
-      case LayoutHint.rowMajorContiguous:
-        return (index % width, index ~/ width);
-      default:
-        throw UnimplementedError();
-    }
+    return (index % width, index ~/ width);
   }
 
-  /// Converts a position `(x, y)` to an [index], given the [width] of a grid.
+  @override
+  @pragma('vm:prefer-inline')
   int toIndex(int x, int y, {required int width}) {
-    switch (this) {
-      case LayoutHint.rowMajorContiguous:
-        return y * width + x;
-      default:
-        throw UnimplementedError(); // coverage:ignore-line
-    }
+    return y * width + x;
   }
 }

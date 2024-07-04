@@ -8,7 +8,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      grid.traverse2(GridTraversal.line(0, 0, 2, 2)),
+      grid.traverse(GridTraversal.line(0, 0, 2, 2)),
     ).deepEquals([1, 5, 9]);
   });
 
@@ -19,7 +19,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      grid.traverse2(GridTraversal.line(0, 0, 2, 2, inclusive: false)),
+      grid.traverse(GridTraversal.line(0, 0, 2, 2, inclusive: false)),
     ).deepEquals([1, 5]);
   });
 
@@ -30,7 +30,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      grid.traverse2(GridTraversal.line(2, 2, 0, 0)),
+      grid.traverse(GridTraversal.line(2, 2, 0, 0)),
     ).deepEquals([9, 5, 1]);
   });
 
@@ -41,7 +41,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      () => grid.traverse2(GridTraversal.line(0, 0, 3, 3)),
+      () => grid.traverse(GridTraversal.line(0, 0, 3, 3)),
     ).throws<Error>();
   });
 
@@ -52,7 +52,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      () => grid.traverse2(GridTraversal.line(0, 0, 2, 3)),
+      () => grid.traverse(GridTraversal.line(0, 0, 2, 3)),
     ).throws<Error>();
   });
 
@@ -63,7 +63,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      () => grid.traverse2(GridTraversal.line(0, 0, 3, 2)),
+      () => grid.traverse(GridTraversal.line(0, 0, 3, 2)),
     ).throws<Error>();
   });
 }

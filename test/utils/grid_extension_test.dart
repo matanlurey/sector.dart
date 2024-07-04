@@ -48,4 +48,24 @@ void main() {
         ..height.equals(3);
     });
   });
+
+  test('fill', () {
+    final grid = Grid.filled(3, 3, 0);
+    grid.fill(GridTraversal.rowMajor(), 1);
+    check(grid.rows).deepEquals([
+      [1, 1, 1],
+      [1, 1, 1],
+      [1, 1, 1],
+    ]);
+  });
+
+  test('fillWith', () {
+    final grid = Grid.filled(3, 3, 0);
+    grid.fillWith(GridTraversal.rowMajor(), (x, y, t) => x + y);
+    check(grid.rows).deepEquals([
+      [0, 1, 2],
+      [1, 2, 3],
+      [2, 3, 4],
+    ]);
+  });
 }

@@ -9,9 +9,6 @@ final class _RowMajorGridTraveral implements GridTraversal {
 
   @override
   GridIterator<T> traverse<T>(Grid<T> grid) {
-    if (grid.isEmpty) {
-      return GridIterator.empty();
-    }
     if (grid is EfficientIndexGrid<T> && grid.layoutHint.isRowMajorContiguous) {
       var index = 0;
       if (_start != (0, 0)) {

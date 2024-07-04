@@ -24,6 +24,10 @@ final class _LineGridTraveral implements GridTraversal {
     var x2 = _x2;
     var y2 = _y2;
 
+    // Ensure bounds.
+    GridImpl.checkBoundsExclusive(grid, x1, y1);
+    GridImpl.checkBoundsExclusive(grid, x2, y2);
+
     // First, determine what octant the line is in, i.e. the origin octant.
     // We store this octant so that we can convert the points back to the
     // original octant after traversing the line.
@@ -43,9 +47,9 @@ final class _LineGridTraveral implements GridTraversal {
     return _LineIterator<T>(
       grid,
       octant,
-      _x1,
-      _y1,
-      _x2,
+      x1,
+      y1,
+      x2,
       _inclusive,
       dx,
       dy,
