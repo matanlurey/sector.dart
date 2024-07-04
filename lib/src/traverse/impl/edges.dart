@@ -1,4 +1,4 @@
-part of '../traversal_2.dart';
+part of '../traversal.dart';
 
 final class _EdgesGridTraveral implements GridTraversal {
   const _EdgesGridTraveral();

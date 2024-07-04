@@ -1,4 +1,4 @@
-part of '../traversal_2.dart';
+part of '../traversal.dart';
 
 final class _BreadthFirstTraversal implements GridTraversal {
   const _BreadthFirstTraversal(this._x, this._y);

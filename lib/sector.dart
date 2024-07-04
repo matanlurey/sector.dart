@@ -91,7 +91,7 @@ export 'src/grids/efficient_index_grid.dart' show EfficientIndexGrid;
 export 'src/grids/grid.dart' show Grid;
 export 'src/grids/list.dart' show ListGrid;
 export 'src/grids/splay_tree.dart' show SplayTreeGrid;
-export 'src/traverse/traversal_2.dart' show GridTraversal;
+export 'src/traverse/traversal.dart' show GridTraversal;
 export 'src/utils/grid_extension.dart' show GridExtension;
 export 'src/utils/grid_impl.dart' show GridImpl;
 export 'src/utils/octant.dart' show Octant;

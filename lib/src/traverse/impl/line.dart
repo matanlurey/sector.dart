@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_positional_boolean_parameters
 
-part of '../traversal_2.dart';
+part of '../traversal.dart';
 
 final class _LineGridTraveral implements GridTraversal {
   const _LineGridTraveral(

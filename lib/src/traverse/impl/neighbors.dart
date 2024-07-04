@@ -1,4 +1,4 @@
-part of '../traversal_2.dart';
+part of '../traversal.dart';
 
 const _adjacentDXDY = [
   (0, -1),
