@@ -78,7 +78,7 @@ data structure.
   - for (final element in grid.traversal) { /* ... */ }
   + for (final element in grid.traversal(GridTraversal.rowMajor())) { /* ... */ }
   ```
-  
+
 ### New Features
 
 - Extending or mixing in `Grid<T>` provides a default implementation of `clear`.
@@ -102,17 +102,25 @@ data structure.
   print(grid.toSparseMap()); // {0: {0: 'a'}, 1: {1: 'b'}, 2: {2: 'c'}}
   ```
 
-- Added `drawRect` as a traveresal that draws a rectangle on the grid:
-
-  ```dart
-  for (final cell in grid.traverse(drawRect(0, 0, 10, 10))) {
-    // ...
-  }
-  ```
-
 - Added `<LayoutHint>.toPosition` and `<LayoutHint>.toIndex` to convert between
   positions and indices, and vice versa, based on the layout hint, without
   having to write this code over and over again.
+
+- Added multiple new traversals:
+
+  - `GridTraversal.breadthFirst`
+  - `GridTraversal.line`
+  - `GridTraversal.rect`
+  - `GridTraversal.edges`
+  - `GridTraversal.neighbors`
+  - `GridTraversal.neighborsDiagonal`
+
+- Added new extension methods, `fill` and `fillWith`, to write to a grid:
+
+  ```dart
+  // Makes the edges of the grid the '#' character.
+  grid.fill(GridTraversal.edges(), '#');
+  ```
 
 ## 0.2.0
 
