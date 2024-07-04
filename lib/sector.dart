@@ -85,15 +85,13 @@ import 'dart:typed_data';
 import 'package:sector/sector.dart';
 
 export 'src/base/axis.dart' show ColumnsMixin, GridAxis, RowsMixin;
-export 'src/base/iterator.dart' show GridIterable, GridIterator, XYGridIterator;
+export 'src/base/iterator.dart' show GridIterable, GridIterator;
 export 'src/base/layout_hint.dart' show LayoutHint;
 export 'src/base/traversal.dart' show Traversal;
 export 'src/grids/efficient_index_grid.dart' show EfficientIndexGrid;
 export 'src/grids/grid.dart' show Grid;
 export 'src/grids/list.dart' show ListGrid;
 export 'src/grids/splay_tree.dart' show SplayTreeGrid;
-export 'src/traverse/breadth_first.dart' show breadthFirst;
-export 'src/traverse/neighbors.dart' show neighbors, neighborsDiagonal;
 export 'src/traverse/pretty_print.dart' show prettyPrint;
 export 'src/traverse/traversal_2.dart' show GridTraversal;
 export 'src/utils/grid_extension.dart' show GridExtension;

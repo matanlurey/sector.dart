@@ -193,6 +193,7 @@ abstract mixin class GridIterator<E> implements Iterator<E> {
 ///   }
 /// }
 /// ```
+@internal
 abstract base class XYGridIterator<T> with GridIterator<T> {
   /// Creates a new iterator for the provided [grid].
   ///
@@ -200,7 +201,7 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
   /// _not_ have to be within the bounds of the grid, as either [firstPosition]
   /// is overriden to handle the first iteration, or [nextPosition] is aware
   /// of the behavior of the starting position.
-  XYGridIterator(this.grid, [this._position = (-1, 0)]);
+  XYGridIterator(this.grid, [this.position = (-1, 0)]);
 
   /// The grid being iterated over.
   @protected
@@ -209,13 +210,12 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
 
   @override
   @nonVirtual
-  (int, int) get position => _position;
-  (int, int) _position;
+  (int, int) position;
   var _first = true;
 
   @override
   @nonVirtual
-  T get current => grid.getUnchecked(_position.$1, _position.$2);
+  T get current => grid.getUnchecked(position.$1, position.$2);
 
   @override
   @nonVirtual
@@ -224,17 +224,17 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
       _first = false;
       final first = firstPosition();
       if (first != done) {
-        _position = first;
-        return grid.containsXY(_position.$1, _position.$2);
+        position = first;
+        return grid.containsXY(position.$1, position.$2);
       }
       return false;
     }
 
-    final next = nextPosition(_position.$1, _position.$2);
+    final next = nextPosition(position.$1, position.$2);
     if (next == done) {
       return false;
     }
-    _position = next;
+    position = next;
     return true;
   }
 
@@ -247,7 +247,7 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
   ///
   /// If omitted, [nextPosition] will be called with the initial position.
   @protected
-  (int, int) firstPosition() => nextPosition(_position.$1, _position.$2);
+  (int, int) firstPosition() => nextPosition(position.$1, position.$2);
 
   /// Given the [x] and [y] coordinates, returns the next position to move to.
   ///
@@ -261,6 +261,7 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
 /// This iterator is useful for traversals that are only concerned with the
 /// index of the grid, and not the actual values of the cells; for example,
 /// a row-major traversal of a row-major laid out grid.
+@internal
 abstract base class IndexGridIterator<T> with GridIterator<T> {
   /// Creates a new iterator for the provided [grid].
   ///

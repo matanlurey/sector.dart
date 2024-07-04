@@ -28,7 +28,7 @@ final class _RowMajorGridTraveral implements GridTraversal {
 }
 
 final class _RowMajorIterator<T> extends XYGridIterator<T> {
-  _RowMajorIterator(super.grid, super._position);
+  _RowMajorIterator(super.grid, super.position);
 
   @override
   (int, int) firstPosition() => position;

@@ -7,11 +7,6 @@ import 'package:sector/sector.dart';
 /// each row in order from left to right, while a spiral traversal will visit
 /// the elements in a spiral pattern starting from the center.
 ///
-/// See some built-in traversals:
-///
-/// - [neighbors]
-/// - [neighborsDiagonal]
-///
 /// Including ones that don't return an iterable:
 ///
 /// - [prettyPrint]

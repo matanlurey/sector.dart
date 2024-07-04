@@ -103,13 +103,17 @@ abstract mixin class Grid<T> {
   /// Creates a new grid from an existing [grid].
   ///
   /// The new grid is a shallow copy of the original grid.
-  factory Grid.from(Grid<T> grid) = ListGrid<T>.from;
+  factory Grid.from(
+    Grid<T> grid,
+  ) = ListGrid<T>.from;
 
   /// Creates a new grid that is an unmodifiable view of the provided [grid].
   ///
   /// The view prevents modification of the underlying grid, and is useful for
   /// exposing a read-only view of a grid in an untrusted context.
-  factory Grid.unmodifiable(Grid<T> grid) = UnmodifiableGridView<T>;
+  factory Grid.unmodifiable(
+    Grid<T> grid,
+  ) = UnmodifiableGridView<T>;
 
   /// Creates a new grid from the provided [cells].
   ///
