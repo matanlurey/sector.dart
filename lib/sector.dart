@@ -99,4 +99,3 @@ export 'src/traverse/traversal_2.dart' show GridTraversal;
 export 'src/utils/grid_extension.dart' show GridExtension;
 export 'src/utils/grid_impl.dart' show GridImpl;
 export 'src/utils/octant.dart' show Octant;
-export 'src/views/unmodifiable_grid_view.dart' show UnmodifiableGridView;

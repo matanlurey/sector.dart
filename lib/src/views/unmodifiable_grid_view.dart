@@ -1,9 +1,11 @@
+import 'package:meta/meta.dart';
 import 'package:sector/sector.dart';
 import 'package:sector/src/views/delegating_grid_view.dart';
 
 /// A grid view that prevents modification of the underlying grid.
 ///
 /// Useful for exposing a read-only view of a grid in an untrusted context.
+@internal
 final class UnmodifiableGridView<T> extends DelegatingGridView<T> {
   /// Creates a grid view that prevents modification of the underlying grid.
   const UnmodifiableGridView(super.view);

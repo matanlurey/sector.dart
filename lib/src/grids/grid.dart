@@ -2,6 +2,7 @@ import 'package:sector/sector.dart';
 
 // ignore: unused_import
 import 'package:sector/src/_dartdoc_macros.dart';
+import 'package:sector/src/views/unmodifiable_grid_view.dart';
 
 /// A data structure representing a 2-dimensional grid of elements of type [T].
 ///
@@ -103,6 +104,12 @@ abstract mixin class Grid<T> {
   ///
   /// The new grid is a shallow copy of the original grid.
   factory Grid.from(Grid<T> grid) = ListGrid<T>.from;
+
+  /// Creates a new grid that is an unmodifiable view of the provided [grid].
+  ///
+  /// The view prevents modification of the underlying grid, and is useful for
+  /// exposing a read-only view of a grid in an untrusted context.
+  factory Grid.unmodifiableView(Grid<T> grid) = UnmodifiableGridView<T>;
 
   /// Creates a new grid from the provided [cells].
   ///
