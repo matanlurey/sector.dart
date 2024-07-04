@@ -82,12 +82,15 @@ enum Octant {
   /// The angle is between `7π/4` and `2π`.
   eighth;
 
-  /// Creates an octant from the provided start and end points.
+  /// Creates an octant from the provided start and end positions.
   ///
   /// The octant is determined by the angle between the two points, where the
   /// angle is measured from the positive x-axis in the counter-clockwise
   /// direction.
-  factory Octant.fromPoints(int x1, int y1, int x2, int y2) {
+  ///
+  /// > [!TIP]
+  /// > Prefer [Pos.octant] when working with [Pos] objects.
+  factory Octant.fromXYXY(int x1, int y1, int x2, int y2) {
     var dx = x2 - x1;
     var dy = y2 - y1;
     var octant = 0;
@@ -112,7 +115,7 @@ enum Octant {
     return Octant.values[octant];
   }
 
-  /// Converts the provided point to the octant's equivalent.
+  /// Converts the provided position to the octant's equivalent.
   ///
   /// Given a point `(x, y)` in the first octant, this method will return the
   /// equivalent point in the octant. For example, the point `(2, 3)` in the
@@ -132,7 +135,7 @@ enum Octant {
     };
   }
 
-  /// Converts the provided point from the octant's equivalent.
+  /// Converts the provided position from the octant's equivalent.
   ///
   /// Given a point `(x, y)` in the octant, this method will return the
   /// equivalent point in the first octant. For example, the point `(3, 2)` in

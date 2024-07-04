@@ -31,7 +31,7 @@ final class _LineGridTraveral implements GridTraversal {
     // First, determine what octant the line is in, i.e. the origin octant.
     // We store this octant so that we can convert the points back to the
     // original octant after traversing the line.
-    final octant = Octant.fromPoints(x1, y1, x2, y2);
+    final octant = Octant.fromXYXY(x1, y1, x2, y2);
 
     // Convert the points to the first octant.
     // This is the octant where the line has a slope between 0 and 1, which

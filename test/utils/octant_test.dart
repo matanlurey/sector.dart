@@ -5,49 +5,49 @@ void main() {
     test(Octant.first.name, () {
       final (x1, y1) = (0, 0);
       final (x2, y2) = (0, 0);
-      check(Octant.fromPoints(x1, y1, x2, y2)).equals(Octant.first);
+      check(Octant.fromXYXY(x1, y1, x2, y2)).equals(Octant.first);
     });
 
     test(Octant.second.name, () {
       final (x1, y1) = (3, 1);
       final (x2, y2) = (3, 2);
-      check(Octant.fromPoints(x1, y1, x2, y2)).equals(Octant.second);
+      check(Octant.fromXYXY(x1, y1, x2, y2)).equals(Octant.second);
     });
 
     test(Octant.third.name, () {
       final (x1, y1) = (3, 1);
       final (x2, y2) = (2, 1);
-      check(Octant.fromPoints(x1, y1, x2, y2)).equals(Octant.third);
+      check(Octant.fromXYXY(x1, y1, x2, y2)).equals(Octant.third);
     });
 
     test(Octant.fourth.name, () {
       final (x1, y1) = (5, 0);
       final (x2, y2) = (0, 8);
-      check(Octant.fromPoints(x1, y1, x2, y2)).equals(Octant.fourth);
+      check(Octant.fromXYXY(x1, y1, x2, y2)).equals(Octant.fourth);
     });
 
     test(Octant.fifth.name, () {
       final (x1, y1) = (0, 0);
       final (x2, y2) = (-5, -2);
-      check(Octant.fromPoints(x1, y1, x2, y2)).equals(Octant.fifth);
+      check(Octant.fromXYXY(x1, y1, x2, y2)).equals(Octant.fifth);
     });
 
     test(Octant.sixth.name, () {
       final (x1, y1) = (1, 0);
       final (x2, y2) = (1, -1);
-      check(Octant.fromPoints(x1, y1, x2, y2)).equals(Octant.sixth);
+      check(Octant.fromXYXY(x1, y1, x2, y2)).equals(Octant.sixth);
     });
 
     test(Octant.seventh.name, () {
       final (x1, y1) = (-3, 2);
       final (x2, y2) = (0, 0);
-      check(Octant.fromPoints(x1, y1, x2, y2)).equals(Octant.seventh);
+      check(Octant.fromXYXY(x1, y1, x2, y2)).equals(Octant.seventh);
     });
 
     test(Octant.eighth.name, () {
       final (x1, y1) = (0, 0);
       final (x2, y2) = (2, -3);
-      check(Octant.fromPoints(x1, y1, x2, y2)).equals(Octant.eighth);
+      check(Octant.fromXYXY(x1, y1, x2, y2)).equals(Octant.eighth);
     });
   });
 
