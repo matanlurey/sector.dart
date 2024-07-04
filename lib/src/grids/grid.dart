@@ -109,7 +109,7 @@ abstract mixin class Grid<T> {
   ///
   /// The view prevents modification of the underlying grid, and is useful for
   /// exposing a read-only view of a grid in an untrusted context.
-  factory Grid.unmodifiableView(Grid<T> grid) = UnmodifiableGridView<T>;
+  factory Grid.unmodifiable(Grid<T> grid) = UnmodifiableGridView<T>;
 
   /// Creates a new grid from the provided [cells].
   ///

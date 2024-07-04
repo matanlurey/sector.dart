@@ -107,7 +107,7 @@ data structure.
 
 - Extending or mixing in `Grid<T>` provides a default implementation of `clear`.
 
-- Added `Grid.unmodifiableView`, which wraps a `Grid` and makes it unmodifiable.
+- Added `Grid.unmodifiable`, which wraps a `Grid` and makes it unmodifiable.
 
 - Added `GridImpl.transpose` to create a `List<List<T>>` from an iterable of
   iterables, where the rows are the columns of the original grid and vice versa;

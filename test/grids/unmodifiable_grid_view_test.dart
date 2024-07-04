@@ -5,12 +5,11 @@ import '../src/suites/unmodifiable.dart';
 
 void main() {
   runUnmodifiableTestSuite(
-    () => Grid.unmodifiableView(Grid.filled(2, 2, 0)),
+    () => Grid.unmodifiable(Grid.filled(2, 2, 0)),
     fill: 1,
   );
 
   runReadOnlyTestSuite(
-    <T>(Iterable<Iterable<T>> rows) =>
-        Grid.unmodifiableView(Grid.fromRows(rows)),
+    <T>(Iterable<Iterable<T>> rows) => Grid.unmodifiable(Grid.fromRows(rows)),
   );
 }
