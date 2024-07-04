@@ -2,14 +2,28 @@
 
 part of '../traversal_2.dart';
 
-final class _DrawLineGridTraveral implements GridTraversal {
-  factory _DrawLineGridTraveral(
-    int x1,
-    int y1,
-    int x2,
-    int y2, {
+final class _LineGridTraveral implements GridTraversal {
+  const _LineGridTraveral(
+    this._x1,
+    this._y1,
+    this._x2,
+    this._y2, {
     bool inclusive = true,
-  }) {
+  }) : _inclusive = inclusive;
+
+  final int _x1;
+  final int _y1;
+  final int _x2;
+  final int _y2;
+  final bool _inclusive;
+
+  @override
+  GridIterator<T> traverse<T>(Grid<T> grid) {
+    var x1 = _x1;
+    var y1 = _y1;
+    var x2 = _x2;
+    var y2 = _y2;
+
     // First, determine what octant the line is in, i.e. the origin octant.
     // We store this octant so that we can convert the points back to the
     // original octant after traversing the line.
@@ -26,53 +40,21 @@ final class _DrawLineGridTraveral implements GridTraversal {
     final dx = x2 - x1;
     final dy = y2 - y1;
 
-    // Store these pre-calculated values in the traversal object.
-    return _DrawLineGridTraveral._(
-      x1,
-      y1,
-      x2,
-      dx,
-      dy,
-      octant,
-      inclusive,
-    );
-  }
-
-  const _DrawLineGridTraveral._(
-    this._x1,
-    this._y1,
-    this._x2,
-    this._dx,
-    this._dy,
-    this._octant,
-    this._inclusive,
-  );
-
-  final Octant _octant;
-  final bool _inclusive;
-  final int _x1;
-  final int _y1;
-  final int _x2;
-  final int _dx;
-  final int _dy;
-
-  @override
-  GridIterator<T> traverse<T>(Grid<T> grid) {
-    return _DrawLineIterator<T>(
+    return _LineIterator<T>(
       grid,
-      _octant,
+      octant,
       _x1,
       _y1,
       _x2,
       _inclusive,
-      _dx,
-      _dy,
+      dx,
+      dy,
     );
   }
 }
 
-final class _DrawLineIterator<T> with GridIterator<T> {
-  _DrawLineIterator(
+final class _LineIterator<T> with GridIterator<T> {
+  _LineIterator(
     this._grid,
     this._octant,
     this._startX,

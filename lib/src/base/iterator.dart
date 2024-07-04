@@ -223,7 +223,7 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
     if (_first) {
       _first = false;
       final first = firstPosition();
-      if (first != null) {
+      if (first != done) {
         _position = first;
         return grid.containsXY(_position.$1, _position.$2);
       }
@@ -231,24 +231,29 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
     }
 
     final next = nextPosition(_position.$1, _position.$2);
-    if (next == null) {
+    if (next == done) {
       return false;
     }
     _position = next;
     return true;
   }
 
+  /// A sentinel value that indicates that the iteration is done.
+  @nonVirtual
+  @pragma('vm:prefer-inline')
+  (int, int) get done => (-1, 0);
+
   /// May override this method to provide how to handle the first iteration.
   ///
   /// If omitted, [nextPosition] will be called with the initial position.
   @protected
-  (int, int)? firstPosition() => nextPosition(_position.$1, _position.$2);
+  (int, int) firstPosition() => nextPosition(_position.$1, _position.$2);
 
   /// Given the [x] and [y] coordinates, returns the next position to move to.
   ///
-  /// If the next position is invalid, this method should return `null`.
+  /// If the next position is invalid, this method should return [done].
   @protected
-  (int, int)? nextPosition(int x, int y);
+  (int, int) nextPosition(int x, int y);
 }
 
 /// A grid iterator that operates entirely based on the [index] of the grid.

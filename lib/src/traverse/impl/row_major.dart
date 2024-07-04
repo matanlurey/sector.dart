@@ -31,16 +31,16 @@ final class _RowMajorIterator<T> extends XYGridIterator<T> {
   _RowMajorIterator(super.grid, super._position);
 
   @override
-  (int, int)? firstPosition() => position;
+  (int, int) firstPosition() => position;
 
   @override
-  (int, int)? nextPosition(int x, int y) {
+  (int, int) nextPosition(int x, int y) {
     if (x + 1 < grid.width) {
       return (x + 1, y);
     } else if (y + 1 < grid.height) {
       return (0, y + 1);
     }
-    return null;
+    return done;
   }
 }
 

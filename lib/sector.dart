@@ -93,7 +93,6 @@ export 'src/grids/grid.dart' show Grid;
 export 'src/grids/list.dart' show ListGrid;
 export 'src/grids/splay_tree.dart' show SplayTreeGrid;
 export 'src/traverse/breadth_first.dart' show breadthFirst;
-export 'src/traverse/draw_rect.dart' show drawRect;
 export 'src/traverse/neighbors.dart' show neighbors, neighborsDiagonal;
 export 'src/traverse/pretty_print.dart' show prettyPrint;
 export 'src/traverse/traversal_2.dart' show GridTraversal;

@@ -2,8 +2,9 @@ import 'package:meta/meta.dart';
 import 'package:sector/sector.dart';
 import 'package:sector/src/base/iterator.dart';
 
-part 'impl/draw_line.dart';
 part 'impl/edges.dart';
+part 'impl/line.dart';
+part 'impl/rect.dart';
 part 'impl/row_major.dart';
 
 /// An algorithim or strategy for traversing a grid.
@@ -51,7 +52,7 @@ abstract interface class GridTraversal {
     GridIterator<T> Function<T>(Grid<T> grid) traversal,
   ) = _GridTraversal;
 
-  /// A traversal that draws a line between two positions.
+  /// A traversal that visits each cell intersected by a line.
   ///
   /// This traversal draws a line between two positions using Bresenham's line
   /// algorithm. The line is drawn from the start position to the end position
@@ -69,7 +70,7 @@ abstract interface class GridTraversal {
   ///   [4, 5, 6],
   ///   [7, 8, 9],
   /// ]);
-  /// for (final cell in grid.traverse(GridTraversal.drawLine(0, 0, 2, 2))) {
+  /// for (final cell in grid.traverse(GridTraversal.line(0, 0, 2, 2))) {
   ///   print(cell);
   /// }
   /// ```
@@ -81,13 +82,49 @@ abstract interface class GridTraversal {
   /// 5
   /// 9
   /// ```
-  factory GridTraversal.drawLine(
+  const factory GridTraversal.line(
     int x1,
     int y1,
     int x2,
     int y2, {
     bool inclusive,
-  }) = _DrawLineGridTraveral;
+  }) = _LineGridTraveral;
+
+  /// A traversal that visits a rectangle's-worth of cells.
+  ///
+  /// This traversal draws a rectangle between a [top] and [left] position, and
+  /// a [width] and [height] from that position. The traversal will visit each
+  /// cell that the (filled) rectangle passes through.
+  ///
+  /// TODO: For just the edges of the rectangle, see [GridTraversal.edges].
+  ///
+  /// ## Examples
+  ///
+  /// ```dart
+  /// final grid = Grid.fromRows([
+  ///   [1, 2, 3],
+  ///   [4, 5, 6],
+  ///   [7, 8, 9],
+  /// ]);
+  /// for (final cell in grid.traverse(GridTraversal.rect(0, 0, 2, 2))) {
+  ///   print(cell);
+  /// }
+  /// ```
+  ///
+  /// The output of the example is:
+  ///
+  /// ```txt
+  /// 1
+  /// 2
+  /// 4
+  /// 5
+  /// ```
+  const factory GridTraversal.rect(
+    int left,
+    int top,
+    int width,
+    int height,
+  ) = _RectGridTraversal;
 
   /// A traversal that visits edges of the grid.
   ///

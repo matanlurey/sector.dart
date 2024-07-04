@@ -30,7 +30,7 @@ import 'package:sector/sector.dart';
 /// `(1, 1)` and `(2, 2)` will be visited, but the order of the points will be
 /// reversed.
 ///
-/// See [GridTraversal.drawLine] for an example of using octants to draw lines.
+/// See [GridTraversal.line] for an example of using octants to draw lines.
 ///
 /// ## Examples
 ///
