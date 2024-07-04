@@ -26,24 +26,24 @@ abstract base class DelegatingGridView<T> implements Grid<T> {
   bool contains(T value) => view.contains(value);
 
   @override
-  bool containsXY(int x, int y) => view.containsXY(x, y);
+  bool containsPos(Pos position) => view.containsPos(position);
 
   @override
-  bool containsXYWH(int x, int y, int width, int height) {
-    return view.containsXYWH(x, y, width, height);
+  bool containsRect(Pos topLeft, int width, int height) {
+    return view.containsRect(topLeft, width, height);
   }
 
   @override
-  T get(int x, int y) => view.get(x, y);
+  T get(Pos position) => view.get(position);
 
   @override
-  T getUnchecked(int x, int y) => view.getUnchecked(x, y);
+  T getUnchecked(Pos position) => view.getUnchecked(position);
 
   @override
-  void set(int x, int y, T value) => view.set(x, y, value);
+  void set(Pos pos, T value) => view.set(pos, value);
 
   @override
-  void setUnchecked(int x, int y, T value) => view.setUnchecked(x, y, value);
+  void setUnchecked(Pos pos, T value) => view.setUnchecked(pos, value);
 
   @override
   void clear() => view.clear();

@@ -3,22 +3,6 @@ import 'dart:math' as math;
 import '../_prelude.dart';
 
 void main() {
-  ({
-    Pos.north: (0, -1),
-    Pos.east: (1, 0),
-    Pos.south: (0, 1),
-    Pos.west: (-1, 0),
-    Pos.northEast: (1, -1),
-    Pos.southEast: (1, 1),
-    Pos.southWest: (-1, 1),
-    Pos.northWest: (-1, -1),
-  }).forEach((pos, expected) {
-    final (x, y) = expected;
-    test('$pos is $expected', () {
-      check(pos).equals(Pos(x, y));
-    });
-  });
-
   test('should order by euclidean distance from the origin', () {
     final positions = [
       Pos(1, 1),

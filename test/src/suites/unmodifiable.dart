@@ -12,14 +12,14 @@ void runUnmodifiableTestSuite<T>(
   test('.set should fail', () {
     final grid = getGrid();
     final cells = grid.traverse(GridTraversal.rowMajor()).toList();
-    check(() => grid.set(0, 0, fill)).throws<UnsupportedError>();
+    check(() => grid.set(Pos(0, 0), fill)).throws<UnsupportedError>();
     check(grid.traverse(GridTraversal.rowMajor())).deepEquals(cells);
   });
 
   test('.setUnchecked should fail', () {
     final grid = getGrid();
     final cells = grid.traverse(GridTraversal.rowMajor()).toList();
-    check(() => grid.setUnchecked(0, 0, fill)).throws<UnsupportedError>();
+    check(() => grid.setUnchecked(Pos(0, 0), fill)).throws<UnsupportedError>();
     check(grid.traverse(GridTraversal.rowMajor())).deepEquals(cells);
   });
 }

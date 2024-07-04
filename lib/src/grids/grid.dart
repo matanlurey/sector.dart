@@ -8,7 +8,7 @@ import 'package:sector/src/views/unmodifiable_grid_view.dart';
 ///
 /// Where as a [List] is a 1-dimensional data structure of elements, a [Grid] is
 /// a 2-dimensional data structure of elements, where each element is accessed
-/// by its `x` and `y` coordinates ([get], [set], [containsXY]).
+/// by its `x` and `y` coordinates ([get], [set], [containsPos]).
 ///
 /// The `x` and `y` coordinates are zero-based, where `x` is the horizontal
 /// axis and `y` is the vertical axis. The origin `(0, 0)` is at the top-left
@@ -97,7 +97,7 @@ abstract mixin class Grid<T> {
   factory Grid.generate(
     int width,
     int height,
-    T Function(int x, int y) generator,
+    T Function(Pos) generator,
   ) = ListGrid<T>.generate;
 
   /// Creates a new grid from an existing [grid].
@@ -213,7 +213,7 @@ abstract mixin class Grid<T> {
   bool contains(T element) {
     for (var y = 0; y < height; y++) {
       for (var x = 0; x < width; x++) {
-        if (getUnchecked(x, y) == element) {
+        if (getUnchecked(Pos(x, y)) == element) {
           return true;
         }
       }
@@ -221,7 +221,7 @@ abstract mixin class Grid<T> {
     return false;
   }
 
-  /// Returns `true` if the grid contains an element at the given [x] and [y].
+  /// Returns `true` if the grid contains an element at the given [position].
   ///
   /// The `x` and `y` coordinates are zero-based, where `x` is the horizontal
   /// axis and `y` is the vertical axis. The origin `(0, 0)` is at the top-left
@@ -234,7 +234,7 @@ abstract mixin class Grid<T> {
   /// print(grid.containsXY(1, 1)); // true
   /// print(grid.containsXY(3, 3)); // false
   /// ```
-  bool containsXY(int x, int y) => x >= 0 && x < width && y >= 0 && y < height;
+  bool containsPos(Pos position) => position.isInBounds(width, height);
 
   /// Returns `true` if the grid contains the bounds provided.
   ///
@@ -249,11 +249,15 @@ abstract mixin class Grid<T> {
   /// print(grid.containsXYWH(1, 1, 1, 1)); // true
   /// print(grid.containsXYWH(2, 2, 2, 2)); // false
   /// ```
-  bool containsXYWH(int x, int y, int width, int height) {
-    return containsXY(x, y) && containsXY(x + width - 1, y + height - 1);
+  bool containsRect(Pos topLeft, int width, int height) {
+    final Pos(:x, :y) = topLeft;
+    if (x < 0 || y < 0 || x + width > this.width || y + height > this.height) {
+      return false;
+    }
+    return true;
   }
 
-  /// Returns the element at the given [x] and [y].
+  /// Returns the element at the given [position];
   ///
   /// The `x` and `y` coordinates are zero-based, where `x` is the horizontal
   /// axis and `y` is the vertical axis. The origin `(0, 0)` is at the top-left
@@ -268,12 +272,12 @@ abstract mixin class Grid<T> {
   /// print(grid.get(1, 1)); // 0
   /// print(grid.get(3, 3)); // throws
   /// ```
-  T get(int x, int y) {
-    GridImpl.checkBoundsExclusive(this, x, y);
-    return getUnchecked(x, y);
+  T get(Pos position) {
+    GridImpl.checkBoundsExclusive(this, position.x, position.y);
+    return getUnchecked(position);
   }
 
-  /// Returns the element at the given [x] and [y].
+  /// Returns the element at the given [position].
   ///
   /// The `x` and `y` coordinates are zero-based, where `x` is the horizontal
   /// axis and `y` is the vertical axis. The origin `(0, 0)` is at the top-left
@@ -285,9 +289,9 @@ abstract mixin class Grid<T> {
   /// > Use this method with caution, as it may lead to undefined behavior if
   /// > the coordinates are out of bounds. It is recommended to use [get]
   /// > instead.
-  T getUnchecked(int x, int y);
+  T getUnchecked(Pos position);
 
-  /// Sets the element at the given [x] and [y] to [value].
+  /// Sets the element at the given [position] to [value].
   ///
   /// The `x` and `y` coordinates are zero-based, where `x` is the horizontal
   /// axis and `y` is the vertical axis. The origin `(0, 0)` is at the top-left
@@ -302,12 +306,12 @@ abstract mixin class Grid<T> {
   /// grid.set(1, 1, 1);
   /// print(grid.get(1, 1)); // 1
   /// ```
-  void set(int x, int y, T value) {
-    GridImpl.checkBoundsExclusive(this, x, y);
-    setUnchecked(x, y, value);
+  void set(Pos position, T value) {
+    GridImpl.checkBoundsExclusive(this, position.x, position.y);
+    setUnchecked(position, value);
   }
 
-  /// Sets the element at the given [x] and [y] to [value].
+  /// Sets the element at the given [position] to [value].
   ///
   /// The `x` and `y` coordinates are zero-based, where `x` is the horizontal
   /// axis and `y` is the vertical axis. The origin `(0, 0)` is at the top-left
@@ -319,7 +323,7 @@ abstract mixin class Grid<T> {
   /// > Use this method with caution, as it may lead to undefined behavior if
   /// > the coordinates are out of bounds. It is recommended to use [set]
   /// > instead.
-  void setUnchecked(int x, int y, T value);
+  void setUnchecked(Pos position, T value);
 
   /// Clears all elements in the grid, making it empty.
   ///
@@ -400,7 +404,7 @@ abstract mixin class Grid<T> {
     height ??= this.height - top;
     GridImpl.checkBoundsXYWH(this, left, top, width, height);
 
-    return Grid.generate(width, height, (x, y) => get(left + x, top + y));
+    return Grid.generate(width, height, (p) => get(Pos(left + p.x, top + p.y)));
   }
 
   /// Returns a _delegate_ grid that performs operations relative to this grid.

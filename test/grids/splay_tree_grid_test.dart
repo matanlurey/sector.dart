@@ -12,14 +12,14 @@ void main() {
   runMutableInPlaceTestSuite(SplayTreeGrid.fromRows);
 
   test('SplayTreeGrid.generate can return an empty grid', () {
-    final grid = SplayTreeGrid.generate(0, 0, (x, y) => x + y, fill: 0);
+    final grid = SplayTreeGrid.generate(0, 0, (p) => p.x + p.y, fill: 0);
     check(grid)
       ..width.equals(0)
       ..height.equals(0);
   });
 
   test('SplayTreeGrid.generate with a provided fill', () {
-    final grid = SplayTreeGrid.generate(2, 2, (x, y) => x + y, fill: 0);
+    final grid = SplayTreeGrid.generate(2, 2, (p) => p.x + p.y, fill: 0);
     check(grid).rows.deepEquals([
       [0, 1],
       [1, 2],

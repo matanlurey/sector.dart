@@ -38,8 +38,8 @@ void main() {
         [3, 4],
       ]);
       final view = grid.asSubGrid(left: 0, top: 0, width: 2, height: 2);
-      view.set(0, 0, 5);
-      check(view.get(0, 0)).equals(5);
+      view.set(Pos(0, 0), 5);
+      check(view.get(Pos(0, 0))).equals(5);
       check(grid).rows.deepEquals([
         [5, 2],
         [3, 4],

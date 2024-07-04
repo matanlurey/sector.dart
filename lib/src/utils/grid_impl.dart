@@ -25,7 +25,7 @@ extension GridImpl on Never {
   ///
   /// If the coordinates are out of bounds, a [RangeError] is thrown.
   static void checkBoundsExclusive(Grid<void> grid, int x, int y) {
-    if (!grid.containsXY(x, y)) {
+    if (!grid.containsPos(Pos(x, y))) {
       throw RangeError('Coordinates out of bounds: ($x, $y)');
     }
   }
@@ -53,8 +53,10 @@ extension GridImpl on Never {
     int width,
     int height,
   ) {
-    if (!grid.containsXYWH(x, y, width, height)) {
-      throw RangeError('Bounds out of grid: ($x, $y, $width, $height)');
+    if (!grid.containsRect(Pos(x, y), width, height)) {
+      throw RangeError(
+        'Bounds out of grid: ($x, $y, $width, $height) in ${grid.width}x${grid.height}.',
+      );
     }
   }
 
@@ -122,7 +124,7 @@ extension GridImpl on Never {
     format ??= _format;
     for (var y = 0; y < grid.height; y++) {
       for (var x = 0; x < grid.width; x++) {
-        final cell = format(grid.get(x, y));
+        final cell = format(grid.get(Pos(x, y)));
         longest = math.max(longest, cell.length);
         output.add(cell);
       }

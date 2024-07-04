@@ -50,10 +50,10 @@ final class _NeighborsIterator<T> with GridIterator<T> {
   var _index = 0;
 
   @override
-  late (int, int) position;
+  late Pos position;
 
   @override
-  T get current => _grid.getUnchecked(position.$1, position.$2);
+  T get current => _grid.getUnchecked(position);
 
   @override
   bool moveNext() {
@@ -65,8 +65,8 @@ final class _NeighborsIterator<T> with GridIterator<T> {
       final nx = x + dx;
       final ny = y + dy;
 
-      if (_grid.containsXY(nx, ny)) {
-        position = (nx, ny);
+      if (_grid.containsPos(Pos(nx, ny))) {
+        position = Pos(nx, ny);
         return true;
       }
     }

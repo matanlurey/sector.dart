@@ -9,8 +9,8 @@ void runMutableInPlaceTestSuite(
       [1, 2],
       [3, 4],
     ]);
-    grid.set(0, 0, 5);
-    check(grid.get(0, 0)).equals(5);
+    grid.set(Pos(0, 0), 5);
+    check(grid.get(Pos(0, 0))).equals(5);
   });
 
   test('set should throw if the cell is out of bounds', () {
@@ -18,9 +18,9 @@ void runMutableInPlaceTestSuite(
       [1, 2],
       [3, 4],
     ]);
-    check(() => grid.set(2, 0, 5)).throws<RangeError>();
-    check(() => grid.set(0, 2, 5)).throws<RangeError>();
-    check(() => grid.set(2, 2, 5)).throws<RangeError>();
+    check(() => grid.set(Pos(2, 0), 5)).throws<RangeError>();
+    check(() => grid.set(Pos(0, 2), 5)).throws<RangeError>();
+    check(() => grid.set(Pos(2, 2), 5)).throws<RangeError>();
     check(grid.rows).deepEquals([
       [1, 2],
       [3, 4],

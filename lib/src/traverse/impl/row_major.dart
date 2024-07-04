@@ -2,21 +2,17 @@ part of '../traversal.dart';
 
 final class _RowMajorGridTraveral implements GridTraversal {
   const _RowMajorGridTraveral({
-    (int, int) start = (0, 0),
+    Pos start = Pos.zero,
   }) : _start = start;
 
-  final (int, int) _start;
+  final Pos _start;
 
   @override
   GridIterator<T> traverse<T>(Grid<T> grid) {
     if (grid is EfficientIndexGrid<T> && grid.layoutHint.isRowMajorContiguous) {
       var index = 0;
-      if (_start != (0, 0)) {
-        index = grid.layoutHint.toIndex(
-          _start.$1,
-          _start.$2,
-          width: grid.width,
-        );
+      if (_start != Pos.zero) {
+        index = grid.layoutHint.toIndex(_start, width: grid.width);
       }
       return _FastRowMajorIterator<T>(grid, index - 1);
     }
@@ -28,14 +24,14 @@ final class _RowMajorIterator<T> extends XYGridIterator<T> {
   _RowMajorIterator(super.grid, super.position);
 
   @override
-  (int, int) firstPosition() => position;
+  Pos firstPosition() => position;
 
   @override
-  (int, int) nextPosition(int x, int y) {
-    if (x + 1 < grid.width) {
-      return (x + 1, y);
-    } else if (y + 1 < grid.height) {
-      return (0, y + 1);
+  Pos nextPosition(Pos previous) {
+    if (previous.x + 1 < grid.width) {
+      return Pos(previous.x + 1, previous.y);
+    } else if (previous.y + 1 < grid.height) {
+      return Pos(0, previous.y + 1);
     }
     return done;
   }

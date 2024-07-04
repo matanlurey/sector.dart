@@ -142,16 +142,16 @@ sealed class Direction {
 /// ```
 enum Cardinal implements Direction {
   /// The direction pointing up, or reducing the `y` value by one.
-  north(Pos.north),
+  north(Pos(0, -1)),
 
   /// The direction pointing right, or increasing the `x` value by one.
-  east(Pos.east),
+  east(Pos(1, 0)),
 
   /// The direction pointing down, or increasing the `y` value by one.
-  south(Pos.south),
+  south(Pos(0, 1)),
 
   /// The direction pointing left, or reducing the `x` value by one.
-  west(Pos.west);
+  west(Pos(-1, 0));
 
   const Cardinal(this.offset);
 
@@ -205,16 +205,16 @@ enum Cardinal implements Direction {
 /// ```
 enum Ordinal implements Direction {
   /// The direction pointing up and right, i.e. `x + 1, y - 1`.
-  northEast(Pos.northEast),
+  northEast(Pos(1, -1)),
 
   /// The direction pointing down and right, i.e. `x + 1, y + 1`.
-  southEast(Pos.southEast),
+  southEast(Pos(1, 1)),
 
   /// The direction pointing down and left, i.e. `x - 1, y + 1`.
-  southWest(Pos.southWest),
+  southWest(Pos(-1, 1)),
 
   /// The direction pointing up and left, i.e. `x - 1, y - 1`.
-  northWest(Pos.northWest);
+  northWest(Pos(-1, -1));
 
   const Ordinal(this.offset);
 

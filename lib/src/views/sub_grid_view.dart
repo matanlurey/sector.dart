@@ -36,13 +36,13 @@ final class SubGridView<T> with Grid<T> {
   }
 
   @override
-  T getUnchecked(int x, int y) {
-    return _view.getUnchecked(x + _left, y + _top);
+  T getUnchecked(Pos position) {
+    return _view.getUnchecked(position + Pos(_left, _top));
   }
 
   @override
-  void setUnchecked(int x, int y, T value) {
-    _view.setUnchecked(x + _left, y + _top, value);
+  void setUnchecked(Pos position, T value) {
+    _view.setUnchecked(position + Pos(_left, _top), value);
   }
 
   @override

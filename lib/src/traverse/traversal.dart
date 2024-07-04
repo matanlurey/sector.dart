@@ -302,7 +302,7 @@ abstract interface class GridTraversal {
   /// 9
   /// ```
   const factory GridTraversal.rowMajor({
-    (int, int) start,
+    Pos start,
   }) = _RowMajorGridTraveral;
 
   /// Returns a [GridIterator] that will traverse the given [grid].

@@ -106,8 +106,8 @@ extension GridExtension<T> on Grid<T> {
   /// └───────┘
   /// ```
   void fill(GridTraversal traversal, T value) {
-    for (final (x, y) in traverse(traversal).positions) {
-      setUnchecked(x, y, value);
+    for (final pos in traverse(traversal).positions) {
+      setUnchecked(pos, value);
     }
   }
 
@@ -140,10 +140,10 @@ extension GridExtension<T> on Grid<T> {
   /// ```
   void fillWith(
     GridTraversal traversal,
-    T Function(int x, int y, T previous) value,
+    T Function(Pos position, T previous) value,
   ) {
-    for (final (x, y, p) in traverse(traversal).positioned) {
-      setUnchecked(x, y, value(x, y, p));
+    for (final (pos, val) in traverse(traversal).positioned) {
+      setUnchecked(pos, value(pos, val));
     }
   }
 }

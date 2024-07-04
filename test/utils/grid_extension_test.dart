@@ -61,7 +61,7 @@ void main() {
 
   test('fillWith', () {
     final grid = Grid.filled(3, 3, 0);
-    grid.fillWith(GridTraversal.rowMajor(), (x, y, t) => x + y);
+    grid.fillWith(GridTraversal.rowMajor(), (p, t) => p.x + p.y);
     check(grid.rows).deepEquals([
       [0, 1, 2],
       [1, 2, 3],

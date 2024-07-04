@@ -51,16 +51,16 @@ final class ListGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   factory ListGrid.generate(
     int width,
     int height,
-    T Function(int x, int y) generator,
+    T Function(Pos) generator,
   ) {
     RangeError.checkNotNegative(width, 'width');
     RangeError.checkNotNegative(height, 'height');
     final cells = List<T>.generate(width * height, (index) {
-      final (x, y) = LayoutHint.rowMajorContiguous.toPosition(
+      final pos = LayoutHint.rowMajorContiguous.toPosition(
         index,
         width: width,
       );
-      return generator(x, y);
+      return generator(pos);
     });
     return ListGrid._(cells, width);
   }

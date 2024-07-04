@@ -16,37 +16,35 @@ final class _EdgesIterator<T> extends XYGridIterator<T> {
   _EdgesIterator(super.grid);
 
   @override
-  (int, int) firstPosition() {
-    return (0, 0);
-  }
+  Pos firstPosition() => Pos.zero;
 
   var _direction = _Direction.right;
 
   @override
-  (int, int) nextPosition(int x, int y) {
+  Pos nextPosition(Pos previous) {
     if (_direction == _Direction.right) {
-      if (x < grid.width - 1) {
-        return (x + 1, y);
+      if (previous.x < grid.width - 1) {
+        return Pos(previous.x + 1, previous.y);
       }
       _direction = _Direction.down;
     }
 
     if (_direction == _Direction.down) {
-      if (y < grid.height - 1) {
-        return (x, y + 1);
+      if (previous.y < grid.height - 1) {
+        return Pos(previous.x, previous.y + 1);
       }
       _direction = _Direction.left;
     }
 
     if (_direction == _Direction.left) {
-      if (x > 0) {
-        return (x - 1, y);
+      if (previous.x > 0) {
+        return Pos(previous.x - 1, previous.y);
       }
       _direction = _Direction.up;
     }
 
-    if (_direction == _Direction.up && y > 0) {
-      return (x, y - 1);
+    if (_direction == _Direction.up && previous.y > 0) {
+      return Pos(previous.x, previous.y - 1);
     }
 
     return done;

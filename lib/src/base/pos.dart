@@ -25,30 +25,6 @@ import 'package:sector/sector.dart';
 /// - Common methods were needed, and extension methods apply too broadly.
 @immutable
 final class Pos {
-  /// Offset of [Cardinal.north], or `(0, -1)`.
-  static const north = Pos(0, -1);
-
-  /// Offset of [Cardinal.east], or `(1, 0)`.
-  static const east = Pos(1, 0);
-
-  /// Offset of [Cardinal.south], or `(0, 1)`.
-  static const south = Pos(0, 1);
-
-  /// Offset of [Cardinal.west], or `(-1, 0)`.
-  static const west = Pos(-1, 0);
-
-  /// Offset of [Cardinal.north] and [Cardinal.east], or `(1, -1)`.
-  static const northEast = Pos(1, -1);
-
-  /// Offset of [Cardinal.south] and [Cardinal.east], or `(1, 1)`.
-  static const southEast = Pos(1, 1);
-
-  /// Offset of [Cardinal.south] and [Cardinal.west], or `(-1, 1)`.
-  static const southWest = Pos(-1, 1);
-
-  /// Offset of [Cardinal.north] and [Cardinal.west], or `(-1, -1)`.
-  static const northWest = Pos(-1, -1);
-
   /// Orders positions by their euclidean distance from the origin.
   ///
   /// See [distance] for the formula used to calculate the distance.
@@ -612,6 +588,24 @@ final class Pos {
   /// ```
   Pos move(Direction direction, [int times = 1]) {
     return this + direction.offset * times;
+  }
+
+  /// Returns whether this position is in bounds of the given region.
+  ///
+  /// By default, the region is the entire 2D space, where `left` and `top` are
+  /// `0`, and `width` and `height` are the maximum values. If the region is
+  /// smaller, provide the `left` and `top` values.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final pos = Pos(1, 2);
+  /// print(pos.isInBounds(3, 3)); // true
+  /// print(pos.isInBounds(1, 1)); // false
+  /// print(pos.isInBounds(3, 3, left: 1, top: 1)); // true
+  /// ```
+  bool isInBounds(int width, int height, {int left = 0, int top = 0}) {
+    return x >= left && x < left + width && y >= top && y < top + height;
   }
 
   @override

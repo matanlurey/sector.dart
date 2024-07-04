@@ -13,21 +13,6 @@ extension GridSubject<T> on Subject<Grid<T>> {
 
   Subject<bool> get isEmpty => has((it) => it.isEmpty, 'isEmpty');
 
-  Subject<bool> containsXY(int x, int y) {
-    return has((it) => it.containsXY(x, y), 'contains($x, $y)');
-  }
-
-  Subject<bool> containsXYWH(int x, int y, int width, int height) {
-    return has(
-      (it) => it.containsXYWH(x, y, width, height),
-      'containsXYWH($x, $y, $width, $height)',
-    );
-  }
-
-  Subject<T> at(int x, int y) {
-    return has((it) => it.get(x, y), 'get($x, $y)');
-  }
-
   Subject<GridAxis<T>> get rows => has((it) => it.rows, 'rows');
 
   Subject<GridAxis<T>> get columns => has((it) => it.columns, 'columns');

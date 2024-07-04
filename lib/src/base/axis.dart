@@ -144,7 +144,10 @@ mixin RowsMixin<T> on GridAxis<T> {
   Iterable<T> operator [](int index) {
     GridImpl.checkNotEmpty(grid);
     GridImpl.checkBoundsExclusive(grid, 0, index);
-    return Iterable.generate(grid.width, (x) => grid.getUnchecked(x, index));
+    return Iterable.generate(
+      grid.width,
+      (x) => grid.getUnchecked(Pos(x, index)),
+    );
   }
 
   @override
@@ -155,7 +158,7 @@ mixin RowsMixin<T> on GridAxis<T> {
 
     var x = 0;
     for (final cell in row) {
-      grid.setUnchecked(x++, index, cell);
+      grid.setUnchecked(Pos(x++, index), cell);
     }
   }
 
@@ -233,7 +236,10 @@ mixin ColumnsMixin<T> on GridAxis<T> {
   Iterable<T> operator [](int index) {
     GridImpl.checkNotEmpty(grid);
     GridImpl.checkBoundsExclusive(grid, index, 0);
-    return Iterable.generate(grid.height, (y) => grid.getUnchecked(index, y));
+    return Iterable.generate(
+      grid.height,
+      (y) => grid.getUnchecked(Pos(index, y)),
+    );
   }
 
   @override
@@ -244,7 +250,7 @@ mixin ColumnsMixin<T> on GridAxis<T> {
 
     var y = 0;
     for (final cell in column) {
-      grid.setUnchecked(index, y++, cell);
+      grid.setUnchecked(Pos(index, y++), cell);
     }
   }
 

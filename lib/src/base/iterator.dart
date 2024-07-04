@@ -89,7 +89,7 @@ abstract mixin class GridIterator<E> implements Iterator<E> {
   /// (0, 1)
   /// (1, 1)
   /// ```
-  (int x, int y) get position;
+  Pos get position;
 
   /// Advances the iterator to the next cell of the iteration.
   ///
@@ -201,7 +201,7 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
   /// _not_ have to be within the bounds of the grid, as either [firstPosition]
   /// is overriden to handle the first iteration, or [nextPosition] is aware
   /// of the behavior of the starting position.
-  XYGridIterator(this.grid, [this.position = (-1, 0)]);
+  XYGridIterator(this.grid, [this.position = const Pos(-1, 0)]);
 
   /// The grid being iterated over.
   @protected
@@ -210,12 +210,12 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
 
   @override
   @nonVirtual
-  (int, int) position;
+  Pos position;
   var _first = true;
 
   @override
   @nonVirtual
-  T get current => grid.getUnchecked(position.$1, position.$2);
+  T get current => grid.getUnchecked(position);
 
   @override
   @nonVirtual
@@ -225,12 +225,12 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
       final first = firstPosition();
       if (first != done) {
         position = first;
-        return grid.containsXY(position.$1, position.$2);
+        return grid.containsPos(position);
       }
       return false;
     }
 
-    final next = nextPosition(position.$1, position.$2);
+    final next = nextPosition(position);
     if (next == done) {
       return false;
     }
@@ -241,19 +241,19 @@ abstract base class XYGridIterator<T> with GridIterator<T> {
   /// A sentinel value that indicates that the iteration is done.
   @nonVirtual
   @pragma('vm:prefer-inline')
-  (int, int) get done => (-1, 0);
+  Pos get done => const Pos(-1, 0);
 
   /// May override this method to provide how to handle the first iteration.
   ///
   /// If omitted, [nextPosition] will be called with the initial position.
   @protected
-  (int, int) firstPosition() => nextPosition(position.$1, position.$2);
+  Pos firstPosition() => nextPosition(position);
 
-  /// Given the [x] and [y] coordinates, returns the next position to move to.
+  /// Given the current position, returns the next position to move to.
   ///
   /// If the next position is invalid, this method should return [done].
   @protected
-  (int, int) nextPosition(int x, int y);
+  Pos nextPosition(Pos current);
 }
 
 /// A grid iterator that operates entirely based on the [index] of the grid.
@@ -289,7 +289,7 @@ abstract base class IndexGridIterator<T> with GridIterator<T> {
   int index;
 
   @override
-  (int, int) get position {
+  Pos get position {
     return grid.layoutHint.toPosition(index, width: grid.width);
   }
 
@@ -307,21 +307,21 @@ final class _EmptyGridIterator<E> with GridIterator<E> {
   E get current => _noElement();
 
   @override
-  (int, int) get position => _noElement();
+  Pos get position => _noElement();
 
   @override
   bool moveNext() => false;
 }
 
-final class _PositionIterator implements GridIterator<(int, int)> {
+final class _PositionIterator implements GridIterator<Pos> {
   const _PositionIterator(this._iterator);
   final GridIterator<void> _iterator;
 
   @override
-  (int, int) get current => _iterator.position;
+  Pos get current => _iterator.position;
 
   @override
-  (int, int) get position => _iterator.position;
+  Pos get position => _iterator.position;
 
   @override
   bool moveNext() => _iterator.moveNext();
@@ -333,18 +333,15 @@ final class _PositionIterator implements GridIterator<(int, int)> {
   bool seek(int steps) => _iterator.seek(steps);
 }
 
-final class _PositionedIterator<E> implements GridIterator<(int, int, E)> {
+final class _PositionedIterator<E> implements GridIterator<(Pos, E)> {
   const _PositionedIterator(this._iterator);
   final GridIterator<E> _iterator;
 
   @override
-  (int, int, E) get current {
-    final (x, y) = _iterator.position;
-    return (x, y, _iterator.current);
-  }
+  (Pos, E) get current => (_iterator.position, _iterator.current);
 
   @override
-  (int, int) get position => _iterator.position;
+  Pos get position => _iterator.position;
 
   @override
   bool moveNext() => _iterator.moveNext();
@@ -387,14 +384,14 @@ final class GridIterable<E> extends Iterable<E> {
   /// An iterable that generates the _positions_ of each cell.
   ///
   /// The positions are returned as a tuple of `(x, y)` coordinates.
-  Iterable<(int, int)> get positions {
+  Iterable<Pos> get positions {
     return GridIterable.from(() => _PositionIterator(_iterator()));
   }
 
   /// An iterable that generates the _positions_ and _values_ of each cell.
   ///
   /// The positions are returned as a tuple of `(x, y)` coordinates.
-  Iterable<(int, int, E)> get positioned {
+  Iterable<(Pos, E)> get positioned {
     return GridIterable.from(() => _PositionedIterator(_iterator()));
   }
 

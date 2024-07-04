@@ -8,7 +8,7 @@ final class _BreadthFirstTraversal implements GridTraversal {
 
   @override
   GridIterator<T> traverse<T>(Grid<T> grid) {
-    return _BreadthFirstIterator(grid, (_x, _y));
+    return _BreadthFirstIterator(grid, Pos(_x, _y));
   }
 }
 
@@ -17,11 +17,11 @@ final class _BreadthFirstIterator<T> extends XYGridIterator<T> {
     _queue.add(position);
   }
 
-  final _queue = Queue<(int, int)>();
-  final _visited = HashSet<(int, int)>();
+  final _queue = Queue<Pos>();
+  final _visited = HashSet<Pos>();
 
   @override
-  (int, int) nextPosition(int x, int y) {
+  Pos nextPosition(Pos previous) {
     while (_queue.isNotEmpty) {
       final next = _queue.removeFirst();
       if (!_visited.add(next)) {
@@ -29,10 +29,9 @@ final class _BreadthFirstIterator<T> extends XYGridIterator<T> {
       }
 
       for (final (dx, dy) in _adjacentDXDY) {
-        final nx = x + dx;
-        final ny = y + dy;
-        if (grid.containsXY(nx, ny)) {
-          _queue.add((nx, ny));
+        final check = Pos(next.x + dx, next.y + dy);
+        if (grid.containsPos(check)) {
+          _queue.add(check);
         }
       }
 

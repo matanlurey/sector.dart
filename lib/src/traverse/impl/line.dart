@@ -103,10 +103,10 @@ final class _LineIterator<T> with GridIterator<T> {
   int _diff;
 
   @override
-  late (int, int) position;
+  late Pos position;
 
   @override
-  T get current => _grid.getUnchecked(position.$1, position.$2);
+  T get current => _grid.getUnchecked(position);
 
   @override
   bool moveNext() {
@@ -116,7 +116,8 @@ final class _LineIterator<T> with GridIterator<T> {
     }
 
     final y = _startY;
-    position = _octant.fromOctant1(x, y);
+    final (ox, oy) = _octant.fromOctant1(x, y);
+    position = Pos(ox, oy);
     if (_diff >= 0) {
       _diff -= _dx;
       _startY += 1;

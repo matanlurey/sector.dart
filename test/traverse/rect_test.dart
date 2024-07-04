@@ -13,10 +13,10 @@ void main() {
     check(
       grid.traverse(GridTraversal.rect(0, 0, 2, 2)).positions,
     ).deepEquals([
-      (0, 0),
-      (1, 0),
-      (0, 1),
-      (1, 1),
+      Pos(0, 0),
+      Pos(1, 0),
+      Pos(0, 1),
+      Pos(1, 1),
     ]);
   });
 

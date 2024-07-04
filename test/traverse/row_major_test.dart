@@ -24,7 +24,7 @@ void main() {
         [4, 5, 6],
       ]);
       check(
-        grid.traverse(GridTraversal.rowMajor(start: (1, 0))),
+        grid.traverse(GridTraversal.rowMajor(start: Pos(1, 0))),
       ).deepEquals([
         2,
         3,
@@ -59,7 +59,7 @@ void main() {
       ]);
       final iterator = GridTraversal.rowMajor().traverse(grid);
       iterator.moveNext();
-      check(iterator.position).equals((0, 0));
+      check(iterator.position).equals(Pos(0, 0));
     });
   });
 
@@ -85,7 +85,7 @@ void main() {
         [4, 5, 6],
       ]);
       check(
-        grid.traverse(GridTraversal.rowMajor(start: (1, 0))),
+        grid.traverse(GridTraversal.rowMajor(start: Pos(1, 0))),
       ).deepEquals([2, 3, 4, 5, 6]);
     });
 
@@ -114,7 +114,7 @@ void main() {
       ]);
       final iterator = GridTraversal.rowMajor().traverse(grid);
       iterator.moveNext();
-      check(iterator.position).equals((0, 0));
+      check(iterator.position).equals(Pos(0, 0));
     });
   });
 }

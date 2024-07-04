@@ -10,7 +10,7 @@ void main() {
   runMutableInPlaceTestSuite(Grid.fromRows);
 
   test('List.generate can return an empty grid', () {
-    final grid = Grid.generate(0, 0, (x, y) => x + y);
+    final grid = Grid.generate(0, 0, (p) => p.x + p.y);
     check(grid)
       ..width.equals(0)
       ..height.equals(0);

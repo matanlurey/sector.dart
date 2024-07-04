@@ -11,12 +11,12 @@ final class UnmodifiableGridView<T> extends DelegatingGridView<T> {
   const UnmodifiableGridView(super.view);
 
   @override
-  void set(int x, int y, T value) {
+  void set(Pos pos, T value) {
     throw UnsupportedError('Cannot modify an unmodifiable grid view');
   }
 
   @override
-  void setUnchecked(int x, int y, T value) {
+  void setUnchecked(Pos pos, T value) {
     throw UnsupportedError('Cannot modify an unmodifiable grid view');
   }
 

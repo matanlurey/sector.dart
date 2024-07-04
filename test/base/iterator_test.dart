@@ -36,7 +36,12 @@ void main() {
     test('iterates through the positions', () {
       final iterator = _FakeGridIterator([(0, 0), (1, 0), (2, 0), (3, 0)]);
       final iterable = GridIterable.from(() => iterator);
-      check(iterable.positions).deepEquals([(0, 0), (1, 0), (2, 0), (3, 0)]);
+      check(iterable.positions).deepEquals([
+        Pos(0, 0),
+        Pos(1, 0),
+        Pos(2, 0),
+        Pos(3, 0),
+      ]);
     });
 
     test('positions still stores positions', () {
@@ -44,9 +49,9 @@ void main() {
       final positions = GridIterable.from(() => iterator).positions.iterator;
 
       // For this test only, don't actually do this!
-      positions as GridIterator<(int, int)>;
+      positions as GridIterator<Pos>;
       positions.moveNext();
-      check(positions.position).equals((0, 0));
+      check(positions.current).equals(Pos(0, 0));
     });
 
     test('iterates through positions when optimized', () {
@@ -55,17 +60,17 @@ void main() {
         useRemainingSteps: true,
       );
       final iterable = GridIterable.from(() => iterator);
-      check(iterable.positions.last).equals((3, 0));
+      check(iterable.positions.last).equals(Pos(3, 0));
     });
 
     test('iterates through the positions and cells', () {
       final iterator = _FakeGridIterator([(0, 0), (1, 0), (2, 0), (3, 0)]);
       final iterable = GridIterable.from(() => iterator);
       check(iterable.positioned).deepEquals([
-        (0, 0, (0, 0)),
-        (1, 0, (1, 0)),
-        (2, 0, (2, 0)),
-        (3, 0, (3, 0)),
+        (Pos(0, 0), (0, 0)),
+        (Pos(1, 0), (1, 0)),
+        (Pos(2, 0), (2, 0)),
+        (Pos(3, 0), (3, 0)),
       ]);
     });
 
@@ -75,7 +80,7 @@ void main() {
         useRemainingSteps: true,
       );
       final iterable = GridIterable.from(() => iterator);
-      check(iterable.positioned.last).equals((3, 0, (3, 0)));
+      check(iterable.positioned.last).equals((Pos(3, 0), (3, 0)));
     });
 
     test('positioned still stores positions and cells', () {
@@ -83,9 +88,9 @@ void main() {
       final positioned = GridIterable.from(() => iterator).positioned.iterator;
 
       // For this test only, don't actually do this!
-      positioned as GridIterator<(int, int, (int, int))>;
+      positioned as GridIterator<(Pos, (int, int))>;
       positioned.moveNext();
-      check(positioned.position).equals((0, 0));
+      check(positioned.position).equals(Pos(0, 0));
     });
 
     test('.length', () {
@@ -269,7 +274,7 @@ final class _FakeGridIterator with GridIterator<(int, int)> {
   late (int, int) current;
 
   @override
-  (int, int) get position => current;
+  Pos get position => Pos(current.$1, current.$2);
 
   @override
   bool moveNext() {

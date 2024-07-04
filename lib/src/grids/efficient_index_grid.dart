@@ -12,15 +12,15 @@ mixin EfficientIndexGrid<T> on Grid<T> {
 
   @override
   @pragma('vm:prefer-inline')
-  T getUnchecked(int x, int y) {
-    final index = layoutHint.toIndex(x, y, width: width);
+  T getUnchecked(Pos position) {
+    final index = layoutHint.toIndex(position, width: width);
     return getByIndexUnchecked(index);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  void setUnchecked(int x, int y, T value) {
-    final index = layoutHint.toIndex(x, y, width: width);
+  void setUnchecked(Pos position, T value) {
+    final index = layoutHint.toIndex(position, width: width);
     setByIndexUnchecked(index, value);
   }
 
@@ -57,11 +57,11 @@ abstract final class LayoutHint {
   /// Whether the layout is row-major contiguous.
   bool get isRowMajorContiguous;
 
-  /// Converts an [index], given the [width] of a grid, to a position `(x, y)`.
-  (int x, int y) toPosition(int index, {required int width});
+  /// Converts an [index], given the [width] of a grid, to a position.
+  Pos toPosition(int index, {required int width});
 
-  /// Converts a position `(x, y)` to an `index`, given the [width] of a grid.
-  int toIndex(int x, int y, {required int width});
+  /// Converts a [position] to an `index`, given the [width] of a grid.
+  int toIndex(Pos position, {required int width});
 }
 
 final class _RowMajorContiguous implements LayoutHint {
@@ -73,13 +73,13 @@ final class _RowMajorContiguous implements LayoutHint {
 
   @override
   @pragma('vm:prefer-inline')
-  (int x, int y) toPosition(int index, {required int width}) {
-    return (index % width, index ~/ width);
+  Pos toPosition(int index, {required int width}) {
+    return Pos(index % width, index ~/ width);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  int toIndex(int x, int y, {required int width}) {
-    return y * width + x;
+  int toIndex(Pos position, {required int width}) {
+    return position.y * width + position.x;
   }
 }

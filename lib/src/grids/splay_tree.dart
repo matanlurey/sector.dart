@@ -58,7 +58,7 @@ final class SplayTreeGrid<T> with Grid<T>, EfficientIndexGrid<T> {
   factory SplayTreeGrid.generate(
     int width,
     int height,
-    T Function(int x, int y) generator, {
+    T Function(Pos) generator, {
     T? fill,
   }) {
     RangeError.checkNotNegative(width, 'width');
@@ -68,11 +68,11 @@ final class SplayTreeGrid<T> with Grid<T>, EfficientIndexGrid<T> {
     if (fill is T) {
       final cells = SplayTreeMap<int, T>();
       for (var index = 0; index < width * height; index++) {
-        final (x, y) = LayoutHint.rowMajorContiguous.toPosition(
+        final position = LayoutHint.rowMajorContiguous.toPosition(
           index,
           width: width,
         );
-        final value = generator(x, y);
+        final value = generator(position);
         if (value != fill) {
           cells[index] = value;
         }
@@ -83,7 +83,7 @@ final class SplayTreeGrid<T> with Grid<T>, EfficientIndexGrid<T> {
     // Otherwise, we need to pre-generate the cells to find the most common.
     final cells = <int, T>{
       for (var y = 0; y < height; y++)
-        for (var x = 0; x < width; x++) y * width + x: generator(x, y),
+        for (var x = 0; x < width; x++) y * width + x: generator(Pos(x, y)),
     };
     final fill_ = GridImpl.mostCommonElement(cells.values);
 

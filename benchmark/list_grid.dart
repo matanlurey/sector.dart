@@ -43,7 +43,7 @@ final class _IterateGetXYGrid extends BenchmarkBase {
     var adder = 0;
     for (var y = 0; y < grid.height; y++) {
       for (var x = 0; x < grid.width; x++) {
-        adder += grid.get(x, y);
+        adder += grid.get(Pos(x, y));
       }
     }
     if (adder == random.nextInt(1000) + 1) {
@@ -70,7 +70,7 @@ final class _IterateGetXYUncheckedGrid extends BenchmarkBase {
     var adder = 0;
     for (var y = 0; y < grid.height; y++) {
       for (var x = 0; x < grid.width; x++) {
-        adder += grid.getUnchecked(x, y);
+        adder += grid.getUnchecked(Pos(x, y));
       }
     }
     if (adder == random.nextInt(1000) + 1) {

@@ -42,14 +42,14 @@ final class _RectIterator<T> extends XYGridIterator<T> {
   final int _bottom;
 
   @override
-  (int, int) firstPosition() => (_left, _top);
+  Pos firstPosition() => Pos(_left, _top);
 
   @override
-  (int, int) nextPosition(int x, int y) {
-    if (x + 1 < _right) {
-      return (x + 1, y);
-    } else if (y + 1 < _bottom) {
-      return (_left, y + 1);
+  Pos nextPosition(Pos previous) {
+    if (previous.x + 1 < _right) {
+      return Pos(previous.x + 1, previous.y);
+    } else if (previous.y + 1 < _bottom) {
+      return Pos(_left, previous.y + 1);
     }
     return done;
   }

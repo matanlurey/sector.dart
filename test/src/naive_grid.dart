@@ -53,11 +53,11 @@ final class NaiveListGrid<T> with Grid<T> {
   GridAxis<T> get columns => _Columns(this);
 
   @override
-  T getUnchecked(int x, int y) => _cells[x + y * _width];
+  T getUnchecked(Pos position) => _cells[position.x + position.y * _width];
 
   @override
-  void setUnchecked(int x, int y, T value) {
-    _cells[x + y * _width] = value;
+  void setUnchecked(Pos position, T value) {
+    _cells[position.x + position.y * _width] = value;
   }
 }
 

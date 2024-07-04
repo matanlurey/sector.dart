@@ -22,7 +22,7 @@ void main(List<String> args) async {
     final grid = Grid<int>.generate(
       20,
       10,
-      (x, y) => Random().nextInt(2),
+      (_) => Random().nextInt(2),
     );
     for (var i = 0; i < 100; i++) {
       runTick(grid);
@@ -73,11 +73,11 @@ void runTick(Grid<int> grid) {
   for (var y = 0; y < grid.height; y++) {
     for (var x = 0; x < grid.width; x++) {
       final neighbors = _countNeighbors(previous, x, y);
-      final cell = previous.get(x, y);
+      final cell = previous.get(Pos(x, y));
       if (cell == 1) {
-        grid.set(x, y, neighbors == 2 || neighbors == 3 ? 1 : 0);
+        grid.set(Pos(x, y), neighbors == 2 || neighbors == 3 ? 1 : 0);
       } else {
-        grid.set(x, y, neighbors == 3 ? 1 : 0);
+        grid.set(Pos(x, y), neighbors == 3 ? 1 : 0);
       }
     }
   }
@@ -92,7 +92,7 @@ int _countNeighbors(Grid<int> grid, int x, int y) {
       final ny = y + dy;
       if (nx < 0 || nx >= grid.width) continue;
       if (ny < 0 || ny >= grid.height) continue;
-      count += grid.get(nx, ny);
+      count += grid.get(Pos(nx, ny));
     }
   }
   return count;
