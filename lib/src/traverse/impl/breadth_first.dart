@@ -28,8 +28,8 @@ final class _BreadthFirstIterator<T> extends XYGridIterator<T> {
         continue;
       }
 
-      for (final (dx, dy) in _adjacentDXDY) {
-        final check = Pos(next.x + dx, next.y + dy);
+      for (final direction in Cardinal.values) {
+        final check = next + direction.offset;
         if (grid.containsPos(check)) {
           _queue.add(check);
         }

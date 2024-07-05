@@ -226,8 +226,7 @@ abstract interface class GridTraversal {
   /// 4
   /// ```
   const factory GridTraversal.neighbors(
-    int x,
-    int y,
+    Pos start,
   ) = _NeighborsTraversal.adjacent;
 
   /// Creates a traversal that returns the neighbors of the given position.
@@ -263,8 +262,7 @@ abstract interface class GridTraversal {
   /// 1
   /// ```
   const factory GridTraversal.neighborsDiagonal(
-    int x,
-    int y,
+    Pos start,
   ) = _NeighborsTraversal.diagonal;
 
   /// A traversal that visits each cell in the grid in row-major order.

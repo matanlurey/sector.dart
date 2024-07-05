@@ -184,12 +184,12 @@ abstract mixin class GridIterator<E> implements Iterator<E> {
 ///   _EdgesIterator(Grid<T> grid) : super(grid);
 ///
 ///   @override
-///   (int, int)? nextPosition(int x, int y) {
-///     if (x == -1 && y == 0) {
-///       return (0, 0);
+///   Pos nextPosition(Pos previous) {
+///     if (previous.x == -1 && previous.y == 0) {
+///       return Pos.zero;
 ///     }
 ///     /* ... */
-///     return null;
+///     return done;
 ///   }
 /// }
 /// ```

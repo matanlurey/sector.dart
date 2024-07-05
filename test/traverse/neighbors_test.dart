@@ -7,7 +7,7 @@ void main() {
       [4, 5, 6],
       [7, 8, 9],
     ]);
-    final results = grid.traverse(GridTraversal.neighbors(1, 1));
+    final results = grid.traverse(GridTraversal.neighbors(Pos(1, 1)));
     check(results).deepEquals([2, 6, 8, 4]);
   });
 
@@ -17,7 +17,7 @@ void main() {
       [4, 5, 6],
       [7, 8, 9],
     ]);
-    final results = grid.traverse(GridTraversal.neighbors(0, 0));
+    final results = grid.traverse(GridTraversal.neighbors(Pos(0, 0)));
     check(results).deepEquals([2, 4]);
   });
 
@@ -27,7 +27,7 @@ void main() {
       [4, 5, 6],
       [7, 8, 9],
     ]);
-    final results = grid.traverse(GridTraversal.neighborsDiagonal(1, 1));
+    final results = grid.traverse(GridTraversal.neighborsDiagonal(Pos(1, 1)));
     check(results).deepEquals([2, 3, 6, 9, 8, 7, 4, 1]);
   });
 
@@ -37,7 +37,7 @@ void main() {
       [4, 5, 6],
       [7, 8, 9],
     ]);
-    final results = grid.traverse(GridTraversal.neighborsDiagonal(0, 0));
+    final results = grid.traverse(GridTraversal.neighborsDiagonal(Pos(0, 0)));
     check(results).deepEquals([2, 5, 4]);
   });
 }
