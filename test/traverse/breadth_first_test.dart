@@ -7,7 +7,7 @@ void main() {
       [4, 5, 6],
       [7, 8, 9],
     ]);
-    final results = grid.traverse(GridTraversal.breadthFirst(1, 1));
+    final results = grid.traverse(GridTraversal.breadthFirst(Pos(1, 1)));
     check(results).deepEquals([
       5, 2, 6, //
       8, 4, 3, //

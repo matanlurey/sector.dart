@@ -1,14 +1,13 @@
 part of '../traversal.dart';
 
 final class _BreadthFirstTraversal implements GridTraversal {
-  const _BreadthFirstTraversal(this._x, this._y);
+  const _BreadthFirstTraversal(this._start);
 
-  final int _x;
-  final int _y;
+  final Pos _start;
 
   @override
   GridIterator<T> traverse<T>(Grid<T> grid) {
-    return _BreadthFirstIterator(grid, Pos(_x, _y));
+    return _BreadthFirstIterator(grid, _start);
   }
 }
 

@@ -64,9 +64,9 @@
 /// - Use [GridImpl] for common functionality, such as bounds checking:
 ///   ```dart
 ///   // Assuming you could not use `Grid` as a mixin:
-///   T get(int x, int y) {
-///     GridImpl.checkBoundsInclusive(this, x, y);
-///     return _cells[y * width + x];
+///   T get(Pos position) {
+///     GridImpl.checkBoundsInclusive(this,position.x, position.y);
+///     return _cells[position.y * width + position.x];
 ///   }
 ///   ```
 ///

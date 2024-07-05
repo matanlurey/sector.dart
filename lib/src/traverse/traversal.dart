@@ -88,10 +88,7 @@ abstract interface class GridTraversal {
   /// 7
   /// 9
   /// ```
-  const factory GridTraversal.breadthFirst(
-    int x,
-    int y,
-  ) = _BreadthFirstTraversal;
+  const factory GridTraversal.breadthFirst(Pos start) = _BreadthFirstTraversal;
 
   /// Creates a traversal that visits each cell intersected by a line.
   ///
