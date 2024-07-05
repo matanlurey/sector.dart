@@ -464,32 +464,6 @@ final class Pos {
     return Pos.ceil(x, y);
   }
 
-  /// Returns the octant of this position in relation to [other].
-  ///
-  /// The octant is determined by the angle between the two points, where the
-  /// angle is measured from the positive x-axis in the counter-clockwise
-  /// direction.
-  ///
-  /// By default, the octant is determined from the origin.
-  ///
-  /// See also:
-  ///
-  /// - [Octant.toOctant1] to convert a position to [Octant.first].
-  /// - [Octant.fromOctant1] to convert a position to another octant.
-  ///
-  /// ## Example
-  ///
-  /// ```dart
-  /// final pos = Pos(2, 2);
-  /// print(pos.octant()); // Octant.first
-  ///
-  /// final other = Pos(2, 0);
-  /// print(pos.octant(other)); // Octant.eighth
-  /// ```
-  Octant octant([Pos other = Pos.zero]) {
-    return Octant.fromXYXY(x, y, other.x, other.y);
-  }
-
   /// Returns a position in range `[min, max]` for both `x` and `y`.
   ///
   /// If [min] is not provided, it defaults to [zero].
@@ -506,6 +480,18 @@ final class Pos {
     final y = this.y.clamp(min.y, max.y);
     return Pos(x, y);
   }
+
+  /// Returns this position rotated by 180 degrees.
+  ///
+  /// This operation is always the same as negating ([-operator]) the position.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final pos = Pos(1, 2);
+  /// print(pos.rotate180()); // Pos(-1, -2)
+  /// ```
+  Pos rotate180() => -this;
 
   /// Returns this position rotated by 90 degrees [steps] times clockwise.
   ///

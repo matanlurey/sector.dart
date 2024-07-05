@@ -87,71 +87,69 @@ enum Octant {
   /// The octant is determined by the angle between the two points, where the
   /// angle is measured from the positive x-axis in the counter-clockwise
   /// direction.
-  ///
-  /// > [!TIP]
-  /// > Prefer [Pos.octant] when working with [Pos] objects.
-  factory Octant.fromXYXY(int x1, int y1, int x2, int y2) {
-    var dx = x2 - x1;
-    var dy = y2 - y1;
+  factory Octant.between(Pos a, Pos b) {
+    var delta = b - a;
     var octant = 0;
 
     // Rotate by 180 degeres.
-    if (dy < 0) {
-      (dx, dy) = (-dx, -dy);
+    if (delta.y < 0) {
+      delta = delta.rotate180();
       octant += 4;
     }
 
     // Rotate clockwise by 90 degrees.
-    if (dx < 0) {
-      (dx, dy) = (-dy, dx);
+    if (delta.x < 0) {
+      delta = delta.rotate90();
       octant += 2;
     }
 
     // No need to rotate.
-    if (dx < dy) {
+    if (delta.x < delta.y) {
       octant += 1;
     }
 
     return Octant.values[octant];
   }
 
-  /// Converts the provided position to the octant's equivalent.
+  /// Converts the provided [position] to the octant's equivalent.
   ///
   /// Given a point `(x, y)` in the first octant, this method will return the
   /// equivalent point in the octant. For example, the point `(2, 3)` in the
   /// first octant is `(3, 2)` in the second octant.
   ///
   /// This method is the inverse of [toOctant1].
-  (int x, int y) toOctant1(int x, int y) {
+  Pos toOctant1(Pos position) {
+    final Pos(:x, :y) = position;
     return switch (this) {
-      Octant.first => (x, y),
-      Octant.second => (y, x),
-      Octant.third => (y, -x),
-      Octant.fourth => (-x, y),
-      Octant.fifth => (-x, -y),
-      Octant.sixth => (-y, -x),
-      Octant.seventh => (-y, x),
-      Octant.eighth => (x, -y),
+      Octant.first => Pos(x, y),
+      Octant.second => Pos(y, x),
+      Octant.third => Pos(y, -x),
+      Octant.fourth => Pos(-x, y),
+      Octant.fifth => Pos(-x, -y),
+      Octant.sixth => Pos(-y, -x),
+      Octant.seventh => Pos(-y, x),
+      Octant.eighth => Pos(x, -y),
     };
   }
 
-  /// Converts the provided position from the octant's equivalent.
+  /// Converts the provided [position] from the octant's equivalent.
   ///
   /// Given a point `(x, y)` in the octant, this method will return the
   /// equivalent point in the first octant. For example, the point `(3, 2)` in
   /// the second octant is `(2, 3)` in the first octant.
   ///
   /// This method is the inverse of [toOctant1].
-  (int x, int y) fromOctant1(int x, int y) {
+  Pos fromOctant1(Pos position) {
+    final Pos(:x, :y) = position;
     return switch (this) {
-      Octant.first => (x, y),
-      Octant.second => (y, x),
-      Octant.third => (-y, x),
-      Octant.fourth => (-x, y),
-      Octant.fifth => (-x, -y),
-      Octant.sixth => (-y, -x),
-      Octant.seventh => (y, -x),
-      Octant.eighth => (x, -y),
+      Octant.first => Pos(x, y),
+      Octant.second => Pos(y, x),
+      Octant.third => Pos(-y, x),
+      Octant.fourth => Pos(-x, y),
+      Octant.fifth => Pos(-x, -y),
+      Octant.sixth => Pos(-y, -x),
+      Octant.seventh => Pos(y, -x),
+      Octant.eighth => Pos(x, -y),
     };
   }
 }

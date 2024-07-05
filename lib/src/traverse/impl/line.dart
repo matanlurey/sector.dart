@@ -4,55 +4,46 @@ part of '../traversal.dart';
 
 final class _LineGridTraveral implements GridTraversal {
   const _LineGridTraveral(
-    this._x1,
-    this._y1,
-    this._x2,
-    this._y2, {
+    this._start,
+    this._end, {
     bool inclusive = true,
   }) : _inclusive = inclusive;
 
-  final int _x1;
-  final int _y1;
-  final int _x2;
-  final int _y2;
+  final Pos _start;
+  final Pos _end;
   final bool _inclusive;
 
   @override
   GridIterator<T> traverse<T>(Grid<T> grid) {
-    var x1 = _x1;
-    var y1 = _y1;
-    var x2 = _x2;
-    var y2 = _y2;
+    var start = _start;
+    var end = _end;
 
     // Ensure bounds.
-    GridImpl.checkBoundsExclusive(grid, x1, y1);
-    GridImpl.checkBoundsExclusive(grid, x2, y2);
+    GridImpl.checkBoundsExclusive(grid, start);
+    GridImpl.checkBoundsExclusive(grid, end);
 
     // First, determine what octant the line is in, i.e. the origin octant.
     // We store this octant so that we can convert the points back to the
     // original octant after traversing the line.
-    final octant = Octant.fromXYXY(x1, y1, x2, y2);
+    final octant = Octant.between(start, end);
 
     // Convert the points to the first octant.
     // This is the octant where the line has a slope between 0 and 1, which
     // makes it easier to traverse, as the direction of the line is always
     // either right or down.
-    (x1, y1) = octant.toOctant1(x1, y1);
-    (x2, y2) = octant.toOctant1(x2, y2);
+    start = octant.toOctant1(start);
+    end = octant.toOctant1(end);
 
     // Calculate the change in x and y.
-    final dx = x2 - x1;
-    final dy = y2 - y1;
+    final delta = end - start;
 
     return _LineIterator<T>(
       grid,
       octant,
-      x1,
-      y1,
-      x2,
+      start,
+      end,
+      delta,
       _inclusive,
-      dx,
-      dy,
     );
   }
 }
@@ -61,13 +52,11 @@ final class _LineIterator<T> with GridIterator<T> {
   _LineIterator(
     this._grid,
     this._octant,
-    this._startX,
-    this._startY,
-    this._endX,
+    this._start,
+    this._end,
+    this._delta,
     this._inclusive,
-    this._dx,
-    this._dy,
-  ) : _diff = _dy - _dx;
+  ) : _diff = _delta.y - _delta.x;
 
   // Immutable state.
   // ---------------------------------------------------------------------------
@@ -75,17 +64,14 @@ final class _LineIterator<T> with GridIterator<T> {
   /// Grid being traversed.
   final Grid<T> _grid;
 
-  /// Direction of the line in the x-axis.
-  final int _dx;
-
-  /// Direction of the line in the y-axis.
-  final int _dy;
+  /// Direction of the line.
+  final Pos _delta;
 
   /// Which octant the line is in.
   final Octant _octant;
 
-  /// The final x-coordinate of the line.
-  final int _endX;
+  /// The final coordinate of the line.
+  final Pos _end;
 
   /// Whether the line should include the end point.
   final bool _inclusive;
@@ -93,11 +79,8 @@ final class _LineIterator<T> with GridIterator<T> {
   // Mutable state.
   // ---------------------------------------------------------------------------
 
-  /// The current x-coordinate of the line, which is stored in the first octant.
-  int _startX;
-
-  /// The current y-coordinate of the line, which is stored in the first octant.
-  int _startY;
+  /// The current coordinate in the line, stored in the first octant.
+  Pos _start;
 
   /// The difference between the y-coordinate and the x-coordinate.
   int _diff;
@@ -110,22 +93,21 @@ final class _LineIterator<T> with GridIterator<T> {
 
   @override
   bool moveNext() {
-    final x = _startX;
-    if (_inclusive ? x > _endX : x >= _endX) {
+    var Pos(:x, :y) = _start;
+    if (_inclusive ? x > _end.x : x >= _end.x) {
       return false;
     }
 
-    final y = _startY;
-    final (ox, oy) = _octant.fromOctant1(x, y);
-    position = Pos(ox, oy);
+    position = _octant.fromOctant1(_start);
     if (_diff >= 0) {
-      _diff -= _dx;
-      _startY += 1;
+      _diff -= _delta.x;
+      y += 1;
     }
 
-    _diff += _dy;
-    _startX += 1;
+    _diff += _delta.y;
+    x += 1;
 
+    _start = Pos(x, y);
     return true;
   }
 }

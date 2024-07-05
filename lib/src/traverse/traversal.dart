@@ -124,10 +124,8 @@ abstract interface class GridTraversal {
   /// 9
   /// ```
   const factory GridTraversal.line(
-    int x1,
-    int y1,
-    int x2,
-    int y2, {
+    Pos start,
+    Pos end, {
     bool inclusive,
   }) = _LineGridTraveral;
 

@@ -273,7 +273,7 @@ abstract mixin class Grid<T> {
   /// print(grid.get(3, 3)); // throws
   /// ```
   T get(Pos position) {
-    GridImpl.checkBoundsExclusive(this, position.x, position.y);
+    GridImpl.checkBoundsExclusive(this, position);
     return getUnchecked(position);
   }
 
@@ -307,7 +307,7 @@ abstract mixin class Grid<T> {
   /// print(grid.get(1, 1)); // 1
   /// ```
   void set(Pos position, T value) {
-    GridImpl.checkBoundsExclusive(this, position.x, position.y);
+    GridImpl.checkBoundsExclusive(this, position);
     setUnchecked(position, value);
   }
 

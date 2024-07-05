@@ -69,7 +69,7 @@ final class _Rows<T> extends GridAxis<T> with RowsMixin<T> {
 
   @override
   void removeAt(int index) {
-    GridImpl.checkBoundsExclusive(grid, 0, index);
+    GridImpl.checkBoundsExclusive(grid, Pos(0, index));
 
     final start = index * grid.width;
     grid._cells.removeRange(start, start + grid.width);
@@ -84,7 +84,7 @@ final class _Rows<T> extends GridAxis<T> with RowsMixin<T> {
       return;
     }
 
-    GridImpl.checkBoundsInclusive(grid, 0, index);
+    GridImpl.checkBoundsInclusive(grid, Pos(0, index));
     GridImpl.checkLength(row, grid.width, name: 'row');
 
     final start = index * grid.width;
@@ -100,7 +100,7 @@ final class _Columns<T> extends GridAxis<T> with ColumnsMixin<T> {
 
   @override
   void removeAt(int index) {
-    GridImpl.checkBoundsExclusive(grid, index, 0);
+    GridImpl.checkBoundsExclusive(grid, Pos(index, 0));
 
     // Remove in reverse order to avoid shifting elements.
     for (var i = grid.height - 1; i >= 0; i--) {
@@ -119,7 +119,7 @@ final class _Columns<T> extends GridAxis<T> with ColumnsMixin<T> {
       return;
     }
 
-    GridImpl.checkBoundsInclusive(grid, index, 0);
+    GridImpl.checkBoundsInclusive(grid, Pos(index, 0));
     GridImpl.checkLength(column, grid.height, name: 'column');
 
     // Insert in reverse order to avoid shifting elements.

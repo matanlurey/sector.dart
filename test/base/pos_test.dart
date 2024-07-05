@@ -203,10 +203,6 @@ void main() {
     check(Pos(1, 2).lerpRound(Pos(4, 6), 0.5)).equals(Pos(3, 4));
   });
 
-  test('should return the octant of a position from the origin', () {
-    check(Pos(1, 2).octant()).equals(Octant.sixth);
-  });
-
   test('should clamp a position to a maximum', () {
     check(Pos(1, 2).clamp(Pos(2, 2))).equals(Pos(1, 2));
   });

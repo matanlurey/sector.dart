@@ -12,6 +12,9 @@ import 'package:sector/src/views/sub_grid_view.dart';
 /// provides a way to share common implementation details across multiple
 /// classes.
 extension GridImpl on Never {
+  /// Returns an error indicating that an expected element was not found.
+  static Error noElement() => throw StateError('No element');
+
   /// Checks that the grid is not empty.
   ///
   /// If the grid is empty, a [StateError] is thrown.
@@ -21,23 +24,24 @@ extension GridImpl on Never {
     }
   }
 
-  /// Checks that the provided [x] and [y] are within the bounds of the grid.
+  /// Checks that the provided [position] are within the bounds of the grid.
   ///
   /// If the coordinates are out of bounds, a [RangeError] is thrown.
-  static void checkBoundsExclusive(Grid<void> grid, int x, int y) {
-    if (!grid.containsPos(Pos(x, y))) {
-      throw RangeError('Coordinates out of bounds: ($x, $y)');
+  static void checkBoundsExclusive(Grid<void> grid, Pos position) {
+    if (!grid.containsPos(position)) {
+      throw RangeError('Coordinates out of bounds: ($position)');
     }
   }
 
-  /// Checks that the provided [x] and [y] are within the bounds of the grid.
+  /// Checks that the provided [position] are within the bounds of the grid.
   ///
   /// Unlike [checkBoundsExclusive], this method allows the coordinates to be
   /// equal to the width and height of the grid. This is useful when it is valid
   /// to insert elements at the end of the grid.
   ///
   /// If the coordinates are out of bounds, a [RangeError] is thrown.
-  static void checkBoundsInclusive(Grid<void> grid, int x, int y) {
+  static void checkBoundsInclusive(Grid<void> grid, Pos position) {
+    final Pos(:x, :y) = position;
     if (x < 0 || x > grid.width || y < 0 || y > grid.height) {
       throw RangeError('Coordinates out of bounds: ($x, $y)');
     }

@@ -304,10 +304,10 @@ final class _EmptyGridIterator<E> with GridIterator<E> {
   const _EmptyGridIterator();
 
   @override
-  E get current => _noElement();
+  E get current => throw GridImpl.noElement();
 
   @override
-  Pos get position => _noElement();
+  Pos get position => throw GridImpl.noElement();
 
   @override
   bool moveNext() => false;
@@ -352,8 +352,6 @@ final class _PositionedIterator<E> implements GridIterator<(Pos, E)> {
   @override
   bool seek(int steps) => _iterator.seek(steps);
 }
-
-Never _noElement() => throw StateError('No element');
 
 /// A collection of cells that can be accessed sequentially.
 ///
@@ -423,7 +421,7 @@ final class GridIterable<E> extends Iterable<E> {
     final it = _iterator();
     if (it.remainingSteps case final int length) {
       if (length == 0) {
-        _noElement();
+        throw GridImpl.noElement();
       }
       it.seek(length);
       return it.current;
@@ -432,7 +430,7 @@ final class GridIterable<E> extends Iterable<E> {
     while (it.moveNext()) {
       last = it.current;
     }
-    return last ?? _noElement();
+    return last ?? (throw GridImpl.noElement());
   }
 
   @override
@@ -450,7 +448,7 @@ final class GridIterable<E> extends Iterable<E> {
       if (orElse != null) {
         return orElse();
       }
-      _noElement();
+      throw GridImpl.noElement();
     }
 
     // Fallback to the default implementation.
@@ -460,7 +458,7 @@ final class GridIterable<E> extends Iterable<E> {
         last = it.current;
       }
     }
-    return last ?? (orElse != null ? orElse() : _noElement());
+    return last ?? (orElse != null ? orElse() : (throw GridImpl.noElement()));
   }
 
   @override
@@ -474,7 +472,7 @@ final class GridIterable<E> extends Iterable<E> {
       return it.current;
     }
     if (!it.moveNext()) {
-      _noElement();
+      throw GridImpl.noElement();
     }
     if (it.moveNext()) {
       throw StateError('Expected exactly one element, but found more');
