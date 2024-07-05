@@ -89,6 +89,7 @@ export 'src/base/direction.dart' show Cardinal, Direction, Ordinal;
 export 'src/base/iterator.dart' show GridIterable, GridIterator;
 export 'src/base/octant.dart' show Octant;
 export 'src/base/pos.dart' show Pos;
+export 'src/base/rect.dart' show Rect;
 export 'src/grids/efficient_index_grid.dart'
     show EfficientIndexGrid, LayoutHint;
 export 'src/grids/grid.dart' show Grid;

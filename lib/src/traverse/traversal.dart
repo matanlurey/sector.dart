@@ -96,7 +96,7 @@ abstract interface class GridTraversal {
   /// algorithm. The line is drawn from the start position to the end position
   /// and the traversal will visit each cell that the line passes through.
   ///
-  /// Optionally, the [inclusive] parameter can be set to `false` to exclude the
+  /// Optionally, the [exclusive] parameter can be set to `true` to exclude the
   /// end position from the traversal, otherwise the end position will be
   /// included.
   ///
@@ -123,7 +123,7 @@ abstract interface class GridTraversal {
   const factory GridTraversal.line(
     Pos start,
     Pos end, {
-    bool inclusive,
+    bool exclusive,
   }) = _LineGridTraveral;
 
   /// Creates a traversal that visits a rectangle's-worth of cells.

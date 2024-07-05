@@ -51,7 +51,7 @@ void main() {
       // For this test only, don't actually do this!
       positions as GridIterator<Pos>;
       positions.moveNext();
-      check(positions.current).equals(Pos(0, 0));
+      check(positions.position).equals(Pos(0, 0));
     });
 
     test('iterates through positions when optimized', () {

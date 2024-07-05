@@ -277,4 +277,42 @@ void main() {
   test('should have a toString', () {
     check(Pos(1, 2).toString()).equals('Pos(1, 2)');
   });
+
+  group('lineTo', () {
+    test('(0, 0) -> (2, 2)', () {
+      check(Pos(0, 0).lineTo(Pos(2, 2))).deepEquals([
+        Pos(0, 0),
+        Pos(1, 1),
+        Pos(2, 2),
+      ]);
+    });
+
+    test('(0, 0) -> (2, 2) exclusive', () {
+      check(Pos(0, 0).lineTo(Pos(2, 2), exclusive: true)).deepEquals([
+        Pos(0, 0),
+        Pos(1, 1),
+      ]);
+    });
+
+    test('(2, 2) -> (0, 0)', () {
+      check(Pos(2, 2).lineTo(Pos(0, 0))).deepEquals([
+        Pos(2, 2),
+        Pos(1, 1),
+        Pos(0, 0),
+      ]);
+    });
+
+    //    s
+    //     |
+    //  ===|===
+    //     |  e
+    test('(-1, 2) -> (2, -1)', () {
+      check(Pos(-1, 2).lineTo(Pos(2, -1))).deepEquals([
+        Pos(-1, 2),
+        Pos(0, 1),
+        Pos(1, 0),
+        Pos(2, -1),
+      ]);
+    });
+  });
 }

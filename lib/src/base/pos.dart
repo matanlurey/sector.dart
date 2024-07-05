@@ -594,6 +594,43 @@ final class Pos {
     return x >= left && x < left + width && y >= top && y < top + height;
   }
 
+  /// Returns an iterable of positions from this position to [other].
+  ///
+  /// "Draws" a line from this position to [other], including both positions,
+  /// unless [exclusive] is `true`, in which case [other] is excluded.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final start = Pos(0, 0);
+  /// final end = Pos(2, 2);
+  /// for (final pos in start.lineTo(end)) {
+  ///   print(pos);
+  /// }
+  /// ```
+  ///
+  /// The output of the example is:
+  ///
+  /// ```txt
+  /// Pos(0, 0)
+  /// Pos(1, 1)
+  /// Pos(2, 2)
+  /// ```
+  Iterable<Pos> lineTo(Pos other, {bool exclusive = false}) {
+    var start = this;
+    var end = other;
+
+    final octant = Octant.between(start, end);
+    start = octant.toOctant1(start);
+    end = octant.toOctant1(end);
+
+    final delta = end - start;
+    final diff = delta.y - delta.x;
+    final endX = exclusive ? end.x : end.x + 1;
+
+    return _LineIterable(octant, delta, start, diff, endX);
+  }
+
   @override
   bool operator ==(Object other) {
     return other is Pos && other.x == x && other.y == y;
@@ -604,4 +641,70 @@ final class Pos {
 
   @override
   String toString() => 'Pos($x, $y)';
+}
+
+final class _LineIterable extends Iterable<Pos> {
+  _LineIterable(
+    this._octant,
+    this._delta,
+    this._start,
+    this._diff,
+    this._endX,
+  );
+
+  final Octant _octant;
+  final Pos _delta;
+  final Pos _start;
+  final int _diff;
+  final int _endX;
+
+  @override
+  Iterator<Pos> get iterator {
+    return _LineIterator(
+      _octant,
+      _delta,
+      _start,
+      _diff,
+      _endX,
+    );
+  }
+}
+
+final class _LineIterator implements Iterator<Pos> {
+  _LineIterator(
+    this._octant,
+    this._delta,
+    this._start,
+    this._diff,
+    this._endX,
+  );
+
+  final Octant _octant;
+  final Pos _delta;
+  final int _endX;
+
+  Pos _start;
+  int _diff;
+
+  @override
+  late Pos current;
+
+  @override
+  bool moveNext() {
+    var Pos(:x, :y) = _start;
+    if (x >= _endX) {
+      return false;
+    }
+
+    current = _octant.fromOctant1(_start);
+    if (_diff >= 0) {
+      y += 1;
+      _diff -= _delta.x;
+    }
+
+    x += 1;
+    _diff += _delta.y;
+    _start = Pos(x, y);
+    return true;
+  }
 }

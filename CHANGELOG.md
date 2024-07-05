@@ -21,6 +21,15 @@ data structure.
 
 ### Breaking Changes
 
+- Perhaps the biggest change, moving all `(int x, int y)` tuples to a dedicated
+  `Pos` class. In benchmarks, this change had no impact on performance, but it
+  makes the API more consistent and easier to use.
+
+  ```diff
+  - final pos = (x, y);
+  + final pos = Pos(x, y);
+  ```
+
 - Moved `<Grid>.layoutHint` and `<Grid>.getByIndexUnchecked` to the optional
   mixin `EfficientIndexGrid`, which only provides these methods. This allows
   users to opt-in to these methods, and not have them clutter the API of the

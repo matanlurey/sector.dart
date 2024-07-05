@@ -19,7 +19,7 @@ void main() {
       [7, 8, 9],
     ]);
     check(
-      grid.traverse(GridTraversal.line(Pos(0, 0), Pos(2, 2), inclusive: false)),
+      grid.traverse(GridTraversal.line(Pos(0, 0), Pos(2, 2), exclusive: true)),
     ).deepEquals([1, 5]);
   });
 
