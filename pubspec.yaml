@@ -10,6 +10,7 @@ environment:
 repository: https://github.com/matanlurey/sector
 
 dependencies:
+  lodim: ^0.1.1
   meta: ^1.15.0
 
 dev_dependencies:

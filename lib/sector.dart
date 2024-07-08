@@ -7,12 +7,14 @@
 /// API:
 ///
 /// ```dart
-/// final grid = Grid.filled(3, 3, 0);
+/// final grid = Grid.fromRows([
+///   [Tile.wall, Tile.wall, Tile.wall],
+///   [Tile.wall, Tile.empty, Tile.empty],
+/// ]);
 /// print(grid);
 /// // ┌───────┐
-/// // │ 0 0 0 │
-/// // │ 0 0 0 │
-/// // │ 0 0 0 │
+/// // │ # # # │
+/// // │ # _ _ │
 /// // └───────┘
 /// ```
 ///
@@ -31,12 +33,13 @@
 /// for similar performance to using a 1-dimensional [List] for a 2-dimensional
 /// grid, but with a more intuitive API.
 ///
-/// For better `Grid<int>` or `Grid<double>` performance, use [ListGrid.view]
-/// with a backing store of a typed data list, such as [Uint8List] or
-/// [Float32List], which can be used to store elements more efficiently:
+/// For better `Grid<int>` or `Grid<double>` performance, use
+/// [ListGrid.backedBy] with a backing store of a typed data list, such as
+/// [Uint8List] or [Float32List], which can be used to store elements more
+/// efficiently:
 /// ```dart
 /// final buffer = Uint8List(9);
-/// final grid = ListGrid.view(buffer, width: 3);
+/// final grid = ListGrid.backedBy(buffer, width: 3);
 /// print(grid);
 /// // ┌───────┐
 /// // │ 0 0 0 │
@@ -44,57 +47,14 @@
 /// // │ 0 0 0 │
 /// // └───────┘
 /// ```
-///
-/// Grids may optionally implement [EfficientIndexGrid] to provide hints to
-/// consumers about how the grid is laid out in memory, which can be used to
-/// optimize traversal algorithms.
-///
-/// ## Custom Implementations
-///
-/// The default implementation of [Grid] is [ListGrid], which is a dense grid
-/// using a 1-dimensional [List] to store elements, but the full Dart source is
-/// is available as a reference (no private APIs or FFI is used).
-///
-/// To make your own implementations easier, the following is recommended:
-/// - Have your list extend or mixin [Grid]:
-///   ```dart
-///   class MyGrid<T> with Grid<T> { /*...*/ }
-///   ```
-///
-/// - Use [GridImpl] for common functionality, such as bounds checking:
-///   ```dart
-///   // Assuming you could not use `Grid` as a mixin:
-///   T get(Pos position) {
-///     GridImpl.checkBoundsInclusive(this,position.x, position.y);
-///     return _cells[position.y * width + position.x];
-///   }
-///   ```
-///
-/// - Use [RowsMixin] and [ColumnsMixin] to implement [GridAxis]s:
-///   ```dart
-///   class _Rows<T> extends GridAxis<T> with RowsMixin<T> { /*...*/ }
-///   ```
-///
-/// After profiling, you may find that the default implementation is sufficient
-/// for your use-case, but if you need to optimize further, you can replace the
-/// built-in methods (either from a mixin or [GridImpl]) with your own.
 library;
 
 import 'dart:typed_data';
 
 import 'package:sector/sector.dart';
 
-export 'src/base/axis.dart' show ColumnsMixin, GridAxis, RowsMixin;
-export 'src/base/direction.dart' show Cardinal, Direction, Ordinal;
-export 'src/base/iterator.dart' show GridIterable, GridIterator;
-export 'src/base/octant.dart' show Octant;
-export 'src/base/pos.dart' show Pos;
-export 'src/base/rect.dart' show Rect;
-export 'src/grids/efficient_index_grid.dart'
-    show EfficientIndexGrid, LayoutHint;
-export 'src/grids/grid.dart' show Grid;
-export 'src/grids/list.dart' show ListGrid;
-export 'src/grids/splay_tree.dart' show SplayTreeGrid;
-export 'src/traverse/traversal.dart' show GridTraversal;
-export 'src/utils/grid_extension.dart' show GridExtension;
-export 'src/utils/grid_impl.dart' show GridImpl;
+export 'package:lodim/lodim.dart' show Pos, Rect;
+
+export 'src/grid/grid.dart';
+export 'src/grid/list_grid.dart';
+export 'src/grid/splay_tree_grid.dart';
