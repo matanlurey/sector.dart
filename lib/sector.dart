@@ -53,8 +53,11 @@ import 'dart:typed_data';
 
 import 'package:sector/sector.dart';
 
-export 'package:lodim/lodim.dart' show Pos, Rect;
+export 'package:lodim/lodim.dart' show Direction, Pos, Rect;
 
+export 'src/graph/adjacency_list_graph.dart';
+export 'src/graph/graph.dart';
+export 'src/graph/lattice_graph.dart';
 export 'src/grid/grid.dart';
 export 'src/grid/list_grid.dart';
 export 'src/grid/splay_tree_grid.dart';
