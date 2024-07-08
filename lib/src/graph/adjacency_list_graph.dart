@@ -50,10 +50,10 @@ final class AdjacencyListGraph<V, E> with Graph<V, E> {
   E? addEdge(E edge, {required V source, required V target}) {
     final edges = _adjacencyList.putIfAbsent(source, () => []);
     for (var i = 0; i < edges.length; i++) {
-      final edge = edges[i];
-      if (edge.$1 == target) {
-        final previous = edge.$2;
-        edges[i] = edge;
+      final option = edges[i];
+      if (option.$1 == target) {
+        final previous = option.$2;
+        edges[i] = (target, edge);
         return previous;
       }
     }

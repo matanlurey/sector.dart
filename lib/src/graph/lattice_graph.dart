@@ -20,15 +20,13 @@ final class LatticeGraph<T> with Graph<Pos, (T source, T target)> {
   /// elements at the source and target positions respectively.
   ///
   /// May optionally provide a set of position offsets to use to automatically
-  /// generate edges between positions, which must be non-empty. If not
-  /// provided, the default is the cardinal directions (up, down, left, right).
+  /// generate edges between positions, which must be non-empty to resolve with
+  /// any edges. If not provided, the default is the cardinal directions (up,
+  /// down, left, right).
   factory LatticeGraph.view(
     Grid<T> grid, {
     Iterable<Pos>? adjacent,
   }) {
-    if (adjacent != null && adjacent.isEmpty) {
-      throw ArgumentError.value(adjacent, 'adjacent', 'Must not be empty');
-    }
     return LatticeGraph._(
       grid,
       adjacent != null ? List.of(adjacent) : Direction.cardinal,
@@ -120,32 +118,37 @@ final class _EdgesIterator<T> implements Iterator<(Pos, Pos, (T, T))> {
   _EdgesIterator(this._graph);
 
   final LatticeGraph<T> _graph;
-  var _source = Pos.zero;
+
+  var _x = 0;
+  var _y = 0;
   var _index = 0;
 
   @override
-  (Pos, Pos, (T, T)) get current {
-    final target = _source + _graph._adjacent[_index];
-    return (
-      _source,
-      target,
-      (
-        _graph._grid.getUnchecked(_source),
-        _graph._grid.getUnchecked(target),
-      )
-    );
-  }
+  late (Pos, Pos, (T, T)) current;
 
   @override
   bool moveNext() {
-    if (_source.y < _graph._grid.height) {
-      if (_index < _graph._adjacent.length - 1) {
-        _index++;
-      } else {
-        _source = Pos(_source.x + 1, _source.y);
+    for (; _y < _graph._grid.height; _y++) {
+      for (; _x < _graph._grid.width; _x++) {
+        final source = Pos(_x, _y);
+        for (; _index < _graph._adjacent.length; _index++) {
+          final target = source + _graph._adjacent[_index];
+          if (_graph._grid.containsPos(target)) {
+            current = (
+              source,
+              target,
+              (
+                _graph._grid.getUnchecked(source),
+                _graph._grid.getUnchecked(target),
+              ),
+            );
+            _index++;
+            return true;
+          }
+        }
         _index = 0;
       }
-      return true;
+      _x = 0;
     }
     return false;
   }
@@ -172,22 +175,23 @@ final class _EdgesFromIterator<T> implements Iterator<(Pos, (T, T))> {
   var _index = 0;
 
   @override
-  (Pos, (T, T)) get current {
-    final target = _source + _adjacent[_index];
-    return (
-      target,
-      (
-        _graph._grid.getUnchecked(_source),
-        _graph._grid.getUnchecked(target),
-      )
-    );
-  }
+  late (Pos, (T, T)) current;
 
   @override
   bool moveNext() {
-    if (_index < _adjacent.length - 1) {
-      _index++;
-      return true;
+    for (; _index < _adjacent.length; _index++) {
+      final target = _source + _adjacent[_index];
+      if (_graph._grid.containsPos(target)) {
+        current = (
+          target,
+          (
+            _graph._grid.getUnchecked(_source),
+            _graph._grid.getUnchecked(target),
+          ),
+        );
+        _index++;
+        return true;
+      }
     }
     return false;
   }

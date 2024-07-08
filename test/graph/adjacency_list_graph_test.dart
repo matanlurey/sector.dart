@@ -20,6 +20,15 @@ void main() {
     check(graph).has((g) => g.getEdge('A', 'B'), 'getEdge').equals(42);
   });
 
+  test('should replace an edge', () {
+    final graph = AdjacencyListGraph<String, int>();
+    graph.addEdge(42, source: 'A', target: 'B');
+    final previous = graph.addEdge(43, source: 'A', target: 'B');
+    check(previous).equals(42);
+    check(graph).has((g) => g.containsEdge('A', 'B'), 'containsEdge').isTrue();
+    check(graph).has((g) => g.getEdge('A', 'B'), 'getEdge').equals(43);
+  });
+
   test('should remove an edge', () {
     final graph = AdjacencyListGraph<String, int>();
     graph.addEdge(42, source: 'A', target: 'B');
