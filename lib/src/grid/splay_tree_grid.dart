@@ -27,6 +27,8 @@ import 'package:sector/src/internal.dart';
 /// ```txt
 /// {0: a, 2: b, 3: c, 8: d}
 /// ```
+///
+/// {@category Grids}
 final class SplayTreeGrid<T> with Grid<T> {
   /// Creates a new grid with the given [width] and [height].
   ///

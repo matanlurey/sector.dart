@@ -24,7 +24,7 @@ import 'package:sector/src/internal.dart';
 ///
 /// If you do need to implement this interface, you should consider _mixing in_
 /// this interface to receive a default implementation of most methods, and then
-/// implement the remaining methods:
+/// implement the remaining methods, optimizing as necessary:
 ///
 /// ```dart
 /// class MyGrid<T> with Grid<T> {
@@ -53,6 +53,8 @@ import 'package:sector/src/internal.dart';
 /// print(grid.height); // 2
 /// print(grid.get(Pos(1, 1))); // Tile.floor
 /// ```
+///
+/// {@category Grids}
 abstract mixin class Grid<T> {
   /// Creates a new grid with the given [width] and [height].
   ///

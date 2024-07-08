@@ -34,7 +34,7 @@
 /// grid, but with a more intuitive API.
 ///
 /// For better `Grid<int>` or `Grid<double>` performance, use
-/// [ListGrid.backedBy] with a backing store of a typed data list, such as
+/// [ListGrid.withList] with a backing store of a typed data list, such as
 /// [Uint8List] or [Float32List], which can be used to store elements more
 /// efficiently:
 /// ```dart
@@ -58,6 +58,7 @@ export 'package:lodim/lodim.dart' show Direction, Pos, Rect;
 export 'src/graph/adjacency_list_graph.dart';
 export 'src/graph/graph.dart';
 export 'src/graph/lattice_graph.dart';
+export 'src/graph/unmodifiable_graph.dart';
 export 'src/grid/grid.dart';
 export 'src/grid/list_grid.dart';
 export 'src/grid/splay_tree_grid.dart';

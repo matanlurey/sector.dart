@@ -1,0 +1,13 @@
+dartdoc:
+  categories:
+    "Grids":
+      markdown: doc/grids.md
+    "Graphs":
+      markdown: doc/graphs.md
+    "Pathfinding":
+      markdown: doc/pathfinding.md
+
+  categoryOrder:
+    - "Grids"
+    - "Graphs"
+    - "Pathfinding"

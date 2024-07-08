@@ -20,6 +20,8 @@ import 'package:sector/src/internal.dart';
 /// - [set], [setUnchecked].
 ///
 /// As row-major iterating over [rows] is much more efficient than [columns].
+///
+/// {@category Grids}
 final class ListGrid<T> with Grid<T> {
   /// Creates a new grid with the given [width] and [height].
   ///
@@ -131,13 +133,13 @@ final class ListGrid<T> with Grid<T> {
   ///
   /// ```dart
   /// final buffer = Uint8List(9);
-  /// final grid = ListGrid.backedBy(buffer, width: 3);
+  /// final grid = ListGrid.withList(buffer, width: 3);
   /// print(grid.get(Pos(1, 1))); // 0
   ///
   /// grid.set(Pos(1, 1), 42);
   /// print(buffer); // [0, 0, 0, 0, 42, 0, 0, 0, 0]
   /// ```
-  factory ListGrid.backedBy(List<T> elements, {required int width}) {
+  factory ListGrid.withList(List<T> elements, {required int width}) {
     if (elements.length % width != 0) {
       throw ArgumentError.value(
         width,

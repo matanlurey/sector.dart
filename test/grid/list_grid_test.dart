@@ -35,7 +35,7 @@ void main() {
   group('ListGrid.backedBy', () {
     test('should create a grid backed by a Uint8List', () {
       final buffer = Uint8List(9);
-      final grid = ListGrid.backedBy(buffer, width: 3);
+      final grid = ListGrid.withList(buffer, width: 3);
       check(grid.rows).deepEquals([
         [0, 0, 0],
         [0, 0, 0],
@@ -51,7 +51,7 @@ void main() {
       () {
         final buffer = Uint8List(8);
         check(
-          () => ListGrid.backedBy(buffer, width: 3),
+          () => ListGrid.withList(buffer, width: 3),
         ).throws<ArgumentError>();
       },
     );

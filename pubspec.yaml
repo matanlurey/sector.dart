@@ -2,7 +2,7 @@
 
 name: sector
 description: Fast and intuitive 2D Grid and grid-based utilities for Dart.
-version: 0.3.0
+version: 0.3.0-alpha
 
 environment:
   sdk: ^3.4.0
@@ -10,7 +10,7 @@ environment:
 repository: https://github.com/matanlurey/sector
 
 dependencies:
-  lodim: ^0.1.1
+  lodim: ^0.1.1+1
   meta: ^1.15.0
 
 dev_dependencies:
@@ -24,3 +24,9 @@ dev_dependencies:
       ref: 597a39fb6aef4e052e419c914a5ea17880327e2a
   path: ^1.9.0
   test: ^1.25.7
+
+dependency_overrides:
+  lodim:
+    git:
+      url: https://github.com/matanlurey/lodim
+      ref: 6fee4a7c01f191167276969248f25439585f73d7
