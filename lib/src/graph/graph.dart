@@ -1,5 +1,6 @@
 import 'package:sector/sector.dart';
 import 'package:sector/src/graph/mapped_graph.dart';
+import 'package:sector/src/graph/path_finder.dart';
 import 'package:sector/src/graph/where_graph.dart';
 
 /// A collection of vertices of type [V] and edges of type [E].
@@ -344,19 +345,30 @@ abstract mixin class Graph<V, E> {
   /// ```
   Iterable<(V, E)> edgesTo(V target);
 
-  /// Traverses the graph starting from [start] and returns visited elements.
+  /// Returns the results of the traversing vertices and edges in a graph.
   ///
-  /// The traversal is controlled by the [using] parameter, which determines
-  /// the order in which vertices are visited, and defaults to [breadthFirst]
-  /// if omitted.
+  /// Traversal algorithms produce a lazy iterable that only visits vertices and
+  /// edges when iterated over. The algorithm can be used to find paths, count
+  /// paths, or perform other operations on a graph.
   ///
-  /// The [visit] parameter is a function that determines whether to visit a
-  /// vertex and edge. The function returns `true` to visit the vertex and edge,
-  /// and `false` to skip the vertex and edge. If omitted, all vertices and
-  /// edges are visited, and the traversal may run indefinitely if the graph
-  /// contains loops or cycles.
+  /// The algorithm takes a [start] vertex, and a [visit] function that
+  /// determines whether to visit a vertex and edge. The function returns an
+  /// iterable of tuples that contain the entered vertex and the edge crossed to
+  /// reach the vertex.
   ///
-  /// See also [TraversalExtension.distinct].
+  /// It is unsupported to modify the graph while traversing it.
+  ///
+  /// See also [GraphTraversal.traverse] and [GraphTraversal.distinct].
+  ///
+  /// ## Configuring
+  ///
+  /// The [using] parameter determines the traversal algorithm to use, and
+  /// defaults to [breadthFirst]. A custom traversal algorithm can be provided
+  /// by implementing the [GraphTraversal] interface.
+  ///
+  /// ```dart
+  /// graph.traverse('A', using: myTraversal);
+  /// ```
   ///
   /// ## Example
   ///
@@ -382,6 +394,59 @@ abstract mixin class Graph<V, E> {
     bool Function(VisitedNode<V, E>)? visit,
   }) {
     return using.traverse(this, start, visit: visit);
+  }
+
+  /// Finds all paths starting from [start] that satisfy the [success] function.
+  ///
+  /// The algorithm takes a [start] vertex, and a [success] function that
+  /// determines whether a path is successful. The function returns an iterable
+  /// if lists that contain the entered vertex and the edge crossed to reach the
+  /// success condition.
+  ///
+  /// The resulting list of paths are not necessarily ordered by length, and
+  /// may contain paths that are not the shortest path. To find the shortest
+  /// path, use [findShortestPaths], which orders the paths by length (if
+  /// necessary, some algorithms return the shortest path first).
+  ///
+  /// Some algorithims return a maximum of one path.
+  ///
+  /// See also [PathFinder.findPaths].
+  ///
+  /// ## Configuring
+  ///
+  /// The [using] parameter determines the path finding algorithm to use, and
+  /// defaults to [breadthFirst]. A custom path finding algorithm can be
+  /// provided by implementing the [PathFinder] interface.
+  ///
+  /// ```dart
+  /// graph.findPaths('A', using: myPathFinder);
+  /// ```
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final graph = Graph<String, int>();
+  /// graph.addEdge('A', 'B', 42);
+  /// graph.addEdge('B', 'C', 17);
+  ///
+  /// final paths = graph.findPaths('A', 'C', success: (n) => n.target == 'C');
+  /// for (final path in paths) {
+  ///   print('Found path: $path');
+  /// }
+  /// ```
+  ///
+  /// Produces the following output:
+  ///
+  /// ```txt
+  /// [A->B, B->C]
+  /// ```
+  Iterable<List<VisitedNode<V, E>>> findPaths(
+    V start, {
+    required bool Function(VisitedNode<V, E>) success,
+    PathFinder using = breadthFirst,
+    bool Function(VisitedNode<V, E>)? visit,
+  }) {
+    return using.findPaths(this, start, success: success, visit: visit);
   }
 
   /// Returns a representation of the graph as a map of vertices to their edges.

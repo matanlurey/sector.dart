@@ -112,4 +112,40 @@ void main() {
       TraversedNode('B', edge: 1, origin: 'A'),
     ]);
   });
+
+  test('should find a path in a trivial graph', () {
+    // A -> B
+    final graph = Graph<String, int>();
+    graph.addEdge(1, source: 'A', target: 'B');
+
+    final paths = graph.findPaths(
+      'A',
+      using: traversal,
+      success: (node) => node.target == 'B',
+    );
+    check(paths.toList()).deepEquals([
+      [
+        TraversedNode('B', edge: 1, origin: 'A'),
+      ],
+    ]);
+  });
+
+  test('should find a path in a simple graph', () {
+    // A -> B -> C
+    final graph = Graph<String, int>();
+    graph.addEdge(1, source: 'A', target: 'B');
+    graph.addEdge(2, source: 'B', target: 'C');
+
+    final paths = graph.findPaths(
+      'A',
+      using: traversal,
+      success: (node) => node.target == 'C',
+    );
+    check(paths.toList()).deepEquals([
+      [
+        TraversedNode('B', edge: 1, origin: 'A'),
+        TraversedNode('C', edge: 2, origin: 'A'),
+      ],
+    ]);
+  });
 }

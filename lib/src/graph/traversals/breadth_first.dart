@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:sector/sector.dart';
+import 'package:sector/src/graph/path_finder.dart';
 
 /// A breadth-first [GraphTraversal] that visits vertices and edges in a graph.
 ///

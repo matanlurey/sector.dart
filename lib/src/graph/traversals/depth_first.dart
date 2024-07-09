@@ -1,4 +1,5 @@
 import 'package:sector/sector.dart';
+import 'package:sector/src/graph/path_finder.dart';
 
 /// A depth-first [GraphTraversal] that visits vertices and edges in a graph.
 ///
