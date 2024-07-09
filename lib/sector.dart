@@ -62,3 +62,6 @@ export 'src/graph/unmodifiable_graph.dart';
 export 'src/grid/grid.dart';
 export 'src/grid/list_grid.dart';
 export 'src/grid/splay_tree_grid.dart';
+export 'src/path/breadth_first.dart';
+export 'src/path/depth_first.dart';
+export 'src/path/traversal.dart';

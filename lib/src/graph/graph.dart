@@ -1,5 +1,6 @@
 import 'package:sector/sector.dart';
 import 'package:sector/src/graph/mapped_graph.dart';
+import 'package:sector/src/graph/where_graph.dart';
 
 /// A collection of vertices of type [V] and edges of type [E].
 ///
@@ -53,6 +54,8 @@ abstract mixin class Graph<V, E> {
   /// The [edges] is a map of vertices to their outgoing edges, where each edge
   /// is a tuple of the target vertex and the edge value. The graph is created
   /// with the given edges, but any vertices without outgoing edges are omitted.
+  ///
+  /// This is the inverse of [Graph.toMap].
   ///
   /// ## Example
   ///
@@ -147,6 +150,25 @@ abstract mixin class Graph<V, E> {
   /// ```
   Graph<V, T> map<T>(T Function(E edge) toEdge) {
     return MappedGraph(this, toEdge);
+  }
+
+  /// Returns the current edges of this graph filtered by [predicate].
+  ///
+  /// The resulting graph is a lazy view of the original graph, where each edge
+  /// is filtered by the given [predicate] function. The vertices are not
+  /// modified, the graph is not copied, and the view is unmodifiable.
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final graph = Graph<String, int>();
+  /// graph.addEdge('A', 'B', 42);
+  /// graph.addEdge('B', 'C', 17);
+  /// final filtered = graph.where((edge) => edge > 40);
+  /// print(filtered.edges); // => (('A', 'B', 42))
+  /// ```
+  Graph<V, E> where(bool Function(E edge) predicate) {
+    return WhereGraph(this, predicate);
   }
 
   /// An iterable of all edges and their source and target vertices.
@@ -321,4 +343,69 @@ abstract mixin class Graph<V, E> {
   /// print(graph.edgesTo('B')); // => (('A', 42), ('C', 17))
   /// ```
   Iterable<(V, E)> edgesTo(V target);
+
+  /// Traverses the graph starting from [start] and returns visited elements.
+  ///
+  /// The traversal is controlled by the [using] parameter, which determines
+  /// the order in which vertices are visited, and defaults to [breadthFirst]
+  /// if omitted.
+  ///
+  /// The [visit] parameter is a function that determines whether to visit a
+  /// vertex and edge. The function returns `true` to visit the vertex and edge,
+  /// and `false` to skip the vertex and edge. If omitted, all vertices and
+  /// edges are visited, and the traversal may run indefinitely if the graph
+  /// contains loops or cycles.
+  ///
+  /// See also [TraversalExtension.distinct].
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final graph = Graph<String, int>();
+  /// graph.addEdge('A', 'B', 42);
+  ///
+  /// final traversal = graph.traverse('A');
+  /// for (final tuple in traversal) {
+  ///   print('Visiting ${tuple.$1} with edge ${tuple.$2}');
+  /// }
+  /// ```
+  ///
+  /// Produces the following output:
+  ///
+  /// ```txt
+  /// Visiting A with edge null
+  /// Visiting B with edge 42
+  /// ```
+  Iterable<VisitedNode<V, E>> traverse(
+    V start, {
+    GraphTraversal using = breadthFirst,
+    bool Function(VisitedNode<V, E>)? visit,
+  }) {
+    return using.traverse(this, start, visit: visit);
+  }
+
+  /// Returns a representation of the graph as a map of vertices to their edges.
+  ///
+  /// The resulting map is a shallow copy of the graph, where each vertex is
+  /// mapped to a map of target vertices to edge data. The vertices and edges
+  /// are shallow copies, and the map is disconnected from the original graph.
+  ///
+  /// This is the inverse of [Graph.fromEdges].
+  ///
+  /// ## Example
+  ///
+  /// ```dart
+  /// final graph = Graph<String, int>();
+  /// graph.addEdge('A', 'B', 42);
+  /// final edges = graph.toEdgesMap();
+  /// print(edges); // => {'A': {'B': 42}}
+  /// ```
+  Map<V, Map<V, E>> toMap() {
+    return {
+      for (final source in vertices)
+        source: {
+          for (final (target, edge) in edgesFrom(source)) target: edge,
+        },
+    };
+  }
 }

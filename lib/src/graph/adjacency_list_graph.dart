@@ -15,6 +15,8 @@ final class AdjacencyListGraph<V, E> with Graph<V, E> {
   /// is a tuple of the target vertex and the edge value. The graph is created
   /// with the given edges, but any vertices without outgoing edges are omitted.
   ///
+  /// This is the inverse of [AdjacencyListGraph.toMap].
+  ///
   /// ## Example
   ///
   /// ```dart
@@ -207,7 +209,9 @@ final class AdjacencyListGraph<V, E> with Graph<V, E> {
   }
 
   @override
-  Iterable<(V, E)> edgesFrom(V source) => _adjacencyList[source]!;
+  Iterable<(V, E)> edgesFrom(V source) {
+    return _adjacencyList[source] ?? const Iterable.empty();
+  }
 
   @override
   Iterable<(V, E)> edgesTo(V target) {

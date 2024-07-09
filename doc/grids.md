@@ -3,6 +3,14 @@ a way to store and manipulate data in a tabular format indexed by rows and
 columns, or `(x, y)` coordinates, and with a fixed `width` and `height` in
 cells.
 
+- [Creating a Grid](#creating-a-grid)
+- [Accessing Cells](#accessing-cells)
+- [Iteration](#iteration)
+- [Advanced Topics](#advanced-topics)
+  - [Picking an implementation](#picking-an-implementation)
+  - [Using `Pos` effectively](#using-pos-effectively)
+  - [Converting to a `Graph`](#converting-to-a-graph)
+
 ## Creating a Grid
 
 To create a new grid filled with a default value, use `Grid.filled`. This is
