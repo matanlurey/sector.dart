@@ -1,9 +1,17 @@
-# Pathfinding Benchmarks: File Formats
+# Pathfinding Benchmarks
+
+## Maps
+
+### [`BigGameHunters.map`](./BigGameHunters.map)
+
+![BigGameHunters.map](./BigGameHunters.png)
+
+## File Formats
 
 See <https://movingai.com/benchmarks/formats.html>, but tl;dr in case taken
 offline.
 
-## Map Format
+### Map Format
 
 All maps begin with the lines:
 
@@ -27,7 +35,7 @@ S - swamp (passable from regular terrain)
 W - water (traversable, but not passable from terrain)
 ```
 
-## Scenario Format
+### Scenario Format
 
 The scenario files have the following format.
 
