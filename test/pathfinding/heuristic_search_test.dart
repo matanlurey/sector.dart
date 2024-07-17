@@ -41,11 +41,11 @@ void main() {
     );
 
     check(path).nodesBetween(start, goal);
-    check(cost).equals(22);
-    check(tracer.events.whereType<VisitEvent<Pos>>()).length.equals(130);
+    check(cost).equals(12);
+    check(tracer.events.whereType<VisitEvent<Pos>>()).length.equals(166);
   });
 
-  test('greedy fails with no accurate guidance, but fails fast', () {
+  test('greedy succeeds with no accurate guidance', () {
     final (path, cost) = greedyBestFirstSearch.findBestPath<Pos>(
       graph,
       start,
@@ -54,9 +54,9 @@ void main() {
       tracer: tracer,
     );
 
-    check(path).notFound();
-    check(cost).equals(double.infinity);
-    check(tracer.events.whereType<VisitEvent<Pos>>()).length.equals(35);
+    check(path).nodesBetween(start, goal);
+    check(cost).equals(22);
+    check(tracer.events.whereType<VisitEvent<Pos>>()).length.equals(22);
   });
 
   test('greedy should find a path faster with a "waypoint" heuristic', () {
@@ -110,8 +110,8 @@ void main() {
       tracer: tracer,
     );
     check(path).nodesBetween(start, goal);
-    check(cost).equals(23);
-    check(tracer.events.whereType<VisitEvent<Pos>>()).length.equals(162);
+    check(cost).equals(13);
+    check(tracer.events.whereType<VisitEvent<Pos>>()).length.equals(193);
   });
 
   test('fringe should find the shortest path with a "waypoint" heuristic', () {
@@ -139,7 +139,7 @@ void main() {
       tracer: tracer,
     );
     check(path).nodesBetween(start, goal);
-    check(cost).equals(22);
-    check(tracer.events.whereType<VisitEvent<Pos>>()).length.equals(261);
+    check(cost).equals(12);
+    check(tracer.events.whereType<VisitEvent<Pos>>()).length.equals(333);
   });
 }
