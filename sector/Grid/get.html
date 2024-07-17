@@ -30,7 +30,7 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">get method</li>
   </ol>
   <div class="self-name">get</div>
@@ -63,9 +63,8 @@
     <section class="multi-line-signature">
       
 
-<span class="returntype">T</span>
-<span class="name ">get</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="get-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span></li>
-<li><span class="parameter" id="get-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span></span></li>
+<span class="returntype">E</span>
+<span class="name ">get</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="get-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span></span></li>
 </ol>)
 
       
@@ -73,15 +72,18 @@
     </section>
     
 <section class="desc markdown">
-  <p>Returns the element at the given <code>x</code> and <code>y</code>.</p>
-<p>The <code>x</code> and <code>y</code> coordinates are zero-based, where <code>x</code> is the horizontal
-axis and <code>y</code> is the vertical axis. The origin <code>(0, 0)</code> is at the top-left
-corner of the grid.</p>
-<p>If the coordinates are out of bounds, this method throws.</p>
-<h2 id="examples">Examples</h2>
-<pre class="language-dart"><code class="language-dart">final grid = Grid.filled(3, 3, 0);
-print(grid.get(1, 1)); // 0
-print(grid.get(3, 3)); // throws
+  <p>Returns the element at a position in the grid.</p>
+<p>The position must be within the bounds of the grid.</p>
+<h2 id="example">Example</h2>
+<pre class="language-dart"><code class="language-dart">final grid = Grid.fromRows(
+  empty: Tile.wall,
+  [
+    [Tile.wall, Tile.wall, Tile.wall],
+    [Tile.wall, Tile.floor, Tile.wall],
+  ],
+);
+final pos = Pos(1, 1);
+print(grid.get(pos)); // Tile.floor
 </code></pre>
 </section>
 
@@ -89,9 +91,11 @@ print(grid.get(3, 3)); // throws
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">T get(int x, int y) {
-  GridImpl.checkBoundsExclusive(this, x, y);
-  return getUnchecked(x, y);
+  <pre class="language-dart"><code class="language-dart">E get(Pos pos) {
+  if (!containsPos(pos)) {
+    throw RangeError(&#39;Position $pos is out of bounds&#39;);
+  }
+  return getUnchecked(pos);
 }</code></pre>
 </section>
 
@@ -109,7 +113,7 @@ print(grid.get(3, 3)); // throws
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">get method</li>
 </ol>
 
@@ -126,7 +130,7 @@ print(grid.get(3, 3)); // throws
 <footer>
   <span class="no-break">
     sector
-      0.2.0
+      0.3.0-alpha
   </span>
 
   

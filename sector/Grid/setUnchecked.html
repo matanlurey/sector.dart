@@ -30,7 +30,7 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">setUnchecked abstract method</li>
   </ol>
   <div class="self-name">setUnchecked</div>
@@ -64,9 +64,8 @@
       
 
 <span class="returntype">void</span>
-<span class="name ">setUnchecked</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="setUnchecked-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span></li>
-<li><span class="parameter" id="setUnchecked-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span>, </span></li>
-<li><span class="parameter" id="setUnchecked-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span></span></li>
+<span class="name ">setUnchecked</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="setUnchecked-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span>, </span></li>
+<li><span class="parameter" id="setUnchecked-param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span></span></li>
 </ol>)
 
       
@@ -74,24 +73,26 @@
     </section>
     
 <section class="desc markdown">
-  <p>Sets the element at the given <code>x</code> and <code>y</code> to <code>value</code>.</p>
-<p>The <code>x</code> and <code>y</code> coordinates are zero-based, where <code>x</code> is the horizontal
-axis and <code>y</code> is the vertical axis. The origin <code>(0, 0)</code> is at the top-left
-corner of the grid.</p>
-<p>If the coordinates are out of bounds, the behavior is undefined.</p>
-<div class="markdown-alert markdown-alert-warning">
-<p class="markdown-alert-title">Warning</p>
-<p>Use this method with caution, as it may lead to undefined behavior if
-the coordinates are out of bounds. It is recommended to use <a href="../../sector/Grid/set.html">set</a>
-instead.</p>
-</div>
+  <p>Sets the element at a position in the grid.</p>
+<p>If the position is not within the bounds of the grid, the behavior is
+undefined. This method is intended to be used in cases where the position
+can be trusted, such as an iterator or other trusted synchronous
+operations.</p>
+<h2 id="example">Example</h2>
+<pre class="language-dart"><code class="language-dart">for (var y = 0; y &lt; grid.height; y++) {
+  for (var x = 0; x &lt; grid.width; x++) {
+    final pos = Pos(x, y);
+    grid.setUnchecked(pos, 1);
+  }
+}
+</code></pre>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">void setUnchecked(int x, int y, T value);</code></pre>
+  <pre class="language-dart"><code class="language-dart">void setUnchecked(Pos pos, E value);</code></pre>
 </section>
 
 
@@ -108,7 +109,7 @@ instead.</p>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">setUnchecked abstract method</li>
 </ol>
 
@@ -125,7 +126,7 @@ instead.</p>
 <footer>
   <span class="no-break">
     sector
-      0.2.0
+      0.3.0-alpha
   </span>
 
   

@@ -30,7 +30,7 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">rows property</li>
   </ol>
   <div class="self-name">rows</div>
@@ -66,7 +66,7 @@
 
     <section class="multi-line-signature">
       
-      <span class="returntype"><a href="../../sector/GridAxis-class.html">GridAxis</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+      <span class="returntype"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span>&gt;</span></span>
       <span class="name ">rows</span>
       
 
@@ -74,30 +74,28 @@
 
     
 <section class="desc markdown">
-  <p>All rows in the grid, from top to bottom.</p>
-<p>This is an iterable of all rows in the grid, where each row is an iterable
-of elements in the row. The rows are ordered from top to bottom, where the
-first row is at the top of the grid, and the elements in each row are
-ordered from left to right.</p>
-<h2 id="performance">Performance</h2>
-<p>Depending on the implementation of the grid, this method may be more or
-less efficient. For example, a row-major grid may have a more efficient
-implementation of this method than a column-major grid.</p>
-<h2 id="examples">Examples</h2>
-<pre class="language-dart"><code class="language-dart">final grid = Grid.filled(3, 3, 0);
-for (final row in grid.rows) {
-  print(row);
-}
-// [0, 0, 0]
-// [0, 0, 0]
-// [0, 0, 0]
+  <p>Rows of the grid.</p>
+<p>An iterable of rows, where each row is an iterable representing the
+columns of that particular row, in the order they appear in the grid;
+the first row is the top-most row, and the last row is the bottom-most
+row.</p>
+<h2 id="example">Example</h2>
+<pre class="language-dart"><code class="language-dart">final grid = Grid.fromRows(
+  [
+    [Tile.wall, Tile.wall, Tile.wall],
+    [Tile.wall, Tile.floor, Tile.wall],
+  ],
+  fill: Tile.wall,
+);
+print(grid.rows.first); // [Tile.wall, Tile.wall, Tile.wall]
+print(grid.rows.last); // [Tile.wall, Tile.floor, Tile.wall]
 </code></pre>
 </section>
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">GridAxis&lt;T&gt; get rows;</code></pre>
+  <pre class="language-dart"><code class="language-dart">Iterable&lt;Iterable&lt;E&gt;&gt; get rows =&gt; _Rows(this);</code></pre>
 </section>
 
   </section>
@@ -116,7 +114,7 @@ for (final row in grid.rows) {
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">rows property</li>
 </ol>
 
@@ -133,7 +131,7 @@ for (final row in grid.rows) {
 <footer>
   <span class="no-break">
     sector
-      0.2.0
+      0.3.0-alpha
   </span>
 
   

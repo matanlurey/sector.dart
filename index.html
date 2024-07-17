@@ -52,53 +52,14 @@
       
 <section class="desc markdown">
   <h1 id="sector">Sector</h1>
-<p>A 🔥 <em>fast</em> (benchmarked) and 👍🏼 <em>intuitive</em> (idiomatic) 2D Grid API.</p>
+<p>Fast and intuitive 2D data structures: grids, graphs, pathfinding &amp; more.</p>
 <p><a href="https://github.com/matanlurey/sector/actions/workflows/ci.yaml"><img src="https://github.com/matanlurey/sector/actions/workflows/ci.yaml/badge.svg" alt="CI"></a>
 <a href="https://coveralls.io/github/matanlurey/sector?branch=main"><img src="https://coveralls.io/repos/github/matanlurey/sector/badge.svg?branch=main" alt="Coverage Status"></a>
 <a href="https://pub.dev/packages/sector"><img src="https://img.shields.io/pub/v/sector.svg" alt="Pub Package"></a>
 <a href="https://pub.dev/documentation/sector/latest/"><img src="https://img.shields.io/badge/dartdoc-reference-blue.svg" alt="Dartdoc reference"></a></p>
-<p><img src="https://github.com/matanlurey/sector/assets/168174/259a0d08-8a7c-4830-beb9-491fc1ea47d9" alt="Demo"></p>
 <h2 id="getting-started">Getting Started</h2>
 <p>Add a dependency in your <code>pubspec.yaml</code> or run the following command:</p>
 <pre class="language-bash"><code class="language-bash">dart pub add sector
-</code></pre>
-<h3 id="usage">Usage</h3>
-<p><code>Grid</code> is the 2-dimensional equivalent of a <code>List</code> in Dart:</p>
-<pre class="language-dart"><code class="language-dart">// Create a 2D grid with 80 columns and 24 rows filled with spaces.
-final grid = Grid.filled(80, 24, Tile.empty);
-</code></pre>
-<pre class="language-dart"><code class="language-dart">// Create a 2D grid from an existing 2D matrix-like collection.
-final grid = Grid.fromRows([
-  [Tile.grass, Tile.water, Tile.water, Tile.grass],
-  [Tile.grass, Tile.water, Tile.water, Tile.grass],
-  [Tile.grass, Tile.grass, Tile.grass, Tile.grass],
-]);
-</code></pre>
-<p>Check the bounds, <code>get</code>, and <code>set</code> elements:</p>
-<pre class="language-dart"><code class="language-dart">// Check if a point is within the bounds of the grid.
-if (grid.containsXY(0, 0)) {
-  // ...
-}
-
-// Get the element at a point.
-final element = grid.get(0, 0);
-
-// Set the element at a point.
-grid.set(0, 0, Tile.lava);
-</code></pre>
-<p>Iterate over the grid with <code>rows</code> and <code>columns</code>:</p>
-<pre class="language-dart"><code class="language-dart">// Iterate over the rows of the grid.
-for (final row in grid.rows) {
-  // ...
-}
-</code></pre>
-<p>Use or build your own custom traversals:</p>
-<pre class="language-dart"><code class="language-dart">for (final cell in grid.traverse(drawLine(0, 0, 10, 10))) {
-  // ...
-}
-</code></pre>
-<pre class="language-dart"><code class="language-dart">// Expand or shrink the grid on demand.
-grid.rows.insertFirst([Tile.rocks, Tile.rocks, Tile.rocks, Tile.rocks]);
 </code></pre>
 <h2 id="features">Features</h2>
 <ul>
@@ -108,41 +69,43 @@ grid.rows.insertFirst([Tile.rocks, Tile.rocks, Tile.rocks, Tile.rocks]);
 <li><em>Well-tested</em>, with 100% code coverage and property-based tests.</li>
 <li><em>Lightweight</em>, with zero dependencies, minimal overhead, and benchmarked.</li>
 </ul>
-<h3 id="benchmarks">Benchmarks</h3>
-<p>For a data structure like a <code>Grid</code>, it will almost always be faster to
-hand-write an optimal repsentation for your specific use case. However,
-<code>sector</code> is designed to be a general-purpose 2D grid that is fast enough
-for most applications.</p>
-<p><a href="./benchmark/README.md">Compared to a baseline implementation</a>, <code>Grid</code> is
-roughly the <em>same speed</em> as a hand-optimized implementation, in JIT and AOT
-modes (within &lt;1% difference).</p>
-<div class="markdown-alert markdown-alert-note">
-<p class="markdown-alert-title">Note</p>
-<p>Results on my personal M2 Macbook Pro, your mileage may vary.</p>
-</div>
-<h4 id="baseline">Baseline</h4>
-<pre class="language-sh"><code class="language-sh">$ dart run ./benchmark/baseline.dart
-Allocate 80x24 grid(RunTime): 16.06649213472959 us.
-Iterate 80x24 grid(RunTime): 19.974587703298372 us.
-Removes the top row and adds at bottom(RunTime): 36.68761446674683 us.
+<h2 id="usage">Usage</h2>
+<p>Sector offers a powerful toolkit for graphs, grids, pathfinding, and more.</p>
+<h3 id="graphs">Graphs</h3>
+<p>Create a graph and add edges:</p>
+<pre class="language-dart"><code class="language-dart">final graph = Graph&lt;String&gt;();
 
-$ dart compile exe ./benchmark/baseline.dart
-$ ./benchmark/baseline.exe
-Allocate 80x24 grid(RunTime): 13.26583125 us.
-Iterate 80x24 grid(RunTime): 19.46614307164082 us.
-Removes the top row and adds at bottom(RunTime): 41.7737068469836 us.
+graph.addEdge(Edge('a', 'b'));
+graph.addEdge(Edge('b', 'c'));
+
+print(graph.roots); // ['a']
+print(graph.successors('b')); // ['c']
 </code></pre>
-<h4 id="grid">Grid</h4>
-<pre class="language-sh"><code class="language-sh">$ dart run ./benchmark/list_grid.dart
-Allocate 80x24 grid(RunTime): 15.735960664285184 us.
-Iterate 80x24 grid using for-loops and rows(RunTime): 19.53493233680822 us.
-Removes the top row and adds at bottom(RunTime): 41.14004523902736 us.
+<h3 id="grids">Grids</h3>
+<p>Create a grid and update cells:</p>
+<pre class="language-dart"><code class="language-dart">enum Tile {
+  wall,
+  floor,
+}
 
-$ dart compile exe ./benchmark/list_grid.dart
-$ ./benchmark/list_grid.exe
-Allocate 80x24 grid(RunTime): 13.095811723035522 us.
-Iterate 80x24 grid using for-loops and rows(RunTime): 20.751487810640235 us.
-Removes the top row and adds at bottom(RunTime): 40.39716505669887 us.
+// Create a 5x8 grid filled with `Tile.wall`.
+//
+// When resizing a grid, the `empty` value is used to fill the new cells.
+final grid = Grid.filled(5, 8, empty: Tile.wall);
+
+// Itereate over the grid.
+for (final row in grid.rows) {
+  for (final cell in row) {
+    print(cell);
+  }
+}
+</code></pre>
+<h3 id="pathfinding">Pathfinding</h3>
+<p>Use built-in pathfinding algorithms or write your own:</p>
+<pre class="language-dart"><code class="language-dart">final graph = Walkable.linear(['a', 'b', 'c']);
+
+final path = breadthFirstSearch(graph, 'a', Goal.node('c'));
+print(path); // Path(['a', 'b', 'c'])
 </code></pre>
 <h2 id="contributing">Contributing</h2>
 <p>To run the tests, run:</p>
@@ -154,6 +117,9 @@ Removes the top row and adds at bottom(RunTime): 40.39716505669887 us.
 <p>To preview <code>dartdoc</code> output locally, run:</p>
 <pre class="language-shell"><code class="language-shell">dart tool/dartdoc.dart
 </code></pre>
+<!--
+TODO: Add a note about use of `cspell` (i.e. technical terms needing to be precise).
+-->
 </section>
 
 
@@ -164,7 +130,7 @@ Removes the top row and adds at bottom(RunTime): 40.39716505669887 us.
   <span class="name"><a href="sector/sector-library.html">sector</a></span> 
 
 </dt>
-<dd>A 🔥 <em>fast</em> (benchmarked) and 👍🏼 <em>intuitive</em> (idiomatic) 2D Grid API.
+<dd>
 </dd>
 
         </dl>
@@ -187,6 +153,11 @@ Removes the top row and adds at bottom(RunTime): 40.39716505669887 us.
 
     <h5 class="hidden-xs"><span class="package-name">sector</span> <span class="package-kind">package</span></h5>
     <ol>
+      <li class="section-title">Topics</li>
+        <li><a href="topics/Collections-topic.html">Collections</a></li>
+        <li><a href="topics/Graphs-topic.html">Graphs</a></li>
+        <li><a href="topics/Grids-topic.html">Grids</a></li>
+        <li><a href="topics/Pathfinding-topic.html">Pathfinding</a></li>
       <li class="section-title">Libraries</li>
       <li><a href="sector/sector-library.html">sector</a></li>
 </ol>
@@ -201,7 +172,7 @@ Removes the top row and adds at bottom(RunTime): 40.39716505669887 us.
 <footer>
   <span class="no-break">
     sector
-      0.2.0
+      0.3.0-alpha
   </span>
 
   

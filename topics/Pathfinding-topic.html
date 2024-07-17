@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="Pathfinding topic docs, for the Dart programming language.">
+  <title>Pathfinding topic - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">sector</a></li>
+    <li class="self-crumb">Pathfinding topic</li>
+  </ol>
+  <div class="self-name">Pathfinding</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+<div id="dartdoc-main-content" class="main-content">
+  <h1><span class="kind-category">Pathfinding</span> topic</h1>
+  
+<section class="desc markdown">
+  <p>Pathfinding algorithms and utilities structured over <code>Walkable</code> and
+<code>WeightedWalkable</code>s.</p>
+<hr>
+<p>Table of Contents:</p>
+<ul>
+<li><a href="#finding-a-path">Finding a Path</a></li>
+<li><a href="#directed-graphs">Directed Graphs</a></li>
+<li><a href="#weighted-graphs">Weighted Graphs</a>
+<ul>
+<li><a href="#heuristics">Heuristics</a></li>
+<li><a href="#picking-a-heuristic">Picking a Heuristic</a></li>
+<li><a href="#writing-a-heuristic">Writing a Heuristic</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="finding-a-path">Finding a Path</h2>
+<p>Pathfinding algorithms are implemented as a <code>Pathfinder</code> interface (or mixin),
+which is a function that takes a <code>Walkable</code>, a <code>start</code> node, and teh concept of
+a <code>Goal</code> (which can be a single node, a set of nodes, or a function that
+determines if a node is a goal):</p>
+<pre class="language-dart"><code class="language-dart">final graph = Walkable.linear(['a', 'b', 'c']);
+
+final path = breadthFirstSearch(graph, 'a', Goal.node('c'));
+print(path); // Path(['a', 'b', 'c'])
+</code></pre>
+<h2 id="directed-graphs">Directed Graphs</h2>
+<p>Every <code>Graph</code> (and <code>Walkable</code>) implementation is always <em>directed</em> (even
+undirected graphs are represented as directed graphs with two edges for each
+undirected edge), so every <code>Pathfinder</code> algorithm is designed to work with any
+graph type without adaptation:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Breadth-first_search">BFS</a>, <code>breadthFirstSearch</code>: explore nearest successors first, then widen
+the search.</li>
+<li><a href="https://en.wikipedia.org/wiki/Depth-first_search">DFS</a>, <code>depthFirstSearch</code>: explore a path as far as possible before
+backtracking.</li>
+<li><a href="https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search">IDDFS</a>, <code>iterativeDepthFirstSearch</code>: explore longer and longer paths
+at the cost of similar reexaminations.</li>
+</ul>
+<!--
+## Undirected Graphs
+
+TODO: Add Kruskal, connectedComponents.
+-->
+<h2 id="weighted-graphs">Weighted Graphs</h2>
+<p>While breadth-first search finds the shortest path in an unweighted graph, it
+is not guaranteed to find the shortest path in a <em>weighted</em> graph, where edges
+have a non-uniform cost. Weighted searches use the <code>BestPathfinder</code>, of which
+the only implementation is <code>dijkstra</code>:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra</a>, <code>dijkstra</code>: find the shortest path in a weighted graph.</li>
+</ul>
+<div class="markdown-alert markdown-alert-note">
+<p class="markdown-alert-title">Note</p>
+<p>Dijkstra's algorithm is exhaustive, and can be slow for large graphs.</p>
+</div>
+<h3 id="heuristics">Heuristics</h3>
+<p>Some graph algorithms can optimize on Dijkstra's algorithm by using a heuristic
+to guide the search, which is an estimate of minimum cost to reach the target
+node or goal. The canonical heuristic search algorithm is <code>astar</code>, which
+implements <code>HeuristicPathfinder</code>:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/A*_search_algorithm">A*</a>, <code>astar</code>: find the shortest path in a weighted graph using a heuristic.</li>
+</ul>
+<p>However, as with Dijkstra's algorithm, A* can be slow for large graphs. Other
+heuristic search algorithms are available:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Greedy_best-first_search">Greedy</a>, <code>greedy</code>: find the shortest path in a weighted graph using a
+heuristic, with a focus on speed.</li>
+<li><a href="https://en.wikipedia.org/wiki/Fringe_search">Fringe</a>, <code>fringe</code>: find the shortest path in a weighted graph using a
+heuristic, with a focus on performance.</li>
+</ul>
+<h3 id="picking-a-heuristic">Picking a Heuristic</h3>
+<p>A heuristic is a function that takes a node and returns an estimate of the
+minimum cost to reach the goal.</p>
+<p>For grid-based graphs, built-in <code>GridHeuristic</code> implementations are available:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Taxicab_geometry">Manhattan</a>, <code>GridHeuristic.manhattan</code>: estimate the minimum cost to reach
+the goal using the Manhattan distance.</li>
+<li><a href="https://en.wikipedia.org/wiki/Chebyshev_distance">Diagonal</a>, <code>GridHeuristic.diagonal</code>: estimate the minimum cost to reach
+the goal using the Diagonal distance.</li>
+<li><a href="https://en.wikipedia.org/wiki/Chebyshev_distance">Chebyshev</a>, <code>GridHeuristic.chebyshev</code>: estimate the minimum cost to reach
+the goal using the Chebyshev distance.</li>
+<li><a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean</a>, <code>GridHeuristic.euclidean</code>: estimate the minimum cost to reach
+the goal using the Euclidean distance.</li>
+</ul>
+<p>The heuristics can be further tweaked by applying a <em>ratio</em>, which is a
+multiplier applied to the heuristic value. For example, a ratio of <code>1.0</code> is the
+default heuristic, a ratio of <code>0.0</code> is equivalent to Dijkstra's algorithm, and
+a much higher ratio approaches a greedy search.</p>
+<pre class="language-dart"><code class="language-dart">final heuristic = GridHeuristic.manhattan(ratio: 2.0);
+</code></pre>
+<h3 id="writing-a-heuristic">Writing a Heuristic</h3>
+<p>When tweaking heuristics, or writing your own, following guidelines can help
+optimize the search.</p>
+<p>Given <code>h(n)</code>, the heuristic, and <code>g(n)</code>, the (unknown) actual cost:</p>
+<table>
+<thead>
+<tr>
+<th>Heuristic</th>
+<th>Optimality Guarantee</th>
+<th>Performance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h(n) == 0</code></td>
+<td>Yes <code>^1</code></td>
+<td>Potentially slower</td>
+</tr>
+<tr>
+<td><code>h(n) &lt;= g(n)</code></td>
+<td>Yes</td>
+<td>Varies (slower with lower h(n))</td>
+</tr>
+<tr>
+<td><code>h(n) == g(n)</code></td>
+<td>Yes</td>
+<td>Fastest possible</td>
+</tr>
+<tr>
+<td><code>h(n) &gt; g(n)</code></td>
+<td>No</td>
+<td>Faster</td>
+</tr>
+<tr>
+<td><code>h(n) &gt; g(n)</code>, always</td>
+<td>No <code>^2</code></td>
+<td>Very fast</td>
+</tr>
+</tbody>
+</table>
+<p><code>^1</code>: A<em>becomes Dijsktra's algorithm.
+<code>^2</code>: A</em> becomes Greedy Best-First Search.</p>
+<p>For example, the Manhattan heuristic is <code>h(n) = |x1 - x2| + |y1 - y2|</code>, which
+is admissible (never overestimates the cost as long as the standard moves are
+<code>1.0</code>), and consistent (the cost of moving from <code>n</code> to <code>n'</code> is always less than
+or equal to <code>h(n) - h(n')</code>).</p>
+<p>Other heuristics may not be admissible or consistent, but can still be useful.</p>
+<p>See also: <a href="https://www.redblobgames.com/pathfinding/a-star/introduction.html#heuristics">www.redblobgames.com/pathfinding/a-star/introduction.html#heuristics</a>.</p>
+</section>
+
+
+
+  <section class="summary offset-anchor" id="classes">
+    <h2>Classes</h2>
+
+    <dl>
+      <dt id="Astar">
+  <span class="name "><a href="../sector/Astar-class.html">Astar</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that finds an optimal shortest path using a heuristic.
+</dd>
+
+      <dt id="BreadthFirstSearch">
+  <span class="name "><a href="../sector/BreadthFirstSearch-class.html">BreadthFirstSearch</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that search the shallowest nodes in a graph first.
+</dd>
+
+      <dt id="DepthFirstSearch">
+  <span class="name "><a href="../sector/DepthFirstSearch-class.html">DepthFirstSearch</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that explores the graph in depth first order.
+</dd>
+
+      <dt id="Dijkstra">
+  <span class="name "><a href="../sector/Dijkstra-class.html">Dijkstra</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that finds the best path in a weighted graph.
+</dd>
+
+      <dt id="FringeAstar">
+  <span class="name "><a href="../sector/FringeAstar-class.html">FringeAstar</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that finds an optimal shortest path using a heuristic.
+</dd>
+
+      <dt id="Goal">
+  <span class="name "><a href="../sector/Goal-class.html">Goal</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Represents a <em>goal</em> in a pathfinding algorithm.
+</dd>
+
+      <dt id="GreedyBestFirstSearch">
+  <span class="name "><a href="../sector/GreedyBestFirstSearch-class.html">GreedyBestFirstSearch</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that chooses the locally optimal path at each step.
+</dd>
+
+      <dt id="GridHeuristic">
+  <span class="name "><a href="../sector/GridHeuristic-class.html">GridHeuristic</a></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  A heuristic that estimates the minimum total cost of reaching a <a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a> goal.
+</dd>
+
+      <dt id="Heuristic">
+  <span class="name "><a href="../sector/Heuristic-class.html">Heuristic</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  A heuristic estimates the minimum total cost of reaching a <a href="../sector/Goal-class.html">Goal</a>.
+</dd>
+
+      <dt id="IterativeDepthFirstSearch">
+  <span class="name "><a href="../sector/IterativeDepthFirstSearch-class.html">IterativeDepthFirstSearch</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that explores the graph in iterative deepening depth.
+</dd>
+
+      <dt id="Path">
+  <span class="name "><a href="../sector/Path-class.html">Path</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  A representation of a path in a graph.
+</dd>
+
+    </dl>
+  </section>
+
+  <section class="summary offset-anchor" id="mixins">
+    <h2>Mixins</h2>
+
+    <dl>
+      <dt id="BestPathfinder">
+  <span class="name "><a href="../sector/BestPathfinder-mixin.html">BestPathfinder</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Visits a <a href="../sector/WeightedWalkable-class.html">WeightedWalkable</a>'s nodes, finding a best path to a goal node.
+</dd>
+
+      <dt id="HeuristicPathfinder">
+  <span class="name "><a href="../sector/HeuristicPathfinder-mixin.html">HeuristicPathfinder</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Visits a <a href="../sector/WeightedWalkable-class.html">WeightedWalkable</a>'s nodes, finding a best path to a goal node.
+</dd>
+
+      <dt id="Pathfinder">
+  <span class="name "><a href="../sector/Pathfinder-mixin.html">Pathfinder</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Visits a <a href="../sector/Walkable-class.html">Walkable</a>'s node, finding one or more paths to a goal node.
+</dd>
+
+    </dl>
+  </section>
+
+
+  <section class="summary offset-anchor" id="constants">
+    <h2>Constants</h2>
+
+    <dl class="properties">
+      <dt id="astar" class="constant">
+    <span class="name "><a href="../sector/astar-constant.html">astar</a></span>
+  <span class="signature">&#8594; const <a href="../sector/Astar-class.html">Astar</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that finds an optimal shortest path using a heuristic.
+  
+
+</dd>
+
+      <dt id="breadthFirstSearch" class="constant">
+    <span class="name "><a href="../sector/breadthFirstSearch-constant.html">breadthFirstSearch</a></span>
+  <span class="signature">&#8594; const <a href="../sector/BreadthFirstSearch-class.html">BreadthFirstSearch</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that search the shallowest nodes in a graph first.
+  
+
+</dd>
+
+      <dt id="depthFirstSearch" class="constant">
+    <span class="name "><a href="../sector/depthFirstSearch-constant.html">depthFirstSearch</a></span>
+  <span class="signature">&#8594; const <a href="../sector/DepthFirstSearch-class.html">DepthFirstSearch</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that explores the graph in depth first order.
+  
+
+</dd>
+
+      <dt id="dijkstra" class="constant">
+    <span class="name "><a href="../sector/dijkstra-constant.html">dijkstra</a></span>
+  <span class="signature">&#8594; const <a href="../sector/Dijkstra-class.html">Dijkstra</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that finds the best path in a weighted graph.
+  
+
+</dd>
+
+      <dt id="fringeAstar" class="constant">
+    <span class="name "><a href="../sector/fringeAstar-constant.html">fringeAstar</a></span>
+  <span class="signature">&#8594; const <a href="../sector/FringeAstar-class.html">FringeAstar</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that finds an optimal shortest path using a heuristic.
+  
+
+</dd>
+
+      <dt id="greedyBestFirstSearch" class="constant">
+    <span class="name "><a href="../sector/greedyBestFirstSearch-constant.html">greedyBestFirstSearch</a></span>
+  <span class="signature">&#8594; const <a href="../sector/GreedyBestFirstSearch-class.html">GreedyBestFirstSearch</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that chooses the locally optimal path at each step.
+  
+
+</dd>
+
+      <dt id="iterativeDepthFirstSearch" class="constant">
+    <span class="name "><a href="../sector/iterativeDepthFirstSearch-constant.html">iterativeDepthFirstSearch</a></span>
+  <span class="signature">&#8594; const <a href="../sector/IterativeDepthFirstSearch-class.html">IterativeDepthFirstSearch</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Pathfinding algorithm that explores the graph in iterative deepening depth.
+  
+
+</dd>
+
+    </dl>
+  </section>
+
+
+  <section class="summary offset-anchor" id="functions">
+    <h2>Functions</h2>
+
+    <dl class="callables">
+      <dt id="countPaths" class="callable">
+  <span class="name"><a href="../sector/countPaths.html">countPaths</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="countPaths-param-walkable"><span class="type-annotation"><a href="../sector/WalkableBase-class.html">WalkableBase</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">walkable</span>, </span><span class="parameter" id="countPaths-param-start">{<span>required</span> <span class="type-annotation">T</span> <span class="parameter-name">start</span>, </span><span class="parameter" id="countPaths-param-goal"><span>required</span> <span class="type-annotation"><a href="../sector/Goal-class.html">Goal</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">goal</span>, </span><span class="parameter" id="countPaths-param-tracer"><span class="type-annotation"><a href="../sector/Tracer-class.html">Tracer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span>?</span> <span class="parameter-name">tracer</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>
+  </span>
+  
+    <span class="category pathfinding cp-3 linked" title="This is part of the Pathfinding topic."><a href="../topics/Pathfinding-topic.html">Pathfinding</a></span>
+
+</dt>
+<dd>
+  Counts the total number of paths from <code>start</code> to a <code>goal</code> in a <code>walkable</code>.
+  
+
+</dd>
+
+    </dl>
+  </section>
+
+
+
+
+</div> <!-- /.main-content -->
+
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">sector</a></li>
+    <li class="self-crumb">Pathfinding topic</li>
+</ol>
+
+
+  <h5><span class="package-name">sector</span> <span class="package-kind">package</span></h5>
+  <ol>
+      <li class="section-title">Topics</li>
+        <li><a href="../topics/Collections-topic.html">Collections</a></li>
+        <li><a href="../topics/Graphs-topic.html">Graphs</a></li>
+        <li><a href="../topics/Grids-topic.html">Grids</a></li>
+        <li><a href="../topics/Pathfinding-topic.html">Pathfinding</a></li>
+      <li class="section-title">Libraries</li>
+      <li><a href="../sector/sector-library.html">sector</a></li>
+</ol>
+
+</div>
+
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  <h5>Pathfinding topic</h5>
+  <ol>
+
+    <li class="section-title"><a href="../topics/Pathfinding-topic.html#classes">Classes</a></li>
+      <li><a href="../sector/Astar-class.html">Astar</a></li>
+      <li><a href="../sector/BreadthFirstSearch-class.html">BreadthFirstSearch</a></li>
+      <li><a href="../sector/DepthFirstSearch-class.html">DepthFirstSearch</a></li>
+      <li><a href="../sector/Dijkstra-class.html">Dijkstra</a></li>
+      <li><a href="../sector/FringeAstar-class.html">FringeAstar</a></li>
+      <li><a href="../sector/Goal-class.html">Goal</a></li>
+      <li><a href="../sector/GreedyBestFirstSearch-class.html">GreedyBestFirstSearch</a></li>
+      <li><a href="../sector/GridHeuristic-class.html">GridHeuristic</a></li>
+      <li><a href="../sector/Heuristic-class.html">Heuristic</a></li>
+      <li><a href="../sector/IterativeDepthFirstSearch-class.html">IterativeDepthFirstSearch</a></li>
+      <li><a href="../sector/Path-class.html">Path</a></li>
+
+
+    <li class="section-title"><a href="../topics/Pathfinding-topic.html#mixins">Mixins</a></li>
+      <li><a href="../sector/BestPathfinder-mixin.html">BestPathfinder</a></li>
+      <li><a href="../sector/HeuristicPathfinder-mixin.html">HeuristicPathfinder</a></li>
+      <li><a href="../sector/Pathfinder-mixin.html">Pathfinder</a></li>
+
+
+    <li class="section-title"><a href="../topics/Pathfinding-topic.html#constants">Constants</a></li>
+      <li><a href="../sector/astar-constant.html">astar</a></li>
+      <li><a href="../sector/breadthFirstSearch-constant.html">breadthFirstSearch</a></li>
+      <li><a href="../sector/depthFirstSearch-constant.html">depthFirstSearch</a></li>
+      <li><a href="../sector/dijkstra-constant.html">dijkstra</a></li>
+      <li><a href="../sector/fringeAstar-constant.html">fringeAstar</a></li>
+      <li><a href="../sector/greedyBestFirstSearch-constant.html">greedyBestFirstSearch</a></li>
+      <li><a href="../sector/iterativeDepthFirstSearch-constant.html">iterativeDepthFirstSearch</a></li>
+
+
+    <li class="section-title"><a href="../topics/Pathfinding-topic.html#functions">Functions</a></li>
+      <li><a href="../sector/countPaths.html">countPaths</a></li>
+
+
+
+</ol>
+
+</div>
+<!--/sidebar-offcanvas-right-->
+</main>
+
+<footer>
+  <span class="no-break">
+    sector
+      0.3.0-alpha
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

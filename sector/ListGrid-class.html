@@ -30,7 +30,7 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">sector</a></li>
     <li><a href="../sector/sector-library.html">sector.dart</a></li>
-    <li class="self-crumb">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> class</li>
+    <li class="self-crumb">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span> class</li>
   </ol>
   <div class="self-name">ListGrid</div>
   <form class="search navbar-right" role="search">
@@ -56,56 +56,68 @@
     data-above-sidebar="sector&#47;sector-library-sidebar.html"
     data-below-sidebar="sector&#47;ListGrid-class-sidebar.html">
     <div>
-<h1><span class="kind-class">ListGrid&lt;<wbr><span class="type-parameter">T</span>&gt;</span> class 
+<h1><span class="kind-class">ListGrid&lt;<wbr><span class="type-parameter">E</span>&gt;</span> class 
+    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
     <a href="https://dart.dev/language/class-modifiers#final" class="feature feature-final" title="This class can neither be extended, implemented, nor mixed in.">final</a>
  
+    <span class="category grids cp-2 linked" title="This is part of the Grids topic."><a href="../topics/Grids-topic.html">Grids</a></span>
 </h1></div>
 
     
 <section class="desc markdown">
-  <p>A dense grid implementation using a 1-dimensional <a href="https://api.dart.dev/stable/3.4.4/dart-core/List-class.html">List</a> to store elements.</p>
+  <p>A dense grid implementation using a 1-dimension <a href="https://api.dart.dev/stable/3.4.4/dart-core/List-class.html">List</a> to store elements.</p>
 <p>This implementation is the default grid type returned by the constructors in
 the <a href="../sector/Grid-class.html">Grid</a> interface. It is a row-major dense grid, where each row is stored
-contiguously in memory. This is the most common layout for a grid, and is
-the most efficient for most use-cases.</p>
-<h2 id="examples">Examples</h2>
-<p>The following grid:</p>
-<pre class="language-dart"><code class="language-dart">final grid = ListGrid.fromRows([
-  ['a', 'b', 'c'],
-  ['d', 'e', 'f'],
-  ['g', 'h', 'i'],
-]);
-print(grid);
-</code></pre>
-<p>Produces the following output:</p>
-<pre class="language-txt"><code class="language-txt">┌───────┐
-│ a b c │
-│ d e f │
-│ g h i │
-└───────┘
-</code></pre>
+contiguously in memory; the most common layout for a grid, and is often the
+most efficient for most use-cases.</p>
+<h2 id="performance">Performance</h2>
+<p><a href="../sector/ListGrid-class.html">ListGrid</a> is optimized for dense grids, sacrificing memory efficiency for
+runtime speed.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get</code></td>
+<td><code>O(1)</code></td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td><code>O(1)</code></td>
+</tr>
+<tr>
+<td><code>isEmpty</code></td>
+<td><code>O(n)</code></td>
+</tr>
+<tr>
+<td><code>rows</code> or <code>columns</code></td>
+<td><code>O(n)</code></td>
+</tr>
+</tbody>
+</table>
 </section>
 
 
     <section>
       <dl class="dl-horizontal">
         
-
-        
-        
-  <dt>Mixed in types</dt>
+  <dt>Inheritance</dt>
   <dd>
-    <ul class="comma-separated clazz-relationships">
-        <li><a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></li>
-        <li><a href="../sector/EfficientIndexGrid-mixin.html">EfficientIndexGrid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></li>
+    <ul class="gt-separated dark clazz-relationships">
+      <li><a href="https://api.dart.dev/stable/3.4.4/dart-core/Object-class.html">Object</a></li>
+        <li><a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></li>
+      <li>ListGrid</li>
     </ul>
   </dd>
 
+        
+        
 
-          <dt>Available Extensions</dt>
-          <dd><ul class="comma-separated clazz-relationships">
-              <li><a href="../sector/GridExtension.html">GridExtension</a></li>
-          </ul></dd>
+
 
         
 
@@ -118,79 +130,113 @@ print(grid);
     <h2>Constructors</h2>
 
     <dl class="constructor-summary-list">
-        <dt id="ListGrid.empty" class="callable">
-          <span class="name"><a href="../sector/ListGrid/ListGrid.empty.html">ListGrid.empty</a></span><span class="signature">()</span>
-        </dt>
-        <dd>
-          Creates a new empty grid.
-            <div class="constructor-modifier features">factory</div>
-        </dd>
         <dt id="ListGrid.filled" class="callable">
-          <span class="name"><a href="../sector/ListGrid/ListGrid.filled.html">ListGrid.filled</a></span><span class="signature">(<span class="parameter" id="filled-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span><span class="parameter" id="filled-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">height</span>, </span><span class="parameter" id="filled-param-fill"><span class="type-annotation">T</span> <span class="parameter-name">fill</span></span>)</span>
+          <span class="name"><a href="../sector/ListGrid/ListGrid.filled.html">ListGrid.filled</a></span><span class="signature">(<span class="parameter" id="filled-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span><span class="parameter" id="filled-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">height</span>, </span><span class="parameter" id="filled-param-empty">{<span>required</span> <span class="type-annotation">E</span> <span class="parameter-name">empty</span>, </span><span class="parameter" id="filled-param-fill"><span class="type-annotation">E?</span> <span class="parameter-name">fill</span>}</span>)</span>
         </dt>
         <dd>
-          Creates a new grid with the provided <code>width</code> and <code>height</code>.
+          Creates a new list grid with the given <code>width</code> and <code>height</code>.
             <div class="constructor-modifier features">factory</div>
         </dd>
         <dt id="ListGrid.from" class="callable">
-          <span class="name"><a href="../sector/ListGrid/ListGrid.from.html">ListGrid.from</a></span><span class="signature">(<span class="parameter" id="from-param-grid"><span class="type-annotation"><a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">grid</span></span>)</span>
+          <span class="name"><a href="../sector/ListGrid/ListGrid.from.html">ListGrid.from</a></span><span class="signature">(<span class="parameter" id="from-param-other"><span class="type-annotation"><a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> <span class="parameter-name">other</span>, </span><span class="parameter" id="from-param-empty">{<span class="type-annotation">E?</span> <span class="parameter-name">empty</span>}</span>)</span>
         </dt>
         <dd>
-          Creates a new grid from an existing <code>grid</code>.
+          Creates a new list grid from an existing grid.
             <div class="constructor-modifier features">factory</div>
         </dd>
         <dt id="ListGrid.fromCells" class="callable">
-          <span class="name"><a href="../sector/ListGrid/ListGrid.fromCells.html">ListGrid.fromCells</a></span><span class="signature">(<span class="parameter" id="fromCells-param-cells"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">cells</span>, </span><span class="parameter" id="fromCells-param-width">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>}</span>)</span>
+          <span class="name"><a href="../sector/ListGrid/ListGrid.fromCells.html">ListGrid.fromCells</a></span><span class="signature">(<span class="parameter" id="fromCells-param-elements"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> <span class="parameter-name">elements</span>, </span><span class="parameter" id="fromCells-param-width">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span><span class="parameter" id="fromCells-param-empty"><span class="type-annotation">E?</span> <span class="parameter-name">empty</span>}</span>)</span>
         </dt>
         <dd>
-          Creates a new grid from the provided <code>cells</code>.
-            <div class="constructor-modifier features">factory</div>
-        </dd>
-        <dt id="ListGrid.fromColumns" class="callable">
-          <span class="name"><a href="../sector/ListGrid/ListGrid.fromColumns.html">ListGrid.fromColumns</a></span><span class="signature">(<span class="parameter" id="fromColumns-param-columns"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">columns</span></span>)</span>
-        </dt>
-        <dd>
-          Creates a new grid from the provided <code>columns</code>.
+          Creates a new list grid from <code>elements</code> in row-major order.
             <div class="constructor-modifier features">factory</div>
         </dd>
         <dt id="ListGrid.fromRows" class="callable">
-          <span class="name"><a href="../sector/ListGrid/ListGrid.fromRows.html">ListGrid.fromRows</a></span><span class="signature">(<span class="parameter" id="fromRows-param-rows"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">rows</span></span>)</span>
+          <span class="name"><a href="../sector/ListGrid/ListGrid.fromRows.html">ListGrid.fromRows</a></span><span class="signature">(<span class="parameter" id="fromRows-param-rows"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">rows</span>, </span><span class="parameter" id="fromRows-param-empty">{<span class="type-annotation">E?</span> <span class="parameter-name">empty</span>}</span>)</span>
         </dt>
         <dd>
-          Creates a new grid from the provided <code>rows</code>.
+          Creates a new list grid from a 2D list of rows of columns.
             <div class="constructor-modifier features">factory</div>
         </dd>
         <dt id="ListGrid.generate" class="callable">
-          <span class="name"><a href="../sector/ListGrid/ListGrid.generate.html">ListGrid.generate</a></span><span class="signature">(<span class="parameter" id="generate-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span><span class="parameter" id="generate-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">height</span>, </span><span class="parameter" id="generate-param-generator"><span class="type-annotation">T</span> <span class="parameter-name">generator</span>(<span class="parameter" id="param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span><span class="parameter" id="param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span></span>)</span>)</span>
+          <span class="name"><a href="../sector/ListGrid/ListGrid.generate.html">ListGrid.generate</a></span><span class="signature">(<span class="parameter" id="generate-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span><span class="parameter" id="generate-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">height</span>, </span><span class="parameter" id="generate-param-generator"><span class="type-annotation">E</span> <span class="parameter-name">generator</span>(<span class="parameter" id="param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span></span>), </span><span class="parameter" id="generate-param-empty">{<span>required</span> <span class="type-annotation">E</span> <span class="parameter-name">empty</span>}</span>)</span>
         </dt>
         <dd>
-          Creates a new grid with the provided <code>width</code> and <code>height</code>.
+          Creates a new list grid with the given <code>width</code> and <code>height</code>.
             <div class="constructor-modifier features">factory</div>
         </dd>
-        <dt id="ListGrid.view" class="callable">
-          <span class="name"><a href="../sector/ListGrid/ListGrid.view.html">ListGrid.view</a></span><span class="signature">(<span class="parameter" id="view-param-cells"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">cells</span>, </span><span class="parameter" id="view-param-width">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>}</span>)</span>
+        <dt id="ListGrid.withList" class="callable">
+          <span class="name"><a href="../sector/ListGrid/ListGrid.withList.html">ListGrid.withList</a></span><span class="signature">(<span class="parameter" id="withList-param-elements"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> <span class="parameter-name">elements</span>, </span><span class="parameter" id="withList-param-width">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span><span class="parameter" id="withList-param-empty"><span>required</span> <span class="type-annotation">E</span> <span class="parameter-name">empty</span>}</span>)</span>
         </dt>
         <dd>
-          Creates a grid that is a <em>view</em> of <code>cells</code> in row-major order.
+          Creates a new grid backed by the provided <code>elements</code> in row-major order.
             <div class="constructor-modifier features">factory</div>
         </dd>
     </dl>
   </section>
     
   <section
-      class="summary offset-anchor"
+      class="summary offset-anchor inherited"
       id="instance-properties">
     <h2>Properties</h2>
     <dl class="properties">
-        <dt id="columns" class="property">
-  <span class="name"><a href="../sector/ListGrid/columns.html">columns</a></span>
-  <span class="signature">&#8594; <a href="../sector/GridAxis-class.html">GridAxis</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+        <dt id="bottomLeft" class="property inherited">
+  <span class="name"><a href="../sector/Grid/bottomLeft.html">bottomLeft</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>
   
 
 </dt>
-<dd>
-  All columns in the grid, from left to right.
-  <div class="features"><span class="feature">no setter</span><span class="feature">override</span></div>
+<dd class="inherited">
+  The bottom-left position of the grid.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="bottomRight" class="property inherited">
+  <span class="name"><a href="../sector/Grid/bottomRight.html">bottomRight</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The bottom-right position of the grid.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="cells" class="property inherited">
+  <span class="name"><a href="../sector/Grid/cells.html">cells</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">(<span class="field"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>, </span><span class="field"><span class="type-annotation">E</span></span>)</span>&gt;</span></span>
+  
+
+</dt>
+<dd class="inherited">
+  An iterable of positions and elements in the grid, in row-major order.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="columns" class="property inherited">
+  <span class="name"><a href="../sector/Grid/columns.html">columns</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span>&gt;</span></span>
+  
+
+</dt>
+<dd class="inherited">
+  Columns of the grid.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="empty" class="property inherited">
+  <span class="name"><a href="../sector/Grid/empty.html">empty</a></span>
+  <span class="signature">&#8594; E</span>
+  
+
+</dt>
+<dd class="inherited">
+  The default element for the grid, or the "empty" element.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -206,51 +252,63 @@ print(grid);
 
 </dd>
 
-        <dt id="height" class="property">
-  <span class="name"><a href="../sector/ListGrid/height.html">height</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>
+        <dt id="height" class="property inherited">
+  <span class="name"><a href="../sector/Grid/height.html">height</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>
   
 
 </dt>
-<dd>
-  Height of the grid, in <em>rows</em>.
-  <div class="features"><span class="feature">no setter</span><span class="feature">override</span></div>
+<dd class="inherited">
+  Number of rows in the grid, and the upper bound for the y-coordinate.
+  <div class="features"><span class="feature">getter/setter pair</span><span class="feature">inherited</span></div>
 
 </dd>
 
-        <dt id="isEmpty" class="property">
-  <span class="name"><a href="../sector/ListGrid/isEmpty.html">isEmpty</a></span>
+        <dt id="isEmpty" class="property inherited">
+  <span class="name"><a href="../sector/Grid/isEmpty.html">isEmpty</a></span>
   <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
   
 
 </dt>
-<dd>
-  Returns <code>true</code> if the grid is empty.
-  <div class="features"><span class="feature">no setter</span><span class="feature">override</span></div>
+<dd class="inherited">
+  Whether the grid is zero-length <em>or</em> is entirely filled with <a href="../sector/Grid/empty.html">empty</a>.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
 
 </dd>
 
-        <dt id="layoutHint" class="property">
-  <span class="name"><a href="../sector/ListGrid/layoutHint.html">layoutHint</a></span>
-  <span class="signature">&#8594; <a href="../sector/LayoutHint.html">LayoutHint</a></span>
+        <dt id="isNotEmpty" class="property inherited">
+  <span class="name"><a href="../sector/Grid/isNotEmpty.html">isNotEmpty</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
   
 
 </dt>
-<dd>
-  A hint to algorithms about the internal layout of the grid.
-  <div class="features"><span class="feature">no setter</span><span class="feature">override</span></div>
+<dd class="inherited">
+  Whether the grid contains at least one element that is not <a href="../sector/Grid/empty.html">empty</a>.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
 
 </dd>
 
-        <dt id="rows" class="property">
-  <span class="name"><a href="../sector/ListGrid/rows.html">rows</a></span>
-  <span class="signature">&#8594; <a href="../sector/GridAxis-class.html">GridAxis</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+        <dt id="length" class="property inherited">
+  <span class="name"><a href="../sector/Grid/length.html">length</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>
   
 
 </dt>
-<dd>
-  All rows in the grid, from top to bottom.
-  <div class="features"><span class="feature">no setter</span><span class="feature">override</span></div>
+<dd class="inherited">
+  Total number of elements in the grid.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="rows" class="property inherited">
+  <span class="name"><a href="../sector/Grid/rows.html">rows</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span>&gt;</span></span>
+  
+
+</dt>
+<dd class="inherited">
+  Rows of the grid.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -266,15 +324,39 @@ print(grid);
 
 </dd>
 
-        <dt id="width" class="property">
-  <span class="name"><a href="../sector/ListGrid/width.html">width</a></span>
-  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>
+        <dt id="topLeft" class="property inherited">
+  <span class="name"><a href="../sector/Grid/topLeft.html">topLeft</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>
   
 
 </dt>
-<dd>
-  Width of the grid, in <em>columns</em>.
-  <div class="features"><span class="feature">no setter</span><span class="feature">override</span></div>
+<dd class="inherited">
+  The top-left position of the grid.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="topRight" class="property inherited">
+  <span class="name"><a href="../sector/Grid/topRight.html">topRight</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The top-right position of the grid.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="width" class="property inherited">
+  <span class="name"><a href="../sector/Grid/width.html">width</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  Number of columns in the grid, and the upper bound for the x-coordinate.
+  <div class="features"><span class="feature">getter/setter pair</span><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -282,111 +364,72 @@ print(grid);
   </section>
     
   <section
-      class="summary offset-anchor"
+      class="summary offset-anchor inherited"
       id="instance-methods">
     <h2>Methods</h2>
     <dl class="callables">
-        <dt id="asSubGrid" class="callable inherited">
-  <span class="name"><a href="../sector/Grid/asSubGrid.html">asSubGrid</a></span><span class="signature">(<wbr><span class="parameter" id="asSubGrid-param-left">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">left</span> = <span class="default-value">0</span>, </span><span class="parameter" id="asSubGrid-param-top"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">top</span> = <span class="default-value">0</span>, </span><span class="parameter" id="asSubGrid-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">width</span>, </span><span class="parameter" id="asSubGrid-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">height</span>}</span>)
-    <span class="returntype parameter">&#8594; <a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+        <dt id="asUnweighted" class="callable inherited">
+  <span class="name"><a href="../sector/Grid/asUnweighted.html">asUnweighted</a></span><span class="signature">(<wbr><span class="parameter" id="asUnweighted-param-directions">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>&gt;</span></span> <span class="parameter-name">directions</span> = <span class="default-value">Direction.cardinal</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="../sector/Walkable-class.html">Walkable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>&gt;</span></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  Returns a <em>delegate</em> grid that performs operations relative to this grid.
+  Returns a view of this grid as an unweighted walkable.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
-        <dt id="clear" class="callable">
-  <span class="name"><a href="../sector/ListGrid/clear.html">clear</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Clears all elements in the grid, making it empty.
-  <div class="features"><span class="feature">override</span></div>
-
-</dd>
-
-        <dt id="contains" class="callable">
-  <span class="name"><a href="../sector/ListGrid/contains.html">contains</a></span><span class="signature">(<wbr><span class="parameter" id="contains-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
-  </span>
-  
-
-</dt>
-<dd>
-  Returns <code>true</code> if the grid contains the provided <code>element</code>.
-  <div class="features"><span class="feature">override</span></div>
-
-</dd>
-
-        <dt id="containsXY" class="callable inherited">
-  <span class="name"><a href="../sector/Grid/containsXY.html">containsXY</a></span><span class="signature">(<wbr><span class="parameter" id="containsXY-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span><span class="parameter" id="containsXY-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
+        <dt id="asWeighted" class="callable inherited">
+  <span class="name"><a href="../sector/Grid/asWeighted.html">asWeighted</a></span><span class="signature">(<wbr><span class="parameter" id="asWeighted-param-weight">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/double-class.html">double</a></span> <span class="parameter-name">weight</span>(<span class="parameter" id="param-"><span class="type-annotation">E</span>, </span><span class="parameter" id="param-"><span class="type-annotation">E</span></span>), </span><span class="parameter" id="asWeighted-param-directions"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>&gt;</span></span> <span class="parameter-name">directions</span> = <span class="default-value">Direction.cardinal</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="../sector/WeightedWalkable-class.html">WeightedWalkable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>&gt;</span></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  Returns <code>true</code> if the grid contains an element at the given <code>x</code> and <code>y</code>.
+  Returns a view of this grid as a weighted walkable.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
-        <dt id="containsXYWH" class="callable inherited">
-  <span class="name"><a href="../sector/Grid/containsXYWH.html">containsXYWH</a></span><span class="signature">(<wbr><span class="parameter" id="containsXYWH-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span><span class="parameter" id="containsXYWH-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span>, </span><span class="parameter" id="containsXYWH-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span><span class="parameter" id="containsXYWH-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">height</span></span>)
+        <dt id="containsPos" class="callable inherited">
+  <span class="name"><a href="../sector/Grid/containsPos.html">containsPos</a></span><span class="signature">(<wbr><span class="parameter" id="containsPos-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span></span>)
     <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  Returns <code>true</code> if the grid contains the bounds provided.
+  Returns whether a position is within the bounds of the grid.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="get" class="callable inherited">
-  <span class="name"><a href="../sector/Grid/get.html">get</a></span><span class="signature">(<wbr><span class="parameter" id="get-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span><span class="parameter" id="get-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span></span>)
-    <span class="returntype parameter">&#8594; T</span>
+  <span class="name"><a href="../sector/Grid/get.html">get</a></span><span class="signature">(<wbr><span class="parameter" id="get-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span></span>)
+    <span class="returntype parameter">&#8594; E</span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  Returns the element at the given <code>x</code> and <code>y</code>.
+  Returns the element at a position in the grid.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
-        <dt id="getByIndexUnchecked" class="callable">
-  <span class="name"><a href="../sector/ListGrid/getByIndexUnchecked.html">getByIndexUnchecked</a></span><span class="signature">(<wbr><span class="parameter" id="getByIndexUnchecked-param-index"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">index</span></span>)
-    <span class="returntype parameter">&#8594; T</span>
+        <dt id="getUnchecked" class="callable inherited">
+  <span class="name"><a href="../sector/Grid/getUnchecked.html">getUnchecked</a></span><span class="signature">(<wbr><span class="parameter" id="getUnchecked-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span></span>)
+    <span class="returntype parameter">&#8594; E</span>
   </span>
   
 
 </dt>
-<dd>
-  Given a grid of <code>width * height</code> cells, returns the nth-cell.
-  <div class="features"><span class="feature">override</span></div>
-
-</dd>
-
-        <dt id="getUnchecked" class="callable">
-  <span class="name"><a href="../sector/ListGrid/getUnchecked.html">getUnchecked</a></span><span class="signature">(<wbr><span class="parameter" id="getUnchecked-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span><span class="parameter" id="getUnchecked-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span></span>)
-    <span class="returntype parameter">&#8594; T</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Returns the element at the given <code>x</code> and <code>y</code>.
-  <div class="features"><span class="feature">override</span></div>
+<dd class="inherited">
+  Returns the element at a position in the grid.
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -404,40 +447,27 @@ print(grid);
 </dd>
 
         <dt id="set" class="callable inherited">
-  <span class="name"><a href="../sector/Grid/set.html">set</a></span><span class="signature">(<wbr><span class="parameter" id="set-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span><span class="parameter" id="set-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span>, </span><span class="parameter" id="set-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span></span>)
+  <span class="name"><a href="../sector/Grid/set.html">set</a></span><span class="signature">(<wbr><span class="parameter" id="set-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span>, </span><span class="parameter" id="set-param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span></span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  Sets the element at the given <code>x</code> and <code>y</code> to <code>value</code>.
+  Sets the element at a position in the grid.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
-        <dt id="setUnchecked" class="callable">
-  <span class="name"><a href="../sector/ListGrid/setUnchecked.html">setUnchecked</a></span><span class="signature">(<wbr><span class="parameter" id="setUnchecked-param-x"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">x</span>, </span><span class="parameter" id="setUnchecked-param-y"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">y</span>, </span><span class="parameter" id="setUnchecked-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span></span>)
+        <dt id="setUnchecked" class="callable inherited">
+  <span class="name"><a href="../sector/Grid/setUnchecked.html">setUnchecked</a></span><span class="signature">(<wbr><span class="parameter" id="setUnchecked-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span>, </span><span class="parameter" id="setUnchecked-param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span></span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
-<dd>
-  Sets the element at the given <code>x</code> and <code>y</code> to <code>value</code>.
-  <div class="features"><span class="feature">override</span></div>
-
-</dd>
-
-        <dt id="subGrid" class="callable inherited">
-  <span class="name"><a href="../sector/Grid/subGrid.html">subGrid</a></span><span class="signature">(<wbr><span class="parameter" id="subGrid-param-left">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">left</span> = <span class="default-value">0</span>, </span><span class="parameter" id="subGrid-param-top"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">top</span> = <span class="default-value">0</span>, </span><span class="parameter" id="subGrid-param-width"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">width</span>, </span><span class="parameter" id="subGrid-param-height"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">height</span>}</span>)
-    <span class="returntype parameter">&#8594; <a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
-  </span>
-  
-
-</dt>
 <dd class="inherited">
-  Returns a <em>new</em> grid with a shallow copy of the provided bounds.
+  Sets the element at a position in the grid.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
@@ -451,19 +481,6 @@ print(grid);
 </dt>
 <dd class="inherited">
   A string representation of this object.
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="traverse" class="callable inherited">
-  <span class="name"><a href="../sector/Grid/traverse.html">traverse</a></span><span class="signature">&lt;<wbr><span class="type-parameter">R</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="traverse-param-order"><span class="type-annotation"><a href="../sector/Traversal.html">Traversal</a><span class="signature">&lt;<wbr><span class="type-parameter">R</span>, <span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">order</span></span>)
-    <span class="returntype parameter">&#8594; R</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Returns an iterable that traverses the grid in a specific <code>order</code>.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
@@ -489,6 +506,32 @@ print(grid);
 
 </dd>
 
+        <dt id="operator []" class="callable inherited">
+  <span class="name"><a href="../sector/Grid/operator_get.html">operator []</a></span><span class="signature">(<wbr><span class="parameter" id="[]-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span></span>)
+    <span class="returntype parameter">&#8594; E</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the element at a position in the grid.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="operator []=" class="callable inherited">
+  <span class="name"><a href="../sector/Grid/operator_put.html">operator []=</a></span><span class="signature">(<wbr><span class="parameter" id="[]=-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span>, </span><span class="parameter" id="[]=-param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the element at a position in the grid.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
     </dl>
   </section>
     
@@ -509,7 +552,7 @@ print(grid);
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">sector</a></li>
     <li><a href="../sector/sector-library.html">sector</a></li>
-    <li class="self-crumb">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> class</li>
+    <li class="self-crumb">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span> class</li>
 </ol>
 
 
@@ -525,7 +568,7 @@ print(grid);
 <footer>
   <span class="no-break">
     sector
-      0.2.0
+      0.3.0-alpha
   </span>
 
   

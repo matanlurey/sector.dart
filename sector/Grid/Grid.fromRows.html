@@ -30,7 +30,7 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">Grid.fromRows factory constructor</li>
   </ol>
   <div class="self-name">Grid.fromRows</div>
@@ -57,22 +57,25 @@
       data-above-sidebar="sector&#47;Grid-class-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-constructor">Grid&lt;<wbr><span class="type-parameter">T</span>&gt;.fromRows</span> constructor 
+<h1><span class="kind-constructor">Grid&lt;<wbr><span class="type-parameter">E</span>&gt;.fromRows</span> constructor 
 </h1></div>
 
     <section class="multi-line-signature">
       
-      <span class="name ">Grid&lt;<wbr><span class="type-parameter">T</span>&gt;.fromRows</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="fromRows-param-rows"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">rows</span></span></li>
+      <span class="name ">Grid&lt;<wbr><span class="type-parameter">E</span>&gt;.fromRows</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="fromRows-param-rows"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">rows</span>, </span></li>
+<li><span class="parameter" id="fromRows-param-empty">{<span class="type-annotation">E?</span> <span class="parameter-name">empty</span>}</span></li>
 </ol>)
     </section>
 
     
 <section class="desc markdown">
-  <p>Creates a new grid from the provided <code>rows</code>.</p>
-<p>Each row must have the same length, and the grid will have a width equal
-to the length of the first row, and a height equal to the number of rows.</p>
+  <p>Each element in <code>rows</code>, a column, must have the same length, and the
+resulting grid will have a width equal to the number of columns, and a
+height equal to the length of each column.</p>
 <p>The grid is initialized with the elements in the rows, where the element
-at index <code>(x, y)</code> is <code>rows[y][x]</code>.</p>
+at index <code>(x, y)</code> is <code>rows.elementAt(y).elementAt(x)</code>. If the <code>empty</code>
+element is omitted, the most common element in the rows is used, in which
+case the rows must be non-empty.</p>
 </section>
 
 
@@ -80,8 +83,9 @@ at index <code>(x, y)</code> is <code>rows[y][x]</code>.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">factory Grid.fromRows(
-  Iterable&lt;Iterable&lt;T&gt;&gt; rows,
-) = ListGrid&lt;T&gt;.fromRows;</code></pre>
+  Iterable&lt;Iterable&lt;E&gt;&gt; rows, {
+  E? empty,
+}) = ListGrid&lt;E&gt;.fromRows;</code></pre>
 </section>
 
 
@@ -98,7 +102,7 @@ at index <code>(x, y)</code> is <code>rows[y][x]</code>.</p>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">Grid.fromRows factory constructor</li>
 </ol>
 
@@ -115,7 +119,7 @@ at index <code>(x, y)</code> is <code>rows[y][x]</code>.</p>
 <footer>
   <span class="no-break">
     sector
-      0.2.0
+      0.3.0-alpha
   </span>
 
   

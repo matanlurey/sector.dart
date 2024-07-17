@@ -30,7 +30,7 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">height property</li>
   </ol>
   <div class="self-name">height</div>
@@ -74,16 +74,8 @@
 
     
 <section class="desc markdown">
-  <p>Height of the grid, in <em>rows</em>.</p>
-<p>This is the number of rows in the grid, where each row is a horizontal
-slice of the grid. The height is the maximum <code>y</code> coordinate that can be
-accessed in the grid.</p>
-<p>The height is always greater than or equal to <code>0</code>, where <code>0</code> indicates an
-empty grid. If the height is <code>0</code>, then the width is also <code>0</code>.</p>
-<h2 id="examples">Examples</h2>
-<pre class="language-dart"><code class="language-dart">final grid = Grid.filled(3, 3, 0);
-print(grid.height); // 3
-</code></pre>
+  <p>Number of rows in the grid, and the upper bound for the y-coordinate.</p>
+<p>Always non-negative.</p>
 </section>
 
     
@@ -94,6 +86,36 @@ print(grid.height); // 3
 
   </section>
 
+
+        
+  <section id="setter">
+
+    <section class="multi-line-signature">
+      
+      <span class="returntype">void</span>
+      <span class="name ">height=</span><span class="signature">(<wbr><span class="parameter" id="height=-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/int-class.html">int</a></span> <span class="parameter-name">value</span></span>)</span>
+      
+
+    </section>
+
+    
+<section class="desc markdown">
+  <p>Sets the number of rows in the grid.</p>
+<p>The behavior of this method is as follows:</p>
+<ul>
+<li>If the grid would shrink, elements outside the new bounds are removed.</li>
+<li>If the grid would grow, the new elements are filled with <a href="../../sector/Grid/empty.html">empty</a>.</li>
+</ul>
+<p>The height must be non-negative.</p>
+</section>
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">set height(int value);</code></pre>
+</section>
+
+  </section>
 
 </div> <!-- /.main-content -->
 
@@ -108,7 +130,7 @@ print(grid.height); // 3
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">height property</li>
 </ol>
 
@@ -125,7 +147,7 @@ print(grid.height); // 3
 <footer>
   <span class="no-break">
     sector
-      0.2.0
+      0.3.0-alpha
   </span>
 
   

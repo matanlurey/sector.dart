@@ -30,7 +30,7 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">isEmpty property</li>
   </ol>
   <div class="self-name">isEmpty</div>
@@ -74,21 +74,13 @@
 
     
 <section class="desc markdown">
-  <p>Returns <code>true</code> if the grid is empty.</p>
-<p>A grid is considered empty if it has no elements.</p>
-<h2 id="examples">Examples</h2>
-<pre class="language-dart"><code class="language-dart">final grid = Grid.filled(3, 3, 0);
-print(grid.isEmpty); // false
-
-final empty = Grid.filled(0, 0, 0);
-print(empty.isEmpty); // true
-</code></pre>
+  <p>Whether the grid is zero-length <em>or</em> is entirely filled with <a href="../../sector/Grid/empty.html">empty</a>.</p>
 </section>
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">bool get isEmpty =&gt; width == 0 || height == 0;</code></pre>
+  <pre class="language-dart"><code class="language-dart">bool get isEmpty;</code></pre>
 </section>
 
   </section>
@@ -107,7 +99,7 @@ print(empty.isEmpty); // true
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
     <li class="self-crumb">isEmpty property</li>
 </ol>
 
@@ -124,7 +116,7 @@ print(empty.isEmpty); // true
 <footer>
   <span class="no-break">
     sector
-      0.2.0
+      0.3.0-alpha
   </span>
 
   

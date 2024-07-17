@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="Collections topic docs, for the Dart programming language.">
+  <title>Collections topic - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">sector</a></li>
+    <li class="self-crumb">Collections topic</li>
+  </ol>
+  <div class="self-name">Collections</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+<div id="dartdoc-main-content" class="main-content">
+  <h1><span class="kind-category">Collections</span> topic</h1>
+  
+<section class="desc markdown">
+  <p>A collection of additional data structures used in and by 2D algorithms.</p>
+<p>Sector provides additional common data structures that are used in and by 2D
+algorithms and not found in the Dart SDK or <code>package:collection</code>. These data
+structures are not required to use <code>sector</code> but are provided for convenience in
+building custom algorithms where their performance characteristics are
+beneficial.</p>
+<hr>
+<p>Table of Contents:</p>
+<ul>
+<li><a href="#fast-insertion-order-retained-set-and-map">Fast Insertion-Order Retained <code>Set</code> and <code>Map</code></a></li>
+<li><a href="#fast-minimum-priority-queue">Fast Minimum Priority Queue</a></li>
+<li><a href="#fixed-length-iterable">Fixed Length <code>Iterable</code></a></li>
+</ul>
+<hr>
+<h2 id="fast-insertion-order-retained-set-and-map">Fast Insertion-Order Retained <code>Set</code> and <code>Map</code></h2>
+<p><code>IndexSet</code> and <code>IndexMap</code> provide fast insertion-order retained sets and maps,
+respectively, with <code>O(1)</code> time complexity for most operations, and are used by
+many of the data structures and pathfinding algorithms in this package. For
+example, consider the following:</p>
+<pre class="language-dart"><code class="language-dart">import 'package:sector/sector.dart';
+
+void main() {
+  final set = IndexSet&lt;int&gt;();
+  set.add(1);
+  set.add(2);
+  set.add(3);
+  print(set); // {1, 2, 3}
+
+  final map = IndexMap&lt;int, String&gt;();
+  map[1] = 'one';
+  map[2] = 'two';
+  map.entryOf(3).setOrUpdate('three');
+  print(map); // {1: 'one', 2: 'two', 3: 'three'}
+}
+</code></pre>
+<p>Index collections have <em>most</em> of the same characteristics of <code>LinkedHashSet</code> and
+<code>LinkedHashMap</code> (outside of removals), but 2-3x faster iteration speed, similar
+removal speed to <code>HashSet</code> and <code>HashMap</code>, and only somewhat slower insertion
+speed (~2x of <code>HashSet</code> and <code>HashMap</code>) which is still ~5x faster than
+<code>LinkedHashSet</code> and <code>LinkedHashMap</code>.</p>
+<h2 id="fast-minimum-priority-queue">Fast Minimum Priority Queue</h2>
+<p><code>FlatQueue</code> is a minimum priority queue that supports <code>O(log n)</code> insertion and
+removal, and <code>O(1)</code> minimum value retrieval, but exclusively uses 32-bit <code>int</code>
+keys and 32-bit <code>double</code> priorities associated with each element, making it
+suitable for <a href="Pathfinding-topic.html#weighted-graphs"><code>BestPathfinder</code></a>
+implementations:</p>
+<pre class="language-dart"><code class="language-dart">import 'package:sector/sector.dart';
+
+void main() {
+  final queue = FlatQueue();
+  queue.add(3, 1.0);
+  queue.add(1, 3.0);
+  queue.add(2, 2.0);
+  print(queue.removeFirst()); // 3
+  print(queue.removeFirst()); // 2
+  print(queue.removeFirst()); // 1
+}
+</code></pre>
+<p><code>FlatQueue</code> is used in the A* and Dijkstra pathfinding algorithms.</p>
+<h2 id="fixed-length-iterable">Fixed Length <code>Iterable</code></h2>
+<p>Many of the algorithms in this package return a lazy iterable of fixed length
+during iteration, which can be useful for performance-sensitive code over the
+default <code>extends Iterable&lt;E&gt;</code> implementations:</p>
+<pre class="language-dart"><code class="language-dart">import 'package:sector/sector.dart';
+
+// An iterator over the rows of a grid, with fast random access.
+final class GridRows&lt;E&gt; extends FixedLengthIterable&lt;Iterable&lt;E&gt;&gt; {
+  const GridRows(this._grid);
+  final Grid&lt;E&gt; _grid;
+
+  @override
+  int get length =&gt; _grid.height;
+
+  @override
+  Iterable&lt;E&gt; elementAt(int index) {
+    return Iterable.generate(_grid.width, (x) {
+      return _grid.getUnchecked(Pos(x, index));
+    });
+  }
+}
+</code></pre>
+</section>
+
+
+
+  <section class="summary offset-anchor" id="classes">
+    <h2>Classes</h2>
+
+    <dl>
+      <dt id="AbsentMapEntry">
+  <span class="name "><a href="../sector/AbsentMapEntry-class.html">AbsentMapEntry</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></span> 
+    <span class="category collections cp-0 linked" title="This is part of the Collections topic."><a href="../topics/Collections-topic.html">Collections</a></span>
+
+</dt>
+<dd>
+  An entry for an absent key-value pair in an <a href="../sector/IndexMap-class.html">IndexMap</a>.
+</dd>
+
+      <dt id="FixedLengthIterable">
+  <span class="name "><a href="../sector/FixedLengthIterable-class.html">FixedLengthIterable</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category collections cp-0 linked" title="This is part of the Collections topic."><a href="../topics/Collections-topic.html">Collections</a></span>
+
+</dt>
+<dd>
+  An <a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a> for classes that have an efficient fixed <a href="../sector/FixedLengthIterable/length.html">length</a> property.
+</dd>
+
+      <dt id="FlatQueue">
+  <span class="name "><a href="../sector/FlatQueue-class.html">FlatQueue</a></span> 
+    <span class="category collections cp-0 linked" title="This is part of the Collections topic."><a href="../topics/Collections-topic.html">Collections</a></span>
+
+</dt>
+<dd>
+  A very fast and tiny binary heap priority queue that stores <code>(int, double</code>).
+</dd>
+
+      <dt id="IndexedMapEntry">
+  <span class="name "><a href="../sector/IndexedMapEntry-class.html">IndexedMapEntry</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></span> 
+    <span class="category collections cp-0 linked" title="This is part of the Collections topic."><a href="../topics/Collections-topic.html">Collections</a></span>
+
+</dt>
+<dd>
+  An entry for an present or absent key-value pair in an <a href="../sector/IndexMap-class.html">IndexMap</a>.
+</dd>
+
+      <dt id="IndexMap">
+  <span class="name "><a href="../sector/IndexMap-class.html">IndexMap</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></span> 
+    <span class="category collections cp-0 linked" title="This is part of the Collections topic."><a href="../topics/Collections-topic.html">Collections</a></span>
+
+</dt>
+<dd>
+  A hash map where element iteration order is independent of their hash codes.
+</dd>
+
+      <dt id="IndexSet">
+  <span class="name "><a href="../sector/IndexSet-class.html">IndexSet</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> 
+    <span class="category collections cp-0 linked" title="This is part of the Collections topic."><a href="../topics/Collections-topic.html">Collections</a></span>
+
+</dt>
+<dd>
+  A hash set where element iteration order is independent of their hash codes.
+</dd>
+
+      <dt id="PresentMapEntry">
+  <span class="name "><a href="../sector/PresentMapEntry-class.html">PresentMapEntry</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></span> 
+    <span class="category collections cp-0 linked" title="This is part of the Collections topic."><a href="../topics/Collections-topic.html">Collections</a></span>
+
+</dt>
+<dd>
+  An entry for a present key-value pair in an <a href="../sector/IndexMap-class.html">IndexMap</a>.
+</dd>
+
+    </dl>
+  </section>
+
+
+
+
+
+
+
+
+
+</div> <!-- /.main-content -->
+
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">sector</a></li>
+    <li class="self-crumb">Collections topic</li>
+</ol>
+
+
+  <h5><span class="package-name">sector</span> <span class="package-kind">package</span></h5>
+  <ol>
+      <li class="section-title">Topics</li>
+        <li><a href="../topics/Collections-topic.html">Collections</a></li>
+        <li><a href="../topics/Graphs-topic.html">Graphs</a></li>
+        <li><a href="../topics/Grids-topic.html">Grids</a></li>
+        <li><a href="../topics/Pathfinding-topic.html">Pathfinding</a></li>
+      <li class="section-title">Libraries</li>
+      <li><a href="../sector/sector-library.html">sector</a></li>
+</ol>
+
+</div>
+
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  <h5>Collections topic</h5>
+  <ol>
+
+    <li class="section-title"><a href="../topics/Collections-topic.html#classes">Classes</a></li>
+      <li><a href="../sector/AbsentMapEntry-class.html">AbsentMapEntry</a></li>
+      <li><a href="../sector/FixedLengthIterable-class.html">FixedLengthIterable</a></li>
+      <li><a href="../sector/FlatQueue-class.html">FlatQueue</a></li>
+      <li><a href="../sector/IndexedMapEntry-class.html">IndexedMapEntry</a></li>
+      <li><a href="../sector/IndexMap-class.html">IndexMap</a></li>
+      <li><a href="../sector/IndexSet-class.html">IndexSet</a></li>
+      <li><a href="../sector/PresentMapEntry-class.html">PresentMapEntry</a></li>
+
+
+
+
+
+
+
+
+
+</ol>
+
+</div>
+<!--/sidebar-offcanvas-right-->
+</main>
+
+<footer>
+  <span class="no-break">
+    sector
+      0.3.0-alpha
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+
