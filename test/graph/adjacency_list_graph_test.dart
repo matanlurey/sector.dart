@@ -1,155 +1,191 @@
 import '../prelude.dart';
 
 void main() {
-  test('should be empty with no edges', () {
-    final graph = Graph<String, int>();
-    check(graph).has((g) => g.isEmpty, 'isEmpty').isTrue();
-  });
+  group('empty graph', () {
+    final empty = Graph<void>();
 
-  test('should not be empty with edges', () {
-    final graph = Graph<String, int>();
-    graph.addEdge(42, source: 'A', target: 'B');
-    check(graph).has((g) => g.isNotEmpty, 'isNotEmpty').isTrue();
-  });
-
-  test('addEdge should refuse a circular edge', () {
-    final graph = Graph<String, int>();
-    check(
-      () => graph.addEdge(42, source: 'A', target: 'A'),
-    ).throws<ArgumentError>();
-  });
-
-  test('should create from edges', () {
-    final graph = Graph<String, int>.fromEdges({
-      'A': {'B': 42},
-      'B': {'C': 17},
+    test('should be empty', () {
+      check(empty).isEmpty();
+      check(empty).not((p) => p.isNotEmpty());
     });
-    check(graph).has((g) => g.edges, 'edges').deepEquals([
-      ('A', 'B', 42),
-      ('B', 'C', 17),
+
+    test('should have no edges', () {
+      check(empty.edges).isEmpty();
+    });
+
+    test('should have no successors', () {
+      check(empty.successors(null)).isEmpty();
+    });
+
+    test('should have no roots', () {
+      check(empty.roots).isEmpty();
+    });
+  });
+
+  group('graph from a traversable base', () {
+    final graph = Graph.from(
+      Walkable.linear({1, 2, 3}),
+    );
+
+    test('should not be empty', () {
+      check(graph).isNotEmpty();
+      check(graph).not((p) => p.isEmpty());
+    });
+
+    test('should have edges', () {
+      check(graph.edges).unorderedEquals([
+        Edge(1, 2),
+        Edge(2, 3),
+      ]);
+    });
+
+    test('should have successors', () {
+      check(graph.successors(1)).unorderedEquals([2]);
+      check(graph.successors(2)).unorderedEquals([3]);
+      check(graph.successors(3)).isEmpty();
+    });
+
+    test('should have roots', () {
+      check(graph.roots).unorderedEquals([1, 2]);
+      check(graph).containsRoot(1);
+      check(graph).containsRoot(2);
+      check(graph).not((p) => p.containsRoot(3));
+    });
+  });
+
+  group('graph from edges', () {
+    final graph = Graph.fromEdges([
+      Edge(1, 2),
+      Edge(2, 3),
+    ]);
+
+    test('should not be empty', () {
+      check(graph).isNotEmpty();
+      check(graph).not((p) => p.isEmpty());
+    });
+
+    test('should have edges', () {
+      check(graph.edges).unorderedEquals([
+        Edge(1, 2),
+        Edge(2, 3),
+      ]);
+    });
+
+    test('should have successors', () {
+      check(graph.successors(1)).unorderedEquals([2]);
+      check(graph.successors(2)).unorderedEquals([3]);
+      check(graph.successors(3)).isEmpty();
+    });
+
+    test('should have roots', () {
+      check(graph.roots).unorderedEquals([1, 2]);
+      check(graph).containsRoot(1);
+      check(graph).containsRoot(2);
+      check(graph).not((p) => p.containsRoot(3));
+    });
+
+    test('should contain edge', () {
+      check(graph).containsEdge(Edge(1, 2));
+      check(graph).containsEdge(Edge(2, 3));
+    });
+
+    test('should not contain edge', () {
+      check(graph).not((p) => p.containsEdge(Edge(1, 3)));
+    });
+  });
+
+  test('addEdge should add an edge', () {
+    final graph = Graph.fromEdges([
+      Edge(1, 2),
+    ]);
+
+    check(graph.addEdge(Edge(2, 3))).isTrue();
+    check(graph.edges).unorderedEquals([
+      Edge(1, 2),
+      Edge(2, 3),
     ]);
   });
 
-  test('should add an edge', () {
-    final graph = Graph<String, int>();
-    final previous = graph.addEdge(42, source: 'A', target: 'B');
-    check(previous).isNull();
-    check(graph).has((g) => g.containsEdge('A', 'B'), 'containsEdge').isTrue();
-    check(graph).has((g) => g.getEdge('A', 'B'), 'getEdge').equals(42);
-  });
+  test('addEdge should not add an existing edge', () {
+    final graph = Graph.fromEdges([
+      Edge(1, 2),
+    ]);
 
-  test('should replace an edge', () {
-    final graph = Graph<String, int>();
-    graph.addEdge(42, source: 'A', target: 'B');
-    final previous = graph.addEdge(43, source: 'A', target: 'B');
-    check(previous).equals(42);
-    check(graph).has((g) => g.containsEdge('A', 'B'), 'containsEdge').isTrue();
-    check(graph).has((g) => g.getEdge('A', 'B'), 'getEdge').equals(43);
-  });
-
-  test('should remove an edge', () {
-    final graph = Graph<String, int>();
-    graph.addEdge(42, source: 'A', target: 'B');
-    final previous = graph.removeEdge('A', 'B');
-    check(previous).equals(42);
-    check(graph).has((g) => g.containsEdge('A', 'B'), 'containsEdge').isFalse();
-    check(graph).has((g) => g.getEdge('A', 'B'), 'getEdge').isNull();
-  });
-
-  test('should add and remove vertices implicitly', () {
-    final graph = Graph<String, int>();
-
-    graph.addEdge(42, source: 'A', target: 'B');
-    check(graph).has((g) => g.containsVertex('A'), 'containsVertex').isTrue();
-    check(graph).has((g) => g.containsVertex('B'), 'containsVertex').isTrue();
-
-    graph.removeEdge('A', 'B');
-    check(graph).has((g) => g.containsVertex('A'), 'containsVertex').isFalse();
-    check(graph).has((g) => g.containsVertex('B'), 'containsVertex').isFalse();
-  });
-
-  test('should return all edges', () {
-    final graph = Graph<String, int>();
-    graph.addEdge(42, source: 'A', target: 'B');
-    graph.addEdge(43, source: 'B', target: 'C');
-    check(graph).has((g) => g.edges, 'edges').deepEquals([
-      ('A', 'B', 42),
-      ('B', 'C', 43),
+    check(graph.addEdge(Edge(1, 2))).isFalse();
+    check(graph.edges).unorderedEquals([
+      Edge(1, 2),
     ]);
   });
 
-  test('should return all vertices', () {
-    final graph = Graph<String, int>();
-    graph.addEdge(42, source: 'A', target: 'B');
-    graph.addEdge(43, source: 'B', target: 'C');
-    check(graph).has((g) => g.vertices, 'vertices').deepEquals(['A', 'B', 'C']);
+  test('removeEdge should remove an edge', () {
+    final graph = Graph.fromEdges([
+      Edge(1, 2),
+      Edge(2, 3),
+    ]);
+
+    check(graph.removeEdge(Edge(2, 3))).isTrue();
+    check(graph.edges).unorderedEquals([
+      Edge(1, 2),
+    ]);
   });
 
-  test('should clear all edges and vertices', () {
-    final graph = Graph<String, int>();
-    graph.addEdge(42, source: 'A', target: 'B');
-    graph.addEdge(43, source: 'B', target: 'C');
+  test('removeEdge should not remove a non-existing edge', () {
+    final graph = Graph.fromEdges([
+      Edge(1, 2),
+    ]);
+
+    check(graph.removeEdge(Edge(2, 3))).isFalse();
+    check(graph.edges).unorderedEquals([
+      Edge(1, 2),
+    ]);
+  });
+
+  test('clear should remove all nodes and edges', () {
+    final graph = Graph.fromEdges([
+      Edge(1, 2),
+      Edge(2, 3),
+    ]);
+
     graph.clear();
-    check(graph).has((g) => g.edges, 'edges').isEmpty();
-    check(graph).has((g) => g.vertices, 'vertices').isEmpty();
+    check(graph).isEmpty();
   });
 
-  test('should return edges from a source', () {
-    final graph = Graph<String, int>();
-    graph.addEdge(42, source: 'A', target: 'B');
-    graph.addEdge(43, source: 'A', target: 'C');
-    check(graph).has((g) => g.edgesFrom('A'), 'edgesFrom').deepEquals([
-      ('B', 42),
-      ('C', 43),
-    ]);
-  });
+  group('directed: false', () {
+    test('should create an empty graph', () {
+      final graph = Graph<void>(directed: false);
+      check(graph).isEmpty();
+    });
 
-  test('should return edges to a target', () {
-    final graph = Graph<String, int>();
-    graph.addEdge(42, source: 'A', target: 'B');
-    graph.addEdge(43, source: 'C', target: 'B');
-    check(graph).has((g) => g.edgesTo('B'), 'edgesTo').deepEquals([
-      ('A', 42),
-      ('C', 43),
-    ]);
-  });
+    test('should contain an edge in one direction', () {
+      final graph = Graph.fromEdges(
+        [Edge(1, 2)],
+        directed: false,
+      );
 
-  test('should map edges to a new type', () {
-    final graph = Graph<String, int>();
-    graph.addEdge(42, source: 'A', target: 'B');
-    graph.addEdge(43, source: 'B', target: 'C');
-    final mapped = graph.map((edge) => edge.toString());
-    check(mapped).has((g) => g.edges, 'edges').deepEquals([
-      ('A', 'B', '42'),
-      ('B', 'C', '43'),
-    ]);
-  });
+      check(graph).containsEdge(Edge(1, 2));
+      check(graph).containsEdge(Edge(2, 1));
+    });
 
-  test('should copy an adjacency list graph', () {
-    final graph = Graph<String, int>();
-    graph.addEdge(42, source: 'A', target: 'B');
-    graph.addEdge(43, source: 'B', target: 'C');
-    final copy = Graph.fromGraph(graph);
-    check(copy).has((g) => g.edges, 'edges').deepEquals([
-      ('A', 'B', 42),
-      ('B', 'C', 43),
-    ]);
-  });
+    test('should add an edge in both directions', () {
+      final graph = Graph.fromEdges(
+        [Edge(1, 2)],
+        directed: false,
+      );
 
-  test('should copy another graph', () {
-    final grid = ListGrid<String>.filled(2, 2, ' ');
-    final graph = Graph.withGrid(grid);
-    final copy = Graph.fromGraph(graph);
+      check(graph.edges).unorderedEquals([
+        Edge(1, 2),
+        Edge(2, 1),
+      ]);
+    });
 
-    check(copy).has((g) => g.edges, 'edges').unorderedEquals([
-      (Pos(0, 0), Pos(1, 0), (' ', ' ')),
-      (Pos(0, 0), Pos(0, 1), (' ', ' ')),
-      (Pos(1, 0), Pos(0, 0), (' ', ' ')),
-      (Pos(1, 0), Pos(1, 1), (' ', ' ')),
-      (Pos(0, 1), Pos(0, 0), (' ', ' ')),
-      (Pos(0, 1), Pos(1, 1), (' ', ' ')),
-      (Pos(1, 1), Pos(0, 1), (' ', ' ')),
-      (Pos(1, 1), Pos(1, 0), (' ', ' ')),
-    ]);
+    test('should remove an edge in both directions', () {
+      final graph = Graph.fromEdges(
+        [Edge(1, 2)],
+        directed: false,
+      );
+
+      check(graph.removeEdge(Edge(1, 2))).isTrue();
+      check(graph).isEmpty();
+    });
   });
 }

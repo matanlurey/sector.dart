@@ -1,13 +1,18 @@
+# Format: https://github.com/dart-lang/dartdoc#dartdoc_optionsyaml.
+
 dartdoc:
   categories:
-    "Grids":
-      markdown: doc/grids.md
+    "Collections":
+      markdown: doc/collections.md
     "Graphs":
       markdown: doc/graphs.md
+    "Grids":
+      markdown: doc/grids.md
     "Pathfinding":
       markdown: doc/pathfinding.md
 
   categoryOrder:
-    - "Grids"
+    - "Collections"
     - "Graphs"
+    - "Grids"
     - "Pathfinding"

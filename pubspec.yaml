@@ -1,13 +1,14 @@
 # Format: https://dart.dev/tools/pub/pubspec
 
 name: sector
-description: Fast and intuitive 2D Grid and grid-based utilities for Dart.
+description: |-
+  Fast and intuitive 2D data structures: grids, graphs, pathfinding & more.
 version: 0.3.0-alpha
 
 environment:
   sdk: ^3.4.0
 
-repository: https://github.com/matanlurey/sector
+repository: https://github.com/matanlurey/sector.dart
 
 dependencies:
   lodim: ^0.1.1+1
@@ -17,16 +18,11 @@ dev_dependencies:
   args: ^2.5.0
   benchmark_harness: ^2.2.2
   checks: ^0.3.0
+  collection: ^1.19.0
   coverage: ^1.8.0
   oath:
     git:
       url: https://github.com/matanlurey/oath.dart
-      ref: 597a39fb6aef4e052e419c914a5ea17880327e2a
+      ref: tools
   path: ^1.9.0
-  test: ^1.25.7
-
-dependency_overrides:
-  lodim:
-    git:
-      url: https://github.com/matanlurey/lodim
-      ref: 6fee4a7c01f191167276969248f25439585f73d7
+  test: ^1.25.8
