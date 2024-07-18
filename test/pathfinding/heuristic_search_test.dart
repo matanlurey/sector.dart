@@ -24,7 +24,7 @@ void main() {
   final start = grid.cells.firstWhere((cell) => cell.$2 == 'S').$1;
   final goal = grid.cells.firstWhere((cell) => cell.$2 == 'X').$1;
   final waypoint = grid.cells.firstWhere((cell) => cell.$2 == 'W').$1;
-  final graph = grid.asWeighted(weight: (_, __) => 1);
+  final graph = grid.asWeighted(weight: (_, __, ___) => 1);
 
   late TestTracer<Pos> tracer;
 

@@ -20,14 +20,15 @@ part of '../grid.dart';
 ///
 /// {@category Grids}
 final class GridWalkable<E> with WeightedWalkable<Pos> {
-  static double _defaultWeight(void a, void b) => 1.0;
+  static double _defaultWeight(void a, void b, Pos c) => 1.0;
 
   /// Creates a new lazily built weighted graph from a [grid].
   ///
   /// {@template sector.GridWalkable:weight}
-  /// A weight is derived from the source and target nodes by calling the
-  /// [weight] function. Any value that returns [double.infinity] is considered
-  /// impassable and will not be connected to its neighbors.
+  /// A weight is derived from the source and target nodes and the direction
+  /// moved by calling the [weight] function. Any value that returns
+  /// [double.infinity] is considered impassable and will not be connected to
+  /// its neighbors.
   /// {@endtemplate}
   ///
   /// The [directions] are the relative positions of the neighbors to connect
@@ -35,7 +36,7 @@ final class GridWalkable<E> with WeightedWalkable<Pos> {
   /// which is the four cardinal directions (north, east, south, west).
   factory GridWalkable.from(
     Grid<E> grid, {
-    double Function(E, E) weight = _defaultWeight,
+    double Function(E, E, Pos) weight = _defaultWeight,
     Iterable<Pos> directions = Direction.cardinal,
   }) {
     final list = identical(directions, Direction.cardinal)
@@ -55,7 +56,7 @@ final class GridWalkable<E> with WeightedWalkable<Pos> {
   /// Each diagonal, or _ordinal_ direction is connected to each node.
   factory GridWalkable.diagonal(
     Grid<E> grid, {
-    double Function(E, E) weight = _defaultWeight,
+    double Function(E, E, Pos) weight = _defaultWeight,
   }) {
     return GridWalkable._(
       grid,
@@ -71,7 +72,7 @@ final class GridWalkable<E> with WeightedWalkable<Pos> {
   /// Both the cardinal and ordinal directions are connected to each node.
   factory GridWalkable.all8Directions(
     Grid<E> grid, {
-    double Function(E, E) weight = _defaultWeight,
+    double Function(E, E, Pos) weight = _defaultWeight,
   }) {
     return GridWalkable._(
       grid,
@@ -88,7 +89,7 @@ final class GridWalkable<E> with WeightedWalkable<Pos> {
 
   final Grid<E> _grid;
   final List<Pos> _directions;
-  final double Function(E, E) _weight;
+  final double Function(E, E, Pos) _weight;
 
   @override
   bool containsRoot(Pos node) {
@@ -152,6 +153,7 @@ final class _GridSuccessorsIterator<E> implements Iterator<(Pos, double)> {
       final weight = _adaptor._weight(
         _adaptor._grid.getUnchecked(_node),
         _adaptor._grid.getUnchecked(next),
+        next - _node,
       );
       if (weight != double.infinity) {
         current = (next, weight);
