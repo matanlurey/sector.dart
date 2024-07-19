@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the IndexMap class from the sector library, for the Dart programming language.">
+  <title>IndexMap class - sector library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">sector</a></li>
+    <li><a href="../sector/sector-library.html">sector.dart</a></li>
+    <li class="self-crumb">IndexMap<span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span> class</li>
+  </ol>
+  <div class="self-name">IndexMap</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="sector&#47;sector-library-sidebar.html"
+    data-below-sidebar="sector&#47;IndexMap-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">IndexMap&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span> class 
+    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
+    <a href="https://dart.dev/language/class-modifiers#final" class="feature feature-final" title="This class can neither be extended, implemented, nor mixed in.">final</a>
+ 
+    <span class="category collections cp-0 linked" title="This is part of the Collections topic."><a href="../topics/Collections-topic.html">Collections</a></span>
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>A hash map where element iteration order is independent of their hash codes.</p>
+<h2 id="iteration-order">Iteration Order</h2>
+<p>The keys, <code>K</code>, have a consistent order that is determined by the sequence
+of <a href="https://api.flutter.dev/flutter/dart-core/Map/operator_put.html">operator[]=</a> and <a href="https://api.flutter.dev/flutter/dart-core/Map/remove.html">remove</a> calls (or similar operations):</p>
+<pre class="language-dart"><code class="language-dart">final map = IndexMap&lt;int, String&gt;();
+map[1] = 'a';
+map[2] = 'b';
+map[3] = 'c';
+map.remove(2);
+print(map); // {1: 'a', 3: 'c'}
+</code></pre>
+<p>Unlike <a href="https://api.flutter.dev/flutter/dart-collection/LinkedHashMap-class.html">LinkedHashMap</a>, <a href="https://api.flutter.dev/flutter/dart-core/Map/remove.html">remove</a> calls (and similar operations) shift
+the iteration order; a removed element is swapped with the last element
+in the map, and then removed:</p>
+<pre class="language-dart"><code class="language-dart">final map = IndexMap&lt;int, String&gt;();
+map[1] = 'a';
+map[2] = 'b';
+map[3] = 'c';
+map.remove(1);
+print(map); // {3: 'c', 2: 'b'}
+</code></pre>
+<h2 id="index-access">Index Access</h2>
+<p>Like <a href="../sector/IndexSet-class.html">IndexSet</a>, <a href="../sector/IndexMap-class.html">IndexMap</a> provides an additional set of operators.</p>
+<p><a href="../sector/IndexMap/entryAt.html">entryAt</a> returns a specialized key-value pair type, <a href="../sector/IndexedMapEntry-class.html">IndexedMapEntry</a>. A
+logical extension to <a href="https://api.flutter.dev/flutter/dart-core/MapEntry-class.html">MapEntry</a>, <a href="../sector/IndexedMapEntry-class.html">IndexedMapEntry</a> not only contains the
+<code>key</code> and <code>value</code>, but also the <code>index</code> of the element in the iteration
+sequence:</p>
+<pre class="language-dart"><code class="language-dart">final map = IndexMap&lt;String, bool&gt;();
+map['a'] = true;
+map['b'] = false;
+
+final entry = map.getEntryAt(1);
+print(entry.key); // 'b'
+print(entry.value); // false
+print(entry.index); // 1
+</code></pre>
+<p>However, unlike even <a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a>, <a href="../sector/IndexMap-class.html">IndexMap</a> can return an <a href="../sector/IndexedMapEntry-class.html">IndexedMapEntry</a>
+<em>even</em> if the key is not yet present in the map, giving a powerful and
+performant way to insert elements at a specific index, using <a href="../sector/IndexMap/entryOf.html">entryOf</a> and
+<a href="../sector/IndexedMapEntry/setOrUpdate.html">IndexedMapEntry.setOrUpdate</a>.</p>
+<pre class="language-dart"><code class="language-dart">final map = IndexMap&lt;String, bool&gt;();
+map['a'] = true;
+
+final a = map.tryGet('a');
+print(a.isPresent); // true
+print(a.key); // 'a'
+print(a.value); // true
+a.value = false;
+a.setOrUpdate(false);
+print(map); // {a: false}
+
+final b = map.tryGet('b');
+print(b.isAbsent); // false
+print(b.key); // 'b'
+print(b.value); // n
+
+b.setOrUpdate(false);
+print(map); // {a: false, b: false}
+</code></pre>
+<h2 id="performance">Performance</h2>
+<p>If you want the properties of <a href="../sector/IndexMap-class.html">IndexMap</a>, or its strongest performance
+characteristics fit your workload, it might be the fastest pure Dart <a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a>
+implementation available; for example <code>package:sector</code> uses it internally
+for its graph search algorithms.</p>
+<p><a href="../sector/IndexMap-class.html">IndexMap</a> derives some performance facts from how it is constructed:</p>
+<ol>
+<li>Iteration is as fast as a <a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a> (~2-3x faster than <code>dart:collection</code>).</li>
+<li>Removals are nearly as fast as <a href="https://api.flutter.dev/flutter/dart-collection/HashMap-class.html">HashMap</a> (~300-400x faster).</li>
+<li>Creation is ~2x slower than <a href="https://api.flutter.dev/flutter/dart-collection/HashMap-class.html">HashMap</a>, 5x faster than <a href="https://api.flutter.dev/flutter/dart-collection/LinkedHashMap-class.html">LinkedHashMap</a>.</li>
+</ol>
+<div class="markdown-alert markdown-alert-tip">
+<p class="markdown-alert-title">Tip</p>
+<p>Profile your workload to be sure.</p>
+</div>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></li>
+    </ul>
+  </dd>
+        
+
+
+
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+
+    <dl class="constructor-summary-list">
+        <dt id="IndexMap" class="callable">
+          <span class="name"><a href="../sector/IndexMap/IndexMap.html">IndexMap</a></span><span class="signature">(<span class="parameter" id="-param-equals">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">equals</span>(<span class="parameter" id="param-e1"><span class="type-annotation">K</span> <span class="parameter-name">e1</span>, </span><span class="parameter" id="param-e2"><span class="type-annotation">K</span> <span class="parameter-name">e2</span></span>)?, </span><span class="parameter" id="-param-hashCode"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">hashCode</span>(<span class="parameter" id="param-e"><span class="type-annotation">K</span> <span class="parameter-name">e</span></span>)?, </span><span class="parameter" id="-param-isValidKey"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isValidKey</span>(<span class="parameter" id="param-potentialKey"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">potentialKey</span></span>)?}</span>)</span>
+        </dt>
+        <dd>
+          Creates an insertion-ordered indexing based <a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a>.
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+        <dt id="IndexMap.from" class="callable">
+          <span class="name"><a href="../sector/IndexMap/IndexMap.from.html">IndexMap.from</a></span><span class="signature">(<span class="parameter" id="from-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></span> <span class="parameter-name">other</span></span>)</span>
+        </dt>
+        <dd>
+          Creates an <a href="../sector/IndexMap-class.html">IndexMap</a> from <code>other</code>.
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+        <dt id="IndexMap.fromEntries" class="callable">
+          <span class="name"><a href="../sector/IndexMap/IndexMap.fromEntries.html">IndexMap.fromEntries</a></span><span class="signature">(<span class="parameter" id="fromEntries-param-entries"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/MapEntry-class.html">MapEntry</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">entries</span></span>)</span>
+        </dt>
+        <dd>
+          Creates an <a href="../sector/IndexMap-class.html">IndexMap</a> from <code>entries</code>.
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+        <dt id="IndexMap.identity" class="callable">
+          <span class="name"><a href="../sector/IndexMap/IndexMap.identity.html">IndexMap.identity</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          Creates an <a href="../sector/IndexMap-class.html">IndexMap</a> that uses <a href="https://api.flutter.dev/flutter/dart-core/identical.html">identical</a> and <a href="https://api.flutter.dev/flutter/dart-core/identityHashCode.html">identityHashCode</a>.
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="entries" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/entries.html">entries</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/MapEntry-class.html">MapEntry</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></span>&gt;</span></span>
+  
+
+</dt>
+<dd class="inherited">
+  The map entries of <a href="../sector/IndexMap-class.html">this</a>.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isEmpty" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/isEmpty.html">isEmpty</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  Whether there is no key/value pair in the map.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isNotEmpty" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/isNotEmpty.html">isNotEmpty</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  Whether there is at least one key/value pair in the map.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="keys" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/keys.html">keys</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>&gt;</span></span>
+  
+
+</dt>
+<dd class="inherited">
+  The keys of <a href="../sector/IndexMap-class.html">this</a>.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="length" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/length.html">length</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The number of key/value pairs in the map.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="values" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/values.html">values</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter">V</span>&gt;</span></span>
+  
+
+</dt>
+<dd class="inherited">
+  The values of <a href="../sector/IndexMap-class.html">this</a>.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="addAll" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/addAll.html">addAll</a></span><span class="signature">(<wbr><span class="parameter" id="addAll-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Adds all key/value pairs of <code>other</code> to this map.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="addEntries" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/addEntries.html">addEntries</a></span><span class="signature">(<wbr><span class="parameter" id="addEntries-param-newEntries"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/MapEntry-class.html">MapEntry</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">newEntries</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Adds all key/value pairs of <code>newEntries</code> to this map.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="cast" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/cast.html">cast</a></span><span class="signature">&lt;<wbr><span class="type-parameter">RK</span>, <span class="type-parameter">RV</span>&gt;</span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter">RK</span>, <span class="type-parameter">RV</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Provides a view of this map as having <code>RK</code> keys and <code>RV</code> instances,
+if necessary.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="clear" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/clear.html">clear</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Removes all entries from the map.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="containsKey" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/containsKey.html">containsKey</a></span><span class="signature">(<wbr><span class="parameter" id="containsKey-param-key"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">key</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Whether this map contains the given <code>key</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="containsValue" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/containsValue.html">containsValue</a></span><span class="signature">(<wbr><span class="parameter" id="containsValue-param-value"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Whether this map contains the given <code>value</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="entryAt" class="callable">
+  <span class="name"><a href="../sector/IndexMap/entryAt.html">entryAt</a></span><span class="signature">(<wbr><span class="parameter" id="entryAt-param-index"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">index</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../sector/PresentMapEntry-class.html">PresentMapEntry</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the map entry at the given <code>index</code>.
+  
+
+</dd>
+
+        <dt id="entryOf" class="callable">
+  <span class="name"><a href="../sector/IndexMap/entryOf.html">entryOf</a></span><span class="signature">(<wbr><span class="parameter" id="entryOf-param-key"><span class="type-annotation">K</span> <span class="parameter-name">key</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../sector/IndexedMapEntry-class.html">IndexedMapEntry</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the map entry for the given <code>key</code>.
+  
+
+</dd>
+
+        <dt id="forEach" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/forEach.html">forEach</a></span><span class="signature">(<wbr><span class="parameter" id="forEach-param-action"><span class="type-annotation">void</span> <span class="parameter-name">action</span>(<span class="parameter" id="param-key"><span class="type-annotation">K</span> <span class="parameter-name">key</span>, </span><span class="parameter" id="param-value"><span class="type-annotation">V</span> <span class="parameter-name">value</span></span>)</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Applies <code>action</code> to each key/value pair of the map.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="map" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/map.html">map</a></span><span class="signature">&lt;<wbr><span class="type-parameter">K2</span>, <span class="type-parameter">V2</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="map-param-convert"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/MapEntry-class.html">MapEntry</a><span class="signature">&lt;<wbr><span class="type-parameter">K2</span>, <span class="type-parameter">V2</span>&gt;</span></span> <span class="parameter-name">convert</span>(<span class="parameter" id="param-key"><span class="type-annotation">K</span> <span class="parameter-name">key</span>, </span><span class="parameter" id="param-value"><span class="type-annotation">V</span> <span class="parameter-name">value</span></span>)</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter">K2</span>, <span class="type-parameter">V2</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a new map where all entries of this map are transformed by
+the given <code>convert</code> function.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="putIfAbsent" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/putIfAbsent.html">putIfAbsent</a></span><span class="signature">(<wbr><span class="parameter" id="putIfAbsent-param-key"><span class="type-annotation">K</span> <span class="parameter-name">key</span>, </span><span class="parameter" id="putIfAbsent-param-ifAbsent"><span class="type-annotation">V</span> <span class="parameter-name">ifAbsent</span>()</span>)
+    <span class="returntype parameter">&#8594; V</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Look up the value of <code>key</code>, or add a new entry if it isn't there.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="remove" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/remove.html">remove</a></span><span class="signature">(<wbr><span class="parameter" id="remove-param-key"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">key</span></span>)
+    <span class="returntype parameter">&#8594; V?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Removes <code>key</code> and its associated value, if present, from the map.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="removeWhere" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/removeWhere.html">removeWhere</a></span><span class="signature">(<wbr><span class="parameter" id="removeWhere-param-test"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">test</span>(<span class="parameter" id="param-key"><span class="type-annotation">K</span> <span class="parameter-name">key</span>, </span><span class="parameter" id="param-value"><span class="type-annotation">V</span> <span class="parameter-name">value</span></span>)</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Removes all entries of this map that satisfy the given <code>test</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="update" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/update.html">update</a></span><span class="signature">(<wbr><span class="parameter" id="update-param-key"><span class="type-annotation">K</span> <span class="parameter-name">key</span>, </span><span class="parameter" id="update-param-update"><span class="type-annotation">V</span> <span class="parameter-name">update</span>(<span class="parameter" id="param-value"><span class="type-annotation">V</span> <span class="parameter-name">value</span></span>), </span><span class="parameter" id="update-param-ifAbsent">{<span class="type-annotation">V</span> <span class="parameter-name">ifAbsent</span>()?}</span>)
+    <span class="returntype parameter">&#8594; V</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Updates the value for the provided <code>key</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="updateAll" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/updateAll.html">updateAll</a></span><span class="signature">(<wbr><span class="parameter" id="updateAll-param-update"><span class="type-annotation">V</span> <span class="parameter-name">update</span>(<span class="parameter" id="param-key"><span class="type-annotation">K</span> <span class="parameter-name">key</span>, </span><span class="parameter" id="param-value"><span class="type-annotation">V</span> <span class="parameter-name">value</span></span>)</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Updates all values.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="operator []" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/operator_get.html">operator []</a></span><span class="signature">(<wbr><span class="parameter" id="[]-param-key"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">key</span></span>)
+    <span class="returntype parameter">&#8594; V?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The value for the given <code>key</code>, or <code>null</code> if <code>key</code> is not in the map.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="operator []=" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Map/operator_put.html">operator []=</a></span><span class="signature">(<wbr><span class="parameter" id="[]=-param-key"><span class="type-annotation">K</span> <span class="parameter-name">key</span>, </span><span class="parameter" id="[]=-param-value"><span class="type-annotation">V</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Associates the <code>key</code> with the given <code>value</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">sector</a></li>
+    <li><a href="../sector/sector-library.html">sector</a></li>
+    <li class="self-crumb">IndexMap<span class="signature">&lt;<wbr><span class="type-parameter">K</span>, <span class="type-parameter">V</span>&gt;</span> class</li>
+</ol>
+
+
+    <h5>sector library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    sector
+      0.3.0-alpha+2
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

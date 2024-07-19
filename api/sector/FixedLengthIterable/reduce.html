@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the reduce method from the FixedLengthIterable class, for the Dart programming language.">
+  <title>reduce method - FixedLengthIterable class - sector library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">sector</a></li>
+    <li><a href="../../sector/sector-library.html">sector.dart</a></li>
+    <li><a href="../../sector/FixedLengthIterable-class.html">FixedLengthIterable<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">reduce method</li>
+  </ol>
+  <div class="self-name">reduce</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="sector&#47;FixedLengthIterable-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">reduce</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.flutter.dev/flutter/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
+
+<span class="returntype">E</span>
+<span class="name ">reduce</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="reduce-param-combine"><span class="type-annotation">E</span> <span class="parameter-name">combine</span>(<ol class="parameter-list"><li><span class="parameter" id="param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span>, </span></li>
+<li><span class="parameter" id="param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span></li>
+</ol>
+)</span></li>
+</ol>)
+
+      <div class="features"><span class="feature">override</span></div>
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Reduces a collection to a single value by iteratively combining elements
+of the collection using the provided function.</p>
+<p>The iterable must have at least one element.
+If it has only one element, that element is returned.</p>
+<p>Otherwise this method starts with the first element from the iterator,
+and then combines it with the remaining elements in iteration order,
+as if by:</p>
+<pre class="language-dart"><code>E value = iterable.first;
+iterable.skip(1).forEach((element) {
+  value = combine(value, element);
+});
+return value;
+</code></pre>
+<p>Example of calculating the sum of an iterable:</p>
+<pre class="language-dart"><code class="language-dart">final numbers = &lt;double&gt;[10, 2, 5, 0.5];
+final result = numbers.reduce((value, element) =&gt; value + element);
+print(result); // 17.5
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@override
+E reduce(E Function(E value, E element) combine) {
+  if (isEmpty) {
+    throw _noElements();
+  }
+  var value = elementAt(0);
+  for (var i = 1; i &lt; length; i++) {
+    value = combine(value, elementAt(i));
+  }
+  return value;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">sector</a></li>
+    <li><a href="../../sector/sector-library.html">sector</a></li>
+    <li><a href="../../sector/FixedLengthIterable-class.html">FixedLengthIterable<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">reduce method</li>
+</ol>
+
+
+    <h5>FixedLengthIterable class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    sector
+      0.3.0-alpha+2
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

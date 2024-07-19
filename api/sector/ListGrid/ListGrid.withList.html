@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the ListGrid.withList constructor from Class ListGrid from the sector library, for the Dart programming language.">
+  <title>ListGrid.withList constructor - ListGrid - sector library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">sector</a></li>
+    <li><a href="../../sector/sector-library.html">sector.dart</a></li>
+    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">ListGrid.withList factory constructor</li>
+  </ol>
+  <div class="self-name">ListGrid.withList</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="sector&#47;ListGrid-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">ListGrid&lt;<wbr><span class="type-parameter">E</span>&gt;.withList</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">ListGrid&lt;<wbr><span class="type-parameter">E</span>&gt;.withList</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="withList-param-elements"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> <span class="parameter-name">elements</span>, </span></li>
+<li><span class="parameter" id="withList-param-width">{<span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span></li>
+<li><span class="parameter" id="withList-param-empty"><span>required</span> <span class="type-annotation">E</span> <span class="parameter-name">empty</span>}</span></li>
+</ol>)
+    </section>
+
+    
+<section class="desc markdown">
+  <p>Creates a new grid backed by the provided <code>elements</code> in row-major order.</p>
+<p>The grid will have a width of <code>width</code>, and the number of rows is
+determined by the number of elements divided by the width, which must be
+an integer.</p>
+<p>Changes to the provided list will be reflected in the grid, and changes
+to the grid will be reflected in the list accordingly, with <code>elements[i]</code>
+being the element at position <code>Pos(i % width, i ~/ width)</code>.</p>
+<div class="markdown-alert markdown-alert-warning">
+<p class="markdown-alert-title">Warning</p>
+<p>The provided list must not be modified in a way that violates the
+constraints of the grid, such as changing the length of the list, or
+changing the elements in a way that violates the width of the grid.</p>
+<p>If the list will support appending rows or columns at runtime, access
+must carefully avoid modifying the length during iteration, including by
+<a href="../../sector/Grid/columns.html">ListGrid.columns</a>, <a href="../../sector/Grid/rows.html">ListGrid.rows</a>, or any other iterative operation.</p>
+</div>
+<h2 id="performance">Performance</h2>
+<p>This constructor exists in order to avoid copying the elements of the list
+into a new list, which can be expensive for large lists, or for using a
+different sub-type of <a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a> such as <a href="https://api.flutter.dev/flutter/dart-typed_data/Uint8List-class.html">Uint8List</a> or <a href="https://api.flutter.dev/flutter/dart-typed_data/Float32List-class.html">Float32List</a>.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">factory ListGrid.withList(
+  List&lt;E&gt; elements, {
+  required int width,
+  required E empty,
+}) {
+  final height = elements.length ~&#47; width;
+  if (elements.length % width != 0) {
+    throw ArgumentError.value(
+      elements,
+      &#39;elements&#39;,
+      &#39;Must have a length that is a multiple of $width.&#39;,
+    );
+  }
+  return _ListGrid(width, height, empty, elements);
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">sector</a></li>
+    <li><a href="../../sector/sector-library.html">sector</a></li>
+    <li><a href="../../sector/ListGrid-class.html">ListGrid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">ListGrid.withList factory constructor</li>
+</ol>
+
+
+    <h5>ListGrid class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    sector
+      0.3.0-alpha+2
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

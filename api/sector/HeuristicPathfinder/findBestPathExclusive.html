@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the findBestPathExclusive method from the HeuristicPathfinder mixin, for the Dart programming language.">
+  <title>findBestPathExclusive method - HeuristicPathfinder mixin - sector library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">sector</a></li>
+    <li><a href="../../sector/sector-library.html">sector.dart</a></li>
+    <li><a href="../../sector/HeuristicPathfinder-mixin.html">HeuristicPathfinder<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">findBestPathExclusive&lt;<wbr><span class="type-parameter">T extends E</span>&gt; abstract method</li>
+  </ol>
+  <div class="self-name">findBestPathExclusive</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="sector&#47;HeuristicPathfinder-mixin-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">findBestPathExclusive&lt;<wbr><span class="type-parameter">T extends E</span>&gt;</span> abstract method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype">(<span class="field"><span class="type-annotation"><a href="../../sector/Path-class.html">Path</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>, </span><span class="field"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span></span>)</span>
+<span class="name ">findBestPathExclusive</span>&lt;<wbr><span class="type-parameter">T extends E</span>&gt;(<wbr><ol class="parameter-list"><li><span class="parameter" id="findBestPathExclusive-param-graph"><span class="type-annotation"><a href="../../sector/WeightedWalkable-class.html">WeightedWalkable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">graph</span>, </span></li>
+<li><span class="parameter" id="findBestPathExclusive-param-start"><span class="type-annotation">T</span> <span class="parameter-name">start</span>, </span></li>
+<li><span class="parameter" id="findBestPathExclusive-param-goal"><span class="type-annotation"><a href="../../sector/Goal-class.html">Goal</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">goal</span>, </span></li>
+<li><span class="parameter" id="findBestPathExclusive-param-heuristic"><span class="type-annotation"><a href="../../sector/Heuristic-class.html">Heuristic</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">heuristic</span>, </span></li>
+<li><span class="parameter" id="findBestPathExclusive-param-tracer">{<span class="type-annotation"><a href="../../sector/Tracer-class.html">Tracer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span>?</span> <span class="parameter-name">tracer</span>}</span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Returns an optimal path (and it's total cost) in <code>graph</code> from <code>start</code> to a
+node that satisfies <code>goal</code>.</p>
+<p>Unlike <a href="../../sector/HeuristicPathfinder/findBestPath.html">findBestPath</a>, this method does not check if the goal is
+<em>initially</em> satisfied by the start node, although it may be satisfied by
+the start node if it is an eventual successor of itself (i.e. a cycle in
+the graph).</p>
+<p>If the path is not found, the total cost will be <a href="https://api.flutter.dev/flutter/dart-core/double/infinity-constant.html">double.infinity</a>.</p>
+<p>If no path can be found, <a href="../../sector/Path/notFound-constant.html">Path.notFound</a> is returned.</p>
+<p>A node will never be included in the path more than once, as determined
+by <a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">Object.==</a> on the node, unless the source node is also a successor of
+itself, in which case it will be included twice (once at the beginning
+and once at the end), otherwise it will only be included at the start.</p>
+<h2 id="impassable-nodes">Impassable Nodes</h2>
+<p>There are two ways to represent impassable nodes in a graph:</p>
+<ul>
+<li>Omit the node from the graph entirely, i.e. no edge leads to it;</li>
+<li>Calculate the weight of the edge to the node as <a href="https://api.flutter.dev/flutter/dart-core/double/infinity-constant.html">double.infinity</a>.</li>
+</ul>
+<h2 id="tracing">Tracing</h2>
+<p>May provide a <code>tracer</code> to capture finer-detail events during the
+traversal.</p>
+<p>If omitted, no tracing is performed.</p>
+<h2 id="example">Example</h2>
+<pre class="language-dart"><code class="language-dart">final graph = WeightedWalkable.from({
+  'a': [('b', 1.0), ('c', 2.0)],
+  'b': [('c', 3.0)],
+  'c': [('a', 4.0)],
+});
+
+final (path, cost) = astar.findBestPathExclusive(graph, 'a', Goal.node('d'));
+print(path); // Path(['a', 'c', 'd'])
+print(cost); // 6.0
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">(Path&lt;T&gt; path, double cost) findBestPathExclusive&lt;T extends E&gt;(
+  WeightedWalkable&lt;T&gt; graph,
+  T start,
+  Goal&lt;T&gt; goal,
+  Heuristic&lt;T&gt; heuristic, {
+  Tracer&lt;T&gt;? tracer,
+});</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">sector</a></li>
+    <li><a href="../../sector/sector-library.html">sector</a></li>
+    <li><a href="../../sector/HeuristicPathfinder-mixin.html">HeuristicPathfinder<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">findBestPathExclusive&lt;<wbr><span class="type-parameter">T extends E</span>&gt; abstract method</li>
+</ol>
+
+
+    <h5>HeuristicPathfinder mixin</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    sector
+      0.3.0-alpha+2
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+
