@@ -137,7 +137,10 @@ Path&lt;T&gt; findPathExclusive&lt;T extends E&gt;(
         path.add(successor);
         return Path(path);
       }
-      parents.entryOf(successor).setOrUpdate(i);
+      final next = parents.entryOf(successor);
+      if (next.isAbsent) {
+        next.setOrUpdate(i);
+      }
     }
     i += 1;
   } while (i &lt; parents.length);
@@ -177,7 +180,7 @@ Path&lt;T&gt; findPathExclusive&lt;T extends E&gt;(
 <footer>
   <span class="no-break">
     sector
-      0.3.0-alpha+1
+      0.3.0
   </span>
 
   

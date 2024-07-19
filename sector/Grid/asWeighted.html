@@ -65,7 +65,8 @@
 
 <span class="returntype"><a href="../../sector/WeightedWalkable-class.html">WeightedWalkable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>&gt;</span></span>
 <span class="name ">asWeighted</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="asWeighted-param-weight">{<span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/double-class.html">double</a></span> <span class="parameter-name">weight</span>(<ol class="parameter-list"><li><span class="parameter" id="param-"><span class="type-annotation">E</span>, </span></li>
-<li><span class="parameter" id="param-"><span class="type-annotation">E</span></span></li>
+<li><span class="parameter" id="param-"><span class="type-annotation">E</span>, </span></li>
+<li><span class="parameter" id="param-"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span></span></li>
 </ol>
 ), </span></li>
 <li><span class="parameter" id="asWeighted-param-directions"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>&gt;</span></span> <span class="parameter-name">directions</span> = <span class="default-value">Direction.cardinal</span>}</span></li>
@@ -81,6 +82,10 @@
 and edges are pairs of elements at each position. The <code>directions</code> are the
 relative positions of the neighbors to connect each node to, which by
 default are the four cardinal directions (north, east, south, west).</p>
+<p>A weight is derived from the source and target nodes and the direction
+moved by calling the <code>weight</code> function. Any value that returns
+<a href="https://api.dart.dev/stable/3.4.4/dart-core/double/infinity-constant.html">double.infinity</a> is considered impassable and will not be connected to
+its neighbors.</p>
 </section>
 
 
@@ -88,7 +93,7 @@ default are the four cardinal directions (north, east, south, west).</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">WeightedWalkable&lt;Pos&gt; asWeighted({
-  required double Function(E, E) weight,
+  required double Function(E, E, Pos) weight,
   Iterable&lt;Pos&gt; directions = Direction.cardinal,
 }) {
   return GridWalkable.from(
@@ -130,7 +135,7 @@ default are the four cardinal directions (north, east, south, west).</p>
 <footer>
   <span class="no-break">
     sector
-      0.3.0-alpha+1
+      0.3.0
   </span>
 
   

@@ -64,10 +64,10 @@
       
       <span class="name ">GridWalkable&lt;<wbr><span class="type-parameter">E</span>&gt;.diagonal</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="diagonal-param-grid"><span class="type-annotation"><a href="../../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> <span class="parameter-name">grid</span>, </span></li>
 <li><span class="parameter" id="diagonal-param-weight">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/double-class.html">double</a></span> <span class="parameter-name">weight</span>(<ol class="parameter-list"><li><span class="parameter" id="param-"><span class="type-annotation">E</span>, </span></li>
-<li><span class="parameter" id="param-"><span class="type-annotation">E</span></span></li>
+<li><span class="parameter" id="param-"><span class="type-annotation">E</span>, </span></li>
+<li><span class="parameter" id="param-"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span></span></li>
 </ol>
-) = <span class="default-value">_defaultWeight</span>, </span></li>
-<li><span class="parameter" id="diagonal-param-connectEmptyCells"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">connectEmptyCells</span> = <span class="default-value">false</span>}</span></li>
+) = <span class="default-value">_defaultWeight</span>}</span></li>
 </ol>)
     </section>
 
@@ -75,10 +75,6 @@
 <section class="desc markdown">
   <p>Creates a new lazily built weighted graph from a <code>grid</code>.</p>
 <p>Each diagonal, or <em>ordinal</em> direction is connected to each node.</p>
-<p>If <code>connectEmptyCells</code> is <code>true</code>, the empty cells in the grid are also
-connected to their neighbors. This is useful when the <code>weight</code> function
-will return <a href="https://api.dart.dev/stable/3.4.4/dart-core/double/infinity-constant.html">double.infinity</a> for impassable nodes instead of omitting
-them from the grid.</p>
 </section>
 
 
@@ -87,14 +83,12 @@ them from the grid.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">factory GridWalkable.diagonal(
   Grid&lt;E&gt; grid, {
-  double Function(E, E) weight = _defaultWeight,
-  bool connectEmptyCells = false,
+  double Function(E, E, Pos) weight = _defaultWeight,
 }) {
   return GridWalkable._(
     grid,
     Direction.ordinal,
     weight,
-    connectEmptyCells: connectEmptyCells,
   );
 }</code></pre>
 </section>
@@ -130,7 +124,7 @@ them from the grid.</p>
 <footer>
   <span class="no-break">
     sector
-      0.3.0-alpha+1
+      0.3.0
   </span>
 
   

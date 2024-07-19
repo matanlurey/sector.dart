@@ -64,26 +64,24 @@
       
       <span class="name ">GridWalkable&lt;<wbr><span class="type-parameter">E</span>&gt;.from</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="from-param-grid"><span class="type-annotation"><a href="../../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> <span class="parameter-name">grid</span>, </span></li>
 <li><span class="parameter" id="from-param-weight">{<span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/double-class.html">double</a></span> <span class="parameter-name">weight</span>(<ol class="parameter-list"><li><span class="parameter" id="param-"><span class="type-annotation">E</span>, </span></li>
-<li><span class="parameter" id="param-"><span class="type-annotation">E</span></span></li>
+<li><span class="parameter" id="param-"><span class="type-annotation">E</span>, </span></li>
+<li><span class="parameter" id="param-"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span></span></li>
 </ol>
 ) = <span class="default-value">_defaultWeight</span>, </span></li>
-<li><span class="parameter" id="from-param-directions"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>&gt;</span></span> <span class="parameter-name">directions</span> = <span class="default-value">Direction.cardinal</span>, </span></li>
-<li><span class="parameter" id="from-param-connectEmptyCells"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">connectEmptyCells</span> = <span class="default-value">false</span>}</span></li>
+<li><span class="parameter" id="from-param-directions"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.4.4/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>&gt;</span></span> <span class="parameter-name">directions</span> = <span class="default-value">Direction.cardinal</span>}</span></li>
 </ol>)
     </section>
 
     
 <section class="desc markdown">
   <p>Creates a new lazily built weighted graph from a <code>grid</code>.</p>
-<p>A weight is derived from the source and target nodes by calling the
-<code>weight</code> function.</p>
+<p>A weight is derived from the source and target nodes and the direction
+moved by calling the <code>weight</code> function. Any value that returns
+<a href="https://api.dart.dev/stable/3.4.4/dart-core/double/infinity-constant.html">double.infinity</a> is considered impassable and will not be connected to
+its neighbors.</p>
 <p>The <code>directions</code> are the relative positions of the neighbors to connect
 each node to. By default, the <a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Direction/cardinal-constant.html">Direction.cardinal</a> directions are used,
 which is the four cardinal directions (north, east, south, west).</p>
-<p>If <code>connectEmptyCells</code> is <code>true</code>, the empty cells in the grid are also
-connected to their neighbors. This is useful when the <code>weight</code> function
-will return <a href="https://api.dart.dev/stable/3.4.4/dart-core/double/infinity-constant.html">double.infinity</a> for impassable nodes instead of omitting
-them from the grid.</p>
 </section>
 
 
@@ -92,9 +90,8 @@ them from the grid.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">factory GridWalkable.from(
   Grid&lt;E&gt; grid, {
-  double Function(E, E) weight = _defaultWeight,
+  double Function(E, E, Pos) weight = _defaultWeight,
   Iterable&lt;Pos&gt; directions = Direction.cardinal,
-  bool connectEmptyCells = false,
 }) {
   final list = identical(directions, Direction.cardinal)
       ? Direction.cardinal
@@ -103,7 +100,6 @@ them from the grid.</p>
     grid,
     list,
     weight,
-    connectEmptyCells: connectEmptyCells,
   );
 }</code></pre>
 </section>
@@ -139,7 +135,7 @@ them from the grid.</p>
 <footer>
   <span class="no-break">
     sector
-      0.3.0-alpha+1
+      0.3.0
   </span>
 
   
