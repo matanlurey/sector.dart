@@ -42,7 +42,8 @@ void main(List<String> arguments) {
   final pathfinder = switch (args.option('algorithm')) {
     'bfs' => breadthFirstSearch,
     'dfs' => depthFirstSearch,
-    'iddfs' => iterativeDepthFirstSearch,
+    // TODO: Enable when it doesn't hang.
+    // 'iddfs' => iterativeDepthFirstSearch,
     'dijkstra' => dijkstra,
     'greedy' => greedyBestFirstSearch,
     'astar' => astar,
@@ -113,7 +114,7 @@ final _parser = ArgParser(allowTrailingOptions: false)
     allowed: [
       'bfs',
       'dfs',
-      // TODO: Do not infinite loop.
+      // TODO: Enable when it doesn't hang.
       // 'iddfs',
       'dijkstra',
       'greedy',

@@ -1,3 +1,5 @@
+import 'package:sector/src/pathfinding.dart';
+
 import '../prelude.dart';
 import '../src/test_data.dart';
 
