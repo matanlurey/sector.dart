@@ -10,7 +10,7 @@ This repository is a monorepo containing multiple packages:
 
 | Package | Pub | CI | Coverage | Docs |
 |---------|-----|----|----------|------|
-| [`sector`][] | [![Pub Package](https://img.shields.io/pub/v/sector.svg)](https://pub.dev/packages/sector) | [![CI](https://github.com/matanlurey/sector/actions/workflows/ci.yaml/badge.svg)](https://github.com/matanlurey/sector/actions/workflows/ci.yaml) | [![Coverage Status](https://coveralls.io/repos/github/matanlurey/sector/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/sector?branch=main) | [![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/sector/latest/)
+| [`sector`][] | [![Pub Package](https://img.shields.io/pub/v/sector.svg)](https://pub.dev/packages/sector) | [![CI](https://github.com/matanlurey/sector/actions/workflows/ci.yaml/badge.svg)](https://github.com/matanlurey/sector/actions/workflows/ci.yaml) | [![Coverage Status](https://coveralls.io/repos/github/matanlurey/sector/badge.svg?branch=main)](https://coveralls.io/github/matanlurey/sector?branch=main) | [![Dartdoc reference](https://img.shields.io/badge/dartdoc-reference-blue.svg)](https://pub.dev/documentation/sector/latest/) |
 | [`sector_demo`][] | - | - | - | - |
 
 [`sector`]: ./packages/sector

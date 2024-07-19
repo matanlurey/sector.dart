@@ -1,0 +1,19 @@
+# Format: https://dart.dev/tools/pub/pubspec
+
+name: sector_dev
+publish_to: none
+
+environment:
+  sdk: ^3.4.0
+
+repository: https://github.com/matanlurey/sector.dart
+
+dependencies:
+  args: ^2.5.0
+  async: ^2.11.0
+  path: ^1.9.0
+  shelf: ^1.4.2
+  shelf_static: ^1.1.2
+
+dev_dependencies:
+  oath: ^0.2.0
