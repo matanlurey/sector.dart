@@ -19,7 +19,7 @@ const RESOURCES = {"icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb0489
 "canvaskit/skwasm.js": "5d4f9263ec93efeb022bb14a3881d240",
 "canvaskit/skwasm.worker.js": "bfb704a6c714a75da9ef320991e88b03",
 "flutter.js": "383e55f7f3cce5be08fcf1f3881f585c",
-"flutter_bootstrap.js": "95011991c723fff163fe0c80fb111093",
+"flutter_bootstrap.js": "dca8bb54005c6e13adf4d0530306d35e",
 "version.json": "f1d7120f23317523cedde13fa5f43f6a",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "assets/NOTICES": "99b674e8a4b9a92f1706ddddcd61b72e",
