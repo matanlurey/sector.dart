@@ -57,13 +57,14 @@
     data-below-sidebar="sector&#47;UndirectedGraph-mixin-sidebar.html">
     <div>
 <h1><span class="kind-mixin">UndirectedGraph&lt;<wbr><span class="type-parameter">E</span>&gt;</span> mixin 
+    <a href="https://dart.dev/language/class-modifiers#base" class="feature feature-base" title="This class or mixin can only be extended (not implemented or mixed in).">base</a>
  
     <span class="category graphs cp-1 linked" title="This is part of the Graphs topic."><a href="../topics/Graphs-topic.html">Graphs</a></span>
 </h1></div>
 
     
 <section class="desc markdown">
-  <p>A mixin and marker interface that that adapts a <a href="../sector/Graph-class.html">Graph</a> to be undirected.</p>
+  <p>A mixin that that adapts a <a href="../sector/Graph-class.html">Graph</a> to be undirected.</p>
 <p>This mixin ensures that for every edge added to the graph, the inverse edge
 is also added, and that for every edge removed from the graph, the inverse
 edge is also removed.</p>
@@ -382,7 +383,7 @@ final class MyUndirectedGraph = MyGraph&lt;E&gt; with UndirectedGraph&lt;E&gt; {
 <footer>
   <span class="no-break">
     sector
-      0.3.0+1
+      0.4.0-alpha
   </span>
 
   

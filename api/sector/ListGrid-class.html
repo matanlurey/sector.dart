@@ -105,17 +105,15 @@ runtime speed.</p>
     <section>
       <dl class="dl-horizontal">
         
-  <dt>Inheritance</dt>
-  <dd>
-    <ul class="gt-separated dark clazz-relationships">
-      <li><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></li>
-        <li><a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></li>
-      <li>ListGrid</li>
-    </ul>
-  </dd>
 
         
         
+  <dt>Mixed in types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></li>
+    </ul>
+  </dd>
 
 
 
@@ -200,6 +198,18 @@ runtime speed.</p>
 </dt>
 <dd class="inherited">
   The bottom-right position of the grid.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="bounds" class="property inherited">
+  <span class="name"><a href="../sector/Grid/bounds.html">bounds</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Rect-class.html">Rect</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  Bounds of the grid, anchored at the <a href="../sector/Grid/topLeft.html">topLeft</a> position.
   <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
 
 </dd>
@@ -395,14 +405,14 @@ runtime speed.</p>
 </dd>
 
         <dt id="clear" class="callable inherited">
-  <span class="name"><a href="../sector/Grid/clear.html">clear</a></span><span class="signature">(<wbr><span class="parameter" id="clear-param-fill">[<span class="type-annotation">E?</span> <span class="parameter-name">fill</span>]</span>)
+  <span class="name"><a href="../sector/Grid/clear.html">clear</a></span><span class="signature">(<wbr><span class="parameter" id="clear-param-bounds">[<span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Rect-class.html">Rect</a>?</span> <span class="parameter-name">bounds</span>]</span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  Clears the grid, setting all elements to <a href="../sector/Grid/empty.html">empty</a>, or <code>fill</code> if provided.
+  Clears the grid, setting all elements to <a href="../sector/Grid/empty.html">empty</a>.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
@@ -416,6 +426,19 @@ runtime speed.</p>
 </dt>
 <dd class="inherited">
   Returns whether a position is within the bounds of the grid.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="fill" class="callable inherited">
+  <span class="name"><a href="../sector/Grid/fill.html">fill</a></span><span class="signature">(<wbr><span class="parameter" id="fill-param-fill"><span class="type-annotation">E</span> <span class="parameter-name">fill</span>, </span><span class="parameter" id="fill-param-bounds">[<span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Rect-class.html">Rect</a>?</span> <span class="parameter-name">bounds</span>]</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Fills the grid with the given element.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
@@ -455,6 +478,19 @@ runtime speed.</p>
 </dt>
 <dd class="inherited">
   Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="resize" class="callable inherited">
+  <span class="name"><a href="../sector/Grid/resize.html">resize</a></span><span class="signature">(<wbr><span class="parameter" id="resize-param-width"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span><span class="parameter" id="resize-param-height"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">height</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Resizes the grid to the given <code>width</code> and <code>height</code>.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
@@ -581,7 +617,7 @@ runtime speed.</p>
 <footer>
   <span class="no-break">
     sector
-      0.3.0+1
+      0.4.0-alpha
   </span>
 
   

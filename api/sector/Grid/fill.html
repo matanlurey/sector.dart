@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the Astar constructor from Class Astar from the sector library, for the Dart programming language.">
-  <title>Astar constructor - Astar - sector library - Dart API</title>
+  <meta name="description" content="API docs for the fill method from the Grid class, for the Dart programming language.">
+  <title>fill method - Grid class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Astar-class.html">Astar<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
-    <li class="self-crumb">Astar const constructor</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">fill method</li>
   </ol>
-  <div class="self-name">Astar</div>
+  <div class="self-name">fill</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -51,30 +51,44 @@
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="sector&#47;Astar-class-sidebar.html"
-      data-below-sidebar="">
-      <div>
-<h1><span class="kind-constructor">Astar&lt;<wbr><span class="type-parameter">E</span>&gt;</span> constructor 
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="sector&#47;Grid-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">fill</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
-      const
-      <span class="name ">Astar&lt;<wbr><span class="type-parameter">E</span>&gt;</span>(<wbr>)
-    </section>
+      
 
+<span class="returntype">void</span>
+<span class="name ">fill</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="fill-param-fill"><span class="type-annotation">E</span> <span class="parameter-name">fill</span>, </span></li>
+<li><span class="parameter" id="fill-param-bounds">[<span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Rect-class.html">Rect</a>?</span> <span class="parameter-name">bounds</span>]</span></li>
+</ol>)
+
+      
+
+    </section>
     
 <section class="desc markdown">
-  <p>Creates a new A* algorithm.</p>
+  <p>Fills the grid with the given element.</p>
+<p>If <code>bounds</code> is provided, only the elements within the bounds are filled.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">const Astar();</code></pre>
+  <pre class="language-dart"><code class="language-dart">void fill(E fill, [Rect? bounds]) {
+  bounds ??= this.bounds;
+  for (var y = bounds.top; y &lt; bounds.bottom; y++) {
+    for (var x = bounds.left; x &lt; bounds.right; x++) {
+      setUnchecked(Pos(x, y), fill);
+    }
+  }
+}</code></pre>
 </section>
 
 
@@ -91,17 +105,17 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Astar-class.html">Astar<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
-    <li class="self-crumb">Astar const constructor</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">fill method</li>
 </ol>
 
 
-    <h5>Astar class</h5>
+    <h5>Grid class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-left-->
+  </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
+</div><!--/.sidebar-offcanvas-->
 
 </main>
 

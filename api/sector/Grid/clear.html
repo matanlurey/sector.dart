@@ -64,7 +64,7 @@
       
 
 <span class="returntype">void</span>
-<span class="name ">clear</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="clear-param-fill">[<span class="type-annotation">E?</span> <span class="parameter-name">fill</span>]</span></li>
+<span class="name ">clear</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="clear-param-bounds">[<span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Rect-class.html">Rect</a>?</span> <span class="parameter-name">bounds</span>]</span></li>
 </ol>)
 
       
@@ -72,21 +72,15 @@
     </section>
     
 <section class="desc markdown">
-  <p>Clears the grid, setting all elements to <a href="../../sector/Grid/empty.html">empty</a>, or <code>fill</code> if provided.</p>
+  <p>Clears the grid, setting all elements to <a href="../../sector/Grid/empty.html">empty</a>.</p>
+<p>If <code>bounds</code> is provided, only the elements within the bounds are cleared.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">void clear([E? fill]) {
-  final cell = fill ?? empty;
-  for (var y = 0; y &lt; height; y++) {
-    for (var x = 0; x &lt; width; x++) {
-      setUnchecked(Pos(x, y), cell);
-    }
-  }
-}</code></pre>
+  <pre class="language-dart"><code class="language-dart">void clear([Rect? bounds]) =&gt; fill(empty, bounds);</code></pre>
 </section>
 
 
@@ -120,7 +114,7 @@
 <footer>
   <span class="no-break">
     sector
-      0.3.0+1
+      0.4.0-alpha
   </span>
 
   

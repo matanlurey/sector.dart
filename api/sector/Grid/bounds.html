@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the Astar constructor from Class Astar from the sector library, for the Dart programming language.">
-  <title>Astar constructor - Astar - sector library - Dart API</title>
+  <meta name="description" content="API docs for the bounds property from the Grid class, for the Dart programming language.">
+  <title>bounds property - Grid class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Astar-class.html">Astar<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
-    <li class="self-crumb">Astar const constructor</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">bounds property</li>
   </ol>
-  <div class="self-name">Astar</div>
+  <div class="self-name">bounds</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -51,37 +51,47 @@
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="sector&#47;Astar-class-sidebar.html"
-      data-below-sidebar="">
-      <div>
-<h1><span class="kind-constructor">Astar&lt;<wbr><span class="type-parameter">E</span>&gt;</span> constructor 
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="sector&#47;Grid-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-property">bounds</span> property 
 </h1></div>
 
+
+        
+  <section id="getter">
+
     <section class="multi-line-signature">
-      const
-      <span class="name ">Astar&lt;<wbr><span class="type-parameter">E</span>&gt;</span>(<wbr>)
+      
+      <span class="returntype"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Rect-class.html">Rect</a></span>
+      <span class="name ">bounds</span>
+      
+
     </section>
 
     
 <section class="desc markdown">
-  <p>Creates a new A* algorithm.</p>
+  <p>Bounds of the grid, anchored at the <a href="../../sector/Grid/topLeft.html">topLeft</a> position.</p>
+<p>The bounds are a rectangle with a width and height equal to the width and
+height of the grid.</p>
 </section>
-
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">const Astar();</code></pre>
+  <pre class="language-dart"><code class="language-dart">Rect get bounds =&gt; Rect.fromLTWH(0, 0, width, height);</code></pre>
 </section>
 
+  </section>
 
-  </div> <!-- /.main-content -->
 
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+</div> <!-- /.main-content -->
+
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
@@ -91,17 +101,17 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Astar-class.html">Astar<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
-    <li class="self-crumb">Astar const constructor</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">bounds property</li>
 </ol>
 
 
-    <h5>Astar class</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-left-->
+  <h5>Grid class</h5>
+  <div id="dartdoc-sidebar-left-content"></div>
+</div><!--/.sidebar-offcanvas-->
 
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
 
 </main>
 

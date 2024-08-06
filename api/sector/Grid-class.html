@@ -58,6 +58,7 @@
     <div>
 <h1><span class="kind-class">Grid&lt;<wbr><span class="type-parameter">E</span>&gt;</span> class 
     <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
+    <a href="https://dart.dev/language/class-modifiers#base" class="feature feature-base" title="This class or mixin can only be extended (not implemented or mixed in).">base</a>
     <a href="https://dart.dev/language/mixins" class="feature feature-mixin" title="This class can be used as a class and a mixin.">mixin</a>
  
     <span class="category grids cp-2 linked" title="This is part of the Grids topic."><a href="../topics/Grids-topic.html">Grids</a></span>
@@ -98,13 +99,6 @@ type, <code>E</code>.</p>
     <h2>Constructors</h2>
 
     <dl class="constructor-summary-list">
-        <dt id="Grid" class="callable">
-          <span class="name"><a href="../sector/Grid/Grid.html">Grid</a></span><span class="signature">()</span>
-        </dt>
-        <dd>
-          
-            <div class="constructor-modifier features">const</div>
-        </dd>
         <dt id="Grid.filled" class="callable">
           <span class="name"><a href="../sector/Grid/Grid.filled.html">Grid.filled</a></span><span class="signature">(<span class="parameter" id="filled-param-width"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span><span class="parameter" id="filled-param-height"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">height</span>, </span><span class="parameter" id="filled-param-empty">{<span>required</span> <span class="type-annotation">E</span> <span class="parameter-name">empty</span>, </span><span class="parameter" id="filled-param-fill"><span class="type-annotation">E?</span> <span class="parameter-name">fill</span>}</span>)</span>
         </dt>
@@ -170,6 +164,18 @@ height equal to the length of each column.
 </dt>
 <dd>
   The bottom-right position of the grid.
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+        <dt id="bounds" class="property">
+  <span class="name"><a href="../sector/Grid/bounds.html">bounds</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Rect-class.html">Rect</a></span>
+  
+
+</dt>
+<dd>
+  Bounds of the grid, anchored at the <a href="../sector/Grid/topLeft.html">topLeft</a> position.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -365,14 +371,14 @@ height equal to the length of each column.
 </dd>
 
         <dt id="clear" class="callable">
-  <span class="name"><a href="../sector/Grid/clear.html">clear</a></span><span class="signature">(<wbr><span class="parameter" id="clear-param-fill">[<span class="type-annotation">E?</span> <span class="parameter-name">fill</span>]</span>)
+  <span class="name"><a href="../sector/Grid/clear.html">clear</a></span><span class="signature">(<wbr><span class="parameter" id="clear-param-bounds">[<span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Rect-class.html">Rect</a>?</span> <span class="parameter-name">bounds</span>]</span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
 <dd>
-  Clears the grid, setting all elements to <a href="../sector/Grid/empty.html">empty</a>, or <code>fill</code> if provided.
+  Clears the grid, setting all elements to <a href="../sector/Grid/empty.html">empty</a>.
   
 
 </dd>
@@ -386,6 +392,19 @@ height equal to the length of each column.
 </dt>
 <dd>
   Returns whether a position is within the bounds of the grid.
+  
+
+</dd>
+
+        <dt id="fill" class="callable">
+  <span class="name"><a href="../sector/Grid/fill.html">fill</a></span><span class="signature">(<wbr><span class="parameter" id="fill-param-fill"><span class="type-annotation">E</span> <span class="parameter-name">fill</span>, </span><span class="parameter" id="fill-param-bounds">[<span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Rect-class.html">Rect</a>?</span> <span class="parameter-name">bounds</span>]</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Fills the grid with the given element.
   
 
 </dd>
@@ -426,6 +445,19 @@ height equal to the length of each column.
 <dd class="inherited">
   Invoked when a nonexistent method or property is accessed.
   <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="resize" class="callable">
+  <span class="name"><a href="../sector/Grid/resize.html">resize</a></span><span class="signature">(<wbr><span class="parameter" id="resize-param-width"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">width</span>, </span><span class="parameter" id="resize-param-height"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">height</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Resizes the grid to the given <code>width</code> and <code>height</code>.
+  
 
 </dd>
 
@@ -569,7 +601,7 @@ height equal to the length of each column.
 <footer>
   <span class="no-break">
     sector
-      0.3.0+1
+      0.4.0-alpha
   </span>
 
   
