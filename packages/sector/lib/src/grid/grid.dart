@@ -146,6 +146,12 @@ abstract base mixin class Grid<E> {
     this.height = height;
   }
 
+  /// Bounds of the grid, anchored at the [topLeft] position.
+  ///
+  /// The bounds are a rectangle with a width and height equal to the width and
+  /// height of the grid.
+  Rect get bounds => Rect.fromLTWH(0, 0, width, height);
+
   /// Clears the grid, setting all elements to [empty].
   ///
   /// If [bounds] is provided, only the elements within the bounds are cleared.
@@ -155,7 +161,7 @@ abstract base mixin class Grid<E> {
   ///
   /// If [bounds] is provided, only the elements within the bounds are filled.
   void fill(E fill, [Rect? bounds]) {
-    bounds ??= Rect.fromLTWH(0, 0, width, height);
+    bounds ??= this.bounds;
     for (var y = bounds.top; y < bounds.bottom; y++) {
       for (var x = bounds.left; x < bounds.right; x++) {
         setUnchecked(Pos(x, y), fill);
