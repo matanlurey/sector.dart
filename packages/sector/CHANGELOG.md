@@ -20,10 +20,6 @@
   + void fill(E fill, [Rect? bounds])
   ```
 
-**New features**:
-
--
-
 ## 0.3.0+1
 
 Cosmetic changes to the `pubspec.yaml` file only.
