@@ -69,10 +69,9 @@
   </div>
 
 <span class="returntype">E</span>
-<span class="name ">reduce</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="reduce-param-combine"><span class="type-annotation">E</span> <span class="parameter-name">combine</span>(<ol class="parameter-list"><li><span class="parameter" id="param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span>, </span></li>
+<span class="name ">reduce</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="reduce-param-combine"><span class="type-annotation">E</span> <span class="parameter-name">combine</span>(<ol class="parameter-list single-line"> <li><span class="parameter" id="param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span>, </span></li>
 <li><span class="parameter" id="param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span></li>
-</ol>
-)</span></li>
+</ol>)</span></li>
 </ol>)
 
       <div class="features"><span class="feature">override</span></div>
@@ -98,6 +97,7 @@ return value;
 final result = numbers.reduce((value, element) =&gt; value + element);
 print(result); // 17.5
 </code></pre>
+<p>Consider using <a href="../../sector/FixedLengthIterable/fold.html">fold</a> if the iterable can be empty.</p>
 </section>
 
 
@@ -148,7 +148,7 @@ E reduce(E Function(E value, E element) combine) {
 <footer>
   <span class="no-break">
     sector
-      0.4.0-alpha
+      0.4.0-alpha+1
   </span>
 
   

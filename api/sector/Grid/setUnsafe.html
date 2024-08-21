@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the TraceEvent constructor from Class TraceEvent from the sector library, for the Dart programming language.">
-  <title>TraceEvent constructor - TraceEvent - sector library - Dart API</title>
+  <meta name="description" content="API docs for the setUnsafe method from the Grid class, for the Dart programming language.">
+  <title>setUnsafe method - Grid class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/TraceEvent-class.html">TraceEvent<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
-    <li class="self-crumb">TraceEvent const constructor</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">setUnsafe abstract method</li>
   </ol>
-  <div class="self-name">TraceEvent</div>
+  <div class="self-name">setUnsafe</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -51,27 +51,54 @@
 </header>
 <main>
 
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="sector&#47;TraceEvent-class-sidebar.html"
-      data-below-sidebar="">
-      <div>
-<h1><span class="kind-constructor">TraceEvent&lt;<wbr><span class="type-parameter">E</span>&gt;</span> constructor 
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="sector&#47;Grid-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">setUnsafe</span> abstract method 
 </h1></div>
 
     <section class="multi-line-signature">
-      const
-      <span class="name ">TraceEvent&lt;<wbr><span class="type-parameter">E</span>&gt;</span>(<wbr>)
-    </section>
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.flutter.dev/flutter/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
 
+<span class="returntype">void</span>
+<span class="name ">setUnsafe</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="setUnsafe-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span>, </span></li>
+<li><span class="parameter" id="setUnsafe-param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span></span></li>
+</ol>)
+
+      
+
+    </section>
     
+<section class="desc markdown">
+  <p>Sets the element at a position in the grid.</p>
+<p>If the position is not within the bounds of the grid, the behavior is
+undefined. This method is intended to be used in cases where the position
+can be trusted, such as an iterator or other trusted synchronous
+operations.</p>
+<h2 id="example">Example</h2>
+<pre class="language-dart"><code class="language-dart">for (var y = 0; y &lt; grid.height; y++) {
+  for (var x = 0; x &lt; grid.width; x++) {
+    final pos = Pos(x, y);
+    grid.setUnchecked(pos, 1);
+  }
+}
+</code></pre>
+</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">const TraceEvent();</code></pre>
+  <pre class="language-dart"><code class="language-dart">@override
+void setUnsafe(Pos pos, E value);</code></pre>
 </section>
 
 
@@ -88,24 +115,24 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/TraceEvent-class.html">TraceEvent<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
-    <li class="self-crumb">TraceEvent const constructor</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">setUnsafe abstract method</li>
 </ol>
 
 
-    <h5>TraceEvent class</h5>
+    <h5>Grid class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-left-->
+  </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
+</div><!--/.sidebar-offcanvas-->
 
 </main>
 
 <footer>
   <span class="no-break">
     sector
-      0.4.0-alpha
+      0.4.0-alpha+1
   </span>
 
   

@@ -65,7 +65,7 @@
 
     
 <section class="desc markdown">
-  <p>A heuristic that estimates the minimum total cost of reaching a <a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a> goal.</p>
+  <p>A heuristic that estimates the minimum total cost of reaching a <a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a> goal.</p>
 <p>This is a common heuristic used in grid-based pathfinding algorithms.</p>
 </section>
 
@@ -79,7 +79,7 @@
   <dt>Mixed in types</dt>
   <dd>
     <ul class="comma-separated clazz-relationships">
-        <li><a href="../sector/Heuristic-class.html">Heuristic</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>&gt;</span></li>
+        <li><a href="../sector/Heuristic-class.html">Heuristic</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a></span>&gt;</span></li>
     </ul>
   </dd>
 
@@ -96,15 +96,8 @@
     <h2>Constructors</h2>
 
     <dl class="constructor-summary-list">
-        <dt id="GridHeuristic" class="callable">
-          <span class="name"><a href="../sector/GridHeuristic/GridHeuristic.html">GridHeuristic</a></span><span class="signature">(<span class="parameter" id="-param-_goal"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">_goal</span>, </span><span class="parameter" id="-param-ratio">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">ratio</span> = <span class="default-value">1</span>}</span>)</span>
-        </dt>
-        <dd>
-          
-            <div class="constructor-modifier features">const</div>
-        </dd>
         <dt id="GridHeuristic.chebyshev" class="callable">
-          <span class="name"><a href="../sector/GridHeuristic/GridHeuristic.chebyshev.html">GridHeuristic.chebyshev</a></span><span class="signature">(<span class="parameter" id="chebyshev-param-goal"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">goal</span>, </span><span class="parameter" id="chebyshev-param-ratio">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">ratio</span>}</span>)</span>
+          <span class="name"><a href="../sector/GridHeuristic/GridHeuristic.chebyshev.html">GridHeuristic.chebyshev</a></span><span class="signature">(<span class="parameter" id="chebyshev-param-goal"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">goal</span>, {</span><span class="parameter" id="chebyshev-param-ratio"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">ratio</span></span>})</span>
         </dt>
         <dd>
           Uses <a href="../sector/GridHeuristic/GridHeuristic.chebyshev.html">chebyshev</a> distance to estimate the total cost.
@@ -112,7 +105,7 @@
             <div class="constructor-modifier features">factory</div>
         </dd>
         <dt id="GridHeuristic.diagonal" class="callable">
-          <span class="name"><a href="../sector/GridHeuristic/GridHeuristic.diagonal.html">GridHeuristic.diagonal</a></span><span class="signature">(<span class="parameter" id="diagonal-param-goal"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">goal</span>, </span><span class="parameter" id="diagonal-param-ratio">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">ratio</span>}</span>)</span>
+          <span class="name"><a href="../sector/GridHeuristic/GridHeuristic.diagonal.html">GridHeuristic.diagonal</a></span><span class="signature">(<span class="parameter" id="diagonal-param-goal"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">goal</span>, {</span><span class="parameter" id="diagonal-param-ratio"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">ratio</span></span>})</span>
         </dt>
         <dd>
           Uses <a href="../sector/GridHeuristic/GridHeuristic.diagonal.html">diagonal</a> distance to estimate the total cost.
@@ -120,16 +113,16 @@
             <div class="constructor-modifier features">factory</div>
         </dd>
         <dt id="GridHeuristic.euclidean" class="callable">
-          <span class="name"><a href="../sector/GridHeuristic/GridHeuristic.euclidean.html">GridHeuristic.euclidean</a></span><span class="signature">(<span class="parameter" id="euclidean-param-goal"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">goal</span>, </span><span class="parameter" id="euclidean-param-ratio">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">ratio</span>}</span>)</span>
+          <span class="name"><a href="../sector/GridHeuristic/GridHeuristic.euclidean.html">GridHeuristic.euclidean</a></span><span class="signature">(<span class="parameter" id="euclidean-param-goal"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">goal</span>, {</span><span class="parameter" id="euclidean-param-ratio"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">ratio</span></span>})</span>
         </dt>
         <dd>
-          Uses <code>euclidean</code> (<code>√</code> of <a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/euclideanSquared.html">euclideanSquared</a>) distance to estimate the
+          Uses <code>euclidean</code> (<code>√</code> of <a href="https://pub.dev/documentation/lodim/0.1.3/lodim/euclideanSquared.html">euclideanSquared</a>) distance to estimate the
 total cost.
             <div class="constructor-modifier features">const</div>
             <div class="constructor-modifier features">factory</div>
         </dd>
         <dt id="GridHeuristic.manhattan" class="callable">
-          <span class="name"><a href="../sector/GridHeuristic/GridHeuristic.manhattan.html">GridHeuristic.manhattan</a></span><span class="signature">(<span class="parameter" id="manhattan-param-goal"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">goal</span>, </span><span class="parameter" id="manhattan-param-ratio">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">ratio</span>}</span>)</span>
+          <span class="name"><a href="../sector/GridHeuristic/GridHeuristic.manhattan.html">GridHeuristic.manhattan</a></span><span class="signature">(<span class="parameter" id="manhattan-param-goal"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">goal</span>, {</span><span class="parameter" id="manhattan-param-ratio"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">ratio</span></span>})</span>
         </dt>
         <dd>
           Uses <a href="../sector/GridHeuristic/GridHeuristic.manhattan.html">manhattan</a> distance to estimate the total cost.
@@ -189,7 +182,7 @@ total cost.
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="estimateTotalCost" class="callable">
-  <span class="name"><a href="../sector/GridHeuristic/estimateTotalCost.html">estimateTotalCost</a></span><span class="signature">(<wbr><span class="parameter" id="estimateTotalCost-param-node"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">node</span></span>)
+  <span class="name"><a href="../sector/GridHeuristic/estimateTotalCost.html">estimateTotalCost</a></span><span class="signature">(<wbr><span class="parameter" id="estimateTotalCost-param-node"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">node</span></span>)
     <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span>
   </span>
   
@@ -216,7 +209,7 @@ total cost.
 
         <dt id="scaleBy" class="callable inherited">
   <span class="name"><a href="../sector/Heuristic/scaleBy.html">scaleBy</a></span><span class="signature">(<wbr><span class="parameter" id="scaleBy-param-ratio"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">ratio</span></span>)
-    <span class="returntype parameter">&#8594; <a href="../sector/Heuristic-class.html">Heuristic</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>&gt;</span></span>
+    <span class="returntype parameter">&#8594; <a href="../sector/Heuristic-class.html">Heuristic</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a></span>&gt;</span></span>
   </span>
   
 
@@ -250,7 +243,7 @@ total cost.
     <dl class="callables">
         <dt id="operator *" class="callable inherited">
   <span class="name"><a href="../sector/Heuristic/operator_multiply.html">operator *</a></span><span class="signature">(<wbr><span class="parameter" id="*-param-ratio"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">ratio</span></span>)
-    <span class="returntype parameter">&#8594; <a href="../sector/Heuristic-class.html">Heuristic</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span>&gt;</span></span>
+    <span class="returntype parameter">&#8594; <a href="../sector/Heuristic-class.html">Heuristic</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a></span>&gt;</span></span>
   </span>
   
 
@@ -310,7 +303,7 @@ total cost.
 <footer>
   <span class="no-break">
     sector
-      0.4.0-alpha
+      0.4.0-alpha+1
   </span>
 
   

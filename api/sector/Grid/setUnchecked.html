@@ -31,7 +31,7 @@
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
     <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
-    <li class="self-crumb">setUnchecked abstract method</li>
+    <li class="self-crumb"><span class="deprecated">setUnchecked</span> method</li>
   </ol>
   <div class="self-name">setUnchecked</div>
   <form class="search navbar-right" role="search">
@@ -57,14 +57,19 @@
     data-above-sidebar="sector&#47;Grid-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">setUnchecked</span> abstract method 
+<h1><span class="kind-method">setUnchecked</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
       
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.flutter.dev/flutter/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use setUnsafe instead&#39;)</li>
+    </ol>
+  </div>
 
 <span class="returntype">void</span>
-<span class="name ">setUnchecked</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="setUnchecked-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.1+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span>, </span></li>
+<span class="name deprecated">setUnchecked</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="setUnchecked-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span>, </span></li>
 <li><span class="parameter" id="setUnchecked-param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span></span></li>
 </ol>)
 
@@ -78,21 +83,14 @@
 undefined. This method is intended to be used in cases where the position
 can be trusted, such as an iterator or other trusted synchronous
 operations.</p>
-<h2 id="example">Example</h2>
-<pre class="language-dart"><code class="language-dart">for (var y = 0; y &lt; grid.height; y++) {
-  for (var x = 0; x &lt; grid.width; x++) {
-    final pos = Pos(x, y);
-    grid.setUnchecked(pos, 1);
-  }
-}
-</code></pre>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">void setUnchecked(Pos pos, E value);</code></pre>
+  <pre class="language-dart"><code class="language-dart">@Deprecated(&#39;Use setUnsafe instead&#39;)
+void setUnchecked(Pos pos, E value) =&gt; setUnsafe(pos, value);</code></pre>
 </section>
 
 
@@ -110,7 +108,7 @@ operations.</p>
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
     <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
-    <li class="self-crumb">setUnchecked abstract method</li>
+    <li class="self-crumb"><span class="deprecated">setUnchecked</span> method</li>
 </ol>
 
 
@@ -126,7 +124,7 @@ operations.</p>
 <footer>
   <span class="no-break">
     sector
-      0.4.0-alpha
+      0.4.0-alpha+1
   </span>
 
   
