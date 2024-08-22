@@ -62,14 +62,9 @@
 
     <section class="multi-line-signature">
       
-  <div>
-    <ol class="annotation-list">
-        <li>@<a href="https://api.flutter.dev/flutter/dart-core/override-constant.html">override</a></li>
-    </ol>
-  </div>
 
 <span class="returntype">E</span>
-<span class="name ">getUnsafe</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getUnsafe-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.3/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span></span></li>
+<span class="name ">getUnsafe</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="getUnsafe-param-pos"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.3+2/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">pos</span></span></li>
 </ol>)
 
       
@@ -94,7 +89,7 @@ operations.</p>
 for (var y = 0; y &lt; grid.height; y++) {
   for (var x = 0; x &lt; grid.width; x++) {
     final pos = Pos(x, y);
-    print(grid.getUnchecked(pos));
+    print(grid.getUnsafe(pos));
   }
 }
 </code></pre>
@@ -104,8 +99,7 @@ for (var y = 0; y &lt; grid.height; y++) {
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@override
-E getUnsafe(Pos pos);</code></pre>
+  <pre class="language-dart"><code class="language-dart">E getUnsafe(Pos pos);</code></pre>
 </section>
 
 
@@ -139,7 +133,7 @@ E getUnsafe(Pos pos);</code></pre>
 <footer>
   <span class="no-break">
     sector
-      0.4.0-alpha+1
+      0.4.0-alpha+2
   </span>
 
   
