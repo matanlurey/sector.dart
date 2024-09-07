@@ -76,8 +76,8 @@ resulting grid will have a width equal to the number of columns, and a
 height equal to the length of each column.</p>
 <p>The grid is initialized with the elements in the rows, where the element
 at index <code>(x, y)</code> is <code>rows.elementAt(y).elementAt(x)</code>. If the <code>empty</code>
-element is omitted, the most common element in the rows is used, in which
-case the rows must be non-empty.</p>
+element is omitted, the most common element in the rows is used.</p>
+<p>The <code>elements</code> must be non-empty.</p>
 </section>
 
 
@@ -89,19 +89,13 @@ case the rows must be non-empty.</p>
   required int width,
   E? empty,
 }) {
-  if (width == 0) {
-    return _ListGrid(0, 0, ArgumentError.checkNotNull(empty, &#39;empty&#39;));
-  }
-  final list = List.of(elements);
-  final height = list.length ~&#47; width;
-  if (list.length % width != 0) {
-    throw ArgumentError.value(
-      elements,
-      &#39;elements&#39;,
-      &#39;Must have a length that is a multiple of $width.&#39;,
-    );
-  }
-  return _ListGrid(width, height, empty ?? _mostCommonElement(list), list);
+  final (cells, size) = checkRectangular1D(elements, width: width);
+  return _ListGrid(
+    size.x,
+    size.y,
+    empty ?? _mostCommonElement(cells),
+    List.of(cells),
+  );
 }</code></pre>
 </section>
 
@@ -136,7 +130,7 @@ case the rows must be non-empty.</p>
 <footer>
   <span class="no-break">
     sector
-      0.4.0-alpha+2
+      0.4.0-alpha+3
   </span>
 
   

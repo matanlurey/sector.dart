@@ -74,7 +74,7 @@
 <p>Each element in the grid is initialized to <code>empty</code>, which is also used as
 the default, or <a href="../../sector/Grid/empty.html">Grid.empty</a>, element. An empty element does not consume
 memory and is ideally the most common element in the grid.</p>
-<p>The <code>width</code> and <code>height</code> must be non-negative.</p>
+<p>The <code>width</code> and <code>height</code> must be positive.</p>
 <h2 id="example">Example</h2>
 <pre class="language-dart"><code class="language-dart">final grid = SplayTreeGrid.filled(2, 2, empty: 0);
 
@@ -90,8 +90,8 @@ print(grid.get(Pos(0, 0))); // 0
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">factory SplayTreeGrid.filled(int width, int height, {required E empty}) {
-  RangeError.checkNotNegative(width, &#39;width&#39;);
-  RangeError.checkNotNegative(height, &#39;height&#39;);
+  checkPositive(width, &#39;width&#39;);
+  checkPositive(height, &#39;height&#39;);
   return _SplayTreeGrid(width, height, empty);
 }</code></pre>
 </section>
@@ -127,7 +127,7 @@ print(grid.get(Pos(0, 0))); // 0
 <footer>
   <span class="no-break">
     sector
-      0.4.0-alpha+2
+      0.4.0-alpha+3
   </span>
 
   

@@ -77,6 +77,7 @@ height equal to the length of each column.</p>
 at index <code>(x, y)</code> is <code>rows.elementAt(y).elementAt(x)</code>. If the <code>empty</code>
 element is omitted, the most common element in the rows is used, in which
 case the rows must be non-empty.</p>
+<p>The <code>rows</code> and columns must be non-empty.</p>
 </section>
 
 
@@ -84,14 +85,12 @@ case the rows must be non-empty.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">factory ListGrid.fromRows(Iterable&lt;Iterable&lt;E&gt;&gt; rows, {E? empty}) {
-  final height = rows.length;
-  final list = List.of(_expandEqualLength(rows));
-  final width = height == 0 ? 0 : list.length ~&#47; height;
+  final (cells, size) = checkRectangular2D(rows);
   return _ListGrid(
-    width,
-    height,
-    empty ?? _mostCommonElement(list),
-    list,
+    size.x,
+    size.y,
+    empty ?? _mostCommonElement(cells),
+    List.of(cells),
   );
 }</code></pre>
 </section>
@@ -127,7 +126,7 @@ case the rows must be non-empty.</p>
 <footer>
   <span class="no-break">
     sector
-      0.4.0-alpha+2
+      0.4.0-alpha+3
   </span>
 
   

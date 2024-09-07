@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the goal property from the Path class, for the Dart programming language.">
-  <title>goal property - Path class - sector library - Dart API</title>
+  <meta name="description" content="API docs for the copyFrom method from the Grid class, for the Dart programming language.">
+  <title>copyFrom method - Grid class - sector library - Dart API</title>
 
 
   
@@ -30,10 +30,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector.dart</a></li>
-    <li><a href="../../sector/Path-class.html">Path<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">goal property</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">copyFrom method</li>
   </ol>
-  <div class="self-name">goal</div>
+  <div class="self-name">copyFrom</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,43 +54,57 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="sector&#47;Path-class-sidebar.html"
+    data-above-sidebar="sector&#47;Grid-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-property">goal</span> property 
+<h1><span class="kind-method">copyFrom</span> method 
 </h1></div>
-
-
-        
-  <section id="getter">
 
     <section class="multi-line-signature">
       
-      <span class="returntype">T</span>
-      <span class="name ">goal</span>
+
+<span class="returntype">void</span>
+<span class="name ">copyFrom</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="copyFrom-param-src"><span class="type-annotation"><a href="../../sector/Grid-class.html">Grid</a><span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></span> <span class="parameter-name">src</span>, {</span></li>
+<li><span class="parameter" id="copyFrom-param-source"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.6+1/lodim/Rect-class.html">Rect</a>?</span> <span class="parameter-name">source</span>, </span></li>
+<li><span class="parameter" id="copyFrom-param-target"><span class="type-annotation"><a href="https://pub.dev/documentation/lodim/0.1.6+1/lodim/Pos-class.html">Pos</a></span> <span class="parameter-name">target</span> = <span class="default-value">Pos.zero</span>, </span></li>
+</ol>})
+
       
 
     </section>
-
     
 <section class="desc markdown">
-  <p>The goal node of the path.</p>
-<p>The path must be <a href="../../sector/Path/isFound.html">isFound</a> for this to be valid.</p>
+  <p>Copies the elements from another grid into this grid.</p>
+<p>If <code>source</code> is provided, only the elements within the bounds are copied.</p>
+<p>A <code>target</code> offset can be provided to copy the elements to a different
+position in <code>this</code> grid.</p>
 </section>
+
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">T get goal =&gt; nodes.last;</code></pre>
+  <pre class="language-dart"><code class="language-dart">void copyFrom(Grid&lt;E&gt; src, {Rect? source, Pos target = Pos.zero}) {
+  final dst = this;
+  if (source == null) {
+    source = src.bounds;
+  } else {
+    source = bounds.intersect(src.bounds);
+  }
+  copyRect(
+    source,
+    src.get,
+    dst.set,
+    target: target,
+  );
+}</code></pre>
 </section>
 
-  </section>
 
+  </div> <!-- /.main-content -->
 
-</div> <!-- /.main-content -->
-
-<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
@@ -100,16 +114,16 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">sector</a></li>
     <li><a href="../../sector/sector-library.html">sector</a></li>
-    <li><a href="../../sector/Path-class.html">Path<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">goal property</li>
+    <li><a href="../../sector/Grid-class.html">Grid<span class="signature">&lt;<wbr><span class="type-parameter">E</span>&gt;</span></a></li>
+    <li class="self-crumb">copyFrom method</li>
 </ol>
 
 
-  <h5>Path class</h5>
-  <div id="dartdoc-sidebar-left-content"></div>
-</div><!--/.sidebar-offcanvas-->
+    <h5>Grid class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
 
-<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
 </div><!--/.sidebar-offcanvas-->
 
 </main>

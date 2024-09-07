@@ -95,8 +95,13 @@ print(copy.get(Pos(0, 0))); // 1
       List&lt;E&gt;.from(other._elements),
     );
   }
-  final list = List.of(other.rows.expand((row) =&gt; row));
-  return _ListGrid(other.width, other.height, empty ?? other.empty, list);
+  final list = List.of(other.cells.map((c) =&gt; c.$2));
+  return _ListGrid(
+    other.width,
+    other.height,
+    empty ?? other.empty,
+    list,
+  );
 }</code></pre>
 </section>
 
@@ -131,7 +136,7 @@ print(copy.get(Pos(0, 0))); // 1
 <footer>
   <span class="no-break">
     sector
-      0.4.0-alpha+2
+      0.4.0-alpha+3
   </span>
 
   

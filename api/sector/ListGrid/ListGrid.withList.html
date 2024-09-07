@@ -77,6 +77,7 @@ an integer.</p>
 <p>Changes to the provided list will be reflected in the grid, and changes
 to the grid will be reflected in the list accordingly, with <code>elements[i]</code>
 being the element at position <code>Pos(i % width, i ~/ width)</code>.</p>
+<p>The grid must be non-empty.</p>
 <div class="markdown-alert markdown-alert-warning">
 <p class="markdown-alert-title">Warning</p>
 <p>The provided list must not be modified in a way that violates the
@@ -101,14 +102,9 @@ different sub-type of <a href="https://api.flutter.dev/flutter/dart-core/List-cl
   required int width,
   required E empty,
 }) {
-  final height = elements.length ~&#47; width;
-  if (elements.length % width != 0) {
-    throw ArgumentError.value(
-      elements,
-      &#39;elements&#39;,
-      &#39;Must have a length that is a multiple of $width.&#39;,
-    );
-  }
+  checkPositive(width, &#39;width&#39;);
+  final (_, size) = checkRectangular1D(elements, width: width);
+  final height = size.y;
   return _ListGrid(width, height, empty, elements);
 }</code></pre>
 </section>
@@ -144,7 +140,7 @@ different sub-type of <a href="https://api.flutter.dev/flutter/dart-core/List-cl
 <footer>
   <span class="no-break">
     sector
-      0.4.0-alpha+2
+      0.4.0-alpha+3
   </span>
 
   
